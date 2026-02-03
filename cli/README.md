@@ -1,63 +1,126 @@
-# uipro-cli
+# UI/UX Pro Max CLI
 
 CLI to install UI/UX Pro Max skill for AI coding assistants.
 
 ## Installation
 
+### Using uvx (recommended)
+
 ```bash
-npm install -g uipro-cli
+# Install and run directly
+uvx uipro init
+
+# Or install globally
+uv tool install uipro
+```
+
+### Using pip
+
+```bash
+pip install uipro
+```
+
+### Using pipx
+
+```bash
+pipx install uipro
 ```
 
 ## Usage
 
+### Install for a specific AI platform
+
 ```bash
-# Install for specific AI assistant
-uipro init --ai claude      # Claude Code
-uipro init --ai cursor      # Cursor
-uipro init --ai windsurf    # Windsurf
-uipro init --ai antigravity # Antigravity
-uipro init --ai copilot     # GitHub Copilot
-uipro init --ai kiro        # Kiro
-uipro init --ai codex       # Codex (Skills)
-uipro init --ai roocode     # Roo Code
-uipro init --ai qoder       # Qoder
-uipro init --ai gemini      # Gemini CLI
-uipro init --ai trae        # Trae
-uipro init --ai opencode    # OpenCode
-uipro init --ai continue    # Continue (Skills)
-uipro init --ai all         # All assistants
+# Install for Claude Code
+uipro init --ai claude
 
-# Options
-uipro init --offline        # Skip GitHub download, use bundled assets only
-uipro init --force          # Overwrite existing files
+# Install for Cursor
+uipro init --ai cursor
 
-# Other commands
-uipro versions              # List available versions
-uipro update                # Update to latest version
+# Install for all platforms
+uipro init --ai all
 ```
 
-## How It Works
+### Interactive mode
 
-By default, `uipro init` tries to download the latest release from GitHub to ensure you get the most up-to-date version. If the download fails (network error, rate limit), it automatically falls back to the bundled assets included in the CLI package.
+If you don't specify a platform, the CLI will auto-detect and prompt you:
 
-Use `--offline` to skip the GitHub download and use bundled assets directly.
+```bash
+uipro init
+```
+
+### Available platforms
+
+- `claude` - Claude Code (.claude/skills/)
+- `cursor` - Cursor (.cursor/skills/)
+- `windsurf` - Windsurf (.windsurf/skills/)
+- `antigravity` - Antigravity (.agent/skills/)
+- `copilot` - GitHub Copilot (.github/prompts/)
+- `kiro` - Kiro (.kiro/steering/)
+- `codex` - Codex (.codex/skills/)
+- `roocode` - RooCode (.roo/skills/)
+- `qoder` - Qoder (.qoder/skills/)
+- `gemini` - Gemini CLI (.gemini/skills/)
+- `trae` - Trae (.trae/skills/)
+- `opencode` - OpenCode (.opencode/skills/)
+- `continue` - Continue (.continue/skills/)
+- `codebuddy` - CodeBuddy (.codebuddy/skills/)
+- `all` - Install for all platforms
+
+### Other commands
+
+```bash
+# List available versions from GitHub
+uipro versions
+
+# Update to latest version
+uipro update
+
+# Show help
+uipro --help
+```
+
+### Command options
+
+```bash
+# Force overwrite existing files
+uipro init --force
+
+# Use bundled assets (offline mode)
+uipro init --offline
+
+# Use legacy ZIP-based install from GitHub
+uipro init --legacy
+```
 
 ## Development
 
+### Setup
+
 ```bash
-# Install dependencies
-bun install
+cd cli
+uv sync
+```
 
-# Run locally
-bun run src/index.ts --help
+### Run locally
 
-# Build
-bun run build
+```bash
+uv run uipro --help
+uv run uipro init --ai claude
+```
 
-# Link for local testing
-bun link
+### Type checking
+
+```bash
+uv run basedpyright src/
+```
+
+### Build
+
+```bash
+uv build
 ```
 
 ## License
 
-CC-BY-NC-4.0
+MIT

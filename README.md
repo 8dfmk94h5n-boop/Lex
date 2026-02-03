@@ -1,18 +1,15 @@
 # UI UX Pro Max
  
 <p align="center">
-  <a href="https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/releases"><img src="https://img.shields.io/github/v/release/nextlevelbuilder/ui-ux-pro-max-skill?style=for-the-badge&color=blue" alt="GitHub Release"></a>
+  <a href="https://github.com/regutierrez/ui-ux-skill/releases"><img src="https://img.shields.io/github/v/release/regutierrez/ui-ux-skill?style=for-the-badge&color=blue" alt="GitHub Release"></a>
   <img src="https://img.shields.io/badge/reasoning_rules-100-green?style=for-the-badge" alt="100 Reasoning Rules">
   <img src="https://img.shields.io/badge/UI_styles-67-purple?style=for-the-badge" alt="67 UI Styles">
-  <img src="https://img.shields.io/badge/python-3.x-yellow?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.x">
-  <a href="https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/main/LICENSE"><img src="https://img.shields.io/github/license/nextlevelbuilder/ui-ux-pro-max-skill?style=for-the-badge&color=green" alt="License"></a>
+  <img src="https://img.shields.io/badge/python-3.10+-yellow?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.10+">
+  <a href="https://github.com/regutierrez/ui-ux-skill/blob/main/LICENSE"><img src="https://img.shields.io/github/license/regutierrez/ui-ux-skill?style=for-the-badge&color=green" alt="License"></a>
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/uipro-cli"><img src="https://img.shields.io/npm/v/uipro-cli?style=flat-square&logo=npm&label=CLI" alt="npm"></a>
-  <a href="https://www.npmjs.com/package/uipro-cli"><img src="https://img.shields.io/npm/dm/uipro-cli?style=flat-square&label=downloads" alt="npm downloads"></a>
-  <a href="https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/stargazers"><img src="https://img.shields.io/github/stars/nextlevelbuilder/ui-ux-pro-max-skill?style=flat-square&logo=github" alt="GitHub stars"></a>
-  <a href="https://paypal.me/uiuxpromax"><img src="https://img.shields.io/badge/PayPal-Support%20Development-00457C?style=flat-square&logo=paypal&logoColor=white" alt="PayPal"></a>
+  <a href="https://github.com/regutierrez/ui-ux-skill/stargazers"><img src="https://img.shields.io/github/stars/regutierrez/ui-ux-skill?style=flat-square&logo=github" alt="GitHub stars"></a>
 </p>
 
 An AI skill that provides design intelligence for building professional UI/UX across multiple platforms and frameworks.
@@ -21,16 +18,24 @@ An AI skill that provides design intelligence for building professional UI/UX ac
   <img src="screenshots/website.png" alt="UI UX Pro Max" width="800">
 </p>
 
-<p align="center">
-  <b>If you find this useful, consider supporting the project:</b><br><br>
-  <a href="https://paypal.me/uiuxpromax"><img src="https://img.shields.io/badge/PayPal-Donate-00457C?style=for-the-badge&logo=paypal&logoColor=white" alt="PayPal Donate"></a>
-</p>
+## What's New in v3.0
 
-## What's New in v2.0
+### Python CLI with uv
+
+The CLI has been rewritten in Python for easier installation and cross-platform compatibility:
+
+```bash
+# Install using uvx (recommended)
+uvx uipro init --ai claude
+
+# Or install using pip
+pip install uipro
+uipro init --ai claude
+```
 
 ### Intelligent Design System Generation
 
-The flagship feature of v2.0 is the **Design System Generator** - an AI-powered reasoning engine that analyzes your project requirements and generates a complete, tailored design system in seconds.
+The flagship feature is the **Design System Generator** - an AI-powered reasoning engine that analyzes your project requirements and generates a complete, tailored design system in seconds.
 
 ```
 +----------------------------------------------------------------------------------------+
@@ -83,41 +88,6 @@ The flagship feature of v2.0 is the **Design System Generator** - an AI-powered 
 +----------------------------------------------------------------------------------------+
 ```
 
-### How Design System Generation Works
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│  1. USER REQUEST                                                │
-│     "Build a landing page for my beauty spa"                    │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  2. MULTI-DOMAIN SEARCH (5 parallel searches)                   │
-│     • Product type matching (100 categories)                    │
-│     • Style recommendations (67 styles)                         │
-│     • Color palette selection (96 palettes)                     │
-│     • Landing page patterns (24 patterns)                       │
-│     • Typography pairing (57 font combinations)                 │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  3. REASONING ENGINE                                            │
-│     • Match product → UI category rules                         │
-│     • Apply style priorities (BM25 ranking)                     │
-│     • Filter anti-patterns for industry                         │
-│     • Process decision rules (JSON conditions)                  │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  4. COMPLETE DESIGN SYSTEM OUTPUT                               │
-│     Pattern + Style + Colors + Typography + Effects             │
-│     + Anti-patterns to avoid + Pre-delivery checklist           │
-└─────────────────────────────────────────────────────────────────┘
-```
-
 ### 100 Industry-Specific Reasoning Rules
 
 The reasoning engine includes specialized rules for:
@@ -132,14 +102,6 @@ The reasoning engine includes specialized rules for:
 | **Creative** | Portfolio, Agency, Photography, Gaming, Music Streaming |
 | **Emerging Tech** | Web3/NFT, Spatial Computing, Quantum Computing, Autonomous Systems |
 
-Each rule includes:
-- **Recommended Pattern** - Landing page structure
-- **Style Priority** - Best matching UI styles
-- **Color Mood** - Industry-appropriate palettes
-- **Typography Mood** - Font personality matching
-- **Key Effects** - Animations and interactions
-- **Anti-Patterns** - What NOT to do (e.g., "AI purple/pink gradients" for banking)
-
 ## Features
 
 - **67 UI Styles** - Glassmorphism, Claymorphism, Minimalism, Brutalism, Neumorphism, Bento Grid, Dark Mode, AI-Native UI, and more
@@ -148,122 +110,38 @@ Each rule includes:
 - **25 Chart Types** - Recommendations for dashboards and analytics
 - **13 Tech Stacks** - React, Next.js, Astro, Vue, Nuxt.js, Nuxt UI, Svelte, SwiftUI, React Native, Flutter, HTML+Tailwind, shadcn/ui, Jetpack Compose
 - **99 UX Guidelines** - Best practices, anti-patterns, and accessibility rules
-- **100 Reasoning Rules** - Industry-specific design system generation (NEW in v2.0)
-
-### Available Styles (67)
-
-<details>
-<summary><b>General Styles (49)</b></summary>
-
-| # | Style | Best For |
-|---|-------|----------|
-| 1 | Minimalism & Swiss Style | Enterprise apps, dashboards, documentation |
-| 2 | Neumorphism | Health/wellness apps, meditation platforms |
-| 3 | Glassmorphism | Modern SaaS, financial dashboards |
-| 4 | Brutalism | Design portfolios, artistic projects |
-| 5 | 3D & Hyperrealism | Gaming, product showcase, immersive |
-| 6 | Vibrant & Block-based | Startups, creative agencies, gaming |
-| 7 | Dark Mode (OLED) | Night-mode apps, coding platforms |
-| 8 | Accessible & Ethical | Government, healthcare, education |
-| 9 | Claymorphism | Educational apps, children's apps, SaaS |
-| 10 | Aurora UI | Modern SaaS, creative agencies |
-| 11 | Retro-Futurism | Gaming, entertainment, music platforms |
-| 12 | Flat Design | Web apps, mobile apps, startup MVPs |
-| 13 | Skeuomorphism | Legacy apps, gaming, premium products |
-| 14 | Liquid Glass | Premium SaaS, high-end e-commerce |
-| 15 | Motion-Driven | Portfolio sites, storytelling platforms |
-| 16 | Micro-interactions | Mobile apps, touchscreen UIs |
-| 17 | Inclusive Design | Public services, education, healthcare |
-| 18 | Zero Interface | Voice assistants, AI platforms |
-| 19 | Soft UI Evolution | Modern enterprise apps, SaaS |
-| 20 | Neubrutalism | Gen Z brands, startups, Figma-style |
-| 21 | Bento Box Grid | Dashboards, product pages, portfolios |
-| 22 | Y2K Aesthetic | Fashion brands, music, Gen Z |
-| 23 | Cyberpunk UI | Gaming, tech products, crypto apps |
-| 24 | Organic Biophilic | Wellness apps, sustainability brands |
-| 25 | AI-Native UI | AI products, chatbots, copilots |
-| 26 | Memphis Design | Creative agencies, music, youth brands |
-| 27 | Vaporwave | Music platforms, gaming, portfolios |
-| 28 | Dimensional Layering | Dashboards, card layouts, modals |
-| 29 | Exaggerated Minimalism | Fashion, architecture, portfolios |
-| 30 | Kinetic Typography | Hero sections, marketing sites |
-| 31 | Parallax Storytelling | Brand storytelling, product launches |
-| 32 | Swiss Modernism 2.0 | Corporate sites, architecture, editorial |
-| 33 | HUD / Sci-Fi FUI | Sci-fi games, space tech, cybersecurity |
-| 34 | Pixel Art | Indie games, retro tools, creative |
-| 35 | Bento Grids | Product features, dashboards, personal |
-| 36 | Spatial UI (VisionOS) | Spatial computing apps, VR/AR |
-| 37 | E-Ink / Paper | Reading apps, digital newspapers |
-| 38 | Gen Z Chaos / Maximalism | Gen Z lifestyle, music artists |
-| 39 | Biomimetic / Organic 2.0 | Sustainability tech, biotech, health |
-| 40 | Anti-Polish / Raw Aesthetic | Creative portfolios, artist sites |
-| 41 | Tactile Digital / Deformable UI | Modern mobile apps, playful brands |
-| 42 | Nature Distilled | Wellness brands, sustainable products |
-| 43 | Interactive Cursor Design | Creative portfolios, interactive |
-| 44 | Voice-First Multimodal | Voice assistants, accessibility apps |
-| 45 | 3D Product Preview | E-commerce, furniture, fashion |
-| 46 | Gradient Mesh / Aurora Evolved | Hero sections, backgrounds, creative |
-| 47 | Editorial Grid / Magazine | News sites, blogs, magazines |
-| 48 | Chromatic Aberration / RGB Split | Music platforms, gaming, tech |
-| 49 | Vintage Analog / Retro Film | Photography, music/vinyl brands |
-
-</details>
-
-<details>
-<summary><b>Landing Page Styles (8)</b></summary>
-
-| # | Style | Best For |
-|---|-------|----------|
-| 1 | Hero-Centric Design | Products with strong visual identity |
-| 2 | Conversion-Optimized | Lead generation, sales pages |
-| 3 | Feature-Rich Showcase | SaaS, complex products |
-| 4 | Minimal & Direct | Simple products, apps |
-| 5 | Social Proof-Focused | Services, B2C products |
-| 6 | Interactive Product Demo | Software, tools |
-| 7 | Trust & Authority | B2B, enterprise, consulting |
-| 8 | Storytelling-Driven | Brands, agencies, nonprofits |
-
-</details>
-
-<details>
-<summary><b>BI/Analytics Dashboard Styles (10)</b></summary>
-
-| # | Style | Best For |
-|---|-------|----------|
-| 1 | Data-Dense Dashboard | Complex data analysis |
-| 2 | Heat Map & Heatmap Style | Geographic/behavior data |
-| 3 | Executive Dashboard | C-suite summaries |
-| 4 | Real-Time Monitoring | Operations, DevOps |
-| 5 | Drill-Down Analytics | Detailed exploration |
-| 6 | Comparative Analysis Dashboard | Side-by-side comparisons |
-| 7 | Predictive Analytics | Forecasting, ML insights |
-| 8 | User Behavior Analytics | UX research, product analytics |
-| 9 | Financial Dashboard | Finance, accounting |
-| 10 | Sales Intelligence Dashboard | Sales teams, CRM |
-
-</details>
+- **100 Reasoning Rules** - Industry-specific design system generation
 
 ## Installation
 
-### Using Claude Marketplace (Claude Code)
-
-Install directly in Claude Code with two commands:
-
-```
-/plugin marketplace add nextlevelbuilder/ui-ux-pro-max-skill
-/plugin install ui-ux-pro-max@ui-ux-pro-max-skill
-```
-
-### Using CLI (Recommended)
+### Using uvx (Recommended)
 
 ```bash
-# Install CLI globally
-npm install -g uipro-cli
+# Install and run directly
+uvx uipro init --ai claude
 
-# Go to your project
-cd /path/to/your/project
+# Or install globally
+uv tool install uipro
+uipro init
+```
 
-# Install for your AI assistant
+### Using pip
+
+```bash
+pip install uipro
+uipro init --ai claude
+```
+
+### Using pipx
+
+```bash
+pipx install uipro
+uipro init --ai claude
+```
+
+### Supported Platforms
+
+```bash
 uipro init --ai claude      # Claude Code
 uipro init --ai cursor      # Cursor
 uipro init --ai windsurf    # Windsurf
@@ -286,12 +164,12 @@ uipro init --ai all         # All assistants
 ```bash
 uipro versions              # List available versions
 uipro update                # Update to latest version
-uipro init --offline        # Skip GitHub download, use bundled assets
+uipro init --offline        # Use bundled assets only
 ```
 
 ## Prerequisites
 
-Python 3.x is required for the search script.
+Python 3.10+ is required.
 
 ```bash
 # Check if Python is installed
@@ -355,8 +233,6 @@ Build a fintech banking app with dark theme
 
 ### Supported Stacks
 
-The skill provides stack-specific guidelines for:
-
 | Category | Stacks |
 |----------|--------|
 | **Web (HTML)** | HTML + Tailwind (default) |
@@ -418,15 +294,6 @@ design-system/
 2. If the page file exists, its rules **override** the Master file
 3. If not, use `design-system/MASTER.md` exclusively
 
-**Context-aware retrieval prompt:**
-```
-I am building the [Page Name] page. Please read design-system/MASTER.md.
-Also check if design-system/pages/[page-name].md exists.
-If the page file exists, prioritize its rules.
-If not, use the Master rules exclusively.
-Now, generate the code...
-```
-
 ## Architecture & Contributing
 
 ### For Users
@@ -436,8 +303,9 @@ The codebase has been restructured to use a **template-based generation system**
 **Always use the CLI to install:**
 
 ```bash
-npm install -g uipro-cli
-uipro init --ai <platform>
+uvx uipro init --ai <platform>
+# or
+pip install uipro && uipro init --ai <platform>
 ```
 
 This ensures you get the latest templates and correct file structure for your AI assistant.
@@ -448,12 +316,12 @@ If you want to contribute to this project:
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git
-cd ui-ux-pro-max-skill
+git clone https://github.com/regutierrez/ui-ux-skill.git
+cd ui-ux-skill
 
 # 2. Understand the structure
 src/ui-ux-pro-max/           # Source of truth (data, scripts, templates)
-cli/                         # CLI installer (generates files from templates)
+cli/                         # CLI installer (Python, uses uv)
 .claude/                     # Local dev/test for Claude Code skill
 
 # 3. Make changes in src/ui-ux-pro-max/
@@ -467,8 +335,9 @@ cp -r src/ui-ux-pro-max/scripts/* cli/assets/scripts/
 cp -r src/ui-ux-pro-max/templates/* cli/assets/templates/
 
 # 5. Build and test CLI
-cd cli && bun run build
-node dist/index.js init --ai claude --offline  # Test in a temp folder
+cd cli
+uv sync
+uv run uipro init --ai claude --offline  # Test in a temp folder
 
 # 6. Create PR (never push directly to main)
 git checkout -b feat/your-feature
@@ -481,7 +350,7 @@ See [CLAUDE.md](CLAUDE.md) for detailed development guidelines.
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=nextlevelbuilder/ui-ux-pro-max-skill&type=Date)](https://star-history.com/#nextlevelbuilder/ui-ux-pro-max-skill&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=regutierrez/ui-ux-skill&type=Date)](https://star-history.com/#regutierrez/ui-ux-skill&Date)
 
 ## License
 
