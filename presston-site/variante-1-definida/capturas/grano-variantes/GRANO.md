@@ -1,6 +1,6 @@
 # Variante 1 — Sistema de grano sutil: 5 variantes
 
-**Estado publicado:** sin grano (`data-grain="off"`). Ninguna variante queda activa hasta que Lex elija una.
+**Estado publicado:** **2 · Halo de lectura** (`data-grain="halo"`), elegida por Lex.
 
 ## Interruptor
 Está en `index.html`, en el atributo del fondo fijo:
