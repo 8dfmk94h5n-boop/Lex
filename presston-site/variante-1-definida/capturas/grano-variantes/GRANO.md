@@ -1,6 +1,12 @@
 # Variante 1 — Sistema de grano sutil: 5 variantes
 
-**Estado publicado:** **2 · Halo de lectura** (`data-grain="halo"`), elegida por Lex.
+**Estado publicado:** **2 · Halo de lectura** (`data-grain="halo"`), elegida por Lex y aplicada en toda la Variante 1 con un punto más de oscuridad.
+
+### Ajuste aplicado al Halo de lectura
+- **Intensidad:** el oscurecido pasó de .42 a **.54** en el centro y de .16 a **.22** en el borde. El grano subió de .09 a **.11**, siempre con el ruido fino de 1 px. El grano grueso original no se usa.
+- **En toda la Variante 1:** el halo sigue el bloque de texto de cada escena (Hero, Quiénes somos, Cómo funciona, Programas, Evidencia/Plan/Financiamiento/FAQ, Trazabilidad, Contacto y pie). La JS escribe `data-scene` en el `.backdrop`. Las posiciones son variables CSS (`--hx --hy --hw --hh`) y se deslizan en 1.1 s entre escenas.
+- **Móvil:** el halo se ensancha al 80 % porque el texto ocupa todo el ancho.
+- Capturas en `halo-aplicado/`: `hero-antes-ahora.jpg`, `escenas-escritorio.jpg` y `escenas-movil.jpg`.
 
 ## Interruptor
 Está en `index.html`, en el atributo del fondo fijo:
