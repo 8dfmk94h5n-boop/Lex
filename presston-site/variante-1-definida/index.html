@@ -61,11 +61,8 @@
   --rail-w:0px;
   --nav-top:max(14px, env(safe-area-inset-top,0px));
   --safe-bottom:max(16px, env(safe-area-inset-bottom,0px));
-  /* INTERRUPTOR DEL GRANO — prueba visual reversible.
-     none  = grano desactivado (estado actual)
-     block = grano activado (con la opacidad de --grain-opacity) */
-  --grain-display:none;
-  --grain-opacity:.04;
+  /* Grano: el interruptor y la variante viven en el atributo data-grain del
+     .backdrop (body). Ver "SISTEMA DE GRANO" más abajo. */
   --measure:58ch;
 }
 @media (min-width:1025px){ :root{ --rail-w:156px; } }
@@ -217,7 +214,68 @@ html[data-lang="zh"] .gate-title{ font-weight:600; }
     linear-gradient(90deg, rgba(11,14,17,.78) 0%, rgba(11,14,17,.18) 52%, rgba(11,14,17,.32) 100%);
 }
 .bd-tone{ position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 70% 40%, rgba(201,169,106,.05), transparent 70%); }
-.bd-grain{ display:var(--grain-display);position:absolute;inset:0;opacity:var(--grain-opacity);background-image:url("../assets/grain.png");background-size:200px 200px; }
+
+/* ============================================================
+   SISTEMA DE GRANO — interruptor + 5 variantes sutiles
+   ------------------------------------------------------------
+   INTERRUPTOR: atributo data-grain del <div class="backdrop">.
+     data-grain="off"       → sin grano ni viñeta (estado publicado)
+     data-grain="original"  → el grano de antes (64px a 200px, .04)
+     data-grain="polvo"     → 1 · Polvo fino
+     data-grain="halo"      → 2 · Halo de lectura
+     data-grain="penumbra"  → 3 · Penumbra (viñeta, sin grano)
+     data-grain="pelicula"  → 4 · Película tenue (grano animado)
+     data-grain="velo"      → 5 · Velo editorial (mezcla)
+   Cualquier otro valor equivale a "off". Sin JS: es CSS puro.
+   Capas: .bd-veil (viñeta/oscurecido) y .bd-grain (textura).
+   Solo opacity/transform; nada se anima con movimiento reducido.
+   ============================================================ */
+:root{
+  /* Ruido fino vectorial (feTurbulence): grano de ~1px, sin archivo extra. */
+  --noise-fine:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1.6 -.55'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* Zona de lectura del Hero: la columna de texto (≈26–71% de ancho, 31–89% de alto). */
+  --read-zone:radial-gradient(ellipse 46% 52% at 46% 62%, #000 0%, rgba(0,0,0,.85) 40%, transparent 80%);
+}
+.bd-veil,.bd-grain{ display:none;position:absolute;inset:0;pointer-events:none; }
+
+/* Original (referencia) */
+[data-grain="original"] .bd-grain{ display:block;opacity:.04;background-image:url("../assets/grain.png");background-size:200px 200px; }
+
+/* 1 · POLVO FINO — grano de 1px casi imperceptible en toda la pantalla.
+   Da "papel" al video sin ensuciar la letra. */
+[data-grain="polvo"] .bd-grain{ display:block;opacity:.05;background-image:var(--noise-fine);background-size:180px 180px;mix-blend-mode:overlay; }
+
+/* 2 · HALO DE LECTURA — la textura existe solo detrás del texto del Hero,
+   (la columna central), junto con un oscurecido leve: la letra se asienta sobre una base mate
+   mientras los bordes de la imagen quedan limpios. */
+[data-grain="halo"] .bd-veil{ display:block;background:radial-gradient(ellipse 46% 52% at 46% 62%, rgba(11,14,17,.42), rgba(11,14,17,.16) 48%, transparent 80%); }
+[data-grain="halo"] .bd-grain{ display:block;opacity:.09;background-image:var(--noise-fine);background-size:180px 180px;mix-blend-mode:overlay;-webkit-mask-image:var(--read-zone);mask-image:var(--read-zone); }
+
+/* 3 · PENUMBRA — sin grano. Viñeta suave que baja los bordes y deja una
+   luz centrada en la imagen; el texto gana contraste por el fondo, no por textura. */
+[data-grain="penumbra"] .bd-veil{ display:block;background:
+  radial-gradient(ellipse 120% 95% at 50% 50%, transparent 42%, rgba(11,14,17,.38) 82%, rgba(11,14,17,.62) 100%),
+  linear-gradient(90deg, rgba(11,14,17,.22) 0%, transparent 46%); }
+
+/* 4 · PELÍCULA TENUE — grano fino que "respira" como emulsión de cine.
+   Saltos de 8 pasos cada 0.9 s (lento, nada de parpadeo). Con movimiento
+   reducido queda quieto. */
+[data-grain="pelicula"] .bd-grain{ display:block;inset:-180px;opacity:.06;background-image:var(--noise-fine);background-size:180px 180px;mix-blend-mode:overlay;will-change:transform; }
+.motion [data-grain="pelicula"] .bd-grain{ animation:grainShift .9s steps(1) infinite; }
+@keyframes grainShift{
+  0%{transform:translate3d(0,0,0)} 12.5%{transform:translate3d(-61px,37px,0)} 25%{transform:translate3d(43px,-89px,0)} 37.5%{transform:translate3d(-117px,-23px,0)}
+  50%{transform:translate3d(91px,71px,0)} 62.5%{transform:translate3d(-29px,113px,0)} 75%{transform:translate3d(127px,-53px,0)} 87.5%{transform:translate3d(-83px,-131px,0)} 100%{transform:translate3d(0,0,0)}
+}
+@media (prefers-reduced-motion:reduce){ [data-grain="pelicula"] .bd-grain{ animation:none!important; } }
+
+/* 5 · VELO EDITORIAL (mezcla) — penumbra muy leve en los bordes + polvo fino
+   en toda la imagen + un poco más de textura y sombra solo en la zona del texto.
+   Es la que más ayuda a la letra con menos presencia visible. */
+[data-grain="velo"] .bd-veil{ display:block;background:
+  radial-gradient(ellipse 46% 52% at 46% 62%, rgba(11,14,17,.3), transparent 78%),
+  radial-gradient(ellipse 125% 100% at 50% 50%, transparent 50%, rgba(11,14,17,.32) 100%); }
+[data-grain="velo"] .bd-grain{ display:block;opacity:.035;background-image:var(--noise-fine),var(--noise-fine);background-size:180px 180px,180px 180px;mix-blend-mode:overlay;
+  -webkit-mask-image:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),var(--read-zone);mask-image:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),var(--read-zone); }
 
 /* ============================================================
    ROUTE RAIL — "el viaje del contenedor" (punto 2.2 / 3.2)
@@ -937,7 +995,7 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
 </div>
 
 <!-- ============ THE STAGE (fixed backdrop) ============ -->
-<div class="backdrop" id="backdrop" aria-hidden="true">
+<div class="backdrop" id="backdrop" aria-hidden="true" data-grain="off">
   <img class="bd-fallback" src="../assets-extra/poster-puerto-noche.jpg" alt="" />
   <div class="bd-layer is-on" data-bd="port"><div class="bd-move" id="bdPortMove"><div class="bd-breathe">
     <video id="vidPort" muted playsinline loop preload="none" disablepictureinpicture data-src="../assets-extra/video-puerto-noche.mp4" data-poster="../assets-extra/poster-puerto-noche.jpg"></video>
@@ -960,6 +1018,7 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
   </div>
   <div class="bd-shade"></div>
   <div class="bd-tone"></div>
+  <div class="bd-veil"></div>
   <div class="bd-grain"></div>
 </div>
 
