@@ -51,6 +51,9 @@
   --f-display:'Fraunces','Noto Serif SC',Georgia,'Times New Roman',serif;
   --f-body:'Inter','Noto Sans SC',system-ui,-apple-system,'Segoe UI',sans-serif;
   --f-mono:'IBM Plex Mono','Noto Sans SC',ui-monospace,Menlo,monospace;
+  --w-display:380;          /* display weight, letter-spacing and width live in */
+  --ls-display:-.018em;     /* variables so the type system can be swapped whole */
+  --stretch-display:100%;
 
   --ease:cubic-bezier(.22,1,.36,1);
   --vh:100vh;
@@ -82,7 +85,7 @@ img,video{ display:block;max-width:100%; }
 .hidden{ display:none!important; }
 
 /* ---------- Type roles ---------- */
-.display{ font-family:var(--f-display);font-weight:380;font-optical-sizing:auto;letter-spacing:-.018em;color:var(--bone);text-wrap:balance; }
+.display{ font-family:var(--f-display);font-weight:var(--w-display);font-stretch:var(--stretch-display);font-optical-sizing:auto;letter-spacing:var(--ls-display);color:var(--bone);text-wrap:balance; }
 html[data-lang="zh"] .display{ font-weight:600;letter-spacing:.01em;line-height:1.28; }
 .h1{ font-size:clamp(42px,5.7vw,94px);line-height:1.01; }
 .h2{ font-size:clamp(32px,3.9vw,60px);line-height:1.06; }
@@ -129,7 +132,7 @@ html[data-lang="zh"] .demo-badge{ letter-spacing:.04em; }
 .gate-vignette{ position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(11,14,17,.55) 78%, rgba(11,14,17,.94) 100%); }
 .gate-welcome{ position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .5s var(--ease),visibility .5s var(--ease);pointer-events:none;z-index:2; }
 .gate-welcome.show{ opacity:1;visibility:visible; }
-.gate-welcome-txt{ font-family:var(--f-display);font-weight:400;font-size:clamp(22px,3.4vw,34px);color:var(--bone);display:flex;align-items:center;gap:14px; }
+.gate-welcome-txt{ font-family:var(--f-display);font-weight:var(--w-display);font-size:clamp(22px,3.4vw,34px);color:var(--bone);display:flex;align-items:center;gap:14px; }
 .gate-welcome-txt .chk{ color:var(--amber);font-family:var(--f-mono);font-size:.7em; }
 .gate-card{ position:relative;z-index:1;width:100%;max-width:430px;background:rgba(18,22,27,.86);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid var(--hair);border-radius:4px;padding:32px 28px;box-shadow:0 30px 80px rgba(0,0,0,.5);transition:opacity .45s var(--ease),transform .45s var(--ease);max-height:92vh;overflow:auto; }
 .gate-card.gate-fade-out{ opacity:0;transform:scale(.97); }
@@ -147,7 +150,7 @@ html[data-lang="zh"] .demo-badge{ letter-spacing:.04em; }
 .gate-logo{ display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:22px; }
 .gate-logo span{ font-family:var(--f-display);font-size:19px;font-weight:500;letter-spacing:.005em;color:var(--bone); }
 .gate-eyebrow{ text-align:center;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:14px; }
-.gate-title{ text-align:center;font-family:var(--f-display);font-weight:400;font-size:clamp(26px,4vw,32px);letter-spacing:-.01em;line-height:1.1;color:var(--bone);margin-bottom:12px; }
+.gate-title{ text-align:center;font-family:var(--f-display);font-weight:var(--w-display);font-size:clamp(26px,4vw,32px);letter-spacing:-.01em;line-height:1.1;color:var(--bone);margin-bottom:12px; }
 html[data-lang="zh"] .gate-title{ font-weight:600; }
 .gate-sub{ text-align:center;font-size:13.5px;line-height:1.6;color:var(--mist);margin-bottom:24px; }
 .gate-field{ margin-bottom:14px; }
@@ -330,7 +333,7 @@ html[data-lang="en"] .hero-copy .h1{ max-width:13ch; }
 html[data-lang="zh"] .hero-copy .h1{ max-width:11em; }
 .hero-lower{ display:grid;grid-template-columns:repeat(10,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);align-items:start; }
 .hero-lower .lead{ grid-column:1 / span 5; }
-.hero-statement{ grid-column:7 / span 4;padding-left:18px;border-left:1px solid var(--amber);font-family:var(--f-display);font-weight:380;font-size:clamp(18px,1.45vw,22px);line-height:1.38;color:var(--bone); }
+.hero-statement{ grid-column:7 / span 4;padding-left:18px;border-left:1px solid var(--amber);font-family:var(--f-display);font-weight:var(--w-display);font-size:clamp(18px,1.45vw,22px);line-height:1.38;color:var(--bone); }
 html[data-lang="zh"] .hero-statement{ font-weight:500; }
 .hero-actions{ margin-top:clamp(22px,3.2vh,34px);display:flex;align-items:center;gap:20px 26px;flex-wrap:wrap; }
 .hero-actions .note{ max-width:40ch;color:var(--mist); }
@@ -342,7 +345,7 @@ html[data-lang="zh"] .hero-statement{ font-weight:500; }
 .about .scene-content > .grid12{ align-content:center; }
 .about-copy{ grid-column:1 / span 6; }
 .about-copy .h2{ margin-bottom:26px;max-width:16ch; }
-.about-copy .about-close{ margin-top:22px;padding-top:18px;border-top:1px solid var(--hair);font-family:var(--f-display);font-size:clamp(19px,1.5vw,23px);font-weight:380;color:var(--bone);max-width:34ch; }
+.about-copy .about-close{ margin-top:22px;padding-top:18px;border-top:1px solid var(--hair);font-family:var(--f-display);font-size:clamp(19px,1.5vw,23px);font-weight:var(--w-display);color:var(--bone);max-width:34ch; }
 html[data-lang="zh"] .about-copy .about-close{ font-weight:500; }
 
 /* ---------- HOW ---------- */
@@ -354,7 +357,7 @@ html[data-lang="zh"] .about-copy .about-close{ font-weight:500; }
 .step{ position:relative;padding-top:22px;border-top:1px solid var(--hair);transition:border-color .5s var(--ease); }
 .step::before{ content:"";position:absolute;left:0;top:-1px;height:1px;width:100%;background:var(--amber);transform:scaleX(0);transform-origin:0 50%;transition:transform .6s var(--ease); }
 .step .n{ display:block;font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;color:var(--mist-dim);margin-bottom:12px;transition:color .4s var(--ease); }
-.step .t{ display:block;font-family:var(--f-display);font-weight:380;font-size:clamp(20px,1.7vw,27px);line-height:1.18;color:var(--mist);transition:color .4s var(--ease); }
+.step .t{ display:block;font-family:var(--f-display);font-weight:var(--w-display);font-size:clamp(20px,1.7vw,27px);line-height:1.18;color:var(--mist);transition:color .4s var(--ease); }
 html[data-lang="zh"] .step .t{ font-weight:500; }
 .step .s{ display:block;margin-top:10px;font-size:14px;line-height:1.55;color:var(--mist); }
 .step.is-past .t,.step.is-on .t{ color:var(--bone); }
@@ -366,7 +369,7 @@ html[data-lang="zh"] .step .t{ font-weight:500; }
 .ai-block{ grid-column:7 / span 6;grid-row:1;margin-bottom:6px;background:var(--panel-2);border:1px solid var(--hair);border-left:2px solid var(--amber);padding:24px 26px 26px; }
 .ai-block .ai-lab{ display:flex;align-items:center;gap:10px;margin-bottom:12px; }
 .ai-block .ai-lab .label{ color:var(--amber); }
-.ai-block .ai-title{ font-family:var(--f-display);font-weight:400;font-size:clamp(21px,1.7vw,26px);line-height:1.2;margin-bottom:12px;color:var(--bone); }
+.ai-block .ai-title{ font-family:var(--f-display);font-weight:var(--w-display);font-size:clamp(21px,1.7vw,26px);line-height:1.2;margin-bottom:12px;color:var(--bone); }
 html[data-lang="zh"] .ai-block .ai-title{ font-weight:600; }
 .ai-block .ai-text{ font-size:15px;line-height:1.66;color:var(--mist); }
 
@@ -385,7 +388,7 @@ html[data-lang="zh"] .ai-block .ai-title{ font-weight:600; }
 .pgm-item{ border-bottom:1px solid var(--hair); }
 .pgm-item button{ width:100%;display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:12px;min-height:48px;padding:10px 0;background:none;border:0;cursor:pointer;text-align:left;color:var(--mist);transition:color .3s var(--ease); }
 .pgm-item .code{ font-family:var(--f-mono);font-size:11.5px;color:var(--mist-dim); }
-.pgm-item .nm{ font-family:var(--f-display);font-size:clamp(18px,1.45vw,22px);font-weight:380; }
+.pgm-item .nm{ font-family:var(--f-display);font-size:clamp(18px,1.45vw,22px);font-weight:var(--w-display); }
 html[data-lang="zh"] .pgm-item .nm{ font-weight:500; }
 .pgm-item .st{ font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mist-dim);text-align:right; }
 html[data-lang="zh"] .pgm-item .st{ letter-spacing:.03em; }
@@ -404,7 +407,7 @@ html[data-lang="zh"] .pgm-status{ letter-spacing:.03em; }
 .pgm-status.is-live{ border-color:var(--amber-a40);color:var(--amber); }
 .pgm-status.is-live .d{ background:var(--amber); }
 .pgm-card .pc-name{ margin-bottom:8px; }
-.pgm-card .pc-hook{ font-family:var(--f-display);font-style:italic;font-weight:360;font-size:18px;color:var(--amber-soft);margin-bottom:12px; }
+.pgm-card .pc-hook{ font-family:var(--f-display);font-style:italic;font-weight:var(--w-display);font-size:18px;color:var(--amber-soft);margin-bottom:12px; }
 html[data-lang="zh"] .pgm-card .pc-hook{ font-style:normal;font-weight:500; }
 .pgm-card .pc-body{ font-size:15px;line-height:1.62;color:var(--mist); }
 .pgm-card .pc-actions{ display:flex;flex-wrap:wrap;gap:10px;margin-top:20px; }
@@ -414,9 +417,9 @@ html[data-lang="zh"] .pgm-card .pc-hook{ font-style:normal;font-weight:500; }
 .ev-head{ grid-column:1 / span 7; }
 .ev-head .h2{ margin-bottom:22px; }
 .ev-note{ grid-column:9 / span 4;align-self:end;padding-left:18px;border-left:1px solid var(--amber);font-size:14px;line-height:1.6;color:var(--mist); }
-.evidence-grid{ grid-column:1 / -1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.6vw,22px);margin-top:44px; }
+.evidence-grid{ grid-column:1 / span 9;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(12px,1.6vw,22px);margin-top:44px; }
 .evidence-card{ border:1px solid var(--hair);background:var(--steel);display:flex;flex-direction:column;cursor:pointer;transition:border-color .3s var(--ease);padding:0;text-align:left;font:inherit;color:inherit;width:100%; }
-.evidence-ph,.evidence-cap,.plan-preview-stat{ display:block; }
+.evidence-ph,.evidence-cap{ display:block; }
 .evidence-card:hover,.evidence-card:focus-visible{ border-color:var(--amber-a40); }
 .evidence-ph{ aspect-ratio:var(--thumb-ratio,4/3);position:relative;overflow:hidden;background:var(--ink); }
 .evidence-ph img{ position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease),opacity .35s var(--ease); }
@@ -424,12 +427,46 @@ html[data-lang="zh"] .pgm-card .pc-hook{ font-style:normal;font-weight:500; }
 .evidence-ph img.ep-frame.is-on{ opacity:1; }
 .evidence-card:hover .evidence-ph img{ transform:scale(1.025); }
 .evidence-plan-badge{ position:absolute;z-index:2;bottom:10px;right:10px;background:rgba(11,14,17,.82);color:var(--bone);font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border:1px solid var(--hair); }
-.evidence-ph-plan{ background:linear-gradient(160deg,#171c22,var(--ink)); }
-.evidence-plan-preview{ position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px; }
-.plan-preview-stat{ text-align:center; }
-.plan-preview-stat .v{ display:block;font-family:var(--f-mono);font-weight:500;font-size:clamp(20px,2.2vw,26px);color:var(--bone); }
-.plan-preview-stat .l{ display:block;font-family:var(--f-mono);font-size:10px;letter-spacing:.06em;color:var(--amber);margin-top:8px; }
 .evidence-cap{ padding:13px 15px;border-top:1px solid var(--hair);font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mist); }
+
+
+/* ---------- PLAN HOOK (flow) — aggregated, approved figures only ---------- */
+.plan-head{ grid-column:1 / span 8; }
+.plan-blocks{ grid-column:1 / -1;margin-top:clamp(36px,5vh,56px);display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);row-gap:40px; }
+.pb{ position:relative;padding-top:22px;border-top:1px solid var(--hair); }
+.pb::before{ content:"";position:absolute;left:0;top:-1px;width:56px;height:1px;background:var(--amber); }
+.pb-econ{ grid-column:1 / span 4; } .pb-proj{ grid-column:5 / span 4; } .pb-ctrl{ grid-column:9 / span 4; }
+.pb-head{ display:flex;align-items:baseline;gap:14px;margin-bottom:18px; }
+.pb-letter{ font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;color:var(--amber); }
+.pb-title{ font-family:var(--f-display);font-weight:var(--w-display);font-stretch:var(--stretch-display);letter-spacing:var(--ls-display);font-size:clamp(24px,2vw,30px);line-height:1.1;color:var(--bone); }
+.pb-sub{ font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mist-dim);margin:16px 0 4px; }
+html[data-lang="zh"] .pb-sub{ letter-spacing:.04em; }
+.pb-rows > div{ display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:11px 0;border-bottom:1px solid var(--hair-2); }
+.pb-rows dt{ font-size:15px;color:var(--mist); }
+.pb-rows dd{ font-size:17px; }
+.pb-rows .is-total dt{ color:var(--bone); }
+.pb-rows .is-total dd{ color:var(--amber); }
+.fig{ font-family:var(--f-mono);font-variant-numeric:tabular-nums lining-nums;color:var(--bone);white-space:nowrap; }
+.pb-mult{ display:flex;flex-direction:column;gap:26px;margin-top:4px; }
+.pb-m{ display:flex;flex-direction:column;gap:8px; }
+.fig-xl{ font-size:clamp(54px,5.4vw,86px);line-height:.95;letter-spacing:-.03em; }
+.pb-m:first-child .fig-xl{ color:var(--amber); }
+.pb-cap{ font-size:14.5px;line-height:1.5;color:var(--mist);max-width:32ch; }
+.pb-recovery{ margin-top:28px;padding-left:16px;border-left:1px solid var(--amber);font-family:var(--f-display);font-weight:var(--w-display);font-stretch:var(--stretch-display);font-size:clamp(17px,1.35vw,20px);line-height:1.42;color:var(--bone); }
+.pb-list{ list-style:none;counter-reset:pc; }
+.pb-list li{ counter-increment:pc;display:grid;grid-template-columns:30px 1fr;gap:8px;padding:12px 0;border-bottom:1px solid var(--hair-2);font-size:15.5px;line-height:1.45;color:var(--bone); }
+.pb-list li::before{ content:counter(pc, decimal-leading-zero);font-family:var(--f-mono);font-size:11px;color:var(--amber);padding-top:4px; }
+.plan-foot{ grid-column:1 / -1;margin-top:clamp(40px,6vh,60px);padding-top:28px;border-top:1px solid var(--hair);display:flex;flex-direction:column;align-items:flex-start;gap:18px; }
+.plan-private{ font-size:13.5px;line-height:1.5;color:var(--mist);letter-spacing:.005em;text-wrap:balance; }
+.mono,.fund-pct,.fund-stat-val,.fund-calc-years,.fund-calc-total,.fund-share-val,.tp-coord,.route-tel{ font-variant-numeric:tabular-nums; }
+@media (max-width:1024px){
+  .plan-head{ grid-column:1 / -1; }
+  .pb-econ{ grid-column:1 / span 3; } .pb-proj{ grid-column:4 / span 3; } .pb-ctrl{ grid-column:1 / -1; }
+}
+@media (max-width:640px){
+  .pb-econ,.pb-proj,.pb-ctrl{ grid-column:1 / -1; }
+  .plan-foot .btn{ width:100%; }
+}
 
 /* ---------- FUNDING (flow) ---------- */
 .fund-head{ grid-column:1 / span 7; }
@@ -444,7 +481,7 @@ html[data-lang="zh"] .pgm-card .pc-hook{ font-style:normal;font-weight:500; }
 .fund-info{ display:flex;flex-direction:column;justify-content:center;min-width:0; }
 .fund-lab{ font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mist-dim); }
 html[data-lang="zh"] .fund-lab{ letter-spacing:.04em; }
-.fund-name{ font-family:var(--f-display);font-size:24px;font-weight:400;margin:4px 0 12px; }
+.fund-name{ font-family:var(--f-display);font-size:24px;font-weight:var(--w-display);margin:4px 0 12px; }
 .fund-pct{ font-family:var(--f-mono);font-weight:500;font-size:clamp(40px,5vw,56px);line-height:.95;margin-bottom:18px;color:var(--bone); }
 .fund-pct-u{ font-size:.42em;color:var(--mist); }
 .fund-stats{ display:flex;flex-direction:column; }
@@ -484,7 +521,7 @@ html[data-lang="zh"] .fund-lab{ letter-spacing:.04em; }
 .fund-calc-amt:focus{ outline:none; }
 .fund-calc-range{ color:var(--mist-dim);font-size:11px; }
 .fund-calc-block{ margin-top:16px;padding-top:16px;border-top:1px solid var(--hair); }
-.fund-calc-block-title{ font-family:var(--f-display);font-weight:400;font-size:17px;color:var(--bone);margin-bottom:12px; }
+.fund-calc-block-title{ font-family:var(--f-display);font-weight:var(--w-display);font-size:17px;color:var(--bone);margin-bottom:12px; }
 .fund-calc-frame{ font-size:10.5px;color:var(--mist-dim);line-height:1.55;margin-top:3px; }
 .fund-calc-context{ margin-top:16px;padding-top:14px;border-top:1px solid var(--hair);opacity:.8; }
 .fund-calc-context-lab{ font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mist-dim);margin-bottom:10px; }
@@ -504,7 +541,7 @@ html[data-lang="zh"] .fund-lab{ letter-spacing:.04em; }
 .fund-calc-note-full[hidden]{ display:none; }
 .fund-trust-ico{ width:34px;height:34px;border:1px solid var(--hair);display:flex;align-items:center;justify-content:center;margin-bottom:14px; }
 .fund-trust-ico svg{ width:15px;height:15px;stroke:var(--amber);fill:none;stroke-width:1.6; }
-.fund-trust h3{ font-family:var(--f-display);font-weight:400;font-size:22px;margin:6px 0 10px; }
+.fund-trust h3{ font-family:var(--f-display);font-weight:var(--w-display);font-size:22px;margin:6px 0 10px; }
 .fund-trust p{ color:var(--mist);font-size:14.5px;line-height:1.62; }
 .fund-cands{ list-style:none;margin-top:16px;border-top:1px solid var(--hair); }
 .fund-cands li{ padding:10px 0;border-bottom:1px solid var(--hair);font-size:14px;color:var(--bone);display:flex;justify-content:space-between;gap:12px;align-items:baseline; }
@@ -532,10 +569,10 @@ html[data-lang="zh"] .fund-lab{ letter-spacing:.04em; }
 .trace-row:last-child{ border-bottom:0;padding-bottom:0; }
 .trace-row .k{ font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mist-dim); }
 html[data-lang="zh"] .trace-row .k{ letter-spacing:.04em; }
-.trace-row .v{ font-family:var(--f-display);font-size:20px;font-weight:380;color:var(--bone);display:flex;align-items:center;gap:10px; }
+.trace-row .v{ font-family:var(--f-display);font-size:20px;font-weight:var(--w-display);color:var(--bone);display:flex;align-items:center;gap:10px; }
 html[data-lang="zh"] .trace-row .v{ font-weight:500;font-size:18px; }
 .trace-row .v .g{ width:7px;height:7px;background:var(--amber);flex:none; }
-.gov-title{ font-family:var(--f-display);font-weight:400;font-size:clamp(22px,1.9vw,28px);margin:6px 0 8px; }
+.gov-title{ font-family:var(--f-display);font-weight:var(--w-display);font-size:clamp(22px,1.9vw,28px);margin:6px 0 8px; }
 html[data-lang="zh"] .gov-title{ font-weight:600; }
 .gov-rules{ list-style:none; }
 .gov-rules li{ display:grid;grid-template-columns:28px 1fr;gap:10px;padding:13px 0;border-bottom:1px solid var(--hair);font-size:15px;line-height:1.5;color:var(--bone); }
@@ -557,7 +594,7 @@ html[data-lang="zh"] .gov-title{ font-weight:600; }
 .faq-head .h2{ max-width:12ch; }
 .faq-list{ grid-column:6 / span 7;display:flex;flex-direction:column;border-top:1px solid var(--hair); }
 .faq-item{ border-bottom:1px solid var(--hair); }
-.faq-item summary{ list-style:none;cursor:pointer;display:grid;grid-template-columns:34px 1fr 16px;align-items:center;gap:14px;padding:18px 0;min-height:48px;font-family:var(--f-display);font-weight:380;font-size:clamp(17px,1.35vw,20px);line-height:1.35;color:var(--bone); }
+.faq-item summary{ list-style:none;cursor:pointer;display:grid;grid-template-columns:34px 1fr 16px;align-items:center;gap:14px;padding:18px 0;min-height:48px;font-family:var(--f-display);font-weight:var(--w-display);font-size:clamp(17px,1.35vw,20px);line-height:1.35;color:var(--bone); }
 html[data-lang="zh"] .faq-item summary{ font-weight:500; }
 .faq-item summary::-webkit-details-marker{ display:none; }
 .faq-item summary::marker{ content:""; }
@@ -611,7 +648,7 @@ footer{ position:relative;z-index:1;background:linear-gradient(180deg, rgba(11,1
 .legal-body p:last-child{ margin-bottom:0;font-size:12px;color:var(--mist-dim);padding-top:14px;border-top:1px solid var(--hair); }
 .legal-body strong{ color:var(--bone); }
 .modal-inner{ position:relative; }
-.modal h2{ font-family:var(--f-display);font-weight:400;font-size:30px;line-height:1.1;margin-bottom:10px;padding-right:44px; }
+.modal h2{ font-family:var(--f-display);font-weight:var(--w-display);font-size:30px;line-height:1.1;margin-bottom:10px;padding-right:44px; }
 html[data-lang="zh"] .modal h2{ font-weight:600; }
 .modal .m-sub{ font-size:14px;color:var(--mist);margin-bottom:20px;line-height:1.6; }
 .proto-note{ display:flex;gap:12px;align-items:flex-start;border:1px solid var(--amber-a40);background:var(--amber-a08);padding:14px 16px;margin-bottom:22px;font-size:13.5px;line-height:1.55;color:var(--bone); }
@@ -629,64 +666,6 @@ html[data-lang="zh"] .field label{ letter-spacing:.04em; }
 .form-note{ font-family:var(--f-mono);font-size:10.5px;color:var(--mist-dim);margin-top:14px;line-height:1.6; }
 .modal-wa-link{ display:inline-flex;align-items:center;min-height:44px;margin-top:10px;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mist);text-decoration:underline;text-underline-offset:4px; }
 .modal-wa-link:hover{ color:var(--amber); }
-
-/* Operating plan viewer (preserved) */
-.pdf-overlay .pdf-modal{ width:100%;max-width:900px;height:90vh;background:var(--steel);border:1px solid var(--hair);display:flex;flex-direction:column;transform:translateY(16px);transition:.4s var(--ease); }
-.pdf-overlay.open .pdf-modal{ transform:none; }
-.pdf-modal-top{ display:grid;grid-template-columns:44px 1fr 44px;align-items:center;padding:10px;border-bottom:1px solid var(--hair);flex:none;gap:8px; }
-.pdf-modal-top .eyebrow{ font-family:var(--f-mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mist);text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
-.pdf-icon-btn{ background:none;border:0;color:var(--mist);width:44px;height:44px;cursor:pointer;display:flex;align-items:center;justify-content:center; }
-.pdf-icon-btn svg{ width:17px;height:17px; }
-.pdf-icon-btn:hover{ color:var(--bone); }
-.pdf-close-btn{ justify-self:end; }
-.pdf-viewport{ flex:1;overflow:auto;display:flex;align-items:flex-start;justify-content:center;background:var(--ink); }
-.pdf-modal-nav{ display:flex;align-items:center;justify-content:center;gap:20px;padding:10px;border-top:1px solid var(--hair);flex:none; }
-.pdf-nav-btn{ background:none;border:1px solid var(--hair);color:var(--bone);width:44px;height:44px;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center; }
-.pdf-nav-btn:hover:not(:disabled){ border-color:var(--amber);color:var(--amber); }
-.pdf-nav-btn:disabled{ opacity:.3;cursor:default; }
-.pdf-page-count{ font-size:12px;color:var(--mist);min-width:50px;text-align:center; }
-.plan-page{ width:100%;max-width:640px;margin:0 auto;padding:30px 26px 40px;color:var(--bone); }
-.plan-eyebrow{ font-family:var(--f-mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin-bottom:8px; }
-.plan-h1{ font-family:var(--f-display);font-weight:400;font-size:clamp(24px,4vw,32px);line-height:1.1;margin-bottom:10px; }
-.plan-h2{ font-family:var(--f-display);font-weight:400;font-size:19px;margin:22px 0 10px; }
-.plan-h2:first-child{ margin-top:0; }
-.plan-lede{ color:var(--mist);font-size:13.5px;line-height:1.6;margin-bottom:14px; }
-.plan-p{ color:var(--mist);font-size:12.5px;line-height:1.7;margin-bottom:12px; }
-.plan-p strong{ color:var(--bone);font-weight:600; }
-.plan-table{ width:100%;border-collapse:collapse;font-family:var(--f-mono);font-size:11.5px;margin-bottom:14px; }
-.plan-table caption{ text-align:left;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mist-dim);margin-bottom:6px;caption-side:top; }
-.plan-table th{ text-align:left;background:var(--steel-2);padding:7px 9px;text-transform:uppercase;font-size:9.5px;letter-spacing:.06em;color:var(--mist);border-bottom:1px solid var(--hair); }
-.plan-table th.num,.plan-table td.num{ text-align:right;font-variant-numeric:tabular-nums; }
-.plan-table td{ padding:6px 9px;border-bottom:1px solid var(--hair);color:var(--mist); }
-.plan-table tr.total td,.plan-table tr.hl td{ font-weight:500;color:var(--bone); }
-.plan-table tr.hl td{ color:var(--amber); }
-.plan-callout{ background:var(--amber-a08);border-left:2px solid var(--amber);padding:11px 14px;margin:0 0 14px;font-size:12px;color:var(--mist);line-height:1.6; }
-.plan-callout strong{ color:var(--bone); }
-.plan-stat-big{ text-align:center;padding:18px;background:var(--amber-a08);border:1px solid var(--amber-a40);margin:0 0 14px; }
-.plan-stat-big .v{ font-family:var(--f-mono);font-weight:500;font-size:clamp(24px,5vw,32px);color:var(--bone); }
-.plan-stat-big .l{ font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mist-dim);margin-top:6px; }
-.plan-bar{ display:flex;height:34px;overflow:hidden;margin-bottom:10px; }
-.plan-bar span{ display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:9.5px;color:#fff;white-space:nowrap;overflow:hidden; }
-.plan-legend{ display:flex;flex-wrap:wrap;gap:8px 16px;font-size:10px;color:var(--mist);margin-bottom:16px; }
-.plan-legend i{ width:9px;height:9px;display:inline-block;margin-right:5px;vertical-align:-1px; }
-.plan-disclaimer{ font-size:10px;color:var(--mist-dim);line-height:1.6;margin-top:18px;padding-top:14px;border-top:1px solid var(--hair); }
-@media (max-width:640px){ .plan-page{ padding:22px 16px 32px; } .plan-table{ font-size:10.5px; } }
-.plan-print-area{ position:absolute;left:-99999px;top:0;width:800px; }
-@media print{
-  body *{ visibility:hidden!important; }
-  #planPrintArea, #planPrintArea *{ visibility:visible!important; }
-  #planPrintArea{ position:absolute;left:0;top:0;width:100%;background:#fff; }
-  #planPrintArea .plan-page{ max-width:100%;color:#111;page-break-after:always;padding:24px 6px; }
-  #planPrintArea .plan-page:last-child{ page-break-after:auto; }
-  #planPrintArea .plan-eyebrow{ color:#7a6335; }
-  #planPrintArea .plan-lede,#planPrintArea .plan-p,#planPrintArea td,#planPrintArea th{ color:#333; }
-  #planPrintArea .plan-h1,#planPrintArea .plan-h2,#planPrintArea tr.total td,#planPrintArea tr.hl td,#planPrintArea strong{ color:#111; }
-  #planPrintArea th{ background:#eee;border-bottom:1px solid #ccc; }
-  #planPrintArea td{ border-bottom:1px solid #ddd; }
-  #planPrintArea .plan-callout,#planPrintArea .plan-stat-big{ background:#f6f2ea;color:#333;border-color:#e3d6bb; }
-  #planPrintArea .plan-stat-big .v{ color:#111; }
-  #planPrintArea .plan-disclaimer{ color:#666;border-top-color:#ddd; }
-}
 
 /* Evidence lightbox (preserved) */
 .ev-lightbox{ position:fixed;inset:0;z-index:100;background:rgba(5,7,9,.94);opacity:0;visibility:hidden;transition:opacity .3s var(--ease),visibility .3s var(--ease);display:flex;align-items:center;justify-content:center; }
@@ -723,7 +702,7 @@ html[data-lang="zh"] .field label{ letter-spacing:.04em; }
   .ai-block{ grid-column:1 / -1;grid-row:auto; }
   .pgm-list,.pgm-stack{ grid-column:1 / -1; }
   .ev-note{ grid-column:1 / -1;margin-top:24px; }
-  .evidence-grid{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .evidence-grid{ grid-column:1 / -1; }
   .fund-head-side{ grid-column:1 / -1;margin-top:22px; }
   .fund-board{ grid-template-columns:1fr; }
   .fund-panel,.fund-terms,.fund-calc-card,.fund-trust{ grid-column:1 / -1; }
@@ -750,7 +729,6 @@ html[data-lang="zh"] .field label{ letter-spacing:.04em; }
   .pgm-card{ padding:20px 18px 22px; }
   .pgm-item button{ min-height:46px;padding:8px 0; }
   .evidence-grid{ grid-template-columns:1fr 1fr;gap:10px; }
-  .evidence-grid .evidence-card:last-child{ grid-column:1 / -1; }
   .fund-panel{ grid-template-columns:64px 1fr;gap:16px;padding:18px; }
   .fund-gauge{ min-height:200px; }
   .fund-card{ padding:18px; }
@@ -884,7 +862,7 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
       <a href="#how" data-goto="how" data-i18n="nav_model">Cómo funciona</a>
       <a href="#programs" data-goto="programs" data-i18n="nav_programs">Programas</a>
       <a href="#evidence" data-goto="evidence" data-i18n="nav_evidence">Evidencia</a>
-      <a href="#funding" data-goto="funding" data-i18n="nav_funding">Plan operativo</a>
+      <a href="#plan" data-goto="plan" data-i18n="nav_funding">Plan operativo</a>
     </div>
     <div class="seg" role="group" aria-label="Idioma">
       <button type="button" data-set-lang="es" aria-pressed="true">ES</button>
@@ -901,7 +879,7 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
   <a href="#how" data-goto="how" data-i18n="nav_model">Cómo funciona</a>
   <a href="#programs" data-goto="programs" data-i18n="nav_programs">Programas</a>
   <a href="#evidence" data-goto="evidence" data-i18n="nav_evidence">Evidencia</a>
-  <a href="#funding" data-goto="funding" data-i18n="nav_funding">Plan operativo</a>
+  <a href="#plan" data-goto="plan" data-i18n="nav_funding">Plan operativo</a>
   <div class="nav-drop-langs" role="group" aria-label="Idioma">
     <button type="button" data-set-lang="es" aria-pressed="true">ES</button>
     <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
@@ -1000,7 +978,6 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
               <p class="pc-body" data-i18n="pgm1_body">Operaciones reales de importación y exportación de acero, un sector impulsado por el gobierno que nunca deja de moverse y la columna de lo que operamos.</p>
               <div class="pc-actions">
                 <button type="button" class="btn btn-primary" data-open-apply data-program="steel"><span data-i18n="cta_eval">Solicitar evaluación privada</span><span class="arw" aria-hidden="true">→</span></button>
-                <button type="button" class="btn btn-ghost" data-open-plan><span data-i18n="fund_plan_cta">Ver el plan operativo completo</span></button>
               </div>
             </article>
             <article class="pgm-card" data-show="1" aria-labelledby="pgm2t">
@@ -1055,25 +1032,68 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
           <span class="evidence-ph" id="evidenceLogisticsPreview"><span class="evidence-plan-badge" data-i18n="evidence_photos_badge">Ver fotos</span></span>
           <span class="evidence-cap" data-i18n="evidence_cat2">Manejo logístico y de ventas</span>
         </button>
-        <button type="button" class="evidence-card" data-open-plan>
-          <span class="evidence-ph evidence-ph-plan"><span class="evidence-plan-preview" id="evidencePlanPreview"></span><span class="evidence-plan-badge" data-i18n="evidence_plan_badge">Ver plan completo</span></span>
-          <span class="evidence-cap" data-i18n="evidence_cat3">Plan operativo</span>
-        </button>
       </div>
     </div>
   </section>
 
-  <!-- 6 · FUNDING (flow — figures) -->
+  <!-- 6 · OPERATING PLAN — public hook (flow). The full plan is private. -->
+  <section class="scene scene--flow plan" id="plan" data-scene="plan" data-bd="port" data-scrim=".76" data-grid=".14" aria-labelledby="planTitle">
+    <div class="grid12">
+      <div class="plan-head">
+        <div class="kicker" data-anim><span class="k-line"></span><span class="k-num">06</span><span data-i18n="plan_kicker">Plan operativo</span></div>
+        <h2 class="display h2" id="planTitle" data-anim data-i18n="plan_title">El plan operativo, en tres bloques.</h2>
+      </div>
+      <div class="plan-blocks" data-anim>
+        <article class="pb pb-econ" aria-labelledby="pbAt">
+          <header class="pb-head"><span class="pb-letter">A</span><h3 class="pb-title" id="pbAt" data-i18n="pbA_t">La economía</h3></header>
+          <p class="pb-sub" data-i18n="pbA_per">Por contenedor</p>
+          <dl class="pb-rows">
+            <div><dt data-i18n="pbA_landed">Costo landed</dt><dd class="fig">$23,269</dd></div>
+            <div><dt data-i18n="pbA_sale">Valor de venta</dt><dd class="fig">$36,232</dd></div>
+            <div class="is-total"><dt data-i18n="pbA_gross">Bruto por contenedor</dt><dd class="fig">$12,963</dd></div>
+          </dl>
+          <p class="pb-sub" data-i18n="pbA_pace">Ritmo</p>
+          <dl class="pb-rows">
+            <div><dt data-i18n="pbA_year">Contenedores al año</dt><dd class="fig">24</dd></div>
+            <div><dt data-i18n="pbA_turn">Un contenedor vendido en</dt><dd class="fig">~15 <span data-i18n="days">días</span></dd></div>
+          </dl>
+        </article>
+        <article class="pb pb-proj" aria-labelledby="pbBt">
+          <header class="pb-head"><span class="pb-letter">B</span><h3 class="pb-title" id="pbBt" data-i18n="pbB_t">La proyección</h3></header>
+          <div class="pb-mult">
+            <div class="pb-m"><span class="fig fig-xl">1.37x</span><span class="pb-cap" data-i18n="pbB_pre">Resultado antes de impuestos sobre el capital solicitado</span></div>
+            <div class="pb-m"><span class="fig fig-xl">1.05x</span><span class="pb-cap" data-i18n="pbB_post">Resultado después de impuestos</span></div>
+          </div>
+          <p class="pb-recovery" data-i18n="pbB_recovery">El capital se recupera en 12 meses mediante las distribuciones de ganancias del plan.</p>
+        </article>
+        <article class="pb pb-ctrl" aria-labelledby="pbCt">
+          <header class="pb-head"><span class="pb-letter">C</span><h3 class="pb-title" id="pbCt" data-i18n="pbC_t">El control</h3></header>
+          <ul class="pb-list">
+            <li data-i18n="pbC_1">Asamblea mensual de socios</li>
+            <li data-i18n="pbC_2">Voto ponderado por capital aportado</li>
+            <li data-i18n="pbC_3">Capital en custodia de tercero independiente</li>
+            <li data-i18n="pbC_4">Reservas de aranceles e impuestos antes de cada distribución</li>
+            <li data-i18n="pbC_5">Plazo de 24 meses con revisión a los 12</li>
+          </ul>
+        </article>
+      </div>
+      <div class="plan-foot" data-anim>
+        <button type="button" class="btn btn-primary" data-open-apply data-program="steel"><span data-i18n="cta_eval">Solicitar evaluación privada</span><span class="arw" aria-hidden="true">→</span></button>
+        <p class="plan-private" data-i18n="plan_private">El plan operativo completo —cifras, proveedores, logística y método— es un documento privado, disponible bajo confidencialidad una vez admitido como socio.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · FUNDING (flow — figures) -->
   <section class="scene scene--flow funding" id="funding" data-scene="funding" data-bd="port" data-scrim=".8" data-grid=".08" aria-labelledby="fundTitle">
     <div class="grid12">
       <div class="fund-head">
-        <div class="kicker" data-anim><span class="k-line"></span><span class="k-num">06</span><span data-i18n="fund_kicker">Financiamiento</span></div>
+        <div class="kicker" data-anim><span class="k-line"></span><span class="k-num">07</span><span data-i18n="fund_kicker">Financiamiento</span></div>
         <h2 class="display h2" id="fundTitle" data-anim data-i18n="fund_title">La ronda, a la vista.</h2>
         <p class="body" data-anim data-i18n="fund_lede">El avance de cada proyecto, la participación de cada socio y las decisiones que tomamos en conjunto.</p>
       </div>
       <div class="fund-head-side" data-anim>
         <span class="demo-badge" data-i18n="demo">Demostración</span>
-        <button type="button" class="btn btn-ghost" data-open-plan><span data-i18n="fund_plan_cta">Ver el plan operativo completo</span><span class="arw" aria-hidden="true">→</span></button>
       </div>
 
       <div class="fund-board">
@@ -1186,7 +1206,7 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
       <div class="scene-content">
         <div class="grid12">
           <div class="trace-copy">
-            <div class="kicker" data-anim><span class="k-line"></span><span class="k-num">07</span><span data-i18n="trace_kicker">Trazabilidad y gobernanza</span></div>
+            <div class="kicker" data-anim><span class="k-line"></span><span class="k-num">08</span><span data-i18n="trace_kicker">Trazabilidad y gobernanza</span></div>
             <span class="demo-badge" data-anim data-i18n="demo">Demostración</span>
             <h2 class="display h2" id="traceTitle" data-anim data-i18n="trace_title">Tu operación tiene ubicación.</h2>
             <p class="body" data-anim data-show="0,1,2" data-show-m="0" data-i18n="trace_body">Cada socio accede a una plataforma de trazabilidad total, con geolocalización de la mercancía y monitoreo por cámara en tiempo real. Sabes siempre en qué punto está la operación y cómo se está liquidando, con total transparencia y acceso completo a su documentación, de la aduana a la liquidación.</p>
@@ -1227,7 +1247,7 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
   <section class="scene scene--flow faq" id="faq" data-scene="faq" data-bd="port" data-scrim=".8" data-grid=".05" aria-labelledby="faqTitle">
     <div class="grid12">
       <div class="faq-head">
-        <div class="kicker" data-anim><span class="k-line"></span><span class="k-num">08</span><span data-i18n="faq_kicker">Preguntas frecuentes</span></div>
+        <div class="kicker" data-anim><span class="k-line"></span><span class="k-num">09</span><span data-i18n="faq_kicker">Preguntas frecuentes</span></div>
         <h2 class="display h2" id="faqTitle" data-anim data-i18n="faq_title">Cómo funciona, en claro.</h2>
       </div>
       <div class="faq-list" id="faqList" data-anim>
@@ -1250,7 +1270,7 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
       <div class="scene-content">
         <div class="grid12">
           <div class="contact-copy">
-            <div class="kicker" data-anim><span class="k-line"></span><span class="k-num">09</span><span data-i18n="contact_kicker">Contacto</span></div>
+            <div class="kicker" data-anim><span class="k-line"></span><span class="k-num">10</span><span data-i18n="contact_kicker">Contacto</span></div>
             <h2 class="sr-only" id="contactTitle" data-i18n="cta_eval">Solicitar evaluación privada</h2>
             <button type="button" class="contact-cta" data-anim data-open-apply data-program="steel">
               <span class="display" data-i18n="cta_eval">Solicitar evaluación privada</span><span class="arw" aria-hidden="true">→</span>
@@ -1319,23 +1339,6 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
   </div>
 </div>
 
-<!-- ============ OPERATING PLAN VIEWER (preserved) ============ -->
-<div class="overlay pdf-overlay" id="pdfOverlay" role="dialog" aria-modal="true" aria-labelledby="pdfOverlayTitle">
-  <div class="pdf-modal">
-    <div class="pdf-modal-top">
-      <button type="button" class="pdf-icon-btn pdf-print-btn" id="pdfPrintBtn" aria-label="Imprimir" data-i18n-aria="print">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><path d="M6 18H4a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-2"/><path d="M6 14h12v7H6z"/></svg>
-      </button>
-      <span class="eyebrow" id="pdfOverlayTitle" data-i18n="fund_plan_cta">Ver el plan operativo completo</span>
-      <button type="button" class="pdf-icon-btn pdf-close-btn" id="pdfClose" aria-label="Cerrar" data-i18n-aria="close">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
-      </button>
-    </div>
-    <div class="pdf-viewport"><div class="plan-page" id="pdfPageContent"></div></div>
-    <div class="pdf-modal-nav"><button type="button" id="pdfPrev" class="pdf-nav-btn" aria-label="Página anterior">←</button><span class="pdf-page-count mono"><span id="pdfPageNum">1</span> / <span id="pdfPageTotal">13</span></span><button type="button" id="pdfNext" class="pdf-nav-btn" aria-label="Página siguiente">→</button></div>
-  </div>
-</div>
-<div id="planPrintArea" class="plan-print-area" aria-hidden="true"></div>
 
 <!-- ============ EVIDENCE LIGHTBOX (preserved) ============ -->
 <div class="ev-lightbox" id="evLightbox" role="dialog" aria-modal="true" aria-labelledby="evLbCaption">
@@ -1756,6 +1759,15 @@ const LEGACY_I18N = {
 };
 const I18N_NEW = {
   es:{
+    plan_kicker:"Plan operativo",
+    plan_title:"El plan operativo, en tres bloques.",
+    pbA_t:"La economía", pbA_per:"Por contenedor", pbA_landed:"Costo landed", pbA_sale:"Valor de venta", pbA_gross:"Bruto por contenedor",
+    pbA_pace:"Ritmo", pbA_year:"Contenedores al año", pbA_turn:"Un contenedor vendido en", days:"días",
+    pbB_t:"La proyección", pbB_pre:"Resultado antes de impuestos sobre el capital solicitado", pbB_post:"Resultado después de impuestos",
+    pbB_recovery:"El capital se recupera en 12 meses mediante las distribuciones de ganancias del plan.",
+    pbC_t:"El control", pbC_1:"Asamblea mensual de socios", pbC_2:"Voto ponderado por capital aportado", pbC_3:"Capital en custodia de tercero independiente",
+    pbC_4:"Reservas de aranceles e impuestos antes de cada distribución", pbC_5:"Plazo de 24 meses con revisión a los 12",
+    plan_private:"El plan operativo completo —cifras, proveedores, logística y método— es un documento privado, disponible bajo confidencialidad una vez admitido como socio.",
     skip:"Saltar al contenido", close:"Cerrar", menu:"Menú", nav_aria:"Secciones", print:"Imprimir",
     route_ai:"Ruta analizada con AI",
     stop_port:"Puerto", stop_customs:"Aduana", stop_warehouse:"Almacén", stop_distribution:"Distribución", stop_settlement:"Liquidación",
@@ -1848,6 +1860,15 @@ const I18N_NEW = {
     f_note:"Esto es una solicitud de información, no una solicitud de compra, y no genera obligación alguna. La participación es privada y está sujeta a acuerdo escrito y a la ley aplicable.",
   },
   en:{
+    plan_kicker:"Operating plan",
+    plan_title:"The operating plan, in three blocks.",
+    pbA_t:"The economics", pbA_per:"Per container", pbA_landed:"Landed cost", pbA_sale:"Sale value", pbA_gross:"Gross per container",
+    pbA_pace:"Pace", pbA_year:"Containers per year", pbA_turn:"One container sold in", days:"days",
+    pbB_t:"The projection", pbB_pre:"Pre-tax result on the capital requested", pbB_post:"After-tax result",
+    pbB_recovery:"Capital is recovered in 12 months through the plan's profit distributions.",
+    pbC_t:"The controls", pbC_1:"Monthly partners' assembly", pbC_2:"Votes weighted by capital contributed", pbC_3:"Capital held in custody by an independent third party",
+    pbC_4:"Tariff and tax reserves before every distribution", pbC_5:"24-month term with a review at month 12",
+    plan_private:"The full operating plan — figures, suppliers, logistics, and method — is a private document, available under confidentiality once you are admitted as a partner.",
     skip:"Skip to content", close:"Close", menu:"Menu", nav_aria:"Sections", print:"Print",
     route_ai:"Route analyzed with AI",
     stop_port:"Port", stop_customs:"Customs", stop_warehouse:"Warehouse", stop_distribution:"Distribution", stop_settlement:"Settlement",
@@ -1940,6 +1961,15 @@ const I18N_NEW = {
     f_note:"This is a request for information, not an application to buy anything, and creates no obligation. Participation is private and subject to a written agreement and applicable law.",
   },
   zh:{
+    plan_kicker:"运营计划",
+    plan_title:"运营计划，分为三个板块。",
+    pbA_t:"经济模型", pbA_per:"每个集装箱", pbA_landed:"到岸成本", pbA_sale:"销售价值", pbA_gross:"每箱毛利",
+    pbA_pace:"节奏", pbA_year:"每年集装箱数", pbA_turn:"售出一个集装箱约需", days:"天",
+    pbB_t:"预测", pbB_pre:"税前结果（相对于所需资本）", pbB_post:"税后结果",
+    pbB_recovery:"资本通过计划中的利润分配在 12 个月内收回。",
+    pbC_t:"管控", pbC_1:"每月合伙人大会", pbC_2:"按出资额加权投票", pbC_3:"资本由独立第三方托管",
+    pbC_4:"每次分配前预留关税与税费储备", pbC_5:"24 个月期限，第 12 个月进行评估",
+    plan_private:"完整运营计划——数据、供应商、物流与方法——为私密文件，在您获准成为合伙人后，可在保密条件下查阅。",
     skip:"跳至内容", close:"关闭", menu:"菜单", nav_aria:"页面导航", print:"打印",
     route_ai:"AI 分析的路线",
     stop_port:"港口", stop_customs:"海关", stop_warehouse:"仓库", stop_distribution:"配送", stop_settlement:"结算",
@@ -2141,7 +2171,7 @@ function trackEvent(event, props){
 }
 
 /* ---- Section views (once each) + scroll depth ---- */
-const TRACK_SECTION_IDS = ["evidence","funding","faq"]; // stage scenes report from the scene engine
+const TRACK_SECTION_IDS = ["evidence","plan","funding","faq"]; // stage scenes report from the scene engine
 (function initSectionTracking(){
   if (!("IntersectionObserver" in window)) return;
   const seen = new Set();
@@ -2170,14 +2200,6 @@ function trackScrollDepth(){
 }
 addEventListener("scroll", trackScrollDepth, { passive:true });
 
-/* ---- Plan viewer events ---- */
-let planOpenedAt = 0;
-const planPagesSeen = new Set();
-let printedViaButton = false;
-addEventListener("beforeprint", ()=>{
-  if (printedViaButton){ printedViaButton = false; return; } // already tracked by the button handler
-  trackEvent("plan_printed", { page: planPage });
-});
 
 /* ---- Participation calculator events ---- */
 let calcUsedTracked = false;
@@ -2466,470 +2488,10 @@ evLbMedia.addEventListener("touchend",(e)=>{
   evLbStep(dx > 0 ? 1 : -1);
 }, { passive:true });
 
-/* ---- preserved from the original site: plan_pages ---- */
-const PLAN_PAGES = [
-// 1 — Cover
-`<div class="plan-eyebrow">Financial Model</div>
-<div class="plan-h1">Import &amp; Distribution Program</div>
-<p class="plan-lede">Capital structure, supply chain, results, and distribution to the operating partner.</p>
-<table class="plan-table">
-  <tr><td>Program capital</td><td class="num">USD 125,000 for 15%</td></tr>
-  <tr><td>Pre-money valuation</td><td class="num">USD 708,333</td></tr>
-  <tr><td>Post-money valuation</td><td class="num">USD 833,333</td></tr>
-  <tr><td>Minimum entry</td><td class="num">USD 25,000</td></tr>
-  <tr><td>Cadence</td><td class="num">3 containers / month</td></tr>
-  <tr><td>Containers per year</td><td class="num">36</td></tr>
-  <tr><td>First sale</td><td class="num">Day 75</td></tr>
-  <tr><td>Gross profit per container</td><td class="num">USD 12,963</td></tr>
-  <tr><td>Net per container before tax</td><td class="num">USD 9,107</td></tr>
-  <tr><td>Net margin</td><td class="num">25.1%</td></tr>
-  <tr><td>Capital turns per year</td><td class="num">4.9</td></tr>
-  <tr><td>Annual net profit in steady state</td><td class="num">USD 327,844</td></tr>
-  <tr><td>Capital payback</td><td class="num">Month 12</td></tr>
-  <tr><td>Additional capital required</td><td class="num">None</td></tr>
-</table>`,
-
-// 2 — The business in one page
-`<div class="plan-eyebrow">Section 01</div>
-<div class="plan-h2" style="margin-top:0">The business in one page</div>
-<p class="plan-p">We import shipping containers of construction materials, sell them, and use that cash to pay for the next ones. The trick is never waiting to run out of product before reordering.</p>
-<table class="plan-table">
-  <caption>Per container</caption>
-  <tr><td>Sale</td><td class="num">36,232</td></tr>
-  <tr><td>Cost landed at port</td><td class="num">23,269</td></tr>
-  <tr class="hl"><td>GROSS PROFIT</td><td class="num">12,963</td></tr>
-</table>
-<p class="plan-p">From that gross margin we subtract the proportional share of overhead. At three containers a month, each one absorbs 3,727 of operating expense.</p>
-<table class="plan-table">
-  <caption>Net per container</caption>
-  <tr><td>Gross profit</td><td class="num">12,963</td></tr>
-  <tr><td>Prorated operating expenses</td><td class="num">-3,727</td></tr>
-  <tr><td>Contingency 1%</td><td class="num">-130</td></tr>
-  <tr class="total"><td>NET BEFORE TAX</td><td class="num">9,107</td></tr>
-</table>
-<div class="plan-callout"><strong>Net margin before tax:</strong> 9,107 on 36,232 in sales = <strong>25.1%</strong></div>
-<table class="plan-table">
-  <caption>Where the 23,269 cost comes from</caption>
-  <tr><td>Merchandise landed at shipping port</td><td class="num">13,467</td></tr>
-  <tr><td>Duty &amp; import tax</td><td class="num">6,797</td></tr>
-  <tr><td>Ocean freight</td><td class="num">2,600</td></tr>
-  <tr><td>Customs broker, ISF, terminal &amp; insurance</td><td class="num">405</td></tr>
-  <tr class="total"><td>COST LANDED AT PORT</td><td class="num">23,269</td></tr>
-</table>
-<table class="plan-table">
-  <caption>Where the 36,232 sale comes from</caption>
-  <tr><td>Units per container</td><td class="num">872</td></tr>
-  <tr><td>Average price per unit</td><td class="num">41.55</td></tr>
-  <tr><td>Reference price range</td><td class="num">40.00 – 42.00</td></tr>
-  <tr><td>Positioning</td><td class="num">One dollar under market</td></tr>
-  <tr class="total"><td>SALE PER CONTAINER</td><td class="num">36,232</td></tr>
-</table>
-<p class="plan-p">Prices were set from an on-the-ground market survey, positioned one dollar below the prevailing competitor reference. The factory takes 30 days to produce and another 30 to arrive — 60 days from payment to product in hand. That is the problem the capital solves.</p>
-<div class="plan-callout"><strong>The idea.</strong> The operating partner does not finance inventory all year — only the start-up. The first 3 containers build the 60-day bridge; from day 75 onward, every sale pays for the next order.</div>
-<div class="plan-callout"><strong>Track record.</strong> We have operated in this industry for several years and know the product, the market, and the supply chain. Our website carries documentation of import operations already executed, the basis on which this study was built.</div>`,
-
-// 3 — Why the margin is 25%
-`<div class="plan-eyebrow">Section 02</div>
-<div class="plan-h2" style="margin-top:0">Why the margin is 25%</div>
-<p class="plan-lede">Comparison against net margins for this sector in the United States.</p>
-<table class="plan-table">
-  <tr><th>Segment</th><th class="num">Net margin</th></tr>
-  <tr><td>Building-materials wholesalers</td><td class="num">3 – 5%</td></tr>
-  <tr><td>Wholesale sector, general</td><td class="num">4 – 7%</td></tr>
-  <tr><td>General contractors</td><td class="num">6 – 9%</td></tr>
-  <tr><td>Specialty trades</td><td class="num">10 – 20%</td></tr>
-  <tr class="hl"><td>This program</td><td class="num">25%</td></tr>
-</table>
-<p class="plan-p">A traditional wholesale distributor runs 3–5% net. Our margin is five times larger, for structural — not commercial — reasons: we are not one link in the chain, we are two.</p>
-<table class="plan-table">
-  <tr><th>Reason</th><th>Effect</th></tr>
-  <tr><td>We import and distribute</td><td>We capture the import spread plus the distribution margin; a traditional wholesaler only captures the second</td></tr>
-  <tr><td>Direct sale to end user</td><td>No intermediate distributor takes a cut</td></tr>
-  <tr><td>No branch network</td><td>No store network, no heavy fleet, no counter-staff payroll</td></tr>
-  <tr><td>Cash on delivery</td><td>No receivables book, no financing cost, no bad debt</td></tr>
-</table>
-<div class="plan-callout"><strong>What this means.</strong> The 25% does not come from selling above market. It comes from removing two layers of cost that a traditional distributor has to pay.</div>`,
-
-// 4 — Use of funds + payment terms
-`<div class="plan-eyebrow">Section 03</div>
-<div class="plan-h2" style="margin-top:0">What the money is used for</div>
-<div class="plan-bar" role="img" aria-label="Use of funds breakdown">
-  <span style="width:55.8%;background:#2f7d54">$69,807</span><span style="width:16.8%;background:#6fb593">$20,942</span><span style="width:6.4%;background:#c99a3f">$8,000</span><span style="width:21%;background:#5b6b76">$26,251</span>
-</div>
-<div class="plan-legend">
-  <span><i style="background:#2f7d54"></i>Initial inventory</span>
-  <span><i style="background:#6fb593"></i>Reorder deposits</span>
-  <span><i style="background:#c99a3f"></i>Marketing &amp; setup</span>
-  <span><i style="background:#5b6b76"></i>Opex, transport &amp; reserve</span>
-</div>
-<table class="plan-table">
-  <tr><th>Use</th><th class="num">Amount</th><th>What for</th></tr>
-  <tr><td>Initial inventory</td><td class="num">69,807</td><td>3 containers</td></tr>
-  <tr><td>Reorder deposits</td><td class="num">20,942</td><td>30% of containers 4, 5 and 6</td></tr>
-  <tr><td>Marketing &amp; setup</td><td class="num">8,000</td><td>Days 0–60, before operating</td></tr>
-  <tr><td>Operating expenses, days 60–75</td><td class="num">5,513</td><td>From merchandise arrival</td></tr>
-  <tr><td>Transport to warehouse</td><td class="num">1,050</td><td>Port to warehouse</td></tr>
-  <tr><td>Reserve</td><td class="num">19,688</td><td>Minimum balance, day 75</td></tr>
-  <tr class="total"><td>TOTAL</td><td class="num">125,000</td><td></td></tr>
-</table>
-<div class="plan-h2">How the merchandise is paid for</div>
-<p class="plan-p">The factory takes 30% on order and 70% on shipment, which lets us keep six containers in production or transit without paying them off in full.</p>
-<table class="plan-table">
-  <tr><th>Moment</th><th class="num">%</th><th class="num">Amount</th></tr>
-  <tr><td>On order</td><td class="num">30%</td><td class="num">6,981</td></tr>
-  <tr><td>On shipment</td><td class="num">70%</td><td class="num">16,288</td></tr>
-  <tr class="total"><td>TOTAL</td><td class="num">100%</td><td class="num">23,269</td></tr>
-</table>`,
-
-// 5 — Operating expenses + break-even + payment schedule
-`<div class="plan-eyebrow">Section 05</div>
-<div class="plan-h2" style="margin-top:0">Operating expenses</div>
-<table class="plan-table">
-  <tr><th>Item</th><th class="num">Annual</th><th class="num">Monthly</th></tr>
-  <tr><td>Administration</td><td class="num">56,400</td><td class="num">4,700</td></tr>
-  <tr><td>Apprentice</td><td class="num">31,200</td><td class="num">2,600</td></tr>
-  <tr><td>Warehouse</td><td class="num">14,400</td><td class="num">1,200</td></tr>
-  <tr><td>Technology &amp; sales</td><td class="num">14,000</td><td class="num">1,167</td></tr>
-  <tr><td>Fleet &amp; delivery</td><td class="num">10,000</td><td class="num">833</td></tr>
-  <tr><td>Tariff reserve</td><td class="num">8,157</td><td class="num">680</td></tr>
-  <tr class="total"><td>TOTAL</td><td class="num">134,157</td><td class="num">11,180</td></tr>
-</table>
-<p class="plan-p">Operating expenses start on day 60, when merchandise arrives. Before that, only marketing and setup run, financed from the reserve.</p>
-<div class="plan-callout"><strong>Break-even.</strong> 11,180 in monthly expense ÷ 12,963 profit per container = 0.86 containers, rounded up to one a month. We sell three.</div>
-<div class="plan-h2">Payment schedule — start-up phase</div>
-<table class="plan-table">
-  <tr><th>Day</th><th>Item</th><th class="num">Debit</th><th class="num">Credit</th><th class="num">Balance</th></tr>
-  <tr><td>0</td><td>Program capital</td><td class="num"></td><td class="num">125,000</td><td class="num">125,000</td></tr>
-  <tr><td>0</td><td>Marketing &amp; setup</td><td class="num">8,000</td><td class="num"></td><td class="num">117,000</td></tr>
-  <tr><td>0</td><td>Deposit 30% · C1, C2, C3</td><td class="num">20,942</td><td class="num"></td><td class="num">96,058</td></tr>
-  <tr><td>30</td><td>Balance 70% pre-shipment · C1–C3</td><td class="num">48,865</td><td class="num"></td><td class="num">47,193</td></tr>
-  <tr><td>45</td><td>Deposit 30% · C4</td><td class="num">6,981</td><td class="num"></td><td class="num">40,212</td></tr>
-  <tr><td>55</td><td>Deposit 30% · C5</td><td class="num">6,981</td><td class="num"></td><td class="num">33,232</td></tr>
-  <tr><td>60</td><td>Arrival C1–C3 · transport to warehouse</td><td class="num">1,050</td><td class="num"></td><td class="num">32,182</td></tr>
-  <tr><td>65</td><td>Deposit 30% · C6</td><td class="num">6,981</td><td class="num"></td><td class="num">25,201</td></tr>
-  <tr><td>60–75</td><td>Operating expenses</td><td class="num">5,513</td><td class="num"></td><td class="num">19,688</td></tr>
-  <tr class="hl"><td>75</td><td>FIRST SALE</td><td class="num"></td><td class="num">36,232</td><td class="num">55,920</td></tr>
-</table>
-<p class="plan-p">The project's minimum balance is 19,688, on day 75, right before the first sale — the point of maximum exposure: 105,312 committed against the 125,000 contributed.</p>`,
-
-// 6 — Cash curve + steady-state cycle
-`<div class="plan-eyebrow">Sections 06 – 07</div>
-<div class="plan-h2" style="margin-top:0">The cash curve</div>
-<p class="plan-lede">How much capital is committed at any given moment.</p>
-<div class="plan-stat-big"><div class="v">USD 105,312</div><div class="l">Peak exposure · Day 74, one day before the first sale</div></div>
-<table class="plan-table">
-  <tr><th>Milestone</th><th>Day</th><th class="num">Capital committed</th></tr>
-  <tr><td>Program starts</td><td>0</td><td class="num">125,000 available</td></tr>
-  <tr class="hl"><td>Peak exposure</td><td>74</td><td class="num">105,312</td></tr>
-  <tr><td>First sale</td><td>75</td><td class="num">—</td></tr>
-  <tr class="total"><td>Capital fully back in cash</td><td>150</td><td class="num">0 (recovered)</td></tr>
-</table>
-<p class="plan-p">That is the tightest moment of the entire project. From day 75 the curve comes down on its own: every 36,232 sale pays the balance on a prior order and the deposit on the next one. By day 150 the capital has fully returned to cash, and the operation begins generating surplus — everything that comes in afterward is distributable profit.</p>
-<div class="plan-h2">Steady-state cycle — repeats every 10 days from day 75</div>
-<table class="plan-table">
-  <tr><th>Item</th><th class="num">Amount</th></tr>
-  <tr><td>Sale of one container</td><td class="num">+36,232</td></tr>
-  <tr><td>70% pre-shipment balance, container in production</td><td class="num">-16,288</td></tr>
-  <tr><td>30% deposit, new container</td><td class="num">-6,981</td></tr>
-  <tr><td>Transport for the arriving container</td><td class="num">-350</td></tr>
-  <tr><td>10 days of operating expenses</td><td class="num">-3,676</td></tr>
-  <tr class="hl"><td>CASH SURPLUS PER CYCLE</td><td class="num">+8,937</td></tr>
-</table>
-<div class="plan-callout"><strong>The rule.</strong> A new order is placed every 10 days, without waiting for the previous one to arrive. Six containers stay permanently in production or transit. Capital committed at start-up: 6 containers, 139,614. Disbursed before the first sale: 90,749.</div>`,
-
-// 7 — Results + how the money is split (Phase 1 / Phase 2)
-`<div class="plan-eyebrow">Sections 08 – 09</div>
-<div class="plan-h2" style="margin-top:0">Results</div>
-<table class="plan-table">
-  <tr><th></th><th class="num">Year 1</th><th class="num">Steady-state annual</th></tr>
-  <tr><td>Containers</td><td class="num">29</td><td class="num">36</td></tr>
-  <tr><td>Sales</td><td class="num">1,050,728</td><td class="num">1,304,352</td></tr>
-  <tr><td>Cost of goods</td><td class="num">674,801</td><td class="num">837,684</td></tr>
-  <tr><td>Gross profit</td><td class="num">375,927</td><td class="num">466,668</td></tr>
-  <tr><td>Operating expenses</td><td class="num">111,798</td><td class="num">134,157</td></tr>
-  <tr><td>Contingency 1%</td><td class="num">3,759</td><td class="num">4,667</td></tr>
-  <tr class="total"><td>NET PROFIT BEFORE TAX</td><td class="num">260,370</td><td class="num">327,844</td></tr>
-</table>
-<p class="plan-p">Year 1 includes 29 containers — the first 75 days are production and transit. Operating expenses start on day 60, with the arrival of merchandise. Net margin is 24.8% in Year 1 and 25.1% in steady state.</p>
-<div class="plan-h2">How the money is split</div>
-<p class="plan-p">Inventory is replenished and expenses are paid first. What is left over is what gets distributed — distributions are never made against gross sales.<br><strong>Order:</strong> Sale → Inventory replenishment → Expenses → Reserve → Distributable profit → Waterfall.</p>
-<table class="plan-table">
-  <caption>Phase 1 — until the operating partner recovers the USD 125,000 principal</caption>
-  <tr><th>Destination</th><th class="num">% of net profit</th><th class="num">Monthly</th></tr>
-  <tr><td>Operating partner · preferential recovery</td><td class="num">50%</td><td class="num">13,660</td></tr>
-  <tr><td>Company capitalization</td><td class="num">40%</td><td class="num">10,928</td></tr>
-  <tr><td>Administration</td><td class="num">10%</td><td class="num">2,732</td></tr>
-</table>
-<table class="plan-table">
-  <caption>Phase 2 — once the principal is recovered</caption>
-  <tr><th>Destination</th><th class="num">% of distributable cash</th></tr>
-  <tr><td>Operating partner · their 15% equity stake</td><td class="num">15%</td></tr>
-  <tr><td>Administration</td><td class="num">85%</td></tr>
-</table>
-<div class="plan-callout"><strong>The closing of the structure.</strong> In Phase 1 the partner collects the preferential recovery of their capital. Once the principal is recovered, they collect exactly their 15% equity stake on distributable cash, permanently. The waterfall converges with ownership: there is no contradiction between what they collect and what they own.</div>`,
-
-// 8 — Operating-partner recovery, month by month
-`<div class="plan-eyebrow">Section 10</div>
-<div class="plan-h2" style="margin-top:0">Operating-partner recovery, month by month</div>
-<p class="plan-lede">Month by month, from the contribution to full recovery.</p>
-<table class="plan-table">
-  <tr><th>Month</th><th class="num">Cont.</th><th class="num">Net profit</th><th class="num">Distributable</th><th class="num">To partner</th><th class="num">Accumulated</th></tr>
-  <tr><td>1 – 2</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
-  <tr><td>3</td><td class="num">2</td><td class="num">14,487</td><td class="num">7,243</td><td class="num">7,243</td><td class="num">7,243</td></tr>
-  <tr><td>4</td><td class="num">3</td><td class="num">27,320</td><td class="num">13,660</td><td class="num">13,660</td><td class="num">20,904</td></tr>
-  <tr><td>5</td><td class="num">3</td><td class="num">27,320</td><td class="num">13,660</td><td class="num">13,660</td><td class="num">34,564</td></tr>
-  <tr><td>6</td><td class="num">3</td><td class="num">27,320</td><td class="num">13,660</td><td class="num">13,660</td><td class="num">48,224</td></tr>
-  <tr><td>7</td><td class="num">3</td><td class="num">27,320</td><td class="num">13,660</td><td class="num">13,660</td><td class="num">61,884</td></tr>
-  <tr><td>8</td><td class="num">3</td><td class="num">27,320</td><td class="num">13,660</td><td class="num">13,660</td><td class="num">75,544</td></tr>
-  <tr><td>9</td><td class="num">3</td><td class="num">27,320</td><td class="num">13,660</td><td class="num">13,660</td><td class="num">89,205</td></tr>
-  <tr><td>10</td><td class="num">3</td><td class="num">27,320</td><td class="num">13,660</td><td class="num">13,660</td><td class="num">102,865</td></tr>
-  <tr><td>11</td><td class="num">3</td><td class="num">27,320</td><td class="num">13,660</td><td class="num">13,660</td><td class="num">116,525</td></tr>
-  <tr class="hl"><td>12</td><td class="num">3</td><td class="num">27,320</td><td class="num">13,660</td><td class="num">9,253</td><td class="num">125,778</td></tr>
-</table>
-<p class="plan-p">In month 12 the partner receives 8,475 to complete the principal and 778 on their 15% of the remainder — the first payment under Phase 2.</p>
-<div class="plan-callout"><strong>Capital recovered in month 12.</strong> The partner fully recovers their 125,000 in twelve months. From month 13 they collect their 15% of distributable cash permanently, with no additional capital contributed.</div>`,
-
-// 9 — Company capitalization + cumulative return
-`<div class="plan-eyebrow">Sections 11 – 12</div>
-<div class="plan-h2" style="margin-top:0">Company capitalization</div>
-<p class="plan-p">The 40% retained during Phase 1 stays in the operation.</p>
-<table class="plan-table">
-  <tr><th>Month</th><th class="num">Retained</th><th class="num">Accumulated</th></tr>
-  <tr><td>3</td><td class="num">5,795</td><td class="num">5,795</td></tr>
-  <tr><td>4 – 6</td><td class="num">10,928 / mo</td><td class="num">38,579</td></tr>
-  <tr><td>7 – 9</td><td class="num">10,928 / mo</td><td class="num">71,364</td></tr>
-  <tr><td>10 – 11</td><td class="num">10,928 / mo</td><td class="num">93,220</td></tr>
-  <tr class="hl"><td>12</td><td class="num">10,928</td><td class="num">104,148</td></tr>
-  <tr class="total"><td>13 onward</td><td class="num">50% of net profit</td><td class="num">growing</td></tr>
-</table>
-<div class="plan-callout">By month 12 the company has <strong>104,148 accumulated</strong> in capitalization, in addition to having fully returned the operating partner's capital. From month 13 capitalization moves to 50% of net profit, and within three months it passes 145,000 and funds City 2.</div>
-<div class="plan-callout"><strong>No new capital.</strong> Growth is funded with money the operation already generated. There is no second round or capital call.</div>
-<div class="plan-h2">Cumulative return</div>
-<table class="plan-table">
-  <tr><th>Period</th><th class="num">To operating partner</th><th class="num">Accumulated</th><th class="num">Multiple</th></tr>
-  <tr><td>Year 1</td><td class="num">125,778</td><td class="num">125,778</td><td class="num">1.01x</td></tr>
-  <tr><td>Year 2</td><td class="num">34,626</td><td class="num">160,404</td><td class="num">1.28x</td></tr>
-  <tr><td>Year 3</td><td class="num">61,026</td><td class="num">221,430</td><td class="num">1.77x</td></tr>
-  <tr class="hl"><td>Value of the 15% stake</td><td class="num">464,331</td><td class="num">685,761</td><td class="num">5.49x</td></tr>
-</table>
-<div class="plan-stat-big"><div class="v">5.49x</div><div class="l">Total return at three years · 221,430 in distributions + 464,331 in equity value</div></div>
-<p class="plan-p">The stake is valued over three cities in steady state, with 1,031,847 in annual net profit at a 3x multiple — equivalent to a company worth 3,095,541. In steady state the partner earns <strong>77,389 a year</strong>, 6,449 a month, with no additional capital contributed.</p>`,
-
-// 10 — Comparison with other instruments + risks
-`<div class="plan-eyebrow">Sections 13 – 14</div>
-<div class="plan-h2" style="margin-top:0">Comparison with other instruments</div>
-<p class="plan-lede">What this capital leaves you versus market instruments.</p>
-<p class="plan-p">The return does not come from an unusual margin. It comes from how fast the capital turns over.</p>
-<table class="plan-table">
-  <tr><th>Concept</th><th class="num">Value</th></tr>
-  <tr><td>Net margin per operation</td><td class="num">25.1%</td></tr>
-  <tr><td>Full capital cycle</td><td class="num">75 days</td></tr>
-  <tr><td>Turns per year</td><td class="num">4.9</td></tr>
-  <tr><td>Principal recovery</td><td class="num">Month 12</td></tr>
-  <tr class="hl"><td>Total return at 3 years</td><td class="num">5.49x</td></tr>
-</table>
-<p class="plan-p">A 25%-margin business that turns once a year returns 25%. The same business turning five times returns five times as much. That is the entire mechanic, and why turnover matters more than margin in this type of operation. The partner recovers their principal in twelve months and keeps their participation permanently.</p>
-<table class="plan-table">
-  <tr><th>Instrument</th><th class="num">Annual</th><th>Risk</th><th>Liquidity</th></tr>
-  <tr><td>Treasuries &amp; CDs</td><td class="num">4 – 5%</td><td>None</td><td>High</td></tr>
-  <tr><td>Corporate bonds</td><td class="num">5 – 6%</td><td>Low</td><td>High</td></tr>
-  <tr><td>S&amp;P 500 historical</td><td class="num">10%</td><td>Medium</td><td>High</td></tr>
-  <tr><td>Real estate (income)</td><td class="num">6 – 10%</td><td>Medium</td><td>Low</td></tr>
-  <tr><td>Private credit</td><td class="num">10 – 14%</td><td>Medium-high</td><td>Very low</td></tr>
-  <tr><td>Private equity</td><td class="num">15 – 25%</td><td>High</td><td>None</td></tr>
-  <tr class="hl"><td>This program</td><td class="num">5.49x at 3 years</td><td>High</td><td>None</td></tr>
-</table>
-<p class="plan-p">The return is high because the risk and illiquidity are high too: there is no secondary market, the operation is concentrated in one channel and geography, and the return depends on commercial execution, not on how a market behaves.</p>
-<div class="plan-callout"><strong>The cushion.</strong> Break-even is 1 container a month and we project three — the operation can run at a third of plan and still not lose money. That is the real protection of capital, not the return projection.</div>
-<div class="plan-h2">Risks</div>
-<table class="plan-table">
-  <tr><th>Risk</th><th>What we do</th></tr>
-  <tr><td>Tariffs rise</td><td>8,157/yr tariff reserve plus an index clause with the factory</td></tr>
-  <tr><td>Factory or vessel delays</td><td>Pre-sell during transit to clear stock immediately on arrival; pace marketing and ordering to stretch inventory; pre-shipment inspection and a qualified second supplier</td></tr>
-  <tr><td>We sell less than projected</td><td>Break-even is 1 container/month; we sell three</td></tr>
-  <tr><td>Freight rises</td><td>We buy FOB and contract freight ourselves</td></tr>
-  <tr><td>Collections delay</td><td>Cash on delivery or pickup — immediate collection</td></tr>
-</table>`,
-
-// 11 — Replication to new cities (cost, timing, per-city structure)
-`<div class="plan-eyebrow">Section 15</div>
-<div class="plan-h2" style="margin-top:0">Replication to new cities</div>
-<p class="plan-lede">Expansion funded from the operation's own cash flow — no additional capital.</p>
-<table class="plan-table">
-  <caption>Cost to open a city</caption>
-  <tr><td>3 starting containers</td><td class="num">69,807</td></tr>
-  <tr><td>Reorder deposits</td><td class="num">20,942</td></tr>
-  <tr><td>Local setup: warehouse, vehicle, staff, marketing</td><td class="num">25,000</td></tr>
-  <tr><td>Operating expenses, days 60–75</td><td class="num">4,583</td></tr>
-  <tr><td>Transport to warehouse</td><td class="num">1,050</td></tr>
-  <tr><td>Reserve</td><td class="num">3,618</td></tr>
-  <tr class="total"><td>TOTAL</td><td class="num">125,000</td></tr>
-</table>
-<table class="plan-table">
-  <caption>How City 2's capital gets completed</caption>
-  <tr><td>Capitalization accumulated by month 12</td><td class="num">104,148</td></tr>
-  <tr><td>Capitalization, months 13 – 15, at 50% of profit</td><td class="num">40,980</td></tr>
-  <tr class="total"><td>CAPITAL AVAILABLE AT MONTH 15</td><td class="num">145,128</td></tr>
-</table>
-<p class="plan-p">Launch is not triggered by the calendar but by when the capital is fully in cash. From month 13 capitalization moves to 50% of net profit, which covers the 125,000 by month 15, with the opening set for month 18 — three months of margin.</p>
-<table class="plan-table">
-  <tr><th></th><th class="num">City 2</th><th class="num">City 3</th></tr>
-  <tr><td>Capital ready in cash</td><td class="num">Month 15</td><td class="num">Month 27</td></tr>
-  <tr><td>Opening</td><td class="num">Month 18</td><td class="num">Month 30</td></tr>
-  <tr><td>First sale</td><td class="num">Month 20</td><td class="num">Month 32</td></tr>
-  <tr><td>Operating-partner capital</td><td class="num">None</td><td class="num">None</td></tr>
-</table>
-<div class="plan-h2">Annual structure by city</div>
-<table class="plan-table">
-  <tr><th>Concept</th><th class="num">City 1</th><th class="num">City 2 &amp; 3</th></tr>
-  <tr><td>Administration</td><td class="num">56,400</td><td class="num">42,000</td></tr>
-  <tr><td>Apprentice</td><td class="num">31,200</td><td class="num">31,200</td></tr>
-  <tr><td>Warehouse</td><td class="num">14,400</td><td class="num">14,400</td></tr>
-  <tr><td>Fleet &amp; delivery</td><td class="num">10,000</td><td class="num">10,000</td></tr>
-  <tr><td>Tariff reserve</td><td class="num">8,157</td><td class="num">8,157</td></tr>
-  <tr><td>Technology &amp; sales</td><td class="num">14,000</td><td class="num">4,243</td></tr>
-  <tr class="total"><td>TOTAL OPERATING EXPENSES</td><td class="num">134,157</td><td class="num">110,000</td></tr>
-</table>
-<p class="plan-p">Central administration, systems, and the factory relationship are already paid for. Each new city carries 24,157 less in structure.</p>`,
-
-// 12 — Consolidated projection + what the operating partner receives
-`<div class="plan-eyebrow">Section 15 (cont.)</div>
-<div class="plan-h2" style="margin-top:0">Annual result by city, in steady state</div>
-<table class="plan-table">
-  <tr><th>Concept</th><th class="num">City 1</th><th class="num">City 2 &amp; 3</th></tr>
-  <tr><td>Containers</td><td class="num">36</td><td class="num">36</td></tr>
-  <tr><td>Sales</td><td class="num">1,304,352</td><td class="num">1,304,352</td></tr>
-  <tr class="hl"><td>GROSS PROFIT</td><td class="num">466,668</td><td class="num">466,668</td></tr>
-  <tr><td>Operating expenses</td><td class="num">134,157</td><td class="num">110,000</td></tr>
-  <tr><td>Contingency 1%</td><td class="num">4,667</td><td class="num">4,667</td></tr>
-  <tr class="total"><td>NET BEFORE TAX</td><td class="num">327,844</td><td class="num">352,001</td></tr>
-</table>
-<p class="plan-p">Three cities in steady state: 108 containers a year, 3,913,056 in sales, and 1,031,847 net before tax.</p>
-<div class="plan-h2">Consolidated projection</div>
-<table class="plan-table">
-  <tr><th></th><th class="num">Year 1</th><th class="num">Year 2</th><th class="num">Year 3</th><th class="num">Steady state</th></tr>
-  <tr><td>Cities operating</td><td class="num">1</td><td class="num">2</td><td class="num">3</td><td class="num">3</td></tr>
-  <tr><td>Containers</td><td class="num">29</td><td class="num">50</td><td class="num">86</td><td class="num">108</td></tr>
-  <tr><td>Sales</td><td class="num">1,050,728</td><td class="num">1,811,600</td><td class="num">3,115,952</td><td class="num">3,913,056</td></tr>
-  <tr><td>Gross profit</td><td class="num">375,927</td><td class="num">648,150</td><td class="num">1,114,818</td><td class="num">1,400,004</td></tr>
-  <tr><td>Operating expenses</td><td class="num">111,798</td><td class="num">179,990</td><td class="num">289,990</td><td class="num">354,157</td></tr>
-  <tr class="total"><td>NET PROFIT BEFORE TAX</td><td class="num">260,370</td><td class="num">461,678</td><td class="num">813,680</td><td class="num">1,031,847</td></tr>
-</table>
-<p class="plan-p">City 2 sells from month 20 and City 3 from month 32. That is why Year 2 adds 14 containers from the second city and Year 3 adds 14 from the third, on top of the 36 annual containers each running city already produces.</p>
-<div class="plan-h2">What the operating partner receives</div>
-<table class="plan-table">
-  <tr><th></th><th class="num">Year 1</th><th class="num">Year 2</th><th class="num">Year 3</th></tr>
-  <tr><td>Distribution for the year</td><td class="num">125,778</td><td class="num">34,626</td><td class="num">61,026</td></tr>
-  <tr><td>Cash accumulated</td><td class="num">125,778</td><td class="num">160,404</td><td class="num">221,430</td></tr>
-  <tr><td>Value of the 15% stake</td><td class="num">–</td><td class="num">–</td><td class="num">464,331</td></tr>
-  <tr class="hl"><td>CUMULATIVE TOTAL RETURN</td><td class="num">1.01x</td><td class="num">1.28x</td><td class="num">5.49x</td></tr>
-</table>
-<div class="plan-callout"><strong>The effect of scale.</strong> Neither City 2 nor City 3 requires capital from the operating partner, and their 15% is not diluted, since the expansion is funded with profit already generated. Their stake is worth 464,331 by the third year and pays 77,389 a year in steady state, on capital they already recovered in month 12.</div>`,
-
-// 13 — Participation transfer + summary + disclaimer
-`<div class="plan-eyebrow">Sections 16 – 17</div>
-<div class="plan-h2" style="margin-top:0">Participation transfer</div>
-<p class="plan-p">The operating partner's participation is transferable. If at any point they decide to sell it, the company holds a right of first refusal on equal terms, and the incorporation of a new partner is subject to its approval.</p>
-<p class="plan-lede">The purpose is to preserve the continuity of the operation and the composition of the partner group. Final terms are set out in the corresponding corporate documents.</p>
-<div class="plan-h2">Summary</div>
-<table class="plan-table">
-  <tr><th></th><th class="num">Value</th></tr>
-  <tr><td>Program capital</td><td class="num">USD 125,000 for 15%</td></tr>
-  <tr><td>Peak exposure</td><td class="num">USD 105,312 (day 74)</td></tr>
-  <tr><td>First sale</td><td class="num">Day 75</td></tr>
-  <tr><td>Capital back in cash</td><td class="num">Day 150</td></tr>
-  <tr><td>Cadence</td><td class="num">3 containers / month</td></tr>
-  <tr><td>Containers per year</td><td class="num">36</td></tr>
-  <tr><td>Break-even</td><td class="num">1 container / month</td></tr>
-  <tr><td>Net per container before tax</td><td class="num">USD 9,107</td></tr>
-  <tr><td>Net margin</td><td class="num">25.1%</td></tr>
-  <tr><td>Capital turns per year</td><td class="num">4.9</td></tr>
-  <tr><td>Net profit — Year 1</td><td class="num">USD 260,370</td></tr>
-  <tr><td>Net profit — steady-state annual</td><td class="num">USD 327,844</td></tr>
-  <tr><td>Operating-partner participation</td><td class="num">15%</td></tr>
-  <tr><td>Minimum entry</td><td class="num">USD 25,000</td></tr>
-  <tr><td>Pre-money valuation</td><td class="num">USD 708,333</td></tr>
-  <tr><td>Post-money valuation</td><td class="num">USD 833,333</td></tr>
-  <tr><td>Principal recovery</td><td class="num">Month 12</td></tr>
-  <tr><td>Annual distribution in steady state</td><td class="num">USD 77,389</td></tr>
-  <tr><td>Value of the 15% stake at Year 3</td><td class="num">USD 464,331</td></tr>
-  <tr class="hl"><td>3-year total return</td><td class="num">5.49x</td></tr>
-</table>
-<table class="plan-table">
-  <tr><th></th><th class="num">Value</th></tr>
-  <tr><td>Phase 1 split</td><td class="num">partner 50 · capitalization 40 · admin 10</td></tr>
-  <tr><td>Phase 2 split</td><td class="num">operating partner 15% of distributable cash</td></tr>
-  <tr><td>Additional capital required</td><td class="num">None</td></tr>
-  <tr><td>Participation transfer</td><td class="num">Company's right of first refusal</td></tr>
-</table>
-<div class="plan-stat-big"><div class="v">USD 12,963</div><div class="l">Gross profit per container · Sale 36,232 · Cost landed at warehouse 23,269</div></div>
-<div class="plan-disclaimer">The figures are estimates based on the stated assumptions and do not constitute a guarantee of results. The final terms of ownership, distribution, governance, and exit must be set out in the corresponding legal documents.</div>`,
-];
-/* ---- preserved from the original site: planviewer ---- */
-const pdfOverlay = document.getElementById("pdfOverlay");
-const pdfPageContent = document.getElementById("pdfPageContent");
-const pdfPageNum = document.getElementById("pdfPageNum");
-const pdfPageTotal = document.getElementById("pdfPageTotal");
-const pdfPrevBtn = document.getElementById("pdfPrev");
-const pdfNextBtn = document.getElementById("pdfNext");
-const pdfPrintBtn = document.getElementById("pdfPrintBtn");
-const planPrintArea = document.getElementById("planPrintArea");
-let pdfLastFocus = null, planPage = 1;
-function renderPlanPage(){
-  pdfPageContent.innerHTML = PLAN_PAGES[planPage-1];
-  const viewport = document.querySelector(".pdf-viewport");
-  if (viewport) viewport.scrollTop = 0;
-  pdfPageNum.textContent = planPage; pdfPageTotal.textContent = PLAN_PAGES.length;
-  pdfPrevBtn.disabled = planPage<=1; pdfNextBtn.disabled = planPage>=PLAN_PAGES.length;
-  if (!planPagesSeen.has(planPage)){ planPagesSeen.add(planPage); trackEvent("plan_page_view", { page: planPage }); }
-}
-function planPageStep(delta){ const n=planPage+delta; if(n<1||n>PLAN_PAGES.length) return; planPage=n; renderPlanPage(); }
-function openPlanPdf(){
-  pdfLastFocus=document.activeElement; planPage=1; renderPlanPage(); pdfOverlay.classList.add("open"); lockScroll();
-  planOpenedAt = Date.now(); planPagesSeen.clear(); planPagesSeen.add(1);
-  trackEvent("plan_opened", {});
-}
-function closePlanPdf(){
-  pdfOverlay.classList.remove("open"); unlockScroll(); if(pdfLastFocus) pdfLastFocus.focus();
-  if (planOpenedAt){ trackEvent("plan_time", { seconds: Math.round((Date.now()-planOpenedAt)/1000) }); planOpenedAt = 0; }
-}
-document.getElementById("pdfClose").addEventListener("click", closePlanPdf);
-pdfPrevBtn.addEventListener("click", ()=> planPageStep(-1));
-pdfNextBtn.addEventListener("click", ()=> planPageStep(1));
-pdfOverlay.addEventListener("click",(e)=>{ if(e.target===pdfOverlay) closePlanPdf(); });
-// Printing renders every page into an off-screen container (@media print then
-// hides everything else) so the printout is the whole plan, not just the page
-// currently on screen.
-pdfPrintBtn.addEventListener("click", ()=>{
-  planPrintArea.innerHTML = PLAN_PAGES.map(p=> `<div class="plan-page">${p}</div>`).join("");
-  // No separate download link exists for the plan — printing (including
-  // "Save as PDF" from the print dialog) is also how a visitor downloads it,
-  // so both events fire from the same trigger.
-  printedViaButton = true;
-  trackEvent("plan_printed", { page: planPage });
-  trackEvent("plan_downloaded", {});
-  // Close the viewer itself before printing rather than leaning on the print
-  // stylesheet to out-rank it: `.overlay.open{visibility:visible}` is a plain
-  // (non-media) rule sitting on a `transition`-bearing element, and dropping
-  // the "open" class outright removes any chance of it fighting the print
-  // rules for which layer actually ends up on the page.
-  closePlanPdf();
-  window.print();
-});
-addEventListener("afterprint", ()=>{ planPrintArea.innerHTML = ""; });
-function renderEvidencePlanPreview(){
-  const box = document.getElementById("evidencePlanPreview");
-  if (box) box.innerHTML = `<span class="plan-preview-stat"><span class="v">USD 120,000</span><span class="l">15% equity · 3-year multiple 5.49x</span></span>`;
-}
-document.addEventListener("click",(e)=>{
-  if (e.target.closest("[data-open-plan]")){ e.preventDefault(); openPlanPdf(); }
-});
+/* Evidence lightbox keyboard (the original shared this handler with the plan viewer). */
 document.addEventListener("keydown",(e)=>{
-  if (evLb.classList.contains("open")){
-    if (e.key==="Escape") evLbClose_(); else if (e.key==="ArrowLeft") evLbStep(-1); else if (e.key==="ArrowRight") evLbStep(1);
-  } else if (pdfOverlay.classList.contains("open")){
-    if (e.key==="Escape") closePlanPdf(); else if (e.key==="ArrowLeft") planPageStep(-1); else if (e.key==="ArrowRight") planPageStep(1);
-  }
+  if (!evLb.classList.contains("open")) return;
+  if (e.key==="Escape") evLbClose_(); else if (e.key==="ArrowLeft") evLbStep(-1); else if (e.key==="ArrowRight") evLbStep(1);
 });
 
 /* ============ Apply modal — prototype: submission disabled, never fakes a send ============ */
@@ -2990,8 +2552,6 @@ function applyLang(l){
   document.querySelectorAll("[data-set-lang]").forEach(b=> b.setAttribute("aria-pressed", b.getAttribute("data-set-lang") === lang ? "true" : "false"));
   updateWaLinks();
   renderFunding(); renderCalc();
-  renderEvidencePlanPreview();
-  if (pdfOverlay.classList.contains("open")) renderPlanPage();
   if (typeof renderGateCheckboxLabel === "function") renderGateCheckboxLabel();
   if (typeof renderLegalBody === "function" && legalOverlay && legalOverlay.classList.contains("open")) renderLegalBody();
   Stage.onLangChange();
@@ -3085,7 +2645,7 @@ const Stage = (function(){
   function stopY(s){ return s.staged ? s.start : Math.max(0, s.top - vhPx * 0.5); }
 
   /* ---- nav state ---- */
-  const NAV_OF = { hero:"hero", about:"hero", how:"how", programs:"programs", evidence:"evidence", funding:"funding", trace:"funding", faq:"funding", contact:"funding" };
+  const NAV_OF = { hero:"hero", about:"hero", how:"how", programs:"programs", evidence:"evidence", plan:"plan", funding:"plan", trace:"plan", faq:"plan", contact:"plan" };
   const navLinks = document.querySelectorAll(".nav-links a, .nav-drop a");
   let lastNav = null, lastScrolled = null;
   function updateNav(y, sceneId){

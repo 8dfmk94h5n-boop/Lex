@@ -15,12 +15,13 @@ En todas las escenas el fondo es fijo y nunca se desplaza. El puerto de noche es
 | 1 | Hero | Escenario | `assets-extra/video-puerto-noche.mp4` (fondo base) | Manifiesto, bajada, frase "Contamos con experiencia real…", CTA y nota de participación privada. El riel empieza en **Puerto**. |
 | 2 | Quiénes somos | Escenario | `assets-extra/video-soldador.mp4` | El soldador se funde **sobre** el puerto en 2.6 s, sin corte seco. Titular "Formamos jóvenes operadores…", LLC y "Los socios aportan capital y tiempo." |
 | 3 | Cómo funciona | Escenario, 5 tiempos | `assets/origin-sequence.mp4` | Rejilla de datos al máximo, con su escala ligada al scroll ("respira"). Los 4 pasos se encienden uno por gesto y en el 5.º tiempo entra el bloque **Administración centrada en AI**. El riel pasa a **Aduana**. |
-| 4 | Programas | Escenario, 5 tiempos | `assets/steps-bg.mp4` (cohetes) | Acero · Ronda 01 ("En preparación · Evaluación abierta", con CTA y plan) y los otros 4 sectores ("En estudio técnico", "Sin captación"), uno por gesto. |
-| 5 | Evidencia | **Flujo** (excepción) | Puerto, atenuado | Prueba piloto 2025, nota de documentos protegidos y 3 tarjetas (documentos, fotos, plan). El riel pasa a **Almacén**. |
-| 6 | Financiamiento | **Flujo** (excepción) | Puerto, atenuado | Panel (Demostración), reglas de distribución, capital y plazo, calculadora (Demostración) y custodia con los candidatos en evaluación. |
-| 7 | Trazabilidad y gobernanza | Escenario, 3 tiempos (flujo en móvil) | `assets/trace-bg.mp4` | Análisis continuo, reglas de gobernanza y propuestas en votación, una por gesto. Lleva badge Demostración. El riel pasa a **Distribución**. |
-| 8 | FAQ | **Flujo** (excepción) | Puerto, atenuado | Las 9 preguntas del punto 7. |
-| 9 | Contacto | Escenario | Puerto | "Solicitar evaluación privada" a gran tamaño, con contacto comercial y WhatsApp "por completar". El riel llega a **Liquidación**. A continuación va el pie. |
+| 4 | Programas | Escenario, 5 tiempos | `assets/steps-bg.mp4` (cohetes) | Acero · Ronda 01 ("En preparación · Evaluación abierta", con CTA) y los otros 4 sectores ("En estudio técnico", "Sin captación"), uno por gesto. |
+| 5 | Evidencia | **Flujo** (excepción) | Puerto, atenuado | Prueba piloto 2025, nota de documentos protegidos y 2 tarjetas (documentos, fotos). El riel pasa a **Almacén**. |
+| 6 | Plan operativo (gancho) | **Flujo** | Puerto, atenuado | Tres bloques solo con cifras agregadas aprobadas: A La economía, B La proyección y C El control. Debajo, el CTA y una línea sobre el plan privado. Reemplaza el visor del plan. |
+| 7 | Financiamiento | **Flujo** (excepción) | Puerto, atenuado | Panel (Demostración), reglas de distribución, capital y plazo, calculadora (Demostración) y custodia con los candidatos en evaluación. |
+| 8 | Trazabilidad y gobernanza | Escenario, 3 tiempos (flujo en móvil) | `assets/trace-bg.mp4` | Análisis continuo, reglas de gobernanza y propuestas en votación, una por gesto. Lleva badge Demostración. El riel pasa a **Distribución**. |
+| 9 | FAQ | **Flujo** (excepción) | Puerto, atenuado | Las 9 preguntas del punto 7. |
+| 10 | Contacto | Escenario | Puerto | "Solicitar evaluación privada" a gran tamaño, con contacto comercial y WhatsApp "por completar". El riel llega a **Liquidación**. A continuación va el pie. |
 
 En todos los modos y tamaños probados el texto queda completo y legible: 1440×900, 1280×720, 390×844, español, inglés y chino, movimiento reducido y sin JavaScript.
 
@@ -33,7 +34,7 @@ En todos los modos y tamaños probados el texto queda completo y legible: 1440×
 | Ningún video se carga de golpe | **Cumple** | No se pide ningún video antes de abrir el gate. Al abrirlo solo se pide el del puerto. Los demás se piden cuando su escena está a menos de 0.6 pantallas (verificado). |
 | Video que falla → póster | **Cumple** | Todos tienen póster. Si un video da error, el póster sigue siendo el fondo de la escena. |
 | Móvil primero: titular y CTA claros | **Cumple** | A 390×844 el titular y el CTA se ven en la primera pantalla. Si una escena no cabe en la pantalla, pasa automáticamente a flujo normal (en móvil le ocurre a Trazabilidad). |
-| Targets ≥ 44 px | **Cumple** | Botones, navegación, idiomas, controles de la calculadora, visor y lightbox. |
+| Targets ≥ 44 px | **Cumple** | Botones, navegación, idiomas, controles de la calculadora y lightbox. |
 | Contraste AA | **Cumple** | #E8EAED, #9AA3AD y #C9A96A sobre #0B0E11 superan 4.5:1. El gris más tenue (#7D8690) es ≈5:1. |
 | Focos visibles | **Cumple** | Contorno ámbar de 2 px con `:focus-visible`. |
 | Landmarks semánticos y alt | **Cumple** | `header`, `nav`, `main`, `section` con `aria-labelledby`, `footer` y enlace "Saltar al contenido". Las imágenes decorativas llevan `alt=""` y el fondo `aria-hidden`. |
@@ -42,7 +43,7 @@ En todos los modos y tamaños probados el texto queda completo y legible: 1440×
 | Fluidez ≥ ~55 fps en teléfono medio | **No verificable aquí** | En emulación (CPU ×4, 390×844, sin GPU) da ≈53 fps, lo mismo que el sitio original en esas condiciones (52.3). El perfil muestra que el JS de la página pesa poco. Hay que medirlo en un teléfono real. |
 | Reproducción de video | **No verificable aquí** | El Chromium de este entorno no decodifica H.264, así que las pruebas mostraron los pósters. Los 5 videos son H.264, que reproducen Chrome, Safari y Edge. |
 | Cada cifra contrastada con el prompt | **Cumple, con conflictos** | El panel muestra 120,000 / 5,600 (4.67%) / 114,400 / 25,000 = 20.83%, verificado por prueba. Hay cifras heredadas que no cuadran (ver §4). |
-| Gate, calculadora, visor del plan y evidencia | **Cumple** | Los 26 chequeos automáticos pasan: gate (código erróneo y correcto), modal, visor (paginación), lightbox (7 documentos), calculadora, idiomas y Escape. |
+| Gate, calculadora, evidencia y sección del plan | **Cumple** | Los 28 chequeos automáticos pasan: gate (código erróneo y correcto), modal, plan fuera del sitio (sin visor, páginas ni PDF en el código fuente), cifras del gancho, enlace "Plan operativo", lightbox (7 documentos), calculadora, idiomas y Escape. |
 | Una rueda = un paso | **Cumple** | El scroll aterriza exacto en cada tiempo, hacia abajo y hacia arriba. En las escenas en flujo el scroll es libre. |
 
 ## 3. Changelog
@@ -54,7 +55,7 @@ En todos los modos y tamaños probados el texto queda completo y legible: 1440×
 - Copy del punto 7 en español, inglés y chino. Las traducciones al inglés y al chino del copy nuevo son mías, hechas fielmente desde el español.
 - AI aparece exactamente en 3 lugares: el bloque en Cómo funciona, el riel y el panel "Análisis continuo" de Trazabilidad.
 - Reglas del punto 6: CTA único "Solicitar evaluación privada". Escrow solo como "Candidato en evaluación", también en el pie de página y en la FAQ legal, que antes lo daban por contratado. Badge "Demostración" en financiamiento, calculadora, trazabilidad/gobernanza y telemetría. Campo "Referencia: ¿quién te presentó?" en lugar de "Mentor". Formulario de prototipo deshabilitado con nota visible y sin "Mensaje recibido" falso. Eliminé "Texto sujeto a revisión legal".
-- Gate, términos, calculadora, visor del plan, evidencia y analítica: el código se copió íntegro del original. Solo cambié el bloqueo de scroll (para que funcione con Lenis), los colores del globo y el idioma por defecto (ES).
+- Gate, términos, calculadora, evidencia y analítica: el código se copió íntegro del original. Solo cambié el bloqueo de scroll (para que funcione con Lenis), los colores del globo y el idioma por defecto (ES).
 - "Productos frescos" pasa a llamarse "Agro". Gobernanza se movió de Financiamiento a la escena 7, según la estructura del punto 5.
 
 **Simplificaciones por rendimiento**
@@ -76,9 +77,9 @@ En todos los modos y tamaños probados el texto queda completo y legible: 1440×
 
 ## 4. Conflictos que necesitan tu decisión (no los adiviné)
 
-1. **Meta: resuelto.** La meta es USD 120,000 en el panel, la calculadora (base y máximo) y la tarjeta de vista previa del plan. Para los montos del socio en la calculadora usé los del plan × 120/125, así que todos los términos por dólar del plan quedan idénticos: año 1 = 100.6% del aporte (recuperación del capital en 12 meses), 1.01x / 1.28x / 5.49x. Las cifras del proyecto (ventas, utilidad) no cambian. **Sigue pendiente:** las 13 páginas del visor del plan operativo todavía dicen "USD 125,000" / "125,000" en 8 páginas: capital del programa, uso de fondos, calendario de pagos, curva de caja, fases, recuperación, ciudad 2 y resumen. Esas tablas suman y se derivan de 125,000, así que cambiarlas exige rehacer el modelo. No las toqué.
-2. **Narrativa de recuperación en 12 meses:** se conserva intacta en la calculadora y en el plan, por decisión tuya.
-3. **Know-how en el plan operativo.** La página 2 del plan describe el método de precios ("un dólar por debajo del competidor de referencia", 872 unidades a $41.55) y dice "materiales de construcción". La regla 6 prohíbe publicar el método de precios, pero el punto 2.4b pide conservar el visor. Lo dejé intacto: decide tú si se edita.
+1. **Meta USD 120,000: resuelto.** Panel, calculadora (base y máximo, con los montos del socio × 120/125 para conservar los términos por dólar) y narrativa de recuperación en 12 meses intacta.
+2. **Plan operativo: fuera del sitio público (resuelto).** Eliminé el visor, sus 13 páginas, la impresión/descarga, la tarjeta de vista previa y los botones "Ver el plan". El texto del plan ya no está ni en el código fuente de la página. Los PDF y las páginas siguen en el repositorio (`presston-site/assets/`, `presston-site/index.html` original) y el paquete de Cloudflare no los incluye. Con esto desaparece también el problema del método de precios.
+3. **Nuevo conflicto: la calculadora contra las cifras del gancho.** El gancho dice 1.37x antes de impuestos y 1.05x después, y 24 contenedores al año. La calculadora (que se conserva, marcada como Demostración) sigue mostrando la proyección del plan anterior: 1.01x / 1.28x / 5.49x a 3 años, valor del 15% al año 3 y ventas/utilidad del proyecto calculadas con 36 contenedores al año. Hoy la página muestra los dos modelos. Decide si la calculadora se actualiza (necesito las cifras aprobadas año por año) o se retira.
 4. **Logos de terceros en el video del puerto.** `video-puerto-noche.mp4` y su póster muestran contenedores con "MAERSK" y "MSC" legibles. El punto 4 dice "sin logos de aliados". No son aliados, pero son marcas de terceros visibles en el Hero.
 5. **Personas en video.** El soldador aparece con careta, sin rostro, y lo asigna el propio prompt. Lo menciono por la regla "sin fotos de personas".
 6. **Gate sin JavaScript.** Como el fallback sin JS es obligatorio, sin JS el gate se oculta y el contenido se lee. El gate siempre fue solo de cliente (el contenido ya estaba en el HTML), así que no cambia la seguridad real.
