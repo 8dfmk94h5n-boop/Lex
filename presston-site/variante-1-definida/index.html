@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es" data-lang="es" class="no-js">
+<html lang="en" data-lang="en" class="no-js">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>Presston Strategic Partners</title>
-<meta name="description" content="Compañía privada que ejecuta operaciones reales de importación, exportación, distribución y venta en sectores estratégicos de Norteamérica." />
+<meta name="description" content="A private company running real import, export, distribution, and sales operations in strategic sectors across North America." />
 <meta name="theme-color" content="#0B0E11" />
 <script>
 /* Runs before first paint: marks JS as available and, unless the visitor prefers
@@ -974,9 +974,9 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
     <div class="gate-welcome-txt"><span class="chk">&#10003;</span><span data-i18n="gate_confirm">Bienvenido · Acceso concedido</span></div>
   </div>
   <div class="gate-card" id="gateCard">
-    <div class="gate-langs" role="group" aria-label="Idioma">
-      <button type="button" class="gate-lang-btn" data-set-lang="es" aria-pressed="true" aria-label="Español">ES</button>
-      <button type="button" class="gate-lang-btn" data-set-lang="en" aria-pressed="false" aria-label="English">EN</button>
+    <div class="gate-langs" role="group" aria-label="Language">
+      <button type="button" class="gate-lang-btn" data-set-lang="en" aria-pressed="true" aria-label="English">EN</button>
+      <button type="button" class="gate-lang-btn" data-set-lang="es" aria-pressed="false" aria-label="Español">ES</button>
       <button type="button" class="gate-lang-btn" data-set-lang="zh" aria-pressed="false" aria-label="中文">ZH</button>
     </div>
     <div class="gate-logo">
@@ -1071,9 +1071,9 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
       <a href="#evidence" data-goto="evidence" data-i18n="nav_evidence">Evidencia</a>
       <a href="#plan" data-goto="plan" data-i18n="nav_funding">Plan operativo</a>
     </div>
-    <div class="seg" role="group" aria-label="Idioma">
-      <button type="button" data-set-lang="es" aria-pressed="true" aria-label="Español">ES</button>
-      <button type="button" data-set-lang="en" aria-pressed="false" aria-label="English">EN</button>
+    <div class="seg" role="group" aria-label="Language">
+      <button type="button" data-set-lang="en" aria-pressed="true" aria-label="English">EN</button>
+      <button type="button" data-set-lang="es" aria-pressed="false" aria-label="Español">ES</button>
       <button type="button" data-set-lang="zh" aria-pressed="false" aria-label="中文">ZH</button>
     </div>
     <button type="button" class="nav-menu-btn" id="navMenuBtn" aria-label="Menú" data-i18n-aria="menu" aria-expanded="false" aria-controls="navDrop">
@@ -1087,9 +1087,9 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
   <a href="#programs" data-goto="programs" data-i18n="nav_programs">Programas</a>
   <a href="#evidence" data-goto="evidence" data-i18n="nav_evidence">Evidencia</a>
   <a href="#plan" data-goto="plan" data-i18n="nav_funding">Plan operativo</a>
-  <div class="nav-drop-langs" role="group" aria-label="Idioma">
-    <button type="button" data-set-lang="es" aria-pressed="true" aria-label="Español">ES</button>
-    <button type="button" data-set-lang="en" aria-pressed="false" aria-label="English">EN</button>
+  <div class="nav-drop-langs" role="group" aria-label="Language">
+    <button type="button" data-set-lang="en" aria-pressed="true" aria-label="English">EN</button>
+    <button type="button" data-set-lang="es" aria-pressed="false" aria-label="Español">ES</button>
     <button type="button" data-set-lang="zh" aria-pressed="false" aria-label="中文">ZH</button>
   </div>
 </nav>
@@ -2333,8 +2333,9 @@ const COORDS = [
 const IMPORT_DOCS = [2,3,4,5,6,7,1].map(n=> ASSET + "evidence/imports/doc-" + n + ".jpg");
 const LOGISTICS_PHOTOS = ["container-1","container-2","truck","van-loading","warehouse"].map(n=> ASSET + "evidence/" + n + ".jpg");
 
-let lang = "es";
-const t = (k)=> (I18N[lang] && I18N[lang][k] !== undefined ? I18N[lang][k] : (I18N.es[k] || ""));
+let lang = "en";
+// English is the reference language: any missing key falls back to it.
+const t = (k)=> (I18N[lang] && I18N[lang][k] !== undefined ? I18N[lang][k] : (I18N.en[k] !== undefined ? I18N.en[k] : (I18N.es[k] || "")));
 const clamp = (n,a,b)=> Math.max(a, Math.min(b,n));
 const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const supportsWebP = (function(){ try { return document.createElement("canvas").toDataURL("image/webp").indexOf("data:image/webp") === 0; } catch(e){ return false; } })();
@@ -2763,7 +2764,7 @@ setTimeout(()=> document.getElementById("waFloat").classList.add("show"), 1400);
 /* ============ Language ============ */
 function applyLang(l){
   const changed = lang !== l;
-  lang = I18N[l] ? l : "es";
+  lang = I18N[l] ? l : "en";
   try { sessionStorage.setItem("presstonLang", lang); } catch(e){}
   root.setAttribute("data-lang", lang);
   root.setAttribute("lang", lang === "zh" ? "zh-CN" : lang);
@@ -3556,10 +3557,7 @@ function detectInitialLang(){
   let saved = null;
   try { saved = sessionStorage.getItem("presstonLang"); } catch(e){}
   if (saved && I18N[saved]) return saved;
-  const nav = (navigator.language || navigator.userLanguage || "en").toLowerCase();
-  if (nav.indexOf("zh") === 0) return "zh";
-  if (nav.indexOf("es") === 0) return "es";
-  return "es";
+  return "en";
 }
 
 /* ============ Bootstrap ============ */
