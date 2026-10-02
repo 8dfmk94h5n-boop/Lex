@@ -21,7 +21,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Fragment+Mono&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;600&display=swap" rel="stylesheet" />
 <link rel="preload" as="image" href="../assets-extra/poster-puerto-noche.webp" type="image/webp" />
 
 <style>
@@ -48,12 +48,12 @@
   --panel:rgba(11,14,17,.84);
   --panel-2:rgba(18,22,27,.9);
 
-  --f-display:'Fraunces','Noto Serif SC',Georgia,'Times New Roman',serif;
-  --f-body:'Inter','Noto Sans SC',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --f-mono:'IBM Plex Mono','Noto Sans SC',ui-monospace,Menlo,monospace;
-  --w-display:380;          /* display weight, letter-spacing and width live in */
-  --ls-display:-.018em;     /* variables so the type system can be swapped whole */
-  --stretch-display:100%;
+  --f-display:'Archivo','Noto Sans SC',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-body:'Archivo','Noto Sans SC',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-mono:'Fragment Mono','Noto Sans SC',ui-monospace,Menlo,monospace;
+  --w-display:600;          /* display weight, letter-spacing and width live in */
+  --ls-display:-.03em;     /* variables so the type system can be swapped whole */
+  --stretch-display:116%;
 
   --ease:cubic-bezier(.22,1,.36,1);
   --vh:100vh;
@@ -86,7 +86,7 @@ img,video{ display:block;max-width:100%; }
 
 /* ---------- Type roles ---------- */
 .display{ font-family:var(--f-display);font-weight:var(--w-display);font-stretch:var(--stretch-display);font-optical-sizing:auto;letter-spacing:var(--ls-display);color:var(--bone);text-wrap:balance; }
-html[data-lang="zh"] .display{ font-weight:600;letter-spacing:.01em;line-height:1.28; }
+html[data-lang="zh"] .display{ font-family:'Noto Serif SC',serif;font-stretch:100%;font-weight:600;letter-spacing:.01em;line-height:1.28; }
 .h1{ font-size:clamp(42px,5.7vw,94px);line-height:1.01; }
 .h2{ font-size:clamp(32px,3.9vw,60px);line-height:1.06; }
 .h3{ font-size:clamp(24px,2.3vw,34px);line-height:1.12; }
@@ -169,7 +169,7 @@ html[data-lang="zh"] .gate-title{ font-weight:600; }
 .gate-check-row label{ font-size:11.5px;line-height:1.6;color:var(--mist);cursor:pointer;position:relative; }
 /* the label's hit area also covers the checkbox and its surroundings: ≥44px target */
 .gate-check-row label::before{ content:"";position:absolute;left:-44px;top:-12px;width:44px;height:max(44px, calc(100% + 24px)); }
-.gate-legal-link{ background:none;border:0;padding:13px 0;margin:-13px 0;color:var(--amber);font:inherit;text-decoration:underline;cursor:pointer; }
+.gate-legal-link{ background:none;border:0;padding:0;margin:0; /* inline link in a sentence: WCAG 2.5.8 inline exception; an enlarged box would overlap the neighbouring line */ color:var(--amber);font:inherit;text-decoration:underline;cursor:pointer; }
 .gate-slogan{ text-align:center;font-family:var(--f-mono);font-size:10px;line-height:1.65;color:var(--mist-dim);padding-top:18px;border-top:1px solid var(--hair); }
 .gate-reveal-veil{ position:fixed;inset:0;z-index:490;pointer-events:none;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:backdrop-filter .8s var(--ease),-webkit-backdrop-filter .8s var(--ease); }
 .gate-reveal-veil.clear{ backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px); }
@@ -233,12 +233,12 @@ html[data-lang="zh"] .route-stop{ letter-spacing:.04em; }
 .route-stop.is-lit .dot{ background:var(--amber);border-color:var(--amber); }
 .route-stop.is-lit{ color:var(--mist); }
 .route-stop.is-here{ color:var(--bone); }
-.route-tel{ font-family:var(--f-mono);font-size:10px;letter-spacing:.06em;color:var(--mist-dim);display:flex;flex-direction:column;gap:6px;align-items:flex-start; }
+.route-tel{ white-space:nowrap;font-family:var(--f-mono);font-size:10px;letter-spacing:.02em;color:var(--mist-dim);display:flex;flex-direction:column;gap:6px;align-items:flex-start; }
 .route-tel .demo-badge{ font-size:9px;padding:2px 6px; }
 .route-here{ display:none; }
 
 @media (min-width:1025px){
-  .route{ left:calc(26px + env(safe-area-inset-left,0px));top:50%;transform:translateY(-50%);width:120px;height:min(62vh,500px);display:flex;flex-direction:column;gap:20px; }
+  .route{ left:calc(26px + env(safe-area-inset-left,0px));top:50%;transform:translateY(-50%);width:150px;height:min(62vh,500px);display:flex;flex-direction:column;gap:20px; }
   .route-track{ flex:1; }
   .route-base,.route-fill{ left:4px;top:0;width:1px;height:100%; }
   .route-fill{ transform-origin:50% 0;transform:scaleY(0); }
@@ -340,7 +340,7 @@ html[data-lang="zh"] .hero-copy .h1{ max-width:11em; }
 html[data-lang="zh"] .hero-statement{ font-weight:500; }
 .hero-actions{ margin-top:clamp(22px,3.2vh,34px);display:flex;align-items:center;gap:20px 26px;flex-wrap:wrap; }
 .hero-actions .note{ max-width:40ch;color:var(--mist); }
-.scroll-cue{ position:absolute;right:var(--pad);bottom:calc(22px + var(--safe-bottom));display:none;align-items:center;gap:10px;font-family:var(--f-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mist-dim);pointer-events:none; }
+.scroll-cue{ position:absolute;left:calc(var(--pad) + var(--rail-w));bottom:calc(22px + var(--safe-bottom));display:none;align-items:center;gap:10px;font-family:var(--f-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mist-dim);pointer-events:none; }
 .is-staged .scroll-cue{ display:flex; }
 .scroll-cue i{ width:40px;height:1px;background:linear-gradient(90deg,var(--amber),transparent); }
 
@@ -480,7 +480,6 @@ html[data-lang="zh"] .scope-line{ letter-spacing:.04em; }
 }
 @media (max-width:640px){
   .pb-econ,.pb-proj,.pb-ctrl{ grid-column:1 / -1; }
-  .plan-foot .btn{ width:100%; }
 }
 
 /* ---------- FUNDING (flow) ---------- */
@@ -735,7 +734,6 @@ html[data-lang="zh"] .field label{ letter-spacing:.04em; }
   html[data-lang="zh"] .h1{ font-size:clamp(32px,9vw,44px); }
   .h2{ font-size:clamp(28px,8vw,38px); }
   .hero-statement{ font-size:17px; }
-  .hero-actions .btn{ width:100%; }
   .steps{ grid-template-columns:1fr;row-gap:0; }
   .step{ padding:14px 0 14px 46px;border-top:1px solid var(--hair); }
   .step .n{ position:absolute;left:0;top:16px;margin:0; }
@@ -770,6 +768,117 @@ html[data-lang="zh"] .field label{ letter-spacing:.04em; }
   .is-staged .scene-content > .grid12{ padding-top:92px;padding-bottom:84px; }
 }
 
+
+/* ---------- Typography #2 (Archivo ensanchada + Fragment Mono): smaller display
+   texts step down to 500 and a narrower width so they read as copy, not shouting. ---------- */
+.h1{ line-height:.98; }
+.hero-statement,.about-copy .about-close,.pb-recovery,.step .t,.pgm-item .nm,.faq-item summary,.trace-row .v,.ai-block .ai-title,.gov-title,.fund-calc-block-title,.fund-trust h3,.pb-title,.modal h2,.gate-title,.gate-welcome-txt,.fund-name{ font-weight:500;font-stretch:108%;letter-spacing:-.01em; }
+.pgm-card .pc-hook{ font-style:normal;font-weight:500;font-stretch:100%; }
+.logo span,.gate-logo span,.foot-brand-row{ font-stretch:112%;font-weight:600;letter-spacing:-.01em; }
+html[data-lang="zh"] .hero-statement,html[data-lang="zh"] .about-copy .about-close,html[data-lang="zh"] .pb-recovery,html[data-lang="zh"] .step .t,html[data-lang="zh"] .faq-item summary,html[data-lang="zh"] .pb-title,html[data-lang="zh"] .ai-block .ai-title,html[data-lang="zh"] .gov-title{ font-family:'Noto Sans SC',sans-serif;font-stretch:100%; }
+/* capital: three statements, lead in bone */
+.cap-list{ list-style:none;display:flex;flex-direction:column;gap:10px; }
+.cap-list li{ font-size:15px;line-height:1.6;color:var(--mist); }
+.cap-list strong{ color:var(--bone);font-weight:600; }
+
+
+/* ============================================================
+   TERMINACIONES — línea SpaceX. Los CTAs son texto puro integrado a la
+   escena: sin bordes, sin cajas, sin rellenos. Una sombra sutil sostiene
+   la lectura sobre la luz del video. Aplica a CTAs, formulario,
+   calculadora, gate, evidencia e idiomas.
+   ============================================================ */
+.btn{ background:none!important;border:0!important;border-radius:0;box-shadow:none;justify-content:flex-start;
+  padding:20px 0;min-height:44px;gap:14px;
+  font-family:var(--f-body);font-weight:600;font-stretch:100%;font-size:14px;letter-spacing:.26em;text-transform:uppercase;line-height:1.35;
+  color:var(--bone);text-shadow:0 1px 14px rgba(5,7,9,.7),0 0 2px rgba(5,7,9,.45);cursor:pointer;
+  transition:color .25s ease,transform .12s ease; }
+html[data-lang="zh"] .btn{ letter-spacing:.1em; }
+.btn .arw{ font-family:var(--f-body);font-size:17px;letter-spacing:0;color:var(--amber);transition:transform .3s cubic-bezier(.2,.8,.2,1),color .25s ease; }
+.btn:hover{ color:var(--amber); }
+.btn:hover .arw{ transform:translateX(6px); }
+.btn:active{ transform:translateY(1px); }
+.btn:focus-visible{ outline:2px solid var(--amber);outline-offset:6px;border-radius:2px; }
+.btn-ghost{ color:var(--mist); }
+.btn-ghost .arw{ color:var(--mist); }
+.btn-ghost:hover{ color:var(--bone); }
+.btn-ghost:hover .arw{ color:var(--amber); }
+.btn[disabled],.btn[disabled]:hover{ color:var(--mist-dim);opacity:1;cursor:not-allowed;transform:none; }
+.btn[disabled] .arw{ color:var(--mist-dim);transform:none; }
+.hero-actions{ gap:6px 34px; }
+.m-actions{ gap:8px 32px; }
+.m-actions .btn{ flex:0 0 auto; }
+
+/* language selector: "ES · EN · ZH", hairline separators, no box */
+.seg,.nav-drop-langs,.gate-langs{ border:0!important;background:none!important;padding:0;gap:0;align-items:center; }
+.nav-drop-langs{ justify-content:flex-start;border-top:1px solid var(--hair)!important;padding-top:6px; }
+.gate-langs{ justify-content:center; }
+.seg button,.nav-drop-langs button,.gate-lang-btn{ position:relative;flex:0 0 auto;background:none!important;border:0!important;border-radius:0;box-shadow:none;
+  min-width:44px;min-height:44px;padding:0 12px;font-family:var(--f-body);font-weight:600;font-stretch:100%;font-size:12px;letter-spacing:.2em;text-indent:.2em;
+  color:var(--mist);text-shadow:0 1px 10px rgba(5,7,9,.6);cursor:pointer;transition:color .2s ease; }
+.seg button + button::before,.nav-drop-langs button + button::before,.gate-lang-btn + .gate-lang-btn::before{ content:"";position:absolute;left:0;top:50%;width:1px;height:12px;margin-top:-6px;background:rgba(232,234,237,.28); }
+.seg button:hover,.nav-drop-langs button:hover,.gate-lang-btn:hover{ color:var(--bone); }
+.seg button[aria-pressed="true"],.nav-drop-langs button[aria-pressed="true"],.gate-lang-btn[aria-pressed="true"]{ color:var(--amber);background:none!important; }
+.gate-lang-btn[aria-pressed="true"]::after{ display:none; }
+.seg button:focus-visible,.nav-drop-langs button:focus-visible,.gate-lang-btn:focus-visible{ outline:2px solid var(--amber);outline-offset:-4px; }
+
+/* gate */
+.gate-submit{ background:none!important;border:0;border-radius:0;padding:0 4px 0 14px;min-height:48px;display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--f-body);font-weight:600;font-size:13px;letter-spacing:.26em;text-transform:uppercase;color:var(--bone);cursor:pointer;transition:color .25s ease,transform .12s ease; }
+.gate-submit::after{ content:"→";color:var(--amber);font-size:16px;letter-spacing:0;transition:transform .3s cubic-bezier(.2,.8,.2,1); }
+.gate-submit:hover:not(:disabled){ color:var(--amber);background:none!important; }
+.gate-submit:hover:not(:disabled)::after{ transform:translateX(6px); }
+.gate-submit:active:not(:disabled){ transform:translateY(1px); }
+.gate-submit:disabled{ opacity:1;color:var(--mist-dim); }
+.gate-submit:disabled::after{ color:var(--mist-dim); }
+.gate-submit:focus-visible{ outline:2px solid var(--amber);outline-offset:4px; }
+
+/* calculator */
+.fund-calc-input{ border:0;background:none;padding:0;gap:2px; }
+.fund-calc-step{ width:44px;height:44px;border:0;background:none;color:var(--mist);font-size:20px;text-shadow:none; }
+.fund-calc-step:hover:not(:disabled){ color:var(--amber);border:0; }
+.fund-calc-step:active:not(:disabled){ transform:translateY(1px); }
+.fund-calc-step:focus-visible{ outline:2px solid var(--amber);outline-offset:-2px; }
+.fund-calc-amt{ border-bottom:1px solid var(--hair);text-align:center; }
+.fund-calc-amt:focus{ border-bottom-color:var(--amber); }
+.fund-calc-note-btn{ color:var(--mist);text-decoration:none;font-family:var(--f-body);font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase; }
+.fund-calc-note-btn:hover{ color:var(--bone); }
+
+/* nav, modal, evidence viewer, floating chat: no boxes */
+.nav-menu-btn{ border:0;background:none;color:var(--bone);filter:drop-shadow(0 1px 6px rgba(5,7,9,.7)); }
+.nav-menu-btn:hover{ color:var(--amber); }
+.m-close{ color:var(--mist);background:none;border:0; }
+.m-close:hover{ color:var(--amber); }
+.ev-lb-close,.ev-lb-arrow{ border:0!important;background:none!important;color:var(--bone);filter:drop-shadow(0 1px 8px rgba(0,0,0,.8)); }
+.ev-lb-close:hover,.ev-lb-arrow:hover{ color:var(--amber); }
+.evidence-plan-badge{ background:none;border:0;padding:0;bottom:12px;right:14px;font-family:var(--f-body);font-weight:600;font-size:11px;letter-spacing:.22em;color:var(--bone);text-shadow:0 1px 10px rgba(0,0,0,.9),0 0 2px rgba(0,0,0,.8); }
+.evidence-plan-badge::after{ content:" →";color:var(--amber); }
+.evidence-card:hover .evidence-plan-badge{ color:var(--amber); }
+.modal-wa-link{ color:var(--mist);text-decoration:none;font-family:var(--f-body);font-weight:600;font-size:11.5px;letter-spacing:.22em; }
+.modal-wa-link:hover{ color:var(--bone); }
+.wa-float{ background:none;border:0;padding:10px 4px;min-width:44px;min-height:44px;justify-content:center;font-family:var(--f-body);font-weight:600;font-size:12px;letter-spacing:.22em;color:var(--bone);text-shadow:0 1px 12px rgba(5,7,9,.85),0 0 2px rgba(5,7,9,.6); }
+.wa-float:hover{ color:var(--amber); }
+.wa-float .wa-ic svg{ filter:drop-shadow(0 1px 6px rgba(5,7,9,.8)); }
+
+/* the large contact CTA follows the same rules at display size */
+.contact-cta .display{ color:var(--bone);text-shadow:0 2px 24px rgba(5,7,9,.6); }
+.contact-cta .arw{ color:var(--amber);transition:transform .3s cubic-bezier(.2,.8,.2,1); }
+.contact-cta:hover .display{ color:var(--amber); }
+.contact-cta:hover .arw{ transform:translateX(6px); }
+.contact-cta:active{ transform:translateY(1px); }
+.contact-cta:focus-visible{ outline:2px solid var(--amber);outline-offset:8px; }
+/* the arrow follows the last word at every width */
+.contact-cta{ display:block; }
+.contact-cta .display{ display:inline; }
+.contact-cta .arw{ display:inline-block;margin-left:.35em;padding-bottom:0;vertical-align:baseline; }
+.btn{ max-width:100%; }
+/* text and arrow flow inline, so when a CTA wraps the arrow stays with its last word */
+.btn:not(.fund-calc-step){ display:inline-block;text-align:left; }
+.btn > span:first-child{ display:inline; }
+.btn .arw{ display:inline-block;margin-left:.75em; }
+.contact-cta .display{ font-size:clamp(38px,4.8vw,80px); }
+@media (max-width:420px){ .btn{ letter-spacing:.2em; } } /* keeps the arrow on the CTA line on narrow phones */
+
 /* ---------- Grain / reduced ---------- */
 body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!important;transition:none!important; }
 </style>
@@ -786,9 +895,9 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
   </div>
   <div class="gate-card" id="gateCard">
     <div class="gate-langs" role="group" aria-label="Idioma">
-      <button type="button" class="gate-lang-btn" data-set-lang="es" aria-pressed="true"><svg class="gate-flag" viewBox="0 0 20 14" aria-hidden="true"><rect width="20" height="14" fill="#AA151B"/><rect y="3.5" width="20" height="7" fill="#F1BF00"/></svg>ES</button>
-      <button type="button" class="gate-lang-btn" data-set-lang="en" aria-pressed="false"><svg class="gate-flag" viewBox="0 0 20 14" aria-hidden="true"><rect width="20" height="14" fill="#fff"/><rect width="20" height="2" fill="#B22234"/><rect y="4" width="20" height="2" fill="#B22234"/><rect y="8" width="20" height="2" fill="#B22234"/><rect y="12" width="20" height="2" fill="#B22234"/><rect width="9" height="8" fill="#3C3B6E"/></svg>EN</button>
-      <button type="button" class="gate-lang-btn" data-set-lang="zh" aria-pressed="false"><svg class="gate-flag" viewBox="0 0 20 14" aria-hidden="true"><rect width="20" height="14" fill="#DE2910"/><polygon points="3.4,1.2 4.2,3.3 6.4,3.3 4.6,4.6 5.3,6.7 3.4,5.4 1.5,6.7 2.2,4.6 0.4,3.3 2.6,3.3" fill="#FFDE00"/></svg>中文</button>
+      <button type="button" class="gate-lang-btn" data-set-lang="es" aria-pressed="true" aria-label="Español">ES</button>
+      <button type="button" class="gate-lang-btn" data-set-lang="en" aria-pressed="false" aria-label="English">EN</button>
+      <button type="button" class="gate-lang-btn" data-set-lang="zh" aria-pressed="false" aria-label="中文">ZH</button>
     </div>
     <div class="gate-logo">
       <svg width="24" height="21" viewBox="0 0 30 26" fill="none" aria-hidden="true"><rect x="1" y="17" width="12" height="8" rx="1" fill="#C9A96A"/><rect x="14.5" y="17" width="14.5" height="8" rx="1" fill="#9AA3AD"/><rect x="6" y="8" width="14.5" height="8" rx="1" fill="#E8EAED"/><rect x="21.5" y="8" width="7.5" height="8" rx="1" fill="#9AA3AD"/><rect x="13" y="0" width="10" height="7" rx="1" fill="#9AA3AD"/></svg>
@@ -882,9 +991,9 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
       <a href="#plan" data-goto="plan" data-i18n="nav_funding">Plan operativo</a>
     </div>
     <div class="seg" role="group" aria-label="Idioma">
-      <button type="button" data-set-lang="es" aria-pressed="true">ES</button>
-      <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
-      <button type="button" data-set-lang="zh" aria-pressed="false">中文</button>
+      <button type="button" data-set-lang="es" aria-pressed="true" aria-label="Español">ES</button>
+      <button type="button" data-set-lang="en" aria-pressed="false" aria-label="English">EN</button>
+      <button type="button" data-set-lang="zh" aria-pressed="false" aria-label="中文">ZH</button>
     </div>
     <button type="button" class="nav-menu-btn" id="navMenuBtn" aria-label="Menú" data-i18n-aria="menu" aria-expanded="false" aria-controls="navDrop">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
@@ -898,9 +1007,9 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
   <a href="#evidence" data-goto="evidence" data-i18n="nav_evidence">Evidencia</a>
   <a href="#plan" data-goto="plan" data-i18n="nav_funding">Plan operativo</a>
   <div class="nav-drop-langs" role="group" aria-label="Idioma">
-    <button type="button" data-set-lang="es" aria-pressed="true">ES</button>
-    <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
-    <button type="button" data-set-lang="zh" aria-pressed="false">中文</button>
+    <button type="button" data-set-lang="es" aria-pressed="true" aria-label="Español">ES</button>
+    <button type="button" data-set-lang="en" aria-pressed="false" aria-label="English">EN</button>
+    <button type="button" data-set-lang="zh" aria-pressed="false" aria-label="中文">ZH</button>
   </div>
 </nav>
 
@@ -1095,7 +1204,7 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
             <li data-i18n="pbC_2">Voto ponderado por capital aportado</li>
             <li data-i18n="pbC_3">Capital en custodia de tercero independiente</li>
             <li data-i18n="pbC_4">Reservas de aranceles e impuestos antes de cada distribución</li>
-            <li data-i18n="pbC_5">Plazo de 24 meses con revisión a los 12</li>
+            <li data-i18n="pbC_5">Plazo de 36 meses, con revisiones a los 12 y a los 24</li>
           </ul>
         </article>
       </div>
@@ -1141,8 +1250,13 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
 
         <div class="fund-terms" data-anim>
           <div class="fund-term"><span class="fund-lab" data-i18n="fund_dist_lab">Distribuciones</span><p data-i18n="fund_dist_txt">Utilidades libres mensuales pro-rata tras reponer el ciclo, costos y reservas.</p></div>
-          <div class="fund-term"><span class="fund-lab" data-i18n="fund_cap_lab">Capital</span><p data-i18n="fund_cap_txt">Base permanente; se devuelve solo al liquidar.</p></div>
-          <div class="fund-term"><span class="fund-lab" data-i18n="fund_term_lab">Plazo</span><p data-i18n="fund_term_txt">24 meses, con revisión al mes 12 y liquidación ordenada en 90–120 días.</p></div>
+          <div class="fund-term"><span class="fund-lab" data-i18n="fund_cap_lab">Capital</span>
+            <ul class="cap-list">
+              <li><strong data-i18n="cap1_t">Recuperación en 12 meses:</strong> <span data-i18n="cap1_d">vía las distribuciones mensuales de ganancias recuperas lo aportado.</span></li>
+              <li><strong data-i18n="cap2_t">Tu capital sigue trabajando:</strong> <span data-i18n="cap2_d">la base permanece en la operación y tu participación se valoriza a medida que la empresa crece.</span></li>
+              <li><strong data-i18n="cap3_t">Devolución al liquidar:</strong> <span data-i18n="cap3_d">al cierre del programa se te devuelve el capital.</span></li>
+            </ul></div>
+          <div class="fund-term"><span class="fund-lab" data-i18n="fund_term_lab">Plazo</span><p data-i18n="fund_term_txt">36 meses, con revisiones a los 12 y a los 24, y liquidación ordenada en 90–120 días.</p></div>
         </div>
 
         <div class="fund-card fund-calc-card" data-anim>
@@ -1276,7 +1390,7 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
       <div class="faq-list" id="faqList" data-anim>
         <details class="faq-item"><summary><span class="n">01</span><span data-i18n="fq1">¿Qué significa ser socio?</span><span class="faq-ic" aria-hidden="true"></span></summary><p data-i18n="fa1">Te conviertes en miembro de una LLC independiente creada para una operación de comercio específica. Tienes una participación real, asumes responsabilidades reales y participas directamente en su ejecución. La membresía es privada y por contrato. No es comprar acciones ni un producto financiero ofrecido al público.</p></details>
         <details class="faq-item"><summary><span class="n">02</span><span data-i18n="fq2">¿Cómo hago seguimiento de la operación?</span><span class="faq-ic" aria-hidden="true"></span></summary><p data-i18n="fa2">A través de nuestra plataforma de trazabilidad. Tienes tracking de la naviera en tiempo real, cámaras y localización en nuestro centro de procesamiento y en los vehículos de distribución, y una plataforma contable con sistema POS que muestra cifras en tiempo real. Como socio, sabes siempre dónde está la mercancía y cómo se está liquidando.</p></details>
-        <details class="faq-item"><summary><span class="n">03</span><span data-i18n="fq3">¿Cómo se distribuyen los resultados?</span><span class="faq-ic" aria-hidden="true"></span></summary><p data-i18n="fa3">Las distribuciones son utilidades libres mensuales, pro-rata, tras reponer el ciclo, costos y reservas. El capital es base permanente y se devuelve solo al liquidar.</p></details>
+        <details class="faq-item"><summary><span class="n">03</span><span data-i18n="fq3">¿Cómo se distribuyen los resultados?</span><span class="faq-ic" aria-hidden="true"></span></summary><p data-i18n="fa3">Las distribuciones son utilidades libres mensuales, pro-rata, tras reponer el ciclo, costos y reservas. Con ellas recuperas lo aportado en 12 meses; la base de capital permanece en la operación y se te devuelve al liquidar.</p></details>
         <details class="faq-item"><summary><span class="n">04</span><span data-i18n="fq4">¿Cómo es la salida?</span><span class="faq-ic" aria-hidden="true"></span></summary><p data-i18n="fa4">Es una salida ordenada: la participación se ofrece primero a los socios, después a la compañía y luego a un comprador aprobado, con valoración objetiva y pago escalonado.</p></details>
         <details class="faq-item"><summary><span class="n">05</span><span data-i18n="fq5">¿Cuál es la estructura legal?</span><span class="faq-ic" aria-hidden="true"></span></summary><p data-i18n="fa5">Cada operación es una LLC independiente con un grupo definido y privado de socios que ingresan por acuerdo escrito. El capital se mantiene en una cuenta de propósito restringido bajo escrow/custodia independiente; los candidatos a custodio están en evaluación. Recomendamos asesoría legal y financiera independiente.</p></details>
         <details class="faq-item"><summary><span class="n">06</span><span data-i18n="fq6">¿Cuánto necesito para participar?</span><span class="faq-ic" aria-hidden="true"></span></summary><p data-i18n="fa6">El aporte mínimo es de $25,000.</p></details>
@@ -1791,7 +1905,7 @@ const I18N_NEW = {
     pbA_t:"La economía", pbA_per:"Por contenedor", pbA_landed:"Costo landed", pbA_sale:"Valor de venta", pbA_gross:"Bruto por contenedor",
     pbA_pace:"Ritmo", pbB_t:"La proyección", pbB_recovery:"El capital se recupera en 12 meses mediante las distribuciones de ganancias del plan.",
     pbC_t:"El control", pbC_1:"Asamblea mensual de socios", pbC_2:"Voto ponderado por capital aportado", pbC_3:"Capital en custodia de tercero independiente",
-    pbC_4:"Reservas de aranceles e impuestos antes de cada distribución", pbC_5:"Plazo de 24 meses con revisión a los 12",
+    pbC_4:"Reservas de aranceles e impuestos antes de cada distribución", pbC_5:"Plazo de 36 meses, con revisiones a los 12 y a los 24",
     plan_private:"El plan operativo completo —cifras, proveedores, logística y método— es un documento privado, disponible bajo confidencialidad una vez admitido como socio.",
     skip:"Saltar al contenido", close:"Cerrar", menu:"Menú", nav_aria:"Secciones", print:"Imprimir",
     route_ai:"Ruta analizada con AI",
@@ -1839,8 +1953,8 @@ const I18N_NEW = {
     fund_min:"Mínimo",
     fund_min_share:"= {pct} de la ronda",
     fund_dist_lab:"Distribuciones", fund_dist_txt:"Utilidades libres mensuales pro-rata tras reponer el ciclo, costos y reservas.",
-    fund_cap_lab:"Capital", fund_cap_txt:"Base permanente; se devuelve solo al liquidar.",
-    fund_term_lab:"Plazo", fund_term_txt:"24 meses, con revisión al mes 12 y liquidación ordenada en 90–120 días.",
+    fund_cap_lab:"Capital", cap1_t:"Recuperación en 12 meses:", cap1_d:"vía las distribuciones mensuales de ganancias recuperas lo aportado.", cap2_t:"Tu capital sigue trabajando:", cap2_d:"la base permanece en la operación y tu participación se valoriza a medida que la empresa crece.", cap3_t:"Devolución al liquidar:", cap3_d:"al cierre del programa se te devuelve el capital.",
+    fund_term_lab:"Plazo", fund_term_txt:"36 meses, con revisiones a los 12 y a los 24, y liquidación ordenada en 90–120 días.",
     fund_trust_lab:"Custodia", fund_trust_title:"Cuenta de propósito restringido",
     fund_trust_text:"Cuenta de propósito restringido bajo escrow/custodia independiente.",
     fund_cand:"Candidato en evaluación",
@@ -1859,7 +1973,7 @@ const I18N_NEW = {
     fq2:"¿Cómo hago seguimiento de la operación?",
     fa2:"A través de nuestra plataforma de trazabilidad. Tienes tracking de la naviera en tiempo real, cámaras y localización en nuestro centro de procesamiento y en los vehículos de distribución, y una plataforma contable con sistema POS que muestra cifras en tiempo real. Como socio, sabes siempre dónde está la mercancía y cómo se está liquidando.",
     fq3:"¿Cómo se distribuyen los resultados?",
-    fa3:"Las distribuciones son utilidades libres mensuales, pro-rata, tras reponer el ciclo, costos y reservas. El capital es base permanente y se devuelve solo al liquidar.",
+    fa3:"Las distribuciones son utilidades libres mensuales, pro-rata, tras reponer el ciclo, costos y reservas. Con ellas recuperas lo aportado en 12 meses; la base de capital permanece en la operación y se te devuelve al liquidar.",
     fq4:"¿Cómo es la salida?",
     fa4:"Es una salida ordenada: la participación se ofrece primero a los socios, después a la compañía y luego a un comprador aprobado, con valoración objetiva y pago escalonado.",
     fq5:"¿Cuál es la estructura legal?",
@@ -1894,7 +2008,7 @@ const I18N_NEW = {
     pbA_t:"The economics", pbA_per:"Per container", pbA_landed:"Landed cost", pbA_sale:"Sale value", pbA_gross:"Gross per container",
     pbA_pace:"Pace", pbB_t:"The projection", pbB_recovery:"Capital is recovered in 12 months through the plan's profit distributions.",
     pbC_t:"The controls", pbC_1:"Monthly partners' assembly", pbC_2:"Votes weighted by capital contributed", pbC_3:"Capital held in custody by an independent third party",
-    pbC_4:"Tariff and tax reserves before every distribution", pbC_5:"24-month term with a review at month 12",
+    pbC_4:"Tariff and tax reserves before every distribution", pbC_5:"36-month term, with reviews at months 12 and 24",
     plan_private:"The full operating plan — figures, suppliers, logistics, and method — is a private document, available under confidentiality once you are admitted as a partner.",
     skip:"Skip to content", close:"Close", menu:"Menu", nav_aria:"Sections", print:"Print",
     route_ai:"Route analyzed with AI",
@@ -1942,8 +2056,8 @@ const I18N_NEW = {
     fund_min:"Minimum",
     fund_min_share:"= {pct} of the round",
     fund_dist_lab:"Distributions", fund_dist_txt:"Monthly free profits, pro rata, after replenishing the cycle, costs, and reserves.",
-    fund_cap_lab:"Capital", fund_cap_txt:"A permanent base; returned only on liquidation.",
-    fund_term_lab:"Term", fund_term_txt:"24 months, with a review at month 12 and an orderly liquidation over 90–120 days.",
+    fund_cap_lab:"Capital", cap1_t:"12-month recovery:", cap1_d:"through the monthly profit distributions, you recover what you contributed.", cap2_t:"Your capital keeps working:", cap2_d:"the base stays in the operation and your stake gains value as the company grows.", cap3_t:"Return at liquidation:", cap3_d:"when the program closes, your capital is returned to you.",
+    fund_term_lab:"Term", fund_term_txt:"36 months, with reviews at months 12 and 24, and an orderly liquidation over 90–120 days.",
     fund_trust_lab:"Custody", fund_trust_title:"Restricted-purpose account",
     fund_trust_text:"Restricted-purpose account under independent escrow/custody.",
     fund_cand:"Candidate under evaluation",
@@ -1962,7 +2076,7 @@ const I18N_NEW = {
     fq2:"How do I track the operation?",
     fa2:"Through our traceability platform. You get real-time shipping tracking from the carrier, live cameras and tracking at our processing center and distribution vehicles, and an accounting platform with POS that shows figures in real time. As a member you always know where the merchandise is and how it is being settled.",
     fq3:"How are results distributed?",
-    fa3:"Distributions are monthly free profits, pro rata, after replenishing the cycle, costs, and reserves. Capital is a permanent base and is returned only on liquidation.",
+    fa3:"Distributions are monthly free profits, pro rata, after replenishing the cycle, costs, and reserves. Through them you recover your contribution in 12 months; the capital base stays in the operation and is returned to you at liquidation.",
     fq4:"How does exit work?",
     fa4:"It is an orderly exit: the stake is offered first to the partners, then to the company, and then to an approved buyer, with an objective valuation and staggered payment.",
     fq5:"What is the legal structure?",
@@ -1997,7 +2111,7 @@ const I18N_NEW = {
     pbA_t:"经济模型", pbA_per:"每个集装箱", pbA_landed:"到岸成本", pbA_sale:"销售价值", pbA_gross:"每箱毛利",
     pbA_pace:"节奏", pbB_t:"预测", pbB_recovery:"资本通过计划中的利润分配在 12 个月内收回。",
     pbC_t:"管控", pbC_1:"每月合伙人大会", pbC_2:"按出资额加权投票", pbC_3:"资本由独立第三方托管",
-    pbC_4:"每次分配前预留关税与税费储备", pbC_5:"24 个月期限，第 12 个月进行评估",
+    pbC_4:"每次分配前预留关税与税费储备", pbC_5:"36 个月期限，第 12 和第 24 个月进行评估",
     plan_private:"完整运营计划——数据、供应商、物流与方法——为私密文件，在您获准成为合伙人后，可在保密条件下查阅。",
     skip:"跳至内容", close:"关闭", menu:"菜单", nav_aria:"页面导航", print:"打印",
     route_ai:"AI 分析的路线",
@@ -2045,8 +2159,8 @@ const I18N_NEW = {
     fund_min:"最低出资",
     fund_min_share:"= 本轮的 {pct}",
     fund_dist_lab:"分配", fund_dist_txt:"在补足周期、成本与储备后，按比例每月分配可支配利润。",
-    fund_cap_lab:"资本", fund_cap_txt:"永久性资本基础；仅在清算时返还。",
-    fund_term_lab:"期限", fund_term_txt:"24 个月，第 12 个月进行评估，并在 90–120 天内有序清算。",
+    fund_cap_lab:"资本", cap1_t:"12 个月收回：", cap1_d:"通过每月利润分配，收回您的出资。", cap2_t:"资本持续运作：", cap2_d:"资本基础留在业务中，您的份额随公司成长而增值。", cap3_t:"清算时返还：", cap3_d:"项目结束时，向您返还资本。",
+    fund_term_lab:"期限", fund_term_txt:"36 个月，第 12 和第 24 个月进行评估，并在 90–120 天内有序清算。",
     fund_trust_lab:"托管", fund_trust_title:"限定用途账户",
     fund_trust_text:"由独立托管（escrow）机构管理的限定用途账户。",
     fund_cand:"候选机构，评估中",
@@ -2065,7 +2179,7 @@ const I18N_NEW = {
     fq2:"我如何追踪业务进展？",
     fa2:"通过我们的可追溯平台。您可获得承运方提供的实时物流追踪、我们处理中心与配送车辆的实时摄像与定位，以及带 POS 的会计平台实时显示数据。作为成员，您始终清楚货物身在何处、如何结算。",
     fq3:"收益如何分配？",
-    fa3:"分配为每月可支配利润，在补足周期、成本与储备后按比例分配。资本为永久性基础，仅在清算时返还。",
+    fa3:"分配为每月可支配利润，在补足周期、成本与储备后按比例分配。您通过分配在 12 个月内收回出资；资本基础留在业务中，并在清算时返还给您。",
     fq4:"如何退出？",
     fa4:"退出有序进行：份额依次优先提供给其他合伙人、公司，然后是经批准的买方，采用客观估值并分期支付。",
     fq5:"法律结构是怎样的？",

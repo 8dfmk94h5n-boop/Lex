@@ -80,7 +80,7 @@ En todos los modos y tamaños probados el texto queda completo y legible: 1440×
 1. **Meta USD 120,000: resuelto.** Panel, calculadora (base y máximo, con los montos del socio × 120/125 para conservar los términos por dólar) y narrativa de recuperación en 12 meses intacta.
 2. **Plan operativo: fuera del sitio público (resuelto).** Eliminé el visor, sus 13 páginas, la impresión/descarga, la tarjeta de vista previa y los botones "Ver el plan". El texto del plan ya no está ni en el código fuente de la página. Los PDF y las páginas siguen en el repositorio (`presston-site/assets/`, `presston-site/index.html` original) y el paquete de Cloudflare no los incluye. Con esto desaparece también el problema del método de precios.
 3. **Calculadora y gancho: resuelto.** Ambos muestran el mismo modelo (verificado: la calculadora con $120,000 da 1.01x / 1.28x / 5.49x y $212,573 acumulados = 1.77x). No queda visible ninguna cifra del plan base (24 contenedores/año, 1.37x, 1.05x, ~15 días) en ES, EN ni ZH.
-3b. **Para que lo revises (no lo cambié):** (a) el plazo dice "24 meses con revisión a los 12", mientras la proyección se extiende a 3 años; (b) en Financiamiento, "Capital: base permanente; se devuelve solo al liquidar" convive con la narrativa de recuperación en 12 meses.
+3b. **Plazo y capital: resuelto.** El plazo es "36 meses, con revisiones a los 12 y a los 24" en el bloque de control y en Financiamiento. El capital es un bloque de tres partes (recuperación en 12 meses, el capital sigue trabajando, devolución al liquidar). La respuesta de FAQ sobre resultados se actualizó para no contradecirlo. Está en ES, EN y ZH, y verifiqué que no quede la redacción vieja.
 4. **Logos de terceros en el video del puerto.** `video-puerto-noche.mp4` y su póster muestran contenedores con "MAERSK" y "MSC" legibles. El punto 4 dice "sin logos de aliados". No son aliados, pero son marcas de terceros visibles en el Hero.
 5. **Personas en video.** El soldador aparece con careta, sin rostro, y lo asigna el propio prompt. Lo menciono por la regla "sin fotos de personas".
 6. **Gate sin JavaScript.** Como el fallback sin JS es obligatorio, sin JS el gate se oculta y el contenido se lee. El gate siempre fue solo de cliente (el contenido ya estaba en el HTML), así que no cambia la seguridad real.
@@ -91,7 +91,13 @@ En todos los modos y tamaños probados el texto queda completo y legible: 1440×
 - Respuestas de FAQ armadas solo con hechos del punto 7: resultados, salida ordenada, estructura legal, mínimo $25,000, qué pasa tras la evaluación y Referencia. Las de "ser socio", "seguimiento" y "garantía" son las del sitio original.
 - Títulos conservados del sitio original: "Una forma directa de ser parte del comercio que mueve al mundo.", "Los sectores donde operamos.", "La ronda, a la vista.", "Tu operación tiene ubicación." y "Cómo funciona, en claro."
 
+## 5a. Tipografía aplicada
+
+Candidata #2: Archivo ensanchada (116%, 600) en titulares, Archivo en texto y Fragment Mono en cifras. Los textos de display chicos bajan a 500. El chino sigue en Noto Serif/Sans SC.
+
 ## 5b. Terminaciones (botones)
+
+**Aplicado: línea SpaceX de texto puro.** Los CTAs no tienen borde, caja ni relleno. Van en mayúsculas en Archivo semibold de 14 px, con espaciado .26em (.20em en teléfonos de 420 px o menos, para que la flecha no quede sola en otra línea), en hueso con la flecha → en ámbar y una sombra sutil. En hover el texto pasa a ámbar y la flecha avanza 6 px; al presionar baja 1 px; el foco es un anillo ámbar. El secundario va en #9AA3AD y en hover sube a hueso. El selector de idioma es "ES | EN | ZH", con separadores finos y el activo en ámbar. Aplica a CTAs, formulario, calculadora, gate, visor de evidencia y botón de chat. El CTA grande de Contacto conserva su tamaño de titular, con el mismo comportamiento.
 
 `botones/BOTONES.md` contiene la auditoría y las 3 líneas propuestas, con capturas. Ya están aplicadas en la base las correcciones de objetivos táctiles (≥44 px) y la del bug de puntero: el CTA del Hero no respondía a un clic real porque la escena siguiente lo tapaba.
 

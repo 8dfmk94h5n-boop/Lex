@@ -1,5 +1,7 @@
 # Variante 1 — Auditoría tipográfica y 3 candidatas
 
+> **Decisión aplicada:** candidata #2 (Archivo ensanchada + Archivo + Fragment Mono).
+
 Capturas en esta carpeta: `0-actual-…` (referencia), `1-…`, `2-…`, `3-…`. Hay Hero e interior (sección Plan operativo) a 1440×900, y `movil-1-2-3.jpg` con las tres a 390×844. Todo se muestra con el mismo layout, copy y colores; solo cambia la tipografía.
 
 ## Auditoría de la actual

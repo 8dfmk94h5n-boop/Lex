@@ -1,5 +1,7 @@
 # Variante 1 — Terminaciones: auditoría de botones y 3 líneas de diseño
 
+> **Decisión aplicada:** ninguna de las tres líneas. Se aplicó la línea SpaceX de texto puro definida por Lex (ver `ENTREGA-V1.md` §5b y `capturas/botones-estados-aplicados.jpg` en la carpeta de la variante). Este documento queda como registro de la exploración.
+
 En esta carpeta hay tres hojas de estilo, una por línea: `linea-1-…`, `linea-2-…` y `linea-3-…`. Para las capturas se aplicaron solo como vista previa; el sitio publicado no cambia hasta que elijas una. Las capturas están en `capturas/`:
 - `N-…-escritorio-es-en.jpg`: Hero, Contacto y formulario, en ES y EN.
 - `N-…-movil-es-en.jpg`: lo mismo a 390×844.
