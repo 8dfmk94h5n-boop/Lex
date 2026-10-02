@@ -17,7 +17,7 @@ En todas las escenas el fondo es fijo y nunca se desplaza. El puerto de noche es
 | 3 | Cómo funciona | Escenario, 5 tiempos | `assets/origin-sequence.mp4` | Rejilla de datos al máximo, con su escala ligada al scroll ("respira"). Los 4 pasos se encienden uno por gesto y en el 5.º tiempo entra el bloque **Administración centrada en AI**. El riel pasa a **Aduana**. |
 | 4 | Programas | Escenario, 5 tiempos | `assets/steps-bg.mp4` (cohetes) | Acero · Ronda 01 ("En preparación · Evaluación abierta", con CTA) y los otros 4 sectores ("En estudio técnico", "Sin captación"), uno por gesto. |
 | 5 | Evidencia | **Flujo** (excepción) | Puerto, atenuado | Prueba piloto 2025, nota de documentos protegidos y 2 tarjetas (documentos, fotos). El riel pasa a **Almacén**. |
-| 6 | Plan operativo (gancho) | **Flujo** | Puerto, atenuado | Tres bloques solo con cifras agregadas aprobadas: A La economía, B La proyección y C El control. Debajo, el CTA y una línea sobre el plan privado. Reemplaza el visor del plan. |
+| 6 | Plan operativo (gancho) | **Flujo** | Puerto, atenuado | Tres bloques alineados al modelo de la calculadora (3 años / 3 ciudades). A La economía: por contenedor $23,269 / $36,232 / $12,963; 29 contenedores el año 1, 36 al año por ciudad en régimen, ciudad 2 desde el año 2, ciudad 3 desde el año 3. B La proyección: 1.01x año 1, 1.28x año 2, 1.77x en distribuciones acumuladas a 3 años, 5.49x total con el 15%, y la recuperación en 12 meses. C El control. Debajo, el CTA y una línea sobre el plan privado. La línea de alcance "Proyección del modelo a 3 años / 3 ciudades" aparece aquí y en la calculadora. |
 | 7 | Financiamiento | **Flujo** (excepción) | Puerto, atenuado | Panel (Demostración), reglas de distribución, capital y plazo, calculadora (Demostración) y custodia con los candidatos en evaluación. |
 | 8 | Trazabilidad y gobernanza | Escenario, 3 tiempos (flujo en móvil) | `assets/trace-bg.mp4` | Análisis continuo, reglas de gobernanza y propuestas en votación, una por gesto. Lleva badge Demostración. El riel pasa a **Distribución**. |
 | 9 | FAQ | **Flujo** (excepción) | Puerto, atenuado | Las 9 preguntas del punto 7. |
@@ -79,7 +79,8 @@ En todos los modos y tamaños probados el texto queda completo y legible: 1440×
 
 1. **Meta USD 120,000: resuelto.** Panel, calculadora (base y máximo, con los montos del socio × 120/125 para conservar los términos por dólar) y narrativa de recuperación en 12 meses intacta.
 2. **Plan operativo: fuera del sitio público (resuelto).** Eliminé el visor, sus 13 páginas, la impresión/descarga, la tarjeta de vista previa y los botones "Ver el plan". El texto del plan ya no está ni en el código fuente de la página. Los PDF y las páginas siguen en el repositorio (`presston-site/assets/`, `presston-site/index.html` original) y el paquete de Cloudflare no los incluye. Con esto desaparece también el problema del método de precios.
-3. **Nuevo conflicto: la calculadora contra las cifras del gancho.** El gancho dice 1.37x antes de impuestos y 1.05x después, y 24 contenedores al año. La calculadora (que se conserva, marcada como Demostración) sigue mostrando la proyección del plan anterior: 1.01x / 1.28x / 5.49x a 3 años, valor del 15% al año 3 y ventas/utilidad del proyecto calculadas con 36 contenedores al año. Hoy la página muestra los dos modelos. Decide si la calculadora se actualiza (necesito las cifras aprobadas año por año) o se retira.
+3. **Calculadora y gancho: resuelto.** Ambos muestran el mismo modelo (verificado: la calculadora con $120,000 da 1.01x / 1.28x / 5.49x y $212,573 acumulados = 1.77x). No queda visible ninguna cifra del plan base (24 contenedores/año, 1.37x, 1.05x, ~15 días) en ES, EN ni ZH.
+3b. **Para que lo revises (no lo cambié):** (a) el plazo dice "24 meses con revisión a los 12", mientras la proyección se extiende a 3 años; (b) en Financiamiento, "Capital: base permanente; se devuelve solo al liquidar" convive con la narrativa de recuperación en 12 meses.
 4. **Logos de terceros en el video del puerto.** `video-puerto-noche.mp4` y su póster muestran contenedores con "MAERSK" y "MSC" legibles. El punto 4 dice "sin logos de aliados". No son aliados, pero son marcas de terceros visibles en el Hero.
 5. **Personas en video.** El soldador aparece con careta, sin rostro, y lo asigna el propio prompt. Lo menciono por la regla "sin fotos de personas".
 6. **Gate sin JavaScript.** Como el fallback sin JS es obligatorio, sin JS el gate se oculta y el contenido se lee. El gate siempre fue solo de cliente (el contenido ya estaba en el HTML), así que no cambia la seguridad real.
@@ -89,6 +90,10 @@ En todos los modos y tamaños probados el texto queda completo y legible: 1440×
 - Paso 3: "Con confidencialidad antes de la llamada." Sale de "Llamada (confidencialidad antes)".
 - Respuestas de FAQ armadas solo con hechos del punto 7: resultados, salida ordenada, estructura legal, mínimo $25,000, qué pasa tras la evaluación y Referencia. Las de "ser socio", "seguimiento" y "garantía" son las del sitio original.
 - Títulos conservados del sitio original: "Una forma directa de ser parte del comercio que mueve al mundo.", "Los sectores donde operamos.", "La ronda, a la vista.", "Tu operación tiene ubicación." y "Cómo funciona, en claro."
+
+## 5b. Terminaciones (botones)
+
+`botones/BOTONES.md` contiene la auditoría y las 3 líneas propuestas, con capturas. Ya están aplicadas en la base las correcciones de objetivos táctiles (≥44 px) y la del bug de puntero: el CTA del Hero no respondía a un clic real porque la escena siguiente lo tapaba.
 
 ## 6. Sitio de prueba en Cloudflare
 

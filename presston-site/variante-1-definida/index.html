@@ -164,9 +164,12 @@ html[data-lang="zh"] .gate-title{ font-weight:600; }
 .gate-error{ color:#E3A49B;font-size:12px;margin-top:10px;line-height:1.5; }
 .gate-error[hidden]{ display:none; }
 .gate-check-row{ display:flex;align-items:flex-start;gap:10px;margin:18px 0 22px; }
-.gate-check-row input[type="checkbox"]{ flex:none;width:18px;height:18px;margin-top:1px;accent-color:var(--amber);cursor:pointer; }
-.gate-check-row label{ font-size:11.5px;line-height:1.6;color:var(--mist);cursor:pointer; }
-.gate-legal-link{ background:none;border:0;padding:0;margin:0;color:var(--amber);font:inherit;text-decoration:underline;cursor:pointer; }
+.gate-check-row{ position:relative; }
+.gate-check-row input[type="checkbox"]{ flex:none;width:22px;height:22px;margin:0;accent-color:var(--amber);cursor:pointer; }
+.gate-check-row label{ font-size:11.5px;line-height:1.6;color:var(--mist);cursor:pointer;position:relative; }
+/* the label's hit area also covers the checkbox and its surroundings: ≥44px target */
+.gate-check-row label::before{ content:"";position:absolute;left:-44px;top:-12px;width:44px;height:max(44px, calc(100% + 24px)); }
+.gate-legal-link{ background:none;border:0;padding:13px 0;margin:-13px 0;color:var(--amber);font:inherit;text-decoration:underline;cursor:pointer; }
 .gate-slogan{ text-align:center;font-family:var(--f-mono);font-size:10px;line-height:1.65;color:var(--mist-dim);padding-top:18px;border-top:1px solid var(--hair); }
 .gate-reveal-veil{ position:fixed;inset:0;z-index:490;pointer-events:none;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:backdrop-filter .8s var(--ease),-webkit-backdrop-filter .8s var(--ease); }
 .gate-reveal-veil.clear{ backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px); }
@@ -277,7 +280,7 @@ html[data-lang="zh"] .route-stop{ letter-spacing:.04em; }
 .nav-links a.active{ color:var(--bone); }
 .nav-links a.active::after{ content:"";position:absolute;left:12px;right:12px;bottom:8px;height:1px;background:var(--amber); }
 .seg{ display:flex;align-items:center;border:1px solid var(--hair);padding:2px;flex:none;gap:1px; }
-.seg button{ border:0;background:transparent;color:var(--mist);font-size:11.5px;font-family:var(--f-mono);padding:8px 10px;min-height:40px;min-width:40px;cursor:pointer;transition:background .25s ease,color .25s ease; }
+.seg button{ border:0;background:transparent;color:var(--mist);font-size:11.5px;font-family:var(--f-mono);padding:8px 10px;min-height:44px;min-width:44px;cursor:pointer;transition:background .25s ease,color .25s ease; }
 .seg button[aria-pressed="true"],.nav-drop-langs button[aria-pressed="true"]{ background:var(--amber-a16);color:var(--bone); }
 .nav-menu-btn{ display:none;border:1px solid var(--hair);background:transparent;color:var(--bone);width:44px;height:44px;align-items:center;justify-content:center;cursor:pointer;flex:none; }
 .nav-menu-btn svg{ width:16px;height:16px; }
@@ -307,7 +310,7 @@ main{ position:relative;z-index:1; }
 .scene--stage .scene-content{ padding:calc(120px + env(safe-area-inset-top,0px)) 0 96px; }
 .scene--stage + .scene--stage .scene-content{ border-top:0; }
 
-.scene--stage.is-staged{ height:calc(var(--vh) + var(--beats,1) * var(--beat-len, 75vh)); }
+.scene--stage.is-staged{ height:calc(var(--vh) + var(--beats,1) * var(--beat-len, 75vh));pointer-events:none; } /* overlapping spacers must never catch the pointer; only the active content does */
 .scene--stage.is-staged + .scene--stage.is-staged{ margin-top:calc(var(--vh) * -1); }
 .is-staged > .scene-frame{ position:sticky;top:0;height:var(--vh);overflow:hidden;pointer-events:none; }
 .is-staged .scene-content{ position:absolute;inset:0;padding:0;display:flex;align-items:stretch;visibility:hidden;opacity:0; }
@@ -447,7 +450,19 @@ html[data-lang="zh"] .pb-sub{ letter-spacing:.04em; }
 .pb-rows .is-total dt{ color:var(--bone); }
 .pb-rows .is-total dd{ color:var(--amber); }
 .fig{ font-family:var(--f-mono);font-variant-numeric:tabular-nums lining-nums;color:var(--bone);white-space:nowrap; }
-.pb-mult{ display:flex;flex-direction:column;gap:26px;margin-top:4px; }
+.pb-unit{ font-size:14px;color:var(--mist); }
+.pb-rows dd.pb-unit{ font-size:15px; }
+.pb-rows dd .fig{ font-size:17px; }
+/* scope line: the projection's frame, said once, quietly */
+.scope-line{ display:flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.07em;text-wrap:balance;text-transform:uppercase;color:var(--amber);margin:2px 0 14px; }
+.scope-line::before{ content:"";width:18px;height:1px;background:var(--amber);flex:none; }
+html[data-lang="zh"] .scope-line{ letter-spacing:.04em; }
+.pb-ledger > div{ display:flex;justify-content:space-between;align-items:baseline;gap:18px;padding:11px 0;border-bottom:1px solid var(--hair-2); }
+.pb-ledger dt{ font-size:15px;line-height:1.4;color:var(--mist); }
+.pb-ledger dd{ font-size:19px; }
+.pb-ledger .is-total{ flex-direction:column;align-items:flex-start;gap:6px;padding-top:16px;border-bottom:0; }
+.pb-ledger .is-total dt{ color:var(--bone);max-width:32ch; }
+.pb-ledger .is-total dd{ color:var(--amber);font-size:clamp(54px,5.4vw,86px);line-height:.95;letter-spacing:-.03em; }
 .pb-m{ display:flex;flex-direction:column;gap:8px; }
 .fig-xl{ font-size:clamp(54px,5.4vw,86px);line-height:.95;letter-spacing:-.03em; }
 .pb-m:first-child .fig-xl{ color:var(--amber); }
@@ -517,7 +532,7 @@ html[data-lang="zh"] .fund-lab{ letter-spacing:.04em; }
 .fund-calc-amt-wrap{ display:flex;align-items:baseline;gap:1px; }
 .fund-calc-cur{ font-size:16px;color:var(--mist); }
 .fund-big{ font-weight:500;font-size:24px; }
-.fund-calc-amt{ width:120px;background:transparent;border:0;padding:0;color:var(--amber); }
+.fund-calc-amt{ width:120px;height:44px;background:transparent;border:0;padding:0;color:var(--amber); }
 .fund-calc-amt:focus{ outline:none; }
 .fund-calc-range{ color:var(--mist-dim);font-size:11px; }
 .fund-calc-block{ margin-top:16px;padding-top:16px;border-top:1px solid var(--hair); }
@@ -536,7 +551,7 @@ html[data-lang="zh"] .fund-lab{ letter-spacing:.04em; }
 .fund-calc-out-net .fund-calc-year{ color:var(--amber); }
 .fund-calc-total{ font-size:16px;font-weight:500;color:var(--amber);white-space:nowrap; }
 .fund-calc-note{ margin-top:12px;font-size:10.5px;color:var(--mist-dim);line-height:1.55;display:flex;flex-wrap:wrap;gap:6px;align-items:baseline; }
-.fund-calc-note-btn{ background:none;border:0;padding:6px 0;color:var(--amber);font-family:var(--f-mono);font-size:10.5px;text-decoration:underline;cursor:pointer; }
+.fund-calc-note-btn{ background:none;border:0;padding:6px 0;min-height:44px;color:var(--amber);font-family:var(--f-mono);font-size:10.5px;text-decoration:underline;cursor:pointer; }
 .fund-calc-note-full{ margin-top:6px;font-size:10.5px;color:var(--mist-dim);line-height:1.6; }
 .fund-calc-note-full[hidden]{ display:none; }
 .fund-trust-ico{ width:34px;height:34px;border:1px solid var(--hair);display:flex;align-items:center;justify-content:center;margin-bottom:14px; }
@@ -737,7 +752,9 @@ html[data-lang="zh"] .field label{ letter-spacing:.04em; }
   .trace-row .v{ font-size:18px; }
   .faq-item summary{ grid-template-columns:28px 1fr 14px;gap:10px; }
   .faq-item p{ padding:0 0 20px 38px; }
-  .contact-cta{ gap:12px; }
+  .contact-cta{ display:block; }
+  .contact-cta .display{ display:inline; }
+  .contact-cta .arw{ display:inline-block;margin-left:10px;padding-bottom:0; }
   .scroll-cue{ display:none!important; }
 }
 /* Motion-only mobile compaction: inside a stuck frame only the active step /
@@ -1054,16 +1071,21 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
           </dl>
           <p class="pb-sub" data-i18n="pbA_pace">Ritmo</p>
           <dl class="pb-rows">
-            <div><dt data-i18n="pbA_year">Contenedores al año</dt><dd class="fig">24</dd></div>
-            <div><dt data-i18n="pbA_turn">Un contenedor vendido en</dt><dd class="fig">~15 <span data-i18n="days">días</span></dd></div>
+            <div><dt data-i18n="pbA_y1">Año 1 · ciudad 1</dt><dd><span class="fig">29</span> <span class="pb-unit" data-i18n="pbA_containers">contenedores</span></dd></div>
+            <div><dt data-i18n="pbA_steady">En régimen, por ciudad</dt><dd><span class="fig">36</span> <span class="pb-unit" data-i18n="pbA_peryear">al año</span></dd></div>
+            <div><dt data-i18n="pbA_c2">Ciudad 2</dt><dd class="pb-unit" data-i18n="pbA_from2">entra en el año 2</dd></div>
+            <div><dt data-i18n="pbA_c3">Ciudad 3</dt><dd class="pb-unit" data-i18n="pbA_from3">entra en el año 3</dd></div>
           </dl>
         </article>
         <article class="pb pb-proj" aria-labelledby="pbBt">
           <header class="pb-head"><span class="pb-letter">B</span><h3 class="pb-title" id="pbBt" data-i18n="pbB_t">La proyección</h3></header>
-          <div class="pb-mult">
-            <div class="pb-m"><span class="fig fig-xl">1.37x</span><span class="pb-cap" data-i18n="pbB_pre">Resultado antes de impuestos sobre el capital solicitado</span></div>
-            <div class="pb-m"><span class="fig fig-xl">1.05x</span><span class="pb-cap" data-i18n="pbB_post">Resultado después de impuestos</span></div>
-          </div>
+          <p class="scope-line" data-i18n="scope">Proyección del modelo a 3 años / 3 ciudades</p>
+          <dl class="pb-ledger">
+            <div><dt data-i18n="pbB_y1">Año 1</dt><dd class="fig">1.01x</dd></div>
+            <div><dt data-i18n="pbB_y2">Año 2</dt><dd class="fig">1.28x</dd></div>
+            <div><dt data-i18n="pbB_dist3">Distribuciones acumuladas a 3 años</dt><dd class="fig">1.77x</dd></div>
+            <div class="is-total"><dt data-i18n="pbB_total3">Total a 3 años, incluido el valor de la participación del 15%</dt><dd class="fig fig-xl">5.49x</dd></div>
+          </dl>
           <p class="pb-recovery" data-i18n="pbB_recovery">El capital se recupera en 12 meses mediante las distribuciones de ganancias del plan.</p>
         </article>
         <article class="pb pb-ctrl" aria-labelledby="pbCt">
@@ -1133,6 +1155,7 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
             </span>
           </div>
           <div class="fund-calc-block fund-calc-block-1" style="margin-top:14px;padding-top:0;border-top:0;">
+            <p class="scope-line" data-i18n="scope">Proyección del modelo a 3 años / 3 ciudades</p>
             <div class="fund-calc-block-title" data-i18n="calc_block1_title">Lo que aportas y lo que posees</div>
             <div class="fund-amount-row">
               <div class="fund-calc-input" role="group" aria-label="Monto del aporte">
@@ -1759,12 +1782,14 @@ const LEGACY_I18N = {
 };
 const I18N_NEW = {
   es:{
+    scope:"Proyección del modelo a 3\u00a0años / 3\u00a0ciudades",
+    pbA_y1:"Año 1 · ciudad 1", pbA_containers:"contenedores", pbA_steady:"En régimen, por ciudad", pbA_peryear:"al año",
+    pbA_c2:"Ciudad 2", pbA_from2:"entra en el año 2", pbA_c3:"Ciudad 3", pbA_from3:"entra en el año 3",
+    pbB_y1:"Año 1", pbB_y2:"Año 2", pbB_dist3:"Distribuciones acumuladas a 3 años", pbB_total3:"Total a 3 años, incluido el valor de la participación del 15%",
     plan_kicker:"Plan operativo",
     plan_title:"El plan operativo, en tres bloques.",
     pbA_t:"La economía", pbA_per:"Por contenedor", pbA_landed:"Costo landed", pbA_sale:"Valor de venta", pbA_gross:"Bruto por contenedor",
-    pbA_pace:"Ritmo", pbA_year:"Contenedores al año", pbA_turn:"Un contenedor vendido en", days:"días",
-    pbB_t:"La proyección", pbB_pre:"Resultado antes de impuestos sobre el capital solicitado", pbB_post:"Resultado después de impuestos",
-    pbB_recovery:"El capital se recupera en 12 meses mediante las distribuciones de ganancias del plan.",
+    pbA_pace:"Ritmo", pbB_t:"La proyección", pbB_recovery:"El capital se recupera en 12 meses mediante las distribuciones de ganancias del plan.",
     pbC_t:"El control", pbC_1:"Asamblea mensual de socios", pbC_2:"Voto ponderado por capital aportado", pbC_3:"Capital en custodia de tercero independiente",
     pbC_4:"Reservas de aranceles e impuestos antes de cada distribución", pbC_5:"Plazo de 24 meses con revisión a los 12",
     plan_private:"El plan operativo completo —cifras, proveedores, logística y método— es un documento privado, disponible bajo confidencialidad una vez admitido como socio.",
@@ -1860,12 +1885,14 @@ const I18N_NEW = {
     f_note:"Esto es una solicitud de información, no una solicitud de compra, y no genera obligación alguna. La participación es privada y está sujeta a acuerdo escrito y a la ley aplicable.",
   },
   en:{
+    scope:"Model projection over 3\u00a0years / 3\u00a0cities",
+    pbA_y1:"Year 1 · city 1", pbA_containers:"containers", pbA_steady:"Steady state, per city", pbA_peryear:"per year",
+    pbA_c2:"City 2", pbA_from2:"joins in year 2", pbA_c3:"City 3", pbA_from3:"joins in year 3",
+    pbB_y1:"Year 1", pbB_y2:"Year 2", pbB_dist3:"Cumulative distributions over 3 years", pbB_total3:"3-year total, including the value of the 15% stake",
     plan_kicker:"Operating plan",
     plan_title:"The operating plan, in three blocks.",
     pbA_t:"The economics", pbA_per:"Per container", pbA_landed:"Landed cost", pbA_sale:"Sale value", pbA_gross:"Gross per container",
-    pbA_pace:"Pace", pbA_year:"Containers per year", pbA_turn:"One container sold in", days:"days",
-    pbB_t:"The projection", pbB_pre:"Pre-tax result on the capital requested", pbB_post:"After-tax result",
-    pbB_recovery:"Capital is recovered in 12 months through the plan's profit distributions.",
+    pbA_pace:"Pace", pbB_t:"The projection", pbB_recovery:"Capital is recovered in 12 months through the plan's profit distributions.",
     pbC_t:"The controls", pbC_1:"Monthly partners' assembly", pbC_2:"Votes weighted by capital contributed", pbC_3:"Capital held in custody by an independent third party",
     pbC_4:"Tariff and tax reserves before every distribution", pbC_5:"24-month term with a review at month 12",
     plan_private:"The full operating plan — figures, suppliers, logistics, and method — is a private document, available under confidentiality once you are admitted as a partner.",
@@ -1961,12 +1988,14 @@ const I18N_NEW = {
     f_note:"This is a request for information, not an application to buy anything, and creates no obligation. Participation is private and subject to a written agreement and applicable law.",
   },
   zh:{
+    scope:"模型预测：3 年 / 3 座城市",
+    pbA_y1:"第 1 年 · 城市 1", pbA_containers:"个集装箱", pbA_steady:"稳定运营期，每座城市", pbA_peryear:"每年",
+    pbA_c2:"城市 2", pbA_from2:"第 2 年加入", pbA_c3:"城市 3", pbA_from3:"第 3 年加入",
+    pbB_y1:"第 1 年", pbB_y2:"第 2 年", pbB_dist3:"3 年累计分配", pbB_total3:"3 年合计（含 15% 股权价值）",
     plan_kicker:"运营计划",
     plan_title:"运营计划，分为三个板块。",
     pbA_t:"经济模型", pbA_per:"每个集装箱", pbA_landed:"到岸成本", pbA_sale:"销售价值", pbA_gross:"每箱毛利",
-    pbA_pace:"节奏", pbA_year:"每年集装箱数", pbA_turn:"售出一个集装箱约需", days:"天",
-    pbB_t:"预测", pbB_pre:"税前结果（相对于所需资本）", pbB_post:"税后结果",
-    pbB_recovery:"资本通过计划中的利润分配在 12 个月内收回。",
+    pbA_pace:"节奏", pbB_t:"预测", pbB_recovery:"资本通过计划中的利润分配在 12 个月内收回。",
     pbC_t:"管控", pbC_1:"每月合伙人大会", pbC_2:"按出资额加权投票", pbC_3:"资本由独立第三方托管",
     pbC_4:"每次分配前预留关税与税费储备", pbC_5:"24 个月期限，第 12 个月进行评估",
     plan_private:"完整运营计划——数据、供应商、物流与方法——为私密文件，在您获准成为合伙人后，可在保密条件下查阅。",
