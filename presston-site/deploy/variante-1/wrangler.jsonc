@@ -1,0 +1,7 @@
+{
+  // Separate Worker for the Variante 1 test site — does not touch the current site.
+  "name": "presston-variante-1",
+  "compatibility_date": "2026-10-01",
+  "assets": { "directory": "./dist" },
+  "workers_dev": true
+}

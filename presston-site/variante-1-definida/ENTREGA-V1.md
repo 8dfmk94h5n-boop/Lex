@@ -76,8 +76,8 @@ En todos los modos y tamaños probados el texto queda completo y legible: 1440×
 
 ## 4. Conflictos que necesitan tu decisión (no los adiviné)
 
-1. **Meta de $120,000 contra $125,000.** El panel muestra la meta aprobada de $120,000. Pero la **calculadora**, el **plan operativo** (13 páginas) y la tarjeta de vista previa del plan siguen basados en "USD 125,000 por 15%". Hoy la página muestra ambas cifras.
-2. **"Capital: base permanente, se devuelve solo al liquidar"** contra la calculadora y el plan, que dicen "Año 1: recuperas casi todo tu capital" y "recuperación del capital al mes 12". Son modelos distintos. Mantuve la calculadora y el plan funcionando y marcados como Demostración, como pide el punto 2.4b, pero hay que actualizar sus datos o retirarlos.
+1. **Meta: resuelto.** La meta es USD 120,000 en el panel, la calculadora (base y máximo) y la tarjeta de vista previa del plan. Para los montos del socio en la calculadora usé los del plan × 120/125, así que todos los términos por dólar del plan quedan idénticos: año 1 = 100.6% del aporte (recuperación del capital en 12 meses), 1.01x / 1.28x / 5.49x. Las cifras del proyecto (ventas, utilidad) no cambian. **Sigue pendiente:** las 13 páginas del visor del plan operativo todavía dicen "USD 125,000" / "125,000" en 8 páginas: capital del programa, uso de fondos, calendario de pagos, curva de caja, fases, recuperación, ciudad 2 y resumen. Esas tablas suman y se derivan de 125,000, así que cambiarlas exige rehacer el modelo. No las toqué.
+2. **Narrativa de recuperación en 12 meses:** se conserva intacta en la calculadora y en el plan, por decisión tuya.
 3. **Know-how en el plan operativo.** La página 2 del plan describe el método de precios ("un dólar por debajo del competidor de referencia", 872 unidades a $41.55) y dice "materiales de construcción". La regla 6 prohíbe publicar el método de precios, pero el punto 2.4b pide conservar el visor. Lo dejé intacto: decide tú si se edita.
 4. **Logos de terceros en el video del puerto.** `video-puerto-noche.mp4` y su póster muestran contenedores con "MAERSK" y "MSC" legibles. El punto 4 dice "sin logos de aliados". No son aliados, pero son marcas de terceros visibles en el Hero.
 5. **Personas en video.** El soldador aparece con careta, sin rostro, y lo asigna el propio prompt. Lo menciono por la regla "sin fotos de personas".
@@ -89,7 +89,11 @@ En todos los modos y tamaños probados el texto queda completo y legible: 1440×
 - Respuestas de FAQ armadas solo con hechos del punto 7: resultados, salida ordenada, estructura legal, mínimo $25,000, qué pasa tras la evaluación y Referencia. Las de "ser socio", "seguimiento" y "garantía" son las del sitio original.
 - Títulos conservados del sitio original: "Una forma directa de ser parte del comercio que mueve al mundo.", "Los sectores donde operamos.", "La ronda, a la vista.", "Tu operación tiene ubicación." y "Cómo funciona, en claro."
 
-## 6. Fuera de alcance observado
+## 6. Sitio de prueba en Cloudflare
+
+`presston-site/deploy/variante-1/` contiene `build.sh`, que empaqueta solo esta variante con los assets que usa (30 MB, 41 archivos), y `wrangler.jsonc`, que la publica como Worker aparte llamado `presston-variante-1`, sin tocar el sitio actual. Para publicar: `./build.sh && npx wrangler deploy` con `CLOUDFLARE_API_TOKEN` y `CLOUDFLARE_ACCOUNT_ID` definidos.
+
+## 7. Fuera de alcance observado
 
 - `FORMSPREE_ID`, `WHATSAPP_NUMBER` y la clave de PostHog siguen como marcadores del original. El botón flotante de WhatsApp apunta a un número vacío.
 - El único código de acceso es el de prueba, "PSP".

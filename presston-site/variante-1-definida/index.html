@@ -1386,19 +1386,19 @@ const ASSET = "../assets/";
 
 /* ---- preserved from the original site: calc_const ---- */
 const CALC = {
-  TARGET_RAISE: 125000,   // this round's own goal — keep equal to FUNDING.goal
+  TARGET_RAISE: 120000,   // this round's own goal — keep equal to FUNDING.goal
   MIN: 25000,             // floor contribution, USD
-  MAX: 125000,            // ceiling — a single contribution can't exceed the round
+  MAX: 120000,            // ceiling — a single contribution can't exceed the round
   STEP: 5000,             // +/- increment, USD, and the manual-entry rounding grid
-  EQUITY_PCT_FULL: 15,    // % of the company the full $125,000 round represents
+  EQUITY_PCT_FULL: 15,    // % of the company the full USD 120,000 round represents
 
   YEARS: [
-    { grossSales: 1050728, netProfit: 260370, cashDist: 125778 },
-    { grossSales: 1811600, netProfit: 461678, cashDist: 34626 },
-    { grossSales: 3115952, netProfit: 813680, cashDist: 61026 },
+    { grossSales: 1050728, netProfit: 260370, cashDist: 120747 },
+    { grossSales: 1811600, netProfit: 461678, cashDist: 33241 },
+    { grossSales: 3115952, netProfit: 813680, cashDist: 58585 },
   ],
-  CASH_ACCUM_3Y: 221430,         // sum of the 3 years' cash distribution, at the full $125,000
-  EQUITY_VALUE_Y3: 464331,       // value of the 15% stake at Year 3, at the full $125,000
+  CASH_ACCUM_3Y: 212573,         // sum of the 3 years' cash distribution, at the full USD 120,000 (plan x 120/125)
+  EQUITY_VALUE_Y3: 445758,       // value of the 15% stake at Year 3, at the full USD 120,000 (plan x 120/125)
   MULTIPLES: [1.01, 1.28, 5.49], // cumulative return multiple — constant regardless of
                                   // contribution size; only the USD amounts above scale.
 
@@ -2919,7 +2919,7 @@ pdfPrintBtn.addEventListener("click", ()=>{
 addEventListener("afterprint", ()=>{ planPrintArea.innerHTML = ""; });
 function renderEvidencePlanPreview(){
   const box = document.getElementById("evidencePlanPreview");
-  if (box) box.innerHTML = `<span class="plan-preview-stat"><span class="v">USD 125,000</span><span class="l">15% equity · 3-year multiple 5.49x</span></span>`;
+  if (box) box.innerHTML = `<span class="plan-preview-stat"><span class="v">USD 120,000</span><span class="l">15% equity · 3-year multiple 5.49x</span></span>`;
 }
 document.addEventListener("click",(e)=>{
   if (e.target.closest("[data-open-plan]")){ e.preventDefault(); openPlanPdf(); }
