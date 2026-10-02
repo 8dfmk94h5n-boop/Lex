@@ -61,6 +61,10 @@
   --rail-w:0px;
   --nav-top:max(14px, env(safe-area-inset-top,0px));
   --safe-bottom:max(16px, env(safe-area-inset-bottom,0px));
+  /* INTERRUPTOR DEL GRANO — prueba visual reversible.
+     none  = grano desactivado (estado actual)
+     block = grano activado (con la opacidad de --grain-opacity) */
+  --grain-display:none;
   --grain-opacity:.04;
   --measure:58ch;
 }
@@ -213,7 +217,7 @@ html[data-lang="zh"] .gate-title{ font-weight:600; }
     linear-gradient(90deg, rgba(11,14,17,.78) 0%, rgba(11,14,17,.18) 52%, rgba(11,14,17,.32) 100%);
 }
 .bd-tone{ position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 70% 40%, rgba(201,169,106,.05), transparent 70%); }
-.bd-grain{ position:absolute;inset:0;opacity:var(--grain-opacity);background-image:url("../assets/grain.png");background-size:200px 200px; }
+.bd-grain{ display:var(--grain-display);position:absolute;inset:0;opacity:var(--grain-opacity);background-image:url("../assets/grain.png");background-size:200px 200px; }
 
 /* ============================================================
    ROUTE RAIL — "el viaje del contenedor" (punto 2.2 / 3.2)
