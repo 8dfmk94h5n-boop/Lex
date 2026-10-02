@@ -1,7 +1,7 @@
 # Variante 1 — Definida · Entrega
 
 **Abrir:** sirve la carpeta `presston-site/` (por ejemplo `python3 -m http.server` dentro de ella) y abre `variante-1-definida/`. Es un `index.html` estático, sin build. Las rutas a `../assets/` y `../assets-extra/` dependen de que se despliegue la carpeta `presston-site/` completa.
-**Código de acceso de prueba:** `PSP`, el mismo del sitio original.
+**Acceso:** la página pública carga directo, sin código (la puerta PSP se retiró; ver §8). El plan operativo completo se abre en Evidencia con el código de prueba `PLAN2030`.
 **Capturas:** están en `capturas/`: 11 de escritorio a 1440×900 y una hoja de móvil a 390×844.
 
 ---
@@ -108,7 +108,23 @@ Candidata #2: Archivo ensanchada (116%, 600) en titulares, Archivo en texto y Fr
 ## 7. Fuera de alcance observado
 
 - `FORMSPREE_ID`, `WHATSAPP_NUMBER` y la clave de PostHog siguen como marcadores del original. El botón flotante de WhatsApp apunta a un número vacío.
-- El único código de acceso es el de prueba, "PSP".
+- El único código del plan privado es el de prueba, "PLAN2030".
 - No hay favicon.
-- El texto legal del gate tiene marcadores (`[correo de contacto]`, `[fecha]`).
+- El texto legal (Términos y privacidad, que ahora se abre desde el bloque del plan privado) tiene marcadores (`[correo de contacto]`, `[fecha]`).
 - Las referencias del punto 2 (Terminal Industries y Apple) se estudiaron como técnica, no como fuente. Este entorno no tiene acceso a esos sitios, así que apliqué lo que el prompt destila de cada una.
+
+## 8. Prueba del plan privado
+
+- **Sin puerta de acceso.** Se retiró la puerta PSP: el código, el globo y su CSS ya no están en la página. Del módulo original solo quedan el panel de Términos y privacidad y la detección de idioma. La analítica no se inicia sola, porque la casilla de la puerta era el momento de consentimiento.
+- **Bloque en Evidencia.** "Plan operativo completo — documento privado", con campo de código, mensaje de error y enlace a los términos de confidencialidad, en ES, EN y ZH.
+- **El plan fuera del paquete público.** El contenido vive en `presston-site/plan-privado/`, que nunca se publica, y se cifra en `privado/`. La página lo pide solo después de validar el código. Los detalles están en `plan-privado/LEEME.md`.
+- **Visor.** El documento se abre dentro de la página, con la nota "Documento privado — bajo confidencialidad", y sigue el idioma del sitio. Se cierra con "Cerrar" o con Escape, y el foco queda atrapado dentro mientras está abierto.
+- **Rediseño.** El contenido (textos, cifras y tablas) es el de los PDF de `assets/`, sin cambios. La presentación es la de la Variante 1: fondo acero oscuro, Archivo ensanchada en titulares, Archivo en texto, Fragment Mono en cifras, acento ámbar y filetes de 1 px sin cajas.
+- **Verificación.** 15 chequeos en cada idioma, en escritorio y en móvil, todos aprobados:
+  - antes del código, el plan no está en el código fuente, en el DOM ni en la red;
+  - un código erróneo no descarga el documento;
+  - el código correcto sí lo descarga;
+  - no hay textos cortados y las tablas caben sin desplazamiento lateral;
+  - Escape cierra el visor y devuelve el scroll de la página.
+
+  Capturas en `capturas/plan-privado/`.

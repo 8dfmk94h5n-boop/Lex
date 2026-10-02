@@ -18,6 +18,15 @@ for n in origin-poster steps-bg-poster trace-bg-poster; do cp "$SITE/assets/$n.j
 cp -r "$SITE/assets/evidence/." "$OUT/assets/evidence/"
 cp "$SITE/assets-extra/"*.mp4 "$SITE/assets-extra/"*.jpg "$SITE/assets-extra/"*.webp "$OUT/assets-extra/"
 
+# private plan: only the ENCRYPTED files (built by plan-privado/construir.py).
+# The plan's sources, the PDFs and the page images never enter the bundle.
+cp -r "$SITE/variante-1-definida/privado" "$OUT/privado"
+
 # guard: no reference may still point outside the bundle
 if grep -q '\.\./assets' "$OUT/index.html"; then echo "unrewritten ../assets path" >&2; exit 1; fi
+# guard: nothing of the plan in clear — no PDFs, no page images, no plan text
+if find "$OUT" -iname '*plan-operativo*' -o -path '*plan-acero*' | grep -q .; then echo "plan file in bundle" >&2; exit 1; fi
+for probe in '0.8247' 'Línea A' '558,456' 'Arancel retroactivo' 'Retroactive duty'; do
+  if grep -rqF "$probe" "$OUT"; then echo "plan text in clear in bundle: $probe" >&2; exit 1; fi
+done
 echo "bundle ready: $OUT ($(du -sh "$OUT" | cut -f1), $(find "$OUT" -type f | wc -l) files)"
