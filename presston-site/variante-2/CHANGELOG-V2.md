@@ -45,7 +45,7 @@ Tampoco cambian:
 
 ### Ajustes para no retroceder respecto a la V1
 - **Titulares que escalan con la altura** de la pantalla, el monitor más angosto en laptops y un bloque de AI más compacto. Así **la V2 escenifica las mismas escenas que la V1 o más en todos los tamaños probados**. Por ejemplo, a 1366×768 la V1 escenifica 4 escenas y la V2 las 6.
-- **Corrección del motor:** en el pie, el monitor ahora se retira. El fondo cambia cuando cambia la escena *o* su atenuación.
+- **Pie:** el monitor se retira apenas aparece el pie, en cualquier tamaño. Lo detecta un observador sobre el propio pie, porque el final de la página todavía puede pertenecer a la escena de Contacto.
 
 ## Archivos
 - `index.html`: la página, un solo archivo estático, sin frameworks ni build.

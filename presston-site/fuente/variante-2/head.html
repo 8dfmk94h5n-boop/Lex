@@ -1157,8 +1157,8 @@ html:not(.motion) .backdrop,html:not(.motion) .route{ display:none; }
   html.motion .backdrop .bd-scan{ display:block;position:absolute;left:0;right:0;bottom:0;height:1px;z-index:7;pointer-events:none;opacity:0;
     background:linear-gradient(90deg, transparent, var(--amber) 18%, var(--amber-soft) 50%, var(--amber) 82%, transparent);box-shadow:0 0 12px rgba(201,169,106,.55); }
   /* en las escenas densas el monitor se retira y el texto toma el ancho completo */
-  html.motion .backdrop:is([data-scene="evidence"],[data-scene="plan"],[data-scene="funding"],[data-scene="faq"],[data-scene="end"]){ opacity:0;transform:translateX(3%); }
-  html.motion .backdrop:is([data-scene="evidence"],[data-scene="plan"],[data-scene="funding"],[data-scene="faq"],[data-scene="end"]) ~ .route{ opacity:0; }
+  html.motion .backdrop:is([data-scene="evidence"],[data-scene="plan"],[data-scene="funding"],[data-scene="faq"],[data-scene="end"]),html.motion .backdrop.at-foot{ opacity:0;transform:translateX(3%); }
+  html.motion .backdrop:is([data-scene="evidence"],[data-scene="plan"],[data-scene="funding"],[data-scene="faq"],[data-scene="end"]) ~ .route,html.motion .backdrop.at-foot ~ .route{ opacity:0; }
 
   /* la ruta como manifiesto dentro del monitor */
   html.motion .route{ left:auto;top:var(--ap-top);right:var(--pad);bottom:var(--ap-bottom);width:var(--ap-w);height:auto;transform:none;display:block;
@@ -1228,7 +1228,7 @@ html:not(.motion) .backdrop,html:not(.motion) .route{ display:none; }
     -webkit-mask-image:linear-gradient(180deg,#000 62%,transparent);mask-image:linear-gradient(180deg,#000 62%,transparent);
     transition:opacity .6s var(--ease),transform .8s var(--ease),height .8s var(--ease); }
   html.motion .backdrop:is([data-scene="evidence"],[data-scene="plan"],[data-scene="funding"],[data-scene="faq"],[data-scene="end"]),
-  html.motion .backdrop.is-closed{ opacity:0;transform:translateY(-6%); }
+  html.motion .backdrop.is-closed,html.motion .backdrop.at-foot{ opacity:0;transform:translateY(-6%); }
   /* cada escena reserva la altura de SU banda (la calcula sizeBands en el motor) */
   html.motion .is-staged .scene-content > .grid12{ padding-top:max(calc(var(--band-scene,var(--band-h)) + 10px), calc(104px + env(safe-area-inset-top,0px)));padding-bottom:calc(14px + var(--safe-bottom)); }
   html.motion .scene--stage .scene-content > .grid12{ align-content:start; }

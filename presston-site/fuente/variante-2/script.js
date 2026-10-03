@@ -1169,6 +1169,14 @@ const PrivatePlan = (function(){
 })();
 
 
+/* V2: the monitor retires as soon as the footer comes into view, at any size
+   (the end of the page can still belong to the last staged scene). */
+(function(){
+  const foot = document.querySelector("footer"), bd = document.getElementById("backdrop");
+  if (!foot || !bd || !("IntersectionObserver" in window)) return;
+  new IntersectionObserver((es)=> es.forEach(e=> bd.classList.toggle("at-foot", e.isIntersecting)), { threshold:0.08 }).observe(foot);
+})();
+
 /* ============ Bootstrap ============ */
 applyLang(detectInitialLang());
 Stage.start();
