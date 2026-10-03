@@ -8,7 +8,7 @@
 Construye el **"Presston — Concierge AI"**: widget de voz en la web que atiende visitantes, responde preguntas con información pública aprobada, perfila al interesado y lo clasifica en el CRM. Texto como alternativa discreta.
 
 ## Stack (obligatorio)
-- Widget: vanilla JS puro, sin frameworks, integrado como overlay al `index.html` de la **Variante 1 aprobada** (la que ya te indiqué). No tocar su diseño ni su copy.
+- Widget: vanilla JS puro, sin frameworks, integrado como overlay al `index.html` de la **Variante 5 v5.1.1** (producción: presston-v5.pages.dev). No tocar su diseño ni su copy.
 - Backend: Cloudflare Worker nuevo (`concierge`), sin romper el sitio actual.
 - Voz: OpenAI Realtime API (modelo vigente de la API). El navegador conecta por WebRTC; el Worker genera tokens efímeros de sesión. La API key NUNCA va en el frontend.
 - RAG: corpus = copy público del sitio + `faq-extendida.md` + `faq-extendida-en.md` (te los doy). Doctrina comercial de referencia: `estrategia-cierre.md` (te la doy). Búsqueda simple sobre el corpus dentro del Worker. Sin vector DB externa.

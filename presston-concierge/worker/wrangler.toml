@@ -13,8 +13,8 @@ compatibility_date = "2026-09-01"
 # o sobrescribir en el dashboard de Cloudflare. Vacío → el bot lo remite a la evaluación privada.
 ROUND_COMMITTED = ""
 ROUND_TARGET = "120000"
-# Orígenes que pueden usar el widget (separados por coma). Completar con el dominio del sitio.
-ALLOWED_ORIGINS = "http://localhost:8787,http://localhost:8080"
+# Orígenes que pueden usar el widget (separados por coma). Producción: Variante 5 v5.1.1 en presston-v5.pages.dev.
+ALLOWED_ORIGINS = "https://presston-v5.pages.dev,http://localhost:8787,http://localhost:8080"
 REALTIME_MODEL = "gpt-realtime"
 REALTIME_VOICE = "cedar"
 TRANSCRIBE_MODEL = "gpt-4o-mini-transcribe"

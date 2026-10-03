@@ -20,4 +20,4 @@ Lex confirma el OK para construir. Resoluciones a tus 6 puntos:
 
 **Puedes construir**: scaffold + build completo, con `OPENAI_API_KEY`, `HUBSPOT_TOKEN` y `ROUND_COMMITTED` como secretos/variables (placeholders hasta el deploy). El envío por WhatsApp queda preparado sin bloquear el resto (API de Meta pendiente).
 
-**Falta del lado de Lex**: acceso al repo de la Variante 1 aprobada y los secretos al momento del deploy.
+**Falta del lado de Lex**: acceso al repo de la Variante 5 v5.1.1 (producción: presston-v5.pages.dev) y los secretos al momento del deploy.

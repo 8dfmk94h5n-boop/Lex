@@ -12,7 +12,7 @@ Sin dependencias ni frameworks: JS puro en el widget y en el Worker. `wrangler` 
 corpus/                  Corpus RAG (solo público). Una sección "### Título" = un fragmento.
   faq-extendida(.md|-en.md)    FAQ aprobada ES/EN
   cifras-publicas(.md|-en.md)  $120k meta, $25k ticket, múltiplos 1.01x/1.28x/5.49x (proyecciones)
-  sitio-es.md / sitio-en.md    PENDIENTE: copy de la Variante 1
+  sitio-es.md / sitio-en.md    PENDIENTE: copy de la Variante 5 v5.1.1
 worker/
   wrangler.toml          Worker `concierge` (independiente del sitio) + variables
   src/index.js           Rutas: /session /search /lead /chat /health
@@ -64,11 +64,11 @@ npm test                                   # pruebas unitarias
 cd worker
 npx wrangler secret put OPENAI_API_KEY
 npx wrangler secret put HUBSPOT_TOKEN
-# editar wrangler.toml: ALLOWED_ORIGINS = "https://<dominio del sitio>", ROUND_COMMITTED = "<monto>"
+# editar wrangler.toml: ALLOWED_ORIGINS = "https://presston-v5.pages.dev", ROUND_COMMITTED = "<monto>"
 cd .. && npm run deploy                    # regenera el corpus y despliega
 ```
 
-En el `index.html` de la Variante 1, antes de `</body>` (única línea que se agrega; no se toca diseño ni copy):
+En el `index.html` de la Variante 5 v5.1.1 (producción: https://presston-v5.pages.dev), antes de `</body>` (única línea que se agrega; no se toca diseño ni copy):
 
 ```html
 <script src="/concierge.js" data-endpoint="https://concierge.<cuenta>.workers.dev" defer></script>
@@ -97,7 +97,7 @@ El criterio 6 (móvil/escritorio) y la voz se prueban a mano con el widget.
 
 ## Pendientes
 
-- **Copy del sitio (Variante 1):** pegarlo en `corpus/sitio-es.md` y `sitio-en.md` y correr `npm run corpus`. Hasta entonces el corpus es la FAQ + cifras públicas. Al hacerlo, revisar que el significado de los múltiplos 1.01x / 1.28x / 5.49x quede tal como lo dice el sitio (hoy el bot solo los cita como proyecciones, sin interpretarlos).
+- **Copy del sitio (Variante 5 v5.1.1):** pegarlo en `corpus/sitio-es.md` y `sitio-en.md` y correr `npm run corpus`. Hasta entonces el corpus es la FAQ + cifras públicas. Al hacerlo, revisar que el significado de los múltiplos 1.01x / 1.28x / 5.49x quede tal como lo dice el sitio (hoy el bot solo los cita como proyecciones, sin interpretarlos).
 - **Email:** acordar la credencial (propuesta: Resend, una API key + dominio verificado).
 - **WhatsApp:** activar la API de Meta y aprobar una plantilla.
 - **HubSpot:** si `origen_concierge` o `idioma` son propiedades de tipo enumeración, sus valores internos deben ser exactamente `voz web` / `texto web` y `ES` / `EN`; si `capital_interes` es numérica, cambiarla a texto (el bot guarda el rango tal como lo dice el visitante).
