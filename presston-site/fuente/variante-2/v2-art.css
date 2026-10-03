@@ -1,0 +1,148 @@
+/* ============================================================
+   VARIANTE 2 — DIRECCIÓN DE ARTE: "SALA DE CONTROL"
+   Contenido idéntico a la V1. Cambia solo el arte:
+   · Composición: el video deja de ser fondo a sangre y pasa a ser un
+     MONITOR enmarcado a la derecha (marcas de corte, telemetría, la ruta
+     del contenedor como manifiesto horizontal). El texto vive a la
+     izquierda sobre acero sólido: más contraste que en la V1.
+   · Las escenas densas (Evidencia, Plan, Financiamiento, FAQ, pie) usan
+     el ancho completo; el monitor se retira.
+   · Atmósfera: imagen graduada en acero (desaturada), un único acento
+     ámbar, una luz de monitor muy tenue sobre el acero.
+   · Ritmo: el texto entra en horizontal, como una línea de bitácora; el
+     cambio de ambiente es un barrido vertical del monitor con su línea
+     de escaneo, en lugar del fundido de la V1.
+   Todo se anima con transform/opacity (el barrido usa clip-path en una
+   sola capa a la vez). Sin JS o con movimiento reducido no hay monitor:
+   la página se lee completa sobre acero.
+   ============================================================ */
+:root{
+  --ap-w:42vw;                 /* ancho del monitor (escritorio); más angosto en laptops */
+  --ap-top:88px;               /* debajo de la barra de control */
+  --ap-bottom:28px;
+  --band-h:34svh;              /* monitor como banda (tablet/móvil) */
+  --rail-w:0px;                /* la ruta ya no ocupa el borde izquierdo */
+}
+@media (min-width:1025px){ :root{ --rail-w:0px; } }
+
+/* --- grading del monitor: acero desaturado, contraste justo --- */
+.bd-layer video,.bd-layer img{ filter:saturate(.58) contrast(1.06) brightness(.96); }
+.backdrop .bd-scrim{ background:rgba(11,14,17,.62); }   /* la imagen respira: ya no carga texto encima */
+.backdrop .bd-shade{ opacity:.5; }
+.bd-marks,.bd-scan{ display:none; }
+
+/* sin JS o con movimiento reducido: no hay monitor, todo se lee sobre acero */
+html:not(.motion) .backdrop,html:not(.motion) .route{ display:none; }
+
+/* ---------- barra de control (escritorio) ---------- */
+@media (min-width:1025px){
+  .nav-wrap,.nav-wrap.scrolled{ top:0;padding:0;justify-content:stretch; }
+  .nav,.nav-wrap.scrolled .nav{ width:100%;max-width:none;min-height:64px;padding:0 var(--pad);border-radius:0;border-width:0 0 1px;border-color:var(--hair-2);
+    background:rgba(11,14,17,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);gap:28px; }
+  .nav-wrap.scrolled .logo,.nav-wrap.scrolled .seg{ display:flex; }
+  .nav-wrap.scrolled .nav-links{ display:flex; }
+  .nav-wrap.scrolled .nav-menu-btn{ display:none; }
+  .nav-links{ justify-content:center; }
+}
+
+/* ============================================================
+   ESCRITORIO ≥ 1180 px — monitor a la derecha
+   ============================================================ */
+@media (min-width:1180px){
+  html.motion body{ background:radial-gradient(52vw 90vh at 100% 52%, rgba(201,169,106,.05), transparent 72%) fixed, var(--ink); }
+
+  /* el monitor */
+  html.motion .backdrop{ inset:auto;top:var(--ap-top);right:var(--pad);bottom:var(--ap-bottom);width:var(--ap-w);
+    outline:1px solid var(--hair);outline-offset:0;
+    transition:opacity .7s var(--ease),transform .9s var(--ease); }
+  html.motion .backdrop .bd-marks{ display:block;position:absolute;inset:12px;z-index:6;pointer-events:none;
+    --m:linear-gradient(var(--amber),var(--amber));
+    background:var(--m) left top/16px 1px no-repeat,var(--m) left top/1px 16px no-repeat,
+               var(--m) right top/16px 1px no-repeat,var(--m) right top/1px 16px no-repeat,
+               var(--m) left bottom/16px 1px no-repeat,var(--m) left bottom/1px 16px no-repeat,
+               var(--m) right bottom/16px 1px no-repeat,var(--m) right bottom/1px 16px no-repeat; opacity:.85; }
+  html.motion .backdrop .bd-scan{ display:block;position:absolute;left:0;right:0;bottom:0;height:1px;z-index:7;pointer-events:none;opacity:0;
+    background:linear-gradient(90deg, transparent, var(--amber) 18%, var(--amber-soft) 50%, var(--amber) 82%, transparent);box-shadow:0 0 12px rgba(201,169,106,.55); }
+  /* en las escenas densas el monitor se retira y el texto toma el ancho completo */
+  html.motion .backdrop:is([data-scene="evidence"],[data-scene="plan"],[data-scene="funding"],[data-scene="faq"],[data-scene="end"]){ opacity:0;transform:translateX(3%); }
+  html.motion .backdrop:is([data-scene="evidence"],[data-scene="plan"],[data-scene="funding"],[data-scene="faq"],[data-scene="end"]) ~ .route{ opacity:0; }
+
+  /* la ruta como manifiesto dentro del monitor */
+  html.motion .route{ left:auto;top:var(--ap-top);right:var(--pad);bottom:var(--ap-bottom);width:var(--ap-w);height:auto;transform:none;display:block;
+    padding:0;transition:opacity .6s var(--ease); }
+  html.motion .route-ai{ position:absolute;left:30px;top:26px;font-size:10px; }
+  html.motion .route-here{ display:block;position:absolute;left:30px;top:44px;font-family:var(--f-display);font-stretch:var(--stretch-display);font-weight:600;
+    font-size:22px;letter-spacing:-.01em;text-transform:none;color:var(--bone);text-shadow:0 1px 14px rgba(5,7,9,.7); }
+  html.motion .route-tel{ position:absolute;right:30px;top:26px;align-items:flex-end;text-align:right; }
+  html.motion .route-track{ position:absolute;left:30px;right:30px;bottom:52px;top:auto;height:1px;flex:none; }
+  html.motion .route-base,html.motion .route-fill{ left:0;top:0;width:100%;height:1px; }
+  html.motion .route-base{ background:rgba(232,234,237,.28); }
+  html.motion .route-fill{ transform-origin:0 50%;transform:scaleX(0); }
+  html.motion .route-stops{ inset:0; }
+  html.motion .route-stop{ top:0;left:0;transform:translate(-50%,-50%);gap:0;flex-direction:column; }
+  html.motion .route-stop .lbl{ position:absolute;top:14px;left:50%;transform:translateX(-50%);font-size:9.5px;text-shadow:0 1px 10px rgba(5,7,9,.8); }
+  html.motion .route-stop:nth-child(1){ left:0;transform:translate(0,-50%); }
+  html.motion .route-stop:nth-child(1) .lbl{ left:0;transform:none; }
+  html.motion .route-stop:nth-child(2){ left:25%; } html.motion .route-stop:nth-child(3){ left:50%; } html.motion .route-stop:nth-child(4){ left:75%; }
+  html.motion .route-stop:nth-child(5){ left:100%;transform:translate(-100%,-50%); }
+  html.motion .route-stop:nth-child(5) .lbl{ left:auto;right:0;transform:none; }
+  html.motion .route-stop .dot{ width:8px;height:8px; }
+  html.motion .route-stop{ color:var(--mist); }
+
+  /* escenas del escenario: el texto vive a la izquierda del monitor */
+  html.motion .scene--stage .grid12{ max-width:none;padding-left:var(--pad);padding-right:calc(var(--ap-w) + var(--pad) + clamp(32px,3.6vw,80px)); }
+  html.motion .is-staged .scene-content > .grid12{ padding-top:calc(var(--ap-top) + 14px);padding-bottom:32px; }  /* el chat vive bajo el monitor, no bajo el texto */
+  /* los titulares escalan también con la altura: en laptops bajas el escenario completo cabe */
+  html.motion .scene--stage .h2{ font-size:clamp(28px,min(2.9vw,5.2vh),56px); }
+
+  html.motion .hero-copy{ grid-column:1 / -1; }
+  html.motion .hero-copy .h1{ font-size:clamp(40px,min(4.25vw,7.4vh),86px);max-width:12ch; }
+  html.motion .hero-lower{ grid-template-columns:repeat(10,minmax(0,1fr)); }
+  html.motion .hero-lower .lead{ grid-column:1 / span 6; }
+  html.motion .hero-statement{ grid-column:7 / span 4; }
+
+  html.motion .about-copy{ grid-column:1 / span 11; }
+  html.motion .about-copy .h2{ max-width:14ch; }
+
+  html.motion .how .scene-content > .grid12{ grid-template-rows:auto 1fr auto;align-content:stretch; }
+  html.motion .how-head{ grid-column:1 / -1;grid-row:1; }
+  html.motion .how .ai-block{ grid-column:1 / span 9;grid-row:2;align-self:end; }
+  html.motion .how .steps{ grid-row:3;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:20px; }
+  html.motion .how .step .t{ font-size:clamp(15px,1.1vw,19px); }
+  html.motion .how .ai-block{ padding:20px 22px 20px; }
+  html.motion .how .ai-block .ai-text{ font-size:14px; }
+  html.motion .how .ai-flow li{ padding:8px 0; }
+
+  html.motion .pgm-head{ grid-column:1 / -1; }
+  html.motion .pgm-list{ grid-column:1 / span 5; }
+  html.motion .pgm-stack{ grid-column:6 / span 7; }
+  html.motion .pgm-item .nm{ font-size:clamp(16px,1.2vw,20px); }
+
+  html.motion .trace-copy{ grid-column:1 / span 6; }
+  html.motion .trace-stack{ grid-column:7 / span 6; }
+
+  html.motion .contact-copy{ grid-column:1 / -1; }
+  html.motion .contact-cta .display{ font-size:clamp(38px,3.7vw,72px); }
+}
+@media (min-width:1180px) and (max-width:1499px){ :root{ --ap-w:36vw; } }
+@media (min-width:1180px) and (max-height:800px){ :root{ --ap-top:80px; } html.motion .is-staged .scene-content > .grid12{ padding-top:84px;padding-bottom:20px; } }
+
+/* ============================================================
+   TABLET Y MÓVIL < 1180 px — el monitor es una banda superior
+   ============================================================ */
+@media (max-width:1179px){
+  html.motion .backdrop{ inset:auto;top:0;left:0;right:0;height:var(--band-now,var(--band-h));
+    -webkit-mask-image:linear-gradient(180deg,#000 62%,transparent);mask-image:linear-gradient(180deg,#000 62%,transparent);
+    transition:opacity .6s var(--ease),transform .8s var(--ease),height .8s var(--ease); }
+  html.motion .backdrop:is([data-scene="evidence"],[data-scene="plan"],[data-scene="funding"],[data-scene="faq"],[data-scene="end"]),
+  html.motion .backdrop.is-closed{ opacity:0;transform:translateY(-6%); }
+  /* cada escena reserva la altura de SU banda (la calcula sizeBands en el motor) */
+  html.motion .is-staged .scene-content > .grid12{ padding-top:max(calc(var(--band-scene,var(--band-h)) + 10px), calc(104px + env(safe-area-inset-top,0px)));padding-bottom:calc(14px + var(--safe-bottom)); }
+  html.motion .scene--stage .scene-content > .grid12{ align-content:start; }
+}
+@media (max-width:640px){
+  :root{ --band-h:26svh; }
+}
+@media (max-width:1179px) and (max-height:720px){
+  :root{ --band-h:19svh; }   /* teléfonos bajos: el texto manda */
+}
