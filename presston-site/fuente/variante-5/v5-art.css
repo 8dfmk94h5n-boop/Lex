@@ -151,15 +151,16 @@ html[data-lang="zh"] .hero-copy .h1{ font-size:clamp(34px,min(4.2vw,7.4vh),80px)
 }
 
 /* "how" on phones held upright: the welder is a close-up in a landscape plate, so a
-   full-screen crop cut him at the edge of the mask. The plate takes the upper part
-   of the screen instead, centred on the welder, and fades into the steel where the
-   copy already sits. Only this scene, only portrait. */
+   full-screen crop cut him at the edge of the mask. Here the plate is sized so the
+   whole welder fits (mask, hands, torch, arc), sits in the upper half framed on him,
+   and melts with a long fade into the port behind it: the containers carry the lower
+   half of the screen. No band, no fill. Only this scene, only portrait. */
 @media (max-width:1024px) and (orientation:portrait){
-  .bd-layer[data-bd="origin"]{ background:var(--ink); }
-  .bd-layer[data-bd="origin"] > .bd-move{ transform-origin:42% 22vh; }   /* the camera turns around the welder, not the middle of the screen */
-  .bd-layer[data-bd="origin"] video,.bd-layer[data-bd="origin"] img{ top:0;bottom:auto;height:44vh;object-position:36% 50%;
-    -webkit-mask-image:linear-gradient(180deg,#000 72%,transparent 100%);mask-image:linear-gradient(180deg,#000 72%,transparent 100%); }
-  @supports (height:1svh){ .bd-layer[data-bd="origin"] video,.bd-layer[data-bd="origin"] img{ height:44svh; } }
+  .bd-layer[data-bd="origin"] > .bd-move{ transform-origin:50% 26vh; }   /* the camera turns around the welder */
+  .bd-layer[data-bd="origin"] video,.bd-layer[data-bd="origin"] img{ top:0;bottom:auto;height:52vh;object-position:34% 50%;
+    -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 52%,rgba(0,0,0,.6) 74%,transparent 100%);
+            mask-image:linear-gradient(180deg,#000 0%,#000 52%,rgba(0,0,0,.6) 74%,transparent 100%); }
+  @supports (height:1svh){ .bd-layer[data-bd="origin"] video,.bd-layer[data-bd="origin"] img{ height:52svh; } }
 }
 /* short phones: the same band, tighter type */
 @media (max-width:1024px) and (max-height:760px){
