@@ -1,0 +1,229 @@
+/* Copia de referencia del bloque de arte de la V4 (vive al final de head.html). */
+/* ============================================================
+   VARIANTE 4 — "RUTA"
+   Experimento de estructura, mismo contenido:
+   · ORIGEN: el hero y "Quiénes somos" son una sola escena de dos pasos;
+     la promesa y quién la cumple, del puerto al soldador.
+   · LA RUTA: cómo funciona, la AI (escena propia), trazabilidad y
+     programas son UN viaje horizontal. El scroll vertical mueve el
+     contenedor a lo largo de la ruta; las placas viajan de lado con él y
+     una línea de suelo ámbar avanza bajo los paneles.
+   · EL EXPEDIENTE: evidencia, plan, financiamiento y FAQ en acero
+     sólido, con un índice fijo que sabe dónde estás.
+   Paleta: el acero frío manda; el ámbar es solo SEÑAL (la ruta, el
+   índice activo, las flechas, los pulsos). El hueso es la voz.
+   Solo transform/opacity. Sin JS o con movimiento reducido, la ruta se
+   apila en vertical y todo se lee en flujo.
+   ============================================================ */
+:root{ --rail-w:0px;--nav-h:72px;--ground:clamp(64px,10.5vh,108px); }
+@media (min-width:1025px){ :root{ --rail-w:0px; } }
+@media (max-width:1024px){ :root{ --nav-h:calc(60px + env(safe-area-inset-top,0px));--ground:58px; } }
+@media (min-width:1025px) and (max-height:780px){ :root{ --nav-h:64px;--ground:58px; } }
+
+/* ---------- grading: cold steel; amber is a signal, not a tint ---------- */
+.bd-layer video,.bd-layer img{ filter:grayscale(.72) contrast(1.12) brightness(.92); }
+.backdrop .bd-tone{ display:none; }
+.backdrop .bd-scrim,.backdrop .bd-grid,.backdrop .bd-shade,.backdrop .bd-veil,.backdrop .bd-grain{ z-index:5; }
+.backdrop .bd-shade{ background:
+  linear-gradient(90deg, rgba(11,14,17,.82) 0%, rgba(11,14,17,.36) 48%, rgba(11,14,17,.2) 100%),
+  linear-gradient(180deg, rgba(11,14,17,.55) 0%, rgba(11,14,17,0) 24%, rgba(11,14,17,0) 60%, rgba(11,14,17,.86) 100%); }
+@media (max-width:1024px){
+  .backdrop .bd-shade{ background:linear-gradient(180deg, rgba(11,14,17,.6) 0%, rgba(11,14,17,.5) 45%, rgba(11,14,17,.88) 100%); }
+  .bd-layer[data-bd="welder"] video,.bd-layer[data-bd="welder"] img{ filter:grayscale(.74) contrast(1.05) brightness(.5); }
+  .bd-layer[data-bd="origin"] video,.bd-layer[data-bd="origin"] img{ filter:grayscale(.74) contrast(1.08) brightness(.7); }
+  .bd-layer[data-bd="trace"] video,.bd-layer[data-bd="trace"] img{ filter:grayscale(.74) contrast(1.06) brightness(.66); }
+}
+
+/* ---------- nav: an open line over the film, solid over the dossier ---------- */
+.nav-wrap,.nav-wrap.scrolled,.js .nav-wrap,.js .nav-wrap.scrolled{ top:0;height:var(--nav-h);padding:env(safe-area-inset-top,0px) var(--pad) 0;align-items:center;justify-content:stretch;
+  background:linear-gradient(180deg, rgba(11,14,17,.78), rgba(11,14,17,0));transition:background-color .5s var(--ease); }
+html.in-dx .nav-wrap,html:not(.motion) .nav-wrap{ background:rgba(18,22,27,.97);border-bottom:1px solid var(--hair-2); }
+.nav,.nav-wrap.scrolled .nav{ width:100%;max-width:none;padding:0;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;gap:28px; }
+.nav-wrap.scrolled .logo,.nav-wrap.scrolled .seg{ display:flex; }
+@media (min-width:1025px){
+  .nav-wrap.scrolled .nav-links{ display:flex; }
+  .nav-wrap.scrolled .nav-menu-btn{ display:none; }
+  .nav-links{ justify-content:center; }
+  .nav-links a.active::after{ left:50%;right:auto;width:5px;height:5px;bottom:4px;transform:translateX(-50%) rotate(45deg); }
+}
+.nav-drop{ top:calc(var(--nav-h) + 6px); }
+
+/* ---------- telemetry: where the container is (bottom left) ---------- */
+html.motion .route{ left:var(--pad);right:auto;top:auto;bottom:calc(16px + var(--safe-bottom));width:auto;height:auto;transform:none;
+  display:flex;flex-direction:row;align-items:center;gap:18px;padding:0;background:none;transition:opacity .5s var(--ease); }
+html.motion.in-dx .route{ opacity:0; }
+html.motion .route-ai{ font-size:9.5px; }
+html.motion .route-here{ display:block;font-family:var(--f-display);font-stretch:var(--stretch-display);font-weight:600;font-size:15px;letter-spacing:-.01em;text-transform:none;color:var(--bone); }
+html.motion .route-track{ position:relative;width:120px;height:9px;flex:none; }
+html.motion .route-base,html.motion .route-fill{ left:0;top:4px;width:100%;height:1px; }
+html.motion .route-fill{ transform-origin:0 50%;transform:scaleX(0); }
+html.motion .route-stops{ inset:0; }
+html.motion .route-stop{ top:4px;transform:translate(-50%,-50%);gap:0; }
+html.motion .route-stop .lbl{ display:none; }
+html.motion .route-stop .dot{ width:5px;height:5px;transform:rotate(45deg); }
+html.motion .route-stop:nth-child(1){ left:0;transform:translate(0,-50%); } html.motion .route-stop:nth-child(2){ left:25%; }
+html.motion .route-stop:nth-child(3){ left:50%; } html.motion .route-stop:nth-child(4){ left:75%; }
+html.motion .route-stop:nth-child(5){ left:100%;transform:translate(-100%,-50%); }
+html.motion .route-tel{ flex-direction:row;align-items:center;gap:10px; }
+@media (max-width:1024px){ html.motion .route-ai,html.motion .route-tel{ display:none; } html.motion .route{ bottom:calc(14px + var(--safe-bottom)); } }
+html:not(.motion) .route{ display:none; }
+.scroll-cue{ display:none!important; }
+
+/* ---------- headings scale with the height too ---------- */
+.scene--stage .h2,.run .h2{ font-size:clamp(30px,min(3.7vw,6.6vh),64px); }
+.grid12{ max-width:none; }
+
+/* ============================================================
+   1 · ORIGEN (hero + quiénes somos)
+   ============================================================ */
+html.motion .is-staged .scene-content > .grid12{ padding-top:calc(var(--nav-h) + clamp(18px,3vh,36px));padding-bottom:calc(var(--ground) + 8px); }
+.origin .scene-content > .grid12{ align-content:stretch; }
+.origin.is-staged .hero-copy,.origin.is-staged .about-copy{ grid-row:1; }
+.origin:not(.is-staged) .about-copy{ margin-top:clamp(72px,12vh,140px); }
+.hero-copy .h1{ font-size:clamp(42px,min(6.6vw,11vh),132px);line-height:.94;max-width:none; }
+html[data-lang="en"] .hero-copy .h1{ max-width:13ch; }
+html[data-lang="zh"] .hero-copy .h1{ font-size:clamp(34px,min(5vw,8.8vh),96px);line-height:1.16;max-width:11em; }
+@media (min-width:1025px){
+  .hero-copy{ grid-column:1 / -1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);grid-template-rows:auto auto auto 1fr auto;align-self:stretch; }
+  .hero-copy > .hero-seal,.hero-copy > .kicker{ grid-column:1 / span 6; }
+  .hero-copy > .h1{ grid-column:1 / span 10;margin-bottom:24px; }
+  .hero-copy > .hero-lower{ grid-column:7 / -1;grid-row:5;grid-template-columns:1fr;row-gap:16px;align-self:end; }
+  .hero-copy > .hero-lower .lead,.hero-copy > .hero-statement,.hero-lower .hero-statement{ grid-column:1 / -1; }
+  /* the call to act sits low-left, the statement low-right: one diagonal from the headline */
+  .hero-copy > .hero-actions{ grid-column:1 / span 5;grid-row:5;align-self:end;margin-top:0;flex-direction:column;align-items:flex-start;gap:4px; }
+  .hero-copy > .hero-actions .note{ max-width:44ch; }
+  .origin .about-copy{ grid-column:1 / span 7;align-self:center; }
+  .about-copy .h2{ font-size:clamp(32px,min(4.4vw,7vh),80px);max-width:15ch; }
+}
+
+/* ============================================================
+   2 · LA RUTA (horizontal)
+   ============================================================ */
+.run-ground{ display:none; }
+html.motion .run.is-staged .scene-content{ display:block; }
+html.motion .run.is-staged .run-track{ position:relative;display:flex;align-items:stretch;width:max-content;height:var(--vh);will-change:transform; }
+html.motion .run.is-staged .run-ground{ display:block;position:absolute;left:0;right:0;bottom:var(--ground);height:1px;pointer-events:none;z-index:0; }
+.run-ground-base{ position:absolute;inset:0;background:rgba(232,234,237,.2); }
+.run-ground-fill{ position:absolute;inset:0;background:var(--amber);transform-origin:0 50%;transform:scaleX(0);box-shadow:0 0 10px rgba(201,169,106,.45); }
+html.motion .run.is-staged .panel{ position:relative;z-index:1;flex:none;height:var(--vh);display:flex;flex-direction:column;justify-content:flex-end;
+  padding:calc(var(--nav-h) + 22px) clamp(14px,1.4vw,24px) calc(var(--ground) + 26px); }
+html.motion .run.is-staged .panel--wide{ width:100vw;padding-left:var(--pad);padding-right:var(--pad); }
+html.motion .run.is-staged .panel--ai{ width:min(64vw,1000px);padding-left:clamp(24px,4vw,72px);padding-right:clamp(24px,3vw,56px); }
+html.motion .run.is-staged .panel--head{ width:min(40vw,620px);padding-left:clamp(32px,4vw,80px);padding-right:clamp(20px,2vw,36px); }
+html.motion .run.is-staged .panel--card{ width:min(33vw,500px); }
+html.motion .run.is-staged .panel:last-child{ padding-right:var(--pad);width:calc(min(33vw,500px) + var(--pad)); }
+/* stations on the ground: Aduana, Almacén, Distribución */
+html.motion .run.is-staged .panel--wide::after,html.motion .run.is-staged .panel--head::after{ content:"";position:absolute;bottom:calc(var(--ground) - 5px);left:var(--station-x,var(--pad));
+  width:9px;height:9px;background:var(--amber);transform:rotate(45deg);box-shadow:0 0 0 4px rgba(11,14,17,.9); }
+html.motion .run.is-staged .panel--head::after{ --station-x:-4px; }
+/* each station is a post planted on the ground: the head of a chapter starts after it */
+html.motion .run.is-staged .panel--head{ padding-left:clamp(40px,5vw,96px);margin-left:clamp(24px,3vw,56px); }
+html.motion .run.is-staged .panel--head::before{ content:"";position:absolute;left:0;top:calc(var(--nav-h) + 22px);bottom:var(--ground);width:1px;
+  background:linear-gradient(180deg, rgba(232,234,237,0), rgba(232,234,237,.28) 30%, var(--amber)); }
+/* cards: the one at the gate reads full; the ones arriving wait a step back */
+html.motion .run.is-staged .panel--card .panel-in{ transition:opacity .5s var(--ease),transform .6s var(--ease); }
+@media (min-width:1025px){
+  /* the station at the gate reads full; the ones arriving and the ones passed wait a step back */
+  html.motion .run.is-staged .panel .panel-in{ transition:opacity .5s var(--ease),transform .6s var(--ease); }
+  html.motion .run.is-staged .panel:not(.is-here) .panel-in{ opacity:.46; }
+  html.motion .run.is-staged .panel--card:not(.is-here) .panel-in{ transform:translateY(10px); }
+}
+.run .trace-panel,.run .pgm-card{ background:rgba(11,14,17,.84);border:1px solid var(--hair);border-top:1px solid var(--amber-a40); }
+.run .pgm-card{ padding:24px 24px 26px; }
+
+/* how: the four steps, lit one after another when the container passes */
+.run .how .panel-in{ display:grid;row-gap:clamp(24px,5vh,56px); }
+.run .how-head .h2{ max-width:20ch; }
+.run .steps{ display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:clamp(16px,2vw,32px); }
+.run .step .t{ color:var(--bone); }
+.run .step .n{ color:var(--amber); }
+.run .step::before{ transform:scaleX(1); }
+html.motion .run.is-staged .step::before{ transform:scaleX(0);transition:transform .7s var(--ease); }
+html.motion .run.is-staged .how.is-seen .step::before{ transform:scaleX(1); }
+html.motion .run.is-staged .how.is-seen .step:nth-child(2)::before{ transition-delay:.15s; }
+html.motion .run.is-staged .how.is-seen .step:nth-child(3)::before{ transition-delay:.3s; }
+html.motion .run.is-staged .how.is-seen .step:nth-child(4)::before{ transition-delay:.45s; }
+
+/* the AI: its own station */
+.run .panel--ai .panel-in{ display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:clamp(20px,2.4vw,40px);align-items:end; }
+.ai-mark{ width:clamp(64px,6.4vw,104px);aspect-ratio:1;border-radius:23%;overflow:hidden;align-self:start;
+  background:linear-gradient(160deg,#1C232B 0%,#12171C 55%,#0D1014 100%);box-shadow:inset 0 0 0 1px rgba(232,234,237,.13),0 10px 30px rgba(0,0,0,.45); }
+.ai-mark svg{ width:100%;height:100%;display:block; }
+.run .ai-block{ background:none;border:0;padding:0;margin:0; }
+.run .ai-block .ai-title{ font-size:clamp(28px,min(3.2vw,5.6vh),54px);line-height:1.06;letter-spacing:-.02em;font-stretch:var(--stretch-display);font-weight:600;max-width:16ch;margin-bottom:16px; }
+html[data-lang="zh"] .run .ai-block .ai-title{ font-size:clamp(26px,2.6vw,44px);line-height:1.25; }
+.run .ai-block .ai-text{ font-size:clamp(15px,1.15vw,18px);max-width:46ch; }
+.run .ai-flow{ grid-template-columns:repeat(4,minmax(0,1fr));column-gap:18px;margin-top:22px; }
+.run .ai-flow li{ padding:14px 0;border-bottom:0;border-top:1px solid var(--hair);flex-direction:column;align-items:flex-start;gap:12px; }
+html.motion .run.is-staged .ai-flow li::before{ opacity:0;transform:rotate(-45deg) scale(.4);transition:opacity .4s var(--ease),transform .5s var(--ease); }
+html.motion .run.is-staged .panel--ai.is-seen .ai-flow li::before{ opacity:1;transform:rotate(-45deg) scale(1); }
+html.motion .run.is-staged .panel--ai.is-seen .ai-flow li:nth-child(2)::before{ transition-delay:.25s; }
+html.motion .run.is-staged .panel--ai.is-seen .ai-flow li:nth-child(3)::before{ transition-delay:.5s; }
+html.motion .run.is-staged .panel--ai.is-seen .ai-flow li:nth-child(4)::before{ transition-delay:.75s; }
+.run .ai-block .ai-close{ font-size:clamp(18px,1.5vw,24px);margin-top:20px; }
+
+/* heads of trace and programs */
+.run .trace-copy .h2,.run .pgm-head .h2{ margin-bottom:18px; }
+.run .trace-copy .body{ max-width:44ch; }
+.run .pgm-list{ margin-top:22px; }
+.run .pgm-item.is-on .nm{ color:var(--bone); }
+
+/* plain flow (reduced motion, no JS, or a phone too short): the route stacks */
+.run:not(.is-staged) .run-track{ display:block;transform:none!important; }
+.run:not(.is-staged) .panel{ padding:clamp(40px,7vh,72px) var(--pad); }
+.run:not(.is-staged) .panel-in{ max-width:1100px; }
+.run:not(.is-staged) .panel--card .panel-in{ max-width:620px; }
+.run:not(.is-staged){ padding-top:calc(var(--nav-h) + 24px); }
+
+/* ---------- phones & tablets: every station is a full screen ---------- */
+@media (max-width:1024px){
+  html.motion .run.is-staged .panel,html.motion .run.is-staged .panel--wide,html.motion .run.is-staged .panel--ai,
+  html.motion .run.is-staged .panel--head,html.motion .run.is-staged .panel--card,html.motion .run.is-staged .panel:last-child{
+    width:100vw;padding-left:var(--pad);padding-right:var(--pad);padding-top:calc(var(--nav-h) + 18px);padding-bottom:calc(var(--ground) + 18px); }
+  html.motion .run.is-staged .panel--head{ margin-left:0;padding-left:var(--pad); }
+  html.motion .run.is-staged .panel--head::before{ left:calc(var(--pad) - 14px); }
+  html.motion .run.is-staged .panel--head::after{ --station-x:calc(var(--pad) - 18px); }
+  .run .steps{ grid-template-columns:1fr;row-gap:0; }
+  .run .step{ padding:13px 0 13px 46px; }
+  .run .step .n{ position:absolute;left:0;top:15px;margin:0; }
+  .run .step .t{ font-size:19px; }
+  .run .panel--ai .panel-in{ grid-template-columns:1fr;row-gap:18px; }
+  .ai-mark{ width:56px; }
+  .run .ai-flow{ grid-template-columns:1fr 1fr; }
+  .run .pgm-card{ padding:20px 18px 22px; }
+  .run .pgm-item button{ min-height:44px;padding:6px 0; }
+}
+
+/* ============================================================
+   3 · EL EXPEDIENTE — acero sólido con índice fijo
+   ============================================================ */
+.dossier{ position:relative;z-index:2;background:var(--steel);border-top:1px solid var(--hair); }
+.dossier .scene--flow::before{ display:none; }
+.dossier .scene--flow{ padding:clamp(72px,10vh,120px) 0 clamp(64px,9vh,104px);border-bottom:1px solid var(--hair-2); }
+.dossier .scene--flow .h2{ font-size:clamp(34px,4.2vw,76px);line-height:1.02;letter-spacing:-.035em; }
+html[data-lang="zh"] .dossier .scene--flow .h2{ font-size:clamp(30px,3.4vw,58px);line-height:1.22;letter-spacing:.01em; }
+.dx-index a{ display:grid;grid-template-columns:34px minmax(0,1fr);align-items:center;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mist-dim);transition:color .3s var(--ease);min-height:44px; }
+html[data-lang="zh"] .dx-index a{ letter-spacing:.05em;font-size:12px; }
+.dx-index a .dx-n{ font-family:var(--f-display);font-stretch:var(--stretch-display);font-weight:600;font-size:14px;letter-spacing:0;color:var(--mist-dim); }
+.dx-index a:hover{ color:var(--bone); }
+.dx-index a.is-on{ color:var(--bone); }
+.dx-index a.is-on .dx-n{ color:var(--amber); }
+@media (min-width:1366px){
+  .dossier{ display:grid;grid-template-columns:clamp(220px,16vw,300px) minmax(0,1fr); }
+  .dx-index{ position:sticky;top:calc(var(--nav-h) + 24px);align-self:start;display:flex;flex-direction:column;padding:clamp(72px,10vh,120px) 0 0 var(--pad); }
+  .dx-index a{ position:relative;padding:10px 0;border-top:1px solid var(--hair-2); }
+  .dx-index a::before{ content:"";position:absolute;left:calc(var(--pad) * -1);top:50%;width:3px;height:18px;margin-top:-9px;background:var(--amber);transform:scaleY(0);transition:transform .4s var(--ease); }
+  .dx-index a.is-on::before{ transform:scaleY(1); }
+  .dx-body .grid12{ padding-left:clamp(28px,3.4vw,64px); }
+}
+@media (max-width:1365px){
+  .dx-index{ position:sticky;top:var(--nav-h);z-index:5;display:flex;overflow-x:auto;scrollbar-width:none;background:rgba(18,22,27,.97);border-bottom:1px solid var(--hair);padding:0 var(--pad); }
+  .dx-index::-webkit-scrollbar{ display:none; }
+  .dx-index a{ flex:none;grid-template-columns:auto auto;gap:8px;padding:0 18px 0 0;margin-right:10px;border-bottom:2px solid transparent; }
+  .dx-index a.is-on{ border-bottom-color:var(--amber); }
+  .dossier .scene--flow{ padding-top:calc(var(--nav-h) + 96px);scroll-margin-top:0; }
+}
+html:not(.motion) .dx-index{ top:var(--nav-h); }
+
+/* ---------- close ---------- */
+.contact-cta .display{ font-size:clamp(42px,min(6vw,10.4vh),116px); }
