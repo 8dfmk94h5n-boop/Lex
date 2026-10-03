@@ -181,6 +181,8 @@ PLAN = [
      ["Múltiplo de las distribuciones", "1.01x", "1.28x", "1.77x"],
      ["Valor de la participación del 15%", "", "", "445,758"],
      ["Retorno total acumulado", "1.01x", "1.28x", "5.49x"]], {"strong": [4], "hl": [4]}),
+  ("p", "USD 120,000 por el 15% refleja la infraestructura, el know-how y el andamiaje ya construidos (valuación de USD 800,000): por eso el retorno es 5.49x y no el 5.64x de un cálculo mecánico."),
+  ("p", "El capital es casi todo inventario: mercancía tangible en movimiento. La reserva operativa (22,922) es el funcionamiento de la compañía."),
   ("p", "**El capital se recupera en 12 meses** mediante las distribuciones de ganancias. Las ciudades 2 y 3 no piden capital al socio ni diluyen su participación: se financian con utilidad ya generada."),
   ("call", "PLAZO", ["36 meses, con revisiones a los 12 y a los 24."], "accent"),
 

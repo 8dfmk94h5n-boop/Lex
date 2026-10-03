@@ -470,6 +470,30 @@ html[data-lang="zh"] .pgm-card .pc-hook{ font-style:normal;font-weight:500; }
 .evidence-cap{ padding:13px 15px;border-top:1px solid var(--hair);font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mist); }
 
 
+/* ---------- SELLO AI en el Hero — propuesta 01 Monograma (sello-ai/propuestas.html) ----------
+   Azulejo de 40 px; una franja metalizada cruza en diagonal de abajo hacia arriba
+   en un ciclo de 7 s (visible menos de 3 s). Solo transform/opacity; quieta con
+   movimiento reducido. */
+.hero-seal{ display:flex;align-items:center;gap:12px;margin-bottom:18px; }
+.hero-seal .seal{ position:relative;width:40px;height:40px;border-radius:23%;overflow:hidden;flex:none;isolation:isolate;
+  background:linear-gradient(160deg,#1C232B 0%,#12171C 55%,#0D1014 100%);
+  box-shadow:inset 0 0 0 1px rgba(232,234,237,.13), inset 0 1px 0 rgba(232,234,237,.08), 0 6px 18px rgba(0,0,0,.45); }
+.hero-seal .seal svg{ position:absolute;inset:0;width:100%;height:100%;z-index:1; }
+.hero-seal .seal::after{ content:"";position:absolute;z-index:2;left:-60%;top:-60%;width:220%;height:220%;pointer-events:none;
+  background:linear-gradient(135deg, transparent 42%, rgba(170,182,196,.10) 47%, rgba(214,222,230,.34) 50%, rgba(150,162,176,.10) 53%, transparent 58%);
+  mix-blend-mode:screen;opacity:0;transform:translate(-32%,32%);
+  animation:sealSheen 7s cubic-bezier(.45,.05,.35,1) infinite; }
+@keyframes sealSheen{
+  0%{ transform:translate(-32%,32%);opacity:0; }
+  6%{ opacity:.5; }
+  38%{ opacity:.5; }
+  46%{ transform:translate(32%,-32%);opacity:0; }
+  100%{ transform:translate(32%,-32%);opacity:0; }
+}
+@media (prefers-reduced-motion:reduce){ .hero-seal .seal::after{ animation:none;opacity:0; } }
+.hero-seal-lab{ font-family:var(--f-mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--mist);text-shadow:0 1px 10px rgba(5,7,9,.6); }
+html[data-lang="zh"] .hero-seal-lab{ letter-spacing:.12em; }
+
 /* ---------- PLAN HOOK (flow) — aggregated, approved figures only ---------- */
 .plan-head{ grid-column:1 / span 8; }
 .plan-blocks{ grid-column:1 / -1;margin-top:clamp(36px,5vh,56px);display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);row-gap:40px; }
@@ -1192,6 +1216,8 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
       <div class="scene-content">
         <div class="grid12">
           <div class="hero-copy">
+            <!-- Sello AI (propuesta 01 · Monograma, sello-ai/propuestas.html) -->
+            <div class="hero-seal" data-anim><span class="seal" aria-hidden="true"><svg viewBox="0 0 100 100" focusable="false"><text x="50" y="62" text-anchor="middle" font-family="Archivo" font-stretch="125%" font-weight="600" font-size="34" letter-spacing="-1" fill="#E8EAED">AI</text><rect x="30" y="72" width="40" height="1.6" fill="#C9A96A"/></svg></span><span class="hero-seal-lab" data-i18n="ai_seal">GOBERNADO POR AI</span></div>
             <div class="kicker" data-anim><span class="k-line"></span><span data-i18n="hero_kicker">Norteamérica · Sectores estratégicos</span></div>
             <h1 class="display h1" id="heroTitle" data-anim data-i18n="hero_title">Construimos el comercio que construye una nación.</h1>
             <div class="hero-lower">
@@ -1216,7 +1242,7 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
         <div class="grid12">
           <div class="about-copy">
             <div class="kicker" data-anim><span class="k-line"></span><span class="k-num">02</span><span data-i18n="about_kicker">Quiénes somos</span></div>
-            <h2 class="display h2" id="aboutTitle" data-anim data-i18n="about_title">Formamos jóvenes operadores dentro de nuestras operaciones.</h2>
+            <h2 class="display h2" id="aboutTitle" data-anim data-i18n="about_title">Forjamos a los jóvenes operadores del mañana.</h2>
             <p class="about-seed" data-anim data-i18n="about_seed">Sumamos jóvenes con inclinación mecánica y los profesionalizamos junto a un coach de altísima experticia y un equipo fenomenal que comparte lo que sabe.</p>
             <p class="body" data-anim data-i18n="about_p1">Cada operación es una LLC independiente con un grupo definido y privado de socios que ingresan por acuerdo escrito, asumen responsabilidades reales de gestión y participan de forma directa, transparente y trazable.</p>
             <p class="about-close" data-anim data-i18n="about_p2">Los socios aportan capital y tiempo.</p>
@@ -2120,7 +2146,7 @@ const I18N_NEW = {
     hero_private:"Participación privada, por invitación y relación previa; no abierta al público.",
     cta_eval:"Solicitar evaluación privada",
     about_kicker:"Quiénes somos",
-    about_title:"Formamos jóvenes operadores dentro de nuestras operaciones.",
+    about_title:"Forjamos a los jóvenes operadores del mañana.",
     about_seed:"Sumamos jóvenes con inclinación mecánica y los profesionalizamos junto a un coach de altísima experticia y un equipo fenomenal que comparte lo que sabe.",
     about_p1:"Cada operación es una LLC independiente con un grupo definido y privado de socios que ingresan por acuerdo escrito, asumen responsabilidades reales de gestión y participan de forma directa, transparente y trazable.",
     about_p2:"Los socios aportan capital y tiempo.",
@@ -2128,6 +2154,7 @@ const I18N_NEW = {
     how_title:"Una forma directa de ser parte del comercio que mueve al mundo.",
     step1_t:"Evaluación privada", step2_t:"Conversación inicial por WhatsApp", step3_t:"Llamada", step3_s:"Con confidencialidad antes de la llamada.", step4_t:"Acuerdo y custodia",
     ai_live:"AI · en tiempo real",
+    ai_seal:"GOBERNADO POR AI",
     ai_label:"Administración gobernada por AI",
     ai_text:"La AI gobierna y valida en tiempo real cada movimiento de la operación:",
     ai_f1:"Inventario",
@@ -2247,7 +2274,7 @@ const I18N_NEW = {
     hero_private:"Private participation, by invitation and prior relationship; not open to the public.",
     cta_eval:"Request a private evaluation",
     about_kicker:"Who we are",
-    about_title:"We train young operators inside our operations.",
+    about_title:"We forge the young operators of tomorrow.",
     about_seed:"Young people with a mechanical bent join us and become professionals, guided by a coach of the highest expertise and a phenomenal team that shares what it knows.",
     about_p1:"Each operation is an independent LLC with a defined, private group of partners who join by written agreement, take on real management responsibilities, and participate directly, transparently, and traceably.",
     about_p2:"Partners contribute capital and time.",
@@ -2255,6 +2282,7 @@ const I18N_NEW = {
     how_title:"A direct way to be part of the trade that moves the world.",
     step1_t:"Private evaluation", step2_t:"Initial conversation on WhatsApp", step3_t:"Call", step3_s:"With confidentiality in place before the call.", step4_t:"Agreement and custody",
     ai_live:"AI · real time",
+    ai_seal:"AI GOVERNED",
     ai_label:"AI-governed administration",
     ai_text:"AI governs and validates every movement of the operation in real time:",
     ai_f1:"Inventory",
@@ -2374,7 +2402,7 @@ const I18N_NEW = {
     hero_private:"私密参与，基于邀请与既有关系；不向公众开放。",
     cta_eval:"申请私密评估",
     about_kicker:"关于我们",
-    about_title:"我们在自己的业务中培养年轻的运营者。",
+    about_title:"我们锻造明日的年轻运营者。",
     about_seed:"我们吸纳具有机械天赋的年轻人，由一位经验极其丰富的教练和一支乐于分享知识的出色团队带领，让他们成长为专业人才。",
     about_p1:"每一项业务都是一家独立的 LLC，拥有一个明确且私密的合伙人群体：他们通过书面协议加入，承担真实的管理责任，并以直接、透明、可追溯的方式参与。",
     about_p2:"合伙人投入资本与时间。",
@@ -2382,6 +2410,7 @@ const I18N_NEW = {
     how_title:"参与推动世界运转之贸易的直接方式。",
     step1_t:"私密评估", step2_t:"通过 WhatsApp 初步沟通", step3_t:"通话", step3_s:"通话之前先确立保密。", step4_t:"协议与托管",
     ai_live:"AI · 实时",
+    ai_seal:"AI 治理",
     ai_label:"由 AI 治理的管理",
     ai_text:"AI 实时治理并验证业务中的每一个动作：",
     ai_f1:"库存",

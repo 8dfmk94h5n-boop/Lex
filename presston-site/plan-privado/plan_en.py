@@ -181,6 +181,8 @@ PLAN = [
      ["Distribution multiple", "1.01x", "1.28x", "1.77x"],
      ["Value of the 15% stake", "", "", "445,758"],
      ["Cumulative total return", "1.01x", "1.28x", "5.49x"]], {"strong": [4], "hl": [4]}),
+  ("p", "USD 120,000 for 15% reflects the infrastructure, know-how, and scaffolding already built (a USD 800,000 valuation): that is why the return is 5.49x, not the 5.64x of a mechanical calculation."),
+  ("p", "The capital is almost all inventory: tangible merchandise in motion. The operating reserve (22,922) is what keeps the company running."),
   ("p", "**Capital is recovered in 12 months** through profit distributions. Cities 2 and 3 ask the partner for no capital and don't dilute their stake: they're funded with profit already generated."),
   ("call", "TERM", ["36 months, with reviews at 12 and 24."], "accent"),
 

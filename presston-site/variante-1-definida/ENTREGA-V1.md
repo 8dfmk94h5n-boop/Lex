@@ -141,3 +141,11 @@ Candidata #2: Archivo ensanchada (116%, 600) en titulares, Archivo en texto y Fr
 5. **Sello AI.** Diez propuestas en `sello-ai/` (`propuestas.html`, capturas y animación). No están integradas.
 
 Capturas en `capturas/cinco-ajustes/`.
+
+## 10. Tres ajustes precisos
+
+1. **Plan privado, valor de la participación.** Se añadieron dos líneas en la sección 11, en ES, EN y ZH. La primera dice que USD 120,000 por el 15% refleja infraestructura, know-how y andamiaje (valuación de USD 800,000), por lo que el retorno es 5.49x y no el 5.64x mecánico. La segunda dice que el capital es casi todo inventario y que la reserva operativa (22,922) es el funcionamiento de la compañía. El plan se volvió a cifrar y abre con PLAN2030.
+2. **Sello AI en el Hero.** Es la propuesta 01 (Monograma), de 40 px, sobre el kicker y con la etiqueta "AI GOVERNED" / "GOBERNADO POR AI" / "AI 治理". La franja metalizada cruza en diagonal de abajo hacia arriba en un ciclo de 7 s y es visible menos de 3 s. No se anima con movimiento reducido.
+3. **Quiénes somos.** El título ahora es "We forge the young operators of tomorrow." / "Forjamos a los jóvenes operadores del mañana." / "我们锻造明日的年轻运营者。". El resto de la escena no cambió.
+
+Capturas en `capturas/tres-ajustes/`.
