@@ -439,11 +439,11 @@ const FUNDING = {
   currency: "USD"
 };
 const COORDS = [
-  ["22.15°N / 101.99°W","LAT 22.15 · LON −101.99"],
-  ["25.79°N / 100.31°W","LAT 25.79 · LON −100.31"],
-  ["31.76°N / 106.49°W","LAT 31.76 · LON −106.49"],
-  ["32.71°N / 117.16°W","LAT 32.71 · LON −117.16"],
-  ["43.65°N / 79.38°W","LAT 43.65 · LON −79.38"]
+  ["33.75°N / 118.26°W","LAT 33.75 · LON −118.26"],
+  ["33.76°N / 118.22°W","LAT 33.76 · LON −118.22"],
+  ["40.69°N / 74.18°W","LAT 40.69 · LON −74.18"],
+  ["32.13°N / 81.15°W","LAT 32.13 · LON −81.15"],
+  ["29.68°N / 95.00°W","LAT 29.68 · LON −95.00"]
 ];
 const IMPORT_DOCS = [2,3,4,5,6,7,1].map(n=> ASSET + "evidence/imports/doc-" + n + ".jpg");
 const LOGISTICS_PHOTOS = ["container-1","container-2","truck","van-loading","warehouse"].map(n=> ASSET + "evidence/" + n + ".jpg");
