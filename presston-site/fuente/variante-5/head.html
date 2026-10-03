@@ -479,20 +479,17 @@ html[data-lang="zh"] .pgm-card .pc-hook{ font-style:normal;font-weight:500; }
   background:linear-gradient(160deg,#1C232B 0%,#12171C 55%,#0D1014 100%);
   box-shadow:inset 0 0 0 1px rgba(232,234,237,.13), inset 0 1px 0 rgba(232,234,237,.08), 0 6px 18px rgba(0,0,0,.45); }
 .hero-seal .seal svg{ position:absolute;inset:0;width:100%;height:100%;z-index:1; }
-.hero-seal .seal::after{ content:"";position:absolute;z-index:2;left:-60%;top:-60%;width:220%;height:220%;pointer-events:none;
-  background:linear-gradient(135deg, transparent 42%, rgba(170,182,196,.10) 47%, rgba(214,222,230,.34) 50%, rgba(150,162,176,.10) 53%, transparent 58%);
-  mix-blend-mode:screen;opacity:0;transform:translate(-32%,32%);
-  animation:sealSheen 7s cubic-bezier(.45,.05,.35,1) infinite; }
-@keyframes sealSheen{
-  0%{ transform:translate(-32%,32%);opacity:0; }
-  6%{ opacity:.5; }
-  38%{ opacity:.5; }
-  46%{ transform:translate(32%,-32%);opacity:0; }
-  100%{ transform:translate(32%,-32%);opacity:0; }
-}
-@media (prefers-reduced-motion:reduce){ .hero-seal .seal::after{ animation:none;opacity:0; } }
 .hero-seal-lab{ font-family:var(--f-mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--mist);text-shadow:0 1px 10px rgba(5,7,9,.6); }
 html[data-lang="zh"] .hero-seal-lab{ letter-spacing:.12em; }
+/* Sello AI · "Neón · solo bordes" (opción 5 de /sellos/): anillo cónico que gira y halo que respira */
+.hero-seal .seal-ring{position:relative;display:inline-flex;padding:3px;border-radius:24%;overflow:hidden;isolation:isolate;animation:ringHalo 3.5s ease-in-out infinite}
+.hero-seal .seal-ring::before{content:"";position:absolute;inset:-60%;z-index:0;background:conic-gradient(#00e1ff,#7a5cff,#ff2dc8,#00e1ff);animation:ringSpin 3.5s linear infinite}
+@keyframes ringSpin{to{transform:rotate(1turn)}}
+@keyframes ringHalo{0%,100%{box-shadow:0 0 14px rgba(0,225,255,.55),0 0 44px rgba(0,225,255,.28),0 8px 22px rgba(0,0,0,.5)}50%{box-shadow:0 0 16px rgba(255,45,200,.6),0 0 48px rgba(255,45,200,.32),0 8px 22px rgba(0,0,0,.5)}}
+.hero-seal .seal{position:relative;z-index:1;width:52px;height:52px;border-radius:21%;background:linear-gradient(160deg,#202932 0%,#141a20 55%,#0D1014 100%);box-shadow:inset 0 2px 5px rgba(0,0,0,.55), inset 0 -8px 16px rgba(0,225,255,.16), inset 0 1px 0 rgba(255,255,255,.07)}
+.hero-seal .seal svg text{filter:drop-shadow(0 0 6px rgba(0,229,255,.9))}
+.hero-seal-lab{font-size:12px;color:#E8EAED;text-shadow:0 0 14px rgba(0,229,255,.6)}
+@media (prefers-reduced-motion:reduce){.hero-seal .seal-ring,.hero-seal .seal-ring::before{animation:none}}
 
 /* ---------- PLAN HOOK (flow) — aggregated, approved figures only ---------- */
 .plan-head{ grid-column:1 / span 8; }
@@ -1269,7 +1266,7 @@ html[data-lang="zh"] .hero-copy .h1{ font-size:clamp(34px,min(4.2vw,7.4vh),80px)
   .trace.is-staged .trace-copy .demo-badge{ margin-bottom:12px;justify-self:start; }
   .scene--stage .h2,.about-copy .h2{ font-size:clamp(26px,7.4vw,32px); }
   .scene--stage .kicker{ margin-bottom:12px; }
-  .hero-seal{ margin-bottom:10px; }
+  .hero-seal{ margin-bottom:2px; }
   .about-seed,.scene--stage .body,.pgm-card .pc-body{ font-size:14px;line-height:1.5; }
   .pgm-card{ padding:16px 16px 18px; }
   .trace-panel{ padding:14px 16px 16px; }

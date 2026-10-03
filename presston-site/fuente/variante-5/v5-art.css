@@ -174,7 +174,7 @@ html[data-lang="zh"] .hero-copy .h1{ font-size:clamp(34px,min(4.2vw,7.4vh),80px)
   .trace.is-staged .trace-copy .demo-badge{ margin-bottom:12px;justify-self:start; }
   .scene--stage .h2,.about-copy .h2{ font-size:clamp(26px,7.4vw,32px); }
   .scene--stage .kicker{ margin-bottom:12px; }
-  .hero-seal{ margin-bottom:10px; }
+  .hero-seal{ margin-bottom:2px; }
   .about-seed,.scene--stage .body,.pgm-card .pc-body{ font-size:14px;line-height:1.5; }
   .pgm-card{ padding:16px 16px 18px; }
   .trace-panel{ padding:14px 16px 16px; }
