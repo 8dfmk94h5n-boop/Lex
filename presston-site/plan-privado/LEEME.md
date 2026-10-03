@@ -4,7 +4,7 @@ El plan operativo completo **no forma parte de la página pública**. Esta carpe
 
 | Archivo | Qué es |
 |---|---|
-| `plan_es.py`, `plan_en.py`, `plan_zh.py` | El contenido del plan (textos, cifras y tablas), copiado literalmente de `assets/plan-operativo-acero-{es,en,zh}.pdf`. |
+| `plan_es.py`, `plan_en.py`, `plan_zh.py` | El contenido del plan. Narrativa, producto, costos por contenedor y negociación vienen de `assets/plan-operativo-acero-{es,en,zh}.pdf`. Volumen, ciudades, resultados y retorno siguen el modelo de la calculadora del sitio (el modelo financiero de 3 ciudades, con la base llevada a USD 120,000). |
 | `codigos.json` | Los códigos de acceso. Hoy solo existe el de prueba, `PLAN2030`. |
 | `construir.py` | Renderiza el plan con el diseño de la Variante 1, lo cifra y escribe `variante-1-definida/privado/`. |
 

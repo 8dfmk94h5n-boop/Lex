@@ -128,3 +128,16 @@ Candidata #2: Archivo ensanchada (116%, 600) en titulares, Archivo en texto y Fr
   - Escape cierra el visor y devuelve el scroll de la página.
 
   Capturas en `capturas/plan-privado/`.
+
+## 9. Cinco ajustes (vocación, AI, plan congruente, guiones, sello)
+
+1. **El plan privado sigue el modelo de la calculadora** (ES, EN y ZH; el diseño del visor no cambió).
+   - Datos del modelo: 29 contenedores el año 1 y 36 por ciudad en régimen; ciudad 2 en el año 2 y ciudad 3 en el año 3; 1.01x, 1.28x y 1.77x en distribuciones; 5.49x total al año 3; base USD 120,000; USD 23,269 / 36,232 / 12,963 por contenedor; 36 meses con revisiones a los 12 y a los 24.
+   - Tablas recalculadas con ese modelo: canales, cadencia (un pedido cada 10 días, 6 contenedores en camino), uso de los USD 120,000, resultado anual por ciudad, gastos y punto de equilibrio, y sensibilidad al precio.
+   - Secciones nuevas: "Tres ciudades en tres años" y "Lo que recibe el socio". El plan pasa de 12 a 13 secciones.
+2. **AI con preponderancia.** El bloque pasó a llamarse "Administración gobernada por AI". Muestra un pulso "AI · en tiempo real" y los cuatro frentes validados (inventario, logística, liquidación y decisiones de socios), y cierra con "La gente lidera. La AI minimiza el error."
+3. **Semilla de vocación en Quiénes somos.** Una frase bajo el título, en la misma escena: jóvenes con inclinación mecánica que se profesionalizan con un coach de altísima experticia y un equipo que comparte lo que sabe.
+4. **Guiones largos.** Se eliminaron en los tres idiomas, en los textos del sitio, el texto legal y el plan. Solo quedan "— documento privado" y "Documento privado — bajo confidencialidad", que vienen de la indicación de Lex.
+5. **Sello AI.** Diez propuestas en `sello-ai/` (`propuestas.html`, capturas y animación). No están integradas.
+
+Capturas en `capturas/cinco-ajustes/`.

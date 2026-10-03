@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sello AI · 10 propuestas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Fragment+Mono&display=swap" rel="stylesheet" />
+<style>
+/* Sello AI — 10 propuestas (NO integradas al sitio). Mismos tokens de la Variante 1. */
+:root{
+  --ink:#0B0E11; --steel:#12161B; --steel-2:#181D24; --bone:#E8EAED; --mist:#9AA3AD; --mist-dim:#7D8690;
+  --amber:#C9A96A; --hair:rgba(232,234,237,.14); --hair-2:rgba(232,234,237,.07);
+  --f-display:'Archivo',system-ui,sans-serif; --f-mono:'Fragment Mono',ui-monospace,monospace;
+  color-scheme:dark;
+}
+*{ box-sizing:border-box;margin:0;padding:0; }
+body{ background:var(--ink);color:var(--bone);font-family:var(--f-display);padding:clamp(28px,5vw,72px) clamp(16px,5vw,72px) 80px; }
+header{ max-width:1240px;margin:0 auto 44px; }
+.k{ font-family:var(--f-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin-bottom:16px; }
+h1{ font-stretch:116%;font-weight:600;letter-spacing:-.02em;font-size:clamp(28px,3.4vw,46px);line-height:1.05;margin-bottom:14px; }
+header p{ color:var(--mist);font-size:15px;line-height:1.65;max-width:70ch; }
+.grid{ max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:var(--hair-2);border:1px solid var(--hair-2); }
+.card{ background:var(--ink);padding:26px 22px 24px;display:flex;flex-direction:column;gap:18px;min-width:0; }
+.num{ font-family:var(--f-mono);font-size:11px;letter-spacing:.2em;color:var(--amber); }
+.stage{ display:flex;align-items:center;justify-content:center;height:150px; }
+.name{ font-stretch:116%;font-weight:600;font-size:17px;letter-spacing:-.005em; }
+.desc{ font-size:13px;line-height:1.55;color:var(--mist); }
+/* en el hero: el sello a tamaño real junto al kicker, sobre el video del puerto */
+.hero{ position:relative;height:96px;margin-top:auto!important;overflow:hidden;border-top:1px solid var(--hair-2);margin:0 -22px -24px;padding:0 22px;display:flex;align-items:center;gap:12px;
+  background:linear-gradient(90deg,rgba(11,14,17,.86),rgba(11,14,17,.55)),url("../../assets-extra/poster-puerto-noche.jpg") center 62%/cover; }
+.hero .kick{ font-family:var(--f-mono);font-size:9.5px;letter-spacing:.2em;color:var(--mist);white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+.hero .kick b{ display:block;font-family:var(--f-display);font-stretch:116%;font-weight:600;letter-spacing:-.01em;font-size:15px;color:var(--bone);margin-top:3px; }
+
+/* ---------- el sello: tile tipo icono de app ---------- */
+.seal{ position:relative;width:var(--s,96px);height:var(--s,96px);border-radius:23%;overflow:hidden;flex:none;isolation:isolate;
+  background:linear-gradient(160deg,#1C232B 0%,#12171C 55%,#0D1014 100%);
+  box-shadow:inset 0 0 0 1px rgba(232,234,237,.13), inset 0 1px 0 rgba(232,234,237,.08), 0 6px 18px rgba(0,0,0,.45); }
+.seal svg{ position:absolute;inset:0;width:100%;height:100%;z-index:1; }
+.hero .seal{ --s:40px; }
+/* la franja metalizada: entra por abajo-izquierda, cruza en diagonal y sale arriba-derecha;
+   después descansa invisible y vuelve. Solo transform/opacity. */
+.seal::after{ content:"";position:absolute;z-index:2;left:-60%;top:-60%;width:220%;height:220%;pointer-events:none;
+  background:linear-gradient(135deg, transparent 42%, var(--m1) 47%, var(--m2) 50%, var(--m3) 53%, transparent 58%);
+  mix-blend-mode:screen;opacity:0;transform:translate(-32%,32%);
+  animation:sheen var(--dur,7s) cubic-bezier(.45,.05,.35,1) infinite;animation-delay:var(--delay,0s); }
+@keyframes sheen{
+  0%{ transform:translate(-32%,32%);opacity:0; }
+  6%{ opacity:var(--peak,.5); }
+  38%{ opacity:var(--peak,.5); }
+  46%{ transform:translate(32%,-32%);opacity:0; }
+  100%{ transform:translate(32%,-32%);opacity:0; }
+}
+@media (prefers-reduced-motion:reduce){ .seal::after{ animation:none;opacity:0; } }
+
+/* acabados metálicos (muy bajos en intensidad) */
+.m-titanio{ --m1:rgba(170,182,196,.10);--m2:rgba(214,222,230,.34);--m3:rgba(150,162,176,.10); }
+.m-champan{ --m1:rgba(201,169,106,.10);--m2:rgba(232,214,172,.32);--m3:rgba(201,169,106,.10); }
+.m-acero{ --m1:rgba(120,140,160,.10);--m2:rgba(190,206,222,.30);--m3:rgba(110,130,150,.10); }
+.m-grafito{ --m1:rgba(110,116,124,.10);--m2:rgba(176,182,190,.26);--m3:rgba(100,106,114,.10); }
+.m-iris{ --m1:rgba(150,170,200,.10);--m2:rgba(214,206,230,.28);--m3:rgba(201,169,106,.12); }
+
+footer{ max-width:1240px;margin:36px auto 0;color:var(--mist-dim);font-size:12.5px;line-height:1.7; }
+footer b{ color:var(--mist);font-weight:600; }
+@media (max-width:1100px){ .grid{ grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media (max-width:700px){ .grid{ grid-template-columns:repeat(2,minmax(0,1fr)); } .card{ padding:20px 16px; } .stage{ height:118px; } .seal{ --s:76px; } .hero{ margin:0 -16px -20px;padding:0 16px; } .hero .kick{ display:none; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="k">Variante 1 · solo propuestas, no integradas</div>
+  <h1>Sello AI para el Hero · 10 propuestas</h1>
+  <p>Mini-logo estilo icono de app: un azulejo de acero oscuro, reconocible a 40 px. Cada uno lleva una franja metalizada muy sutil que cruza en diagonal de abajo hacia arriba, desaparece y vuelve en bucle (ciclo de 7 s, visible menos de 3 s). Debajo de cada propuesta se ve el sello a tamaño real sobre el video del puerto, junto al kicker del Hero.</p>
+</header>
+
+<main class="grid">
+  <!-- 01 -->
+  <article class="card">
+    <div class="num">01</div>
+    <div class="stage"><span class="seal m-titanio"><svg viewBox="0 0 100 100" aria-hidden="true"><text x="50" y="62" text-anchor="middle" font-family="Archivo" font-stretch="125%" font-weight="600" font-size="34" letter-spacing="-1" fill="#E8EAED">AI</text><rect x="30" y="72" width="40" height="1.6" fill="#C9A96A"/></svg></span></div>
+    <div><div class="name">Monograma</div><p class="desc">"AI" en Archivo ensanchada, hueso sobre acero, con un filete ámbar. El más directo; acabado titanio.</p></div>
+    <div class="hero"><span class="seal m-titanio"><svg viewBox="0 0 100 100" aria-hidden="true"><text x="50" y="62" text-anchor="middle" font-family="Archivo" font-stretch="125%" font-weight="600" font-size="34" letter-spacing="-1" fill="#E8EAED">AI</text><rect x="30" y="72" width="40" height="1.6" fill="#C9A96A"/></svg></span><span class="kick">NORTH AMERICA · STRATEGIC SECTORS<b>We build the trade…</b></span></div>
+  </article>
+  <!-- 02 -->
+  <article class="card">
+    <div class="num">02</div>
+    <div class="stage"><span class="seal m-champan"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="27" fill="none" stroke="#C9A96A" stroke-width="1.6"/><text x="50" y="56.5" text-anchor="middle" font-family="Fragment Mono" font-size="18" letter-spacing="2" fill="#E8EAED">AI</text></svg></span></div>
+    <div><div class="name">Anillo</div><p class="desc">"AI" en Fragment Mono dentro de un filete circular ámbar, como un sello de verificación. Acabado champán.</p></div>
+    <div class="hero"><span class="seal m-champan"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="27" fill="none" stroke="#C9A96A" stroke-width="1.6"/><text x="50" y="56.5" text-anchor="middle" font-family="Fragment Mono" font-size="18" letter-spacing="2" fill="#E8EAED">AI</text></svg></span><span class="kick">NORTH AMERICA · STRATEGIC SECTORS<b>We build the trade…</b></span></div>
+  </article>
+  <!-- 03 -->
+  <article class="card">
+    <div class="num">03</div>
+    <div class="stage"><span class="seal m-acero"><svg viewBox="0 0 100 100" aria-hidden="true"><g stroke="#9AA3AD" stroke-width="1.4"><line x1="30" y1="66" x2="50" y2="32"/><line x1="50" y1="32" x2="70" y2="66"/><line x1="30" y1="66" x2="70" y2="66"/><line x1="50" y1="32" x2="50" y2="55"/><line x1="30" y1="66" x2="50" y2="55"/><line x1="70" y1="66" x2="50" y2="55"/></g><circle cx="50" cy="32" r="5" fill="#E8EAED"/><circle cx="30" cy="66" r="5" fill="#E8EAED"/><circle cx="70" cy="66" r="5" fill="#E8EAED"/><circle cx="50" cy="55" r="4.2" fill="#C9A96A"/></svg></span></div>
+    <div><div class="name">Nodo</div><p class="desc">Tres nodos enlazados alrededor de un centro ámbar: la red que valida cada movimiento. Acabado acero.</p></div>
+    <div class="hero"><span class="seal m-acero"><svg viewBox="0 0 100 100" aria-hidden="true"><g stroke="#9AA3AD" stroke-width="1.4"><line x1="30" y1="66" x2="50" y2="32"/><line x1="50" y1="32" x2="70" y2="66"/><line x1="30" y1="66" x2="70" y2="66"/><line x1="50" y1="32" x2="50" y2="55"/><line x1="30" y1="66" x2="50" y2="55"/><line x1="70" y1="66" x2="50" y2="55"/></g><circle cx="50" cy="32" r="5" fill="#E8EAED"/><circle cx="30" cy="66" r="5" fill="#E8EAED"/><circle cx="70" cy="66" r="5" fill="#E8EAED"/><circle cx="50" cy="55" r="4.2" fill="#C9A96A"/></svg></span><span class="kick">NORTH AMERICA · STRATEGIC SECTORS<b>We build the trade…</b></span></div>
+  </article>
+  <!-- 04 -->
+  <article class="card">
+    <div class="num">04</div>
+    <div class="stage"><span class="seal m-grafito"><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,22 74,36 74,64 50,78 26,64 26,36" fill="none" stroke="#E8EAED" stroke-width="1.6"/><text x="50" y="57" text-anchor="middle" font-family="Archivo" font-stretch="116%" font-weight="600" font-size="19" fill="#C9A96A">AI</text></svg></span></div>
+    <div><div class="name">Celda</div><p class="desc">Hexágono de filete fino, la celda de control, con "AI" ámbar al centro. Sobrio y técnico; acabado grafito.</p></div>
+    <div class="hero"><span class="seal m-grafito"><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,22 74,36 74,64 50,78 26,64 26,36" fill="none" stroke="#E8EAED" stroke-width="1.6"/><text x="50" y="57" text-anchor="middle" font-family="Archivo" font-stretch="116%" font-weight="600" font-size="19" fill="#C9A96A">AI</text></svg></span><span class="kick">NORTH AMERICA · STRATEGIC SECTORS<b>We build the trade…</b></span></div>
+  </article>
+  <!-- 05 -->
+  <article class="card">
+    <div class="num">05</div>
+    <div class="stage"><span class="seal m-champan"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 22 C52 40 60 48 78 50 C60 52 52 60 50 78 C48 60 40 52 22 50 C40 48 48 40 50 22 Z" fill="#C9A96A"/><path d="M71 26 C71.6 30 74 32.4 78 33 C74 33.6 71.6 36 71 40 C70.4 36 68 33.6 64 33 C68 32.4 70.4 30 71 26 Z" fill="#E8EAED" opacity=".85"/></svg></span></div>
+    <div><div class="name">Destello</div><p class="desc">La estrella de cuatro puntas, el signo universal de la inteligencia artificial, en ámbar. El más reconocible a 40 px.</p></div>
+    <div class="hero"><span class="seal m-champan"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 22 C52 40 60 48 78 50 C60 52 52 60 50 78 C48 60 40 52 22 50 C40 48 48 40 50 22 Z" fill="#C9A96A"/><path d="M71 26 C71.6 30 74 32.4 78 33 C74 33.6 71.6 36 71 40 C70.4 36 68 33.6 64 33 C68 32.4 70.4 30 71 26 Z" fill="#E8EAED" opacity=".85"/></svg></span><span class="kick">NORTH AMERICA · STRATEGIC SECTORS<b>We build the trade…</b></span></div>
+  </article>
+  <!-- 06 -->
+  <article class="card">
+    <div class="num">06</div>
+    <div class="stage"><span class="seal m-acero"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="24" y="34" width="52" height="32" fill="none" stroke="#9AA3AD" stroke-width="1.4"/><g stroke="#9AA3AD" stroke-width="1"><line x1="33" y1="38" x2="33" y2="62"/><line x1="40" y1="38" x2="40" y2="62"/><line x1="47" y1="38" x2="47" y2="62"/></g><text x="63" y="56" text-anchor="middle" font-family="Archivo" font-stretch="116%" font-weight="600" font-size="15" fill="#E8EAED">AI</text><rect x="24" y="70" width="52" height="1.6" fill="#C9A96A"/></svg></span></div>
+    <div><div class="name">Contenedor</div><p class="desc">Un contenedor de costillas finas que lleva la marca "AI": el oficio físico gobernado por la inteligencia.</p></div>
+    <div class="hero"><span class="seal m-acero"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="24" y="34" width="52" height="32" fill="none" stroke="#9AA3AD" stroke-width="1.4"/><g stroke="#9AA3AD" stroke-width="1"><line x1="33" y1="38" x2="33" y2="62"/><line x1="40" y1="38" x2="40" y2="62"/><line x1="47" y1="38" x2="47" y2="62"/></g><text x="63" y="56" text-anchor="middle" font-family="Archivo" font-stretch="116%" font-weight="600" font-size="15" fill="#E8EAED">AI</text><rect x="24" y="70" width="52" height="1.6" fill="#C9A96A"/></svg></span><span class="kick">NORTH AMERICA · STRATEGIC SECTORS<b>We build the trade…</b></span></div>
+  </article>
+  <!-- 07 -->
+  <article class="card">
+    <div class="num">07</div>
+    <div class="stage"><span class="seal m-iris"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="26" fill="none" stroke="#9AA3AD" stroke-width="1.2"/><g fill="none" stroke="#E8EAED" stroke-width="1.4"><path d="M50 24 L62 46"/><path d="M76 50 L54 62"/><path d="M50 76 L38 54"/><path d="M24 50 L46 38"/></g><circle cx="50" cy="50" r="7" fill="#C9A96A"/></svg></span></div>
+    <div><div class="name">Apertura</div><p class="desc">Un obturador que se abre sobre un centro ámbar: la AI que observa y valida. Acabado iris, entre acero y ámbar.</p></div>
+    <div class="hero"><span class="seal m-iris"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="26" fill="none" stroke="#9AA3AD" stroke-width="1.2"/><g fill="none" stroke="#E8EAED" stroke-width="1.4"><path d="M50 24 L62 46"/><path d="M76 50 L54 62"/><path d="M50 76 L38 54"/><path d="M24 50 L46 38"/></g><circle cx="50" cy="50" r="7" fill="#C9A96A"/></svg></span><span class="kick">NORTH AMERICA · STRATEGIC SECTORS<b>We build the trade…</b></span></div>
+  </article>
+  <!-- 08 -->
+  <article class="card">
+    <div class="num">08</div>
+    <div class="stage"><span class="seal m-titanio"><svg viewBox="0 0 100 100" aria-hidden="true"><g stroke="rgba(232,234,237,.22)" stroke-width="1"><line x1="26" y1="38" x2="74" y2="38"/><line x1="26" y1="50" x2="74" y2="50"/><line x1="26" y1="62" x2="74" y2="62"/><line x1="38" y1="26" x2="38" y2="74"/><line x1="50" y1="26" x2="50" y2="74"/><line x1="62" y1="26" x2="62" y2="74"/></g><path d="M34 51 L45 62 L67 38" fill="none" stroke="#C9A96A" stroke-width="3.4" stroke-linecap="square"/></svg></span></div>
+    <div><div class="name">Validado</div><p class="desc">Un check ámbar sobre una retícula de datos: cada movimiento, validado. Habla del gobierno de la AI sin escribir "AI".</p></div>
+    <div class="hero"><span class="seal m-titanio"><svg viewBox="0 0 100 100" aria-hidden="true"><g stroke="rgba(232,234,237,.22)" stroke-width="1"><line x1="26" y1="38" x2="74" y2="38"/><line x1="26" y1="50" x2="74" y2="50"/><line x1="26" y1="62" x2="74" y2="62"/><line x1="38" y1="26" x2="38" y2="74"/><line x1="50" y1="26" x2="50" y2="74"/><line x1="62" y1="26" x2="62" y2="74"/></g><path d="M34 51 L45 62 L67 38" fill="none" stroke="#C9A96A" stroke-width="3.4" stroke-linecap="square"/></svg></span><span class="kick">NORTH AMERICA · STRATEGIC SECTORS<b>We build the trade…</b></span></div>
+  </article>
+  <!-- 09 -->
+  <article class="card">
+    <div class="num">09</div>
+    <div class="stage"><span class="seal m-grafito"><svg viewBox="0 0 100 100" aria-hidden="true"><ellipse cx="50" cy="50" rx="30" ry="13" transform="rotate(-24 50 50)" fill="none" stroke="#9AA3AD" stroke-width="1.3"/><text x="50" y="57" text-anchor="middle" font-family="Archivo" font-stretch="125%" font-weight="600" font-size="20" fill="#E8EAED">AI</text><circle cx="74.5" cy="38" r="3.8" fill="#C9A96A"/></svg></span></div>
+    <div><div class="name">Órbita</div><p class="desc">"AI" con un punto ámbar en órbita: la ruta del contenedor, siempre vigilada. Un guiño al lenguaje aeroespacial.</p></div>
+    <div class="hero"><span class="seal m-grafito"><svg viewBox="0 0 100 100" aria-hidden="true"><ellipse cx="50" cy="50" rx="30" ry="13" transform="rotate(-24 50 50)" fill="none" stroke="#9AA3AD" stroke-width="1.3"/><text x="50" y="57" text-anchor="middle" font-family="Archivo" font-stretch="125%" font-weight="600" font-size="20" fill="#E8EAED">AI</text><circle cx="74.5" cy="38" r="3.8" fill="#C9A96A"/></svg></span><span class="kick">NORTH AMERICA · STRATEGIC SECTORS<b>We build the trade…</b></span></div>
+  </article>
+  <!-- 10 -->
+  <article class="card">
+    <div class="num">10</div>
+    <div class="stage"><span class="seal m-titanio"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M27 72 L44 30 L61 72" fill="none" stroke="#E8EAED" stroke-width="5.5" stroke-linejoin="miter"/><rect x="69" y="30" width="5.5" height="42" fill="#C9A96A"/><rect x="33" y="57" width="22" height="3" fill="#E8EAED"/></svg></span></div>
+    <div><div class="name">Ascenso</div><p class="desc">La "A" como chevron que sube y la "I" en ámbar: geometría de lanzamiento, la más cercana al minimalismo SpaceX.</p></div>
+    <div class="hero"><span class="seal m-titanio"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M27 72 L44 30 L61 72" fill="none" stroke="#E8EAED" stroke-width="5.5" stroke-linejoin="miter"/><rect x="69" y="30" width="5.5" height="42" fill="#C9A96A"/><rect x="33" y="57" width="22" height="3" fill="#E8EAED"/></svg></span><span class="kick">NORTH AMERICA · STRATEGIC SECTORS<b>We build the trade…</b></span></div>
+  </article>
+</main>
+
+<footer>
+  <b>Cómo se integraría la elegida:</b> un solo elemento de 40 px junto al kicker del Hero (o en la barra de navegación), en SVG en línea, sin imágenes ni librerías. La franja es un pseudo-elemento animado solo con transform y opacity; con movimiento reducido no se anima. Cada acabado (titanio, champán, acero, grafito, iris) es intercambiable entre propuestas.
+</footer>
+<script>
+/* desfasa los ciclos para que no todas las franjas crucen a la vez */
+document.querySelectorAll('.card').forEach((c,i)=> c.querySelectorAll('.seal').forEach(s=> s.style.setProperty('--delay', (-i*0.7)+'s')));
+</script>
+</body>
+</html>

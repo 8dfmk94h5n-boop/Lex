@@ -369,7 +369,9 @@ html[data-lang="zh"] .hero-statement{ font-weight:500; }
 /* ---------- ABOUT ---------- */
 .about .scene-content > .grid12{ align-content:center; }
 .about-copy{ grid-column:1 / span 6; }
-.about-copy .h2{ margin-bottom:26px;max-width:16ch; }
+.about-copy .h2{ margin-bottom:22px;max-width:16ch; }
+/* semilla de vocación: dos líneas, en la misma escena, sin caja */
+.about-seed{ max-width:46ch;margin-bottom:20px;font-size:clamp(16px,1.2vw,18px);line-height:1.6;color:var(--bone); }
 .about-copy .about-close{ margin-top:22px;padding-top:18px;border-top:1px solid var(--hair);font-family:var(--f-display);font-size:clamp(19px,1.5vw,23px);font-weight:var(--w-display);color:var(--bone);max-width:34ch; }
 html[data-lang="zh"] .about-copy .about-close{ font-weight:500; }
 
@@ -397,6 +399,19 @@ html[data-lang="zh"] .step .t{ font-weight:500; }
 .ai-block .ai-title{ font-family:var(--f-display);font-weight:var(--w-display);font-size:clamp(21px,1.7vw,26px);line-height:1.2;margin-bottom:12px;color:var(--bone); }
 html[data-lang="zh"] .ai-block .ai-title{ font-weight:600; }
 .ai-block .ai-text{ font-size:15px;line-height:1.66;color:var(--mist); }
+/* AI con preponderancia: pulso "en tiempo real", los cuatro frentes validados y el cierre */
+.ai-live{ display:flex;align-items:center;gap:10px;margin-bottom:14px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber); }
+.ai-pulse{ position:relative;width:7px;height:7px;border-radius:50%;background:var(--amber);flex:none; }
+.ai-pulse::after{ content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid var(--amber);opacity:0; }
+.motion .ai-pulse::after{ animation:aiPulse 2.4s ease-out infinite; }
+@keyframes aiPulse{ 0%{ transform:scale(.4);opacity:.7; } 80%,100%{ transform:scale(1.5);opacity:0; } }
+.ai-flow{ list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:22px;border-top:1px solid var(--hair); }
+.ai-flow li{ display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--hair-2);font-family:var(--f-mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--bone); }
+.ai-flow li::before{ content:"";width:9px;height:5px;margin-top:-3px;border-left:1.5px solid var(--amber);border-bottom:1.5px solid var(--amber);transform:rotate(-45deg);flex:none; }
+.ai-block .ai-close{ margin-top:16px;font-family:var(--f-display);font-weight:var(--w-display);font-stretch:var(--stretch-display);font-size:clamp(16px,1.25vw,19px);line-height:1.35;color:var(--bone); }
+html[data-lang="zh"] .ai-live,html[data-lang="zh"] .ai-flow li{ letter-spacing:.06em; }
+html[data-lang="zh"] .ai-block .ai-close{ font-family:'Noto Serif SC',serif;font-stretch:100%;font-weight:600; }
+@media (prefers-reduced-motion:reduce){ .ai-pulse::after{ animation:none; } }
 
 
 @media (min-width:1025px){
@@ -1043,6 +1058,10 @@ html[data-lang="zh"] .pv-confid{ letter-spacing:.08em; }
   .pv-t th,.pv-t td{ padding-left:6px;padding-right:6px; }
   .pv-c6 td.n{ font-size:11.5px; }
   .pv-c6 th{ font-size:8.5px;letter-spacing:.06em; }
+  .pv-c5 td.n{ font-size:10px; }
+  .pv-c5 th{ font-size:8px;letter-spacing:.04em; }
+  .pv-c5 th,.pv-c5 td{ padding-left:4px;padding-right:4px; }
+  .pv-c5 td.l{ font-size:12px; }
   .pv-risk{ grid-template-columns:1fr; }
   .pv-terms li{ grid-template-columns:32px minmax(0,1fr); }
 }
@@ -1198,6 +1217,7 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
           <div class="about-copy">
             <div class="kicker" data-anim><span class="k-line"></span><span class="k-num">02</span><span data-i18n="about_kicker">Quiénes somos</span></div>
             <h2 class="display h2" id="aboutTitle" data-anim data-i18n="about_title">Formamos jóvenes operadores dentro de nuestras operaciones.</h2>
+            <p class="about-seed" data-anim data-i18n="about_seed">Sumamos jóvenes con inclinación mecánica y los profesionalizamos junto a un coach de altísima experticia y un equipo fenomenal que comparte lo que sabe.</p>
             <p class="body" data-anim data-i18n="about_p1">Cada operación es una LLC independiente con un grupo definido y privado de socios que ingresan por acuerdo escrito, asumen responsabilidades reales de gestión y participan de forma directa, transparente y trazable.</p>
             <p class="about-close" data-anim data-i18n="about_p2">Los socios aportan capital y tiempo.</p>
           </div>
@@ -1223,8 +1243,16 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
               <li class="step" data-step="3"><span class="n">04</span><span class="t" data-i18n="step4_t">Acuerdo y custodia</span></li>
             </ol>
             <aside class="ai-block" data-show="4" aria-labelledby="aiTitle">
-              <h3 class="ai-title" id="aiTitle" data-i18n="ai_label">Administración centrada en AI</h3>
-              <p class="ai-text" data-i18n="ai_text">La administración de Presston se centra en la inteligencia artificial. Cada movimiento de la operación — inventario, logística, liquidación y decisiones de los socios — se analiza y se define con AI, para establecer mejoras continuas y decisiones basadas en datos.</p>
+              <div class="ai-live"><span class="ai-pulse" aria-hidden="true"></span><span data-i18n="ai_live">AI · en tiempo real</span></div>
+              <h3 class="ai-title" id="aiTitle" data-i18n="ai_label">Administración gobernada por AI</h3>
+              <p class="ai-text" data-i18n="ai_text">La AI gobierna y valida en tiempo real cada movimiento de la operación:</p>
+              <ul class="ai-flow">
+                <li data-i18n="ai_f1">Inventario</li>
+                <li data-i18n="ai_f2">Logística</li>
+                <li data-i18n="ai_f3">Liquidación</li>
+                <li data-i18n="ai_f4">Decisiones de socios</li>
+              </ul>
+              <p class="ai-close" data-i18n="ai_close">La gente lidera. La AI minimiza el error.</p>
             </aside>
           </div>
         </div>
@@ -1298,7 +1326,7 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
       <div class="ev-head">
         <div class="kicker" data-anim><span class="k-line"></span><span class="k-num">05</span><span data-i18n="ev_kicker">Evidencia</span></div>
         <h2 class="display h2" id="evTitle" data-anim data-i18n="ev_title">Prueba piloto 2025</h2>
-        <p class="lead" data-anim data-i18n="ev_lede">Un ciclo de importación completo — importado, vendido y cobrado — ejecutado por Presston.</p>
+        <p class="lead" data-anim data-i18n="ev_lede">Un ciclo de importación completo ejecutado por Presston: importado, vendido y cobrado.</p>
       </div>
       <p class="ev-note" data-anim data-i18n="ev_note">Documentos públicos protegidos; venta y cobro solo en privado bajo confidencialidad.</p>
       <div class="evidence-grid" data-anim>
@@ -1384,7 +1412,7 @@ body.reduced *,body.reduced *::before,body.reduced *::after{ animation:none!impo
       </div>
       <div class="plan-foot" data-anim>
         <button type="button" class="btn btn-primary" data-open-apply data-program="steel"><span data-i18n="cta_eval">Solicitar evaluación privada</span><span class="arw" aria-hidden="true">→</span></button>
-        <p class="plan-private" data-i18n="plan_private">El plan operativo completo —cifras, proveedores, logística y método— es un documento privado, disponible bajo confidencialidad una vez admitido como socio.</p>
+        <p class="plan-private" data-i18n="plan_private">El plan operativo completo, con cifras, proveedores, logística y método, es un documento privado disponible bajo confidencialidad una vez admitido como socio.</p>
       </div>
     </div>
   </section>
@@ -1827,15 +1855,15 @@ const LEGACY_I18N = {
     fund_gov_votes:"votes", fund_gov_most:"Most voted",
     fund_participate_cta:"Request participation",
     calc_decrease:"Decrease contribution", calc_increase:"Increase contribution", calc_amount_aria:"Your contribution, USD", calc_total:"Total",
-    calc_block1_title:"What you contribute & what you own", calc_block2_title:"What comes back in cash — and when", calc_block3_title:"What you keep at the end — beyond cash",
+    calc_block1_title:"What you contribute & what you own", calc_block2_title:"What comes back in cash, and when", calc_block3_title:"What you keep at the end, beyond cash",
     calc_stake_lab:"Your stake in the company",
     calc_dist_lab:"Your cash distribution", calc_annual_pct_lab:"Annual cash return on your contribution", calc_return_lab:"Cumulative return",
-    calc_frame_y1:"Year 1 — Capital recovery: you get almost all of your capital back.", calc_frame_y23:"Years 2–3 — Gain on capital already returned to you.",
-    calc_equity_value_lab:"Value of your 15% stake — Year 3", calc_equity_caveat:"Estimated value, not cash in hand.", calc_equity_note:"Based on the project scaling to three cities.",
+    calc_frame_y1:"Year 1: capital recovery. You get almost all of your capital back.", calc_frame_y23:"Years 2–3: gain on capital already returned to you.",
+    calc_equity_value_lab:"Value of your 15% stake in Year 3", calc_equity_caveat:"Estimated value, not cash in hand.", calc_equity_note:"Based on the project scaling to three cities.",
     calc_context_lab:"Project figures (context)", calc_gross_lab:"Gross sales", calc_net_lab:"Net profit",
-    calc_note_short:"Active partnership · studied projections, not guarantees — evaluate independently.",
+    calc_note_short:"Active partnership · studied projections, not guarantees. Evaluate independently.",
     calc_note_more:"See detail",
-    calc_note_full:"You acquire an ACTIVE participation: you work in and help manage an area of the company. These figures are studied projections backed by the documentation available on this site; evaluate them and consult your own expert team before deciding. No projection is a guaranteed result — your participation is proportional, governed by your agreement, and does not constitute a sale of securities or shares.",
+    calc_note_full:"You acquire an ACTIVE participation: you work in and help manage an area of the company. These figures are studied projections backed by the documentation available on this site; evaluate them and consult your own expert team before deciding. No projection is a guaranteed result. Your participation is proportional, governed by your agreement, and does not constitute a sale of securities or shares.",
     prog_hold_status:"In technical study",
     f_mentor:"Mentor (optional)",
     f_amount:"Participation amount (from $25,000)",
@@ -1943,12 +1971,12 @@ const LEGACY_I18N = {
     calc_block1_title:"您的投入与所拥有的股权", calc_block2_title:"现金回报及其时间", calc_block3_title:"除现金外，您最终所拥有的",
     calc_stake_lab:"您在公司中的股权",
     calc_dist_lab:"您的现金分配", calc_annual_pct_lab:"相对您出资的年度现金回报率", calc_return_lab:"累计回报",
-    calc_frame_y1:"第 1 年 — 收回本金：您几乎收回全部本金。", calc_frame_y23:"第 2–3 年 — 对已返还本金的额外收益。",
-    calc_equity_value_lab:"您15%股权的价值——第3年", calc_equity_caveat:"为估值，并非现金。", calc_equity_note:"取决于项目扩展至三座城市。",
+    calc_frame_y1:"第 1 年：收回本金，您几乎收回全部本金。", calc_frame_y23:"第 2–3 年：对已返还本金的额外收益。",
+    calc_equity_value_lab:"第3年时您15%股权的价值", calc_equity_caveat:"为估值，并非现金。", calc_equity_note:"取决于项目扩展至三座城市。",
     calc_context_lab:"项目数据（背景信息）", calc_gross_lab:"总销售额", calc_net_lab:"净利润",
-    calc_note_short:"主动型合伙参与 · 基于研究的预测，非保证收益——请自行评估。",
+    calc_note_short:"主动型合伙参与 · 基于研究的预测，非保证收益，请自行评估。",
     calc_note_more:"查看详情",
-    calc_note_full:"您获得的是主动型参与：您将在公司的某个业务领域中工作并参与管理。这些数据是基于本网站现有文件研究得出的预测；请自行评估并咨询您自己的专业团队后再做决定。任何预测均不构成保证结果——您的参与按比例计算，受您的协议约束，且不构成证券或股权销售。",
+    calc_note_full:"您获得的是主动型参与：您将在公司的某个业务领域中工作并参与管理。这些数据是基于本网站现有文件研究得出的预测；请自行评估并咨询您自己的专业团队后再做决定。任何预测均不构成保证结果。您的参与按比例计算，受您的协议约束，且不构成证券或股权销售。",
     prog_hold_status:"技术评估中",
     f_mentor:"导师（选填）",
     f_amount:"参与金额（起始 $25,000）",
@@ -2056,10 +2084,10 @@ const LEGACY_I18N = {
     calc_block1_title:"Lo que aportas y lo que posees", calc_block2_title:"Lo que regresa en efectivo, y cuándo", calc_block3_title:"Lo que conservas al final, además del efectivo",
     calc_stake_lab:"Tu participación en la empresa",
     calc_dist_lab:"Tu distribución en efectivo", calc_annual_pct_lab:"Rendimiento en efectivo anual sobre tu aporte", calc_return_lab:"Retorno acumulado",
-    calc_frame_y1:"Año 1 — Recuperación de capital: recuperas casi todo tu capital.", calc_frame_y23:"Años 2–3 — Ganancia sobre capital que ya volvió a ti.",
-    calc_equity_value_lab:"Valor de tu 15% — Año 3", calc_equity_caveat:"Valor estimado, no efectivo en mano.", calc_equity_note:"Sujeto a que el proyecto escale a tres ciudades.",
+    calc_frame_y1:"Año 1: recuperación de capital. Recuperas casi todo tu capital.", calc_frame_y23:"Años 2–3: ganancia sobre capital que ya volvió a ti.",
+    calc_equity_value_lab:"Valor de tu 15% en el año 3", calc_equity_caveat:"Valor estimado, no efectivo en mano.", calc_equity_note:"Sujeto a que el proyecto escale a tres ciudades.",
     calc_context_lab:"Cifras del proyecto (contexto)", calc_gross_lab:"Ventas brutas", calc_net_lab:"Utilidad neta",
-    calc_note_short:"Participación activa · proyecciones estudiadas, no garantizadas — evalúa con tu propio equipo.",
+    calc_note_short:"Participación activa · proyecciones estudiadas, no garantizadas. Evalúa con tu propio equipo.",
     calc_note_more:"Ver detalle",
     calc_note_full:"Adquieres una participación ACTIVA: trabajas y gestionas un área de la compañía. Estas cifras son proyecciones estudiadas y sustentadas en la documentación disponible en el sitio; evalúalas y asesórate con tu propio equipo experto antes de decidir. Ninguna proyección constituye un resultado garantizado; tu participación es proporcional, se rige por tu contrato, y no constituye venta de valores ni de acciones.",
     prog_hold_status:"En estudio técnico",
@@ -2080,7 +2108,7 @@ const I18N_NEW = {
     pbA_pace:"Ritmo", pbB_t:"La proyección", pbB_recovery:"El capital se recupera en 12 meses mediante las distribuciones de ganancias del plan.",
     pbC_t:"El control", pbC_1:"Asamblea mensual de socios", pbC_2:"Voto ponderado por capital aportado", pbC_3:"Capital en custodia de tercero independiente",
     pbC_4:"Reservas de aranceles e impuestos antes de cada distribución", pbC_5:"Plazo de 36 meses, con revisiones a los 12 y a los 24",
-    plan_private:"El plan operativo completo —cifras, proveedores, logística y método— es un documento privado, disponible bajo confidencialidad una vez admitido como socio.",
+    plan_private:"El plan operativo completo, con cifras, proveedores, logística y método, es un documento privado disponible bajo confidencialidad una vez admitido como socio.",
     skip:"Saltar al contenido", close:"Cerrar", menu:"Menú", nav_aria:"Secciones", print:"Imprimir",
     route_ai:"Ruta analizada con AI",
     stop_port:"Puerto", stop_customs:"Aduana", stop_warehouse:"Almacén", stop_distribution:"Distribución", stop_settlement:"Liquidación",
@@ -2093,13 +2121,20 @@ const I18N_NEW = {
     cta_eval:"Solicitar evaluación privada",
     about_kicker:"Quiénes somos",
     about_title:"Formamos jóvenes operadores dentro de nuestras operaciones.",
+    about_seed:"Sumamos jóvenes con inclinación mecánica y los profesionalizamos junto a un coach de altísima experticia y un equipo fenomenal que comparte lo que sabe.",
     about_p1:"Cada operación es una LLC independiente con un grupo definido y privado de socios que ingresan por acuerdo escrito, asumen responsabilidades reales de gestión y participan de forma directa, transparente y trazable.",
     about_p2:"Los socios aportan capital y tiempo.",
     how_kicker:"Cómo funciona",
     how_title:"Una forma directa de ser parte del comercio que mueve al mundo.",
     step1_t:"Evaluación privada", step2_t:"Conversación inicial por WhatsApp", step3_t:"Llamada", step3_s:"Con confidencialidad antes de la llamada.", step4_t:"Acuerdo y custodia",
-    ai_label:"Administración centrada en AI",
-    ai_text:"La administración de Presston se centra en la inteligencia artificial. Cada movimiento de la operación — inventario, logística, liquidación y decisiones de los socios — se analiza y se define con AI, para establecer mejoras continuas y decisiones basadas en datos.",
+    ai_live:"AI · en tiempo real",
+    ai_label:"Administración gobernada por AI",
+    ai_text:"La AI gobierna y valida en tiempo real cada movimiento de la operación:",
+    ai_f1:"Inventario",
+    ai_f2:"Logística",
+    ai_f3:"Liquidación",
+    ai_f4:"Decisiones de socios",
+    ai_close:"La gente lidera. La AI minimiza el error.",
     prog_kicker:"Programas",
     prog_round:"Ronda 01",
     prog_steel_status:"En preparación · Evaluación abierta",
@@ -2118,7 +2153,7 @@ const I18N_NEW = {
     fund_plan_cta:"Ver el plan operativo completo",
     ev_kicker:"Evidencia",
     ev_title:"Prueba piloto 2025",
-    ev_lede:"Un ciclo de importación completo — importado, vendido y cobrado — ejecutado por Presston.",
+    ev_lede:"Un ciclo de importación completo ejecutado por Presston: importado, vendido y cobrado.",
     ev_note:"Documentos públicos protegidos; venta y cobro solo en privado bajo confidencialidad.",
     pp_tag:"Documento privado",
     pp_title:"Plan operativo completo",
@@ -2200,7 +2235,7 @@ const I18N_NEW = {
     pbA_pace:"Pace", pbB_t:"The projection", pbB_recovery:"Capital is recovered in 12 months through the plan's profit distributions.",
     pbC_t:"The controls", pbC_1:"Monthly partners' assembly", pbC_2:"Votes weighted by capital contributed", pbC_3:"Capital held in custody by an independent third party",
     pbC_4:"Tariff and tax reserves before every distribution", pbC_5:"36-month term, with reviews at months 12 and 24",
-    plan_private:"The full operating plan — figures, suppliers, logistics, and method — is a private document, available under confidentiality once you are admitted as a partner.",
+    plan_private:"The full operating plan, with figures, suppliers, logistics, and method, is a private document available under confidentiality once you are admitted as a partner.",
     skip:"Skip to content", close:"Close", menu:"Menu", nav_aria:"Sections", print:"Print",
     route_ai:"Route analyzed with AI",
     stop_port:"Port", stop_customs:"Customs", stop_warehouse:"Warehouse", stop_distribution:"Distribution", stop_settlement:"Settlement",
@@ -2213,13 +2248,20 @@ const I18N_NEW = {
     cta_eval:"Request a private evaluation",
     about_kicker:"Who we are",
     about_title:"We train young operators inside our operations.",
+    about_seed:"Young people with a mechanical bent join us and become professionals, guided by a coach of the highest expertise and a phenomenal team that shares what it knows.",
     about_p1:"Each operation is an independent LLC with a defined, private group of partners who join by written agreement, take on real management responsibilities, and participate directly, transparently, and traceably.",
     about_p2:"Partners contribute capital and time.",
     how_kicker:"How it works",
     how_title:"A direct way to be part of the trade that moves the world.",
     step1_t:"Private evaluation", step2_t:"Initial conversation on WhatsApp", step3_t:"Call", step3_s:"With confidentiality in place before the call.", step4_t:"Agreement and custody",
-    ai_label:"AI-centered administration",
-    ai_text:"Presston's administration is centered on artificial intelligence. Every movement of the operation — inventory, logistics, settlement, and partner decisions — is analyzed and defined with AI, to establish continuous improvement and data-driven decisions.",
+    ai_live:"AI · real time",
+    ai_label:"AI-governed administration",
+    ai_text:"AI governs and validates every movement of the operation in real time:",
+    ai_f1:"Inventory",
+    ai_f2:"Logistics",
+    ai_f3:"Settlement",
+    ai_f4:"Partner decisions",
+    ai_close:"People lead. AI minimizes error.",
     prog_kicker:"Programs",
     prog_round:"Round 01",
     prog_steel_status:"In preparation · Evaluation open",
@@ -2238,7 +2280,7 @@ const I18N_NEW = {
     fund_plan_cta:"View the full operating plan",
     ev_kicker:"Evidence",
     ev_title:"2025 pilot",
-    ev_lede:"A complete import cycle — imported, sold, and collected — executed by Presston.",
+    ev_lede:"A complete import cycle executed by Presston: imported, sold, and collected.",
     ev_note:"Public documents are protected; sale and collection are shown only in private, under confidentiality.",
     pp_tag:"Private document",
     pp_title:"Full operating plan",
@@ -2320,7 +2362,7 @@ const I18N_NEW = {
     pbA_pace:"节奏", pbB_t:"预测", pbB_recovery:"资本通过计划中的利润分配在 12 个月内收回。",
     pbC_t:"管控", pbC_1:"每月合伙人大会", pbC_2:"按出资额加权投票", pbC_3:"资本由独立第三方托管",
     pbC_4:"每次分配前预留关税与税费储备", pbC_5:"36 个月期限，第 12 和第 24 个月进行评估",
-    plan_private:"完整运营计划——数据、供应商、物流与方法——为私密文件，在您获准成为合伙人后，可在保密条件下查阅。",
+    plan_private:"完整运营计划包含数据、供应商、物流与方法，为私密文件，在您获准成为合伙人后，可在保密条件下查阅。",
     skip:"跳至内容", close:"关闭", menu:"菜单", nav_aria:"页面导航", print:"打印",
     route_ai:"AI 分析的路线",
     stop_port:"港口", stop_customs:"海关", stop_warehouse:"仓库", stop_distribution:"配送", stop_settlement:"结算",
@@ -2333,13 +2375,20 @@ const I18N_NEW = {
     cta_eval:"申请私密评估",
     about_kicker:"关于我们",
     about_title:"我们在自己的业务中培养年轻的运营者。",
+    about_seed:"我们吸纳具有机械天赋的年轻人，由一位经验极其丰富的教练和一支乐于分享知识的出色团队带领，让他们成长为专业人才。",
     about_p1:"每一项业务都是一家独立的 LLC，拥有一个明确且私密的合伙人群体：他们通过书面协议加入，承担真实的管理责任，并以直接、透明、可追溯的方式参与。",
     about_p2:"合伙人投入资本与时间。",
     how_kicker:"运作方式",
     how_title:"参与推动世界运转之贸易的直接方式。",
     step1_t:"私密评估", step2_t:"通过 WhatsApp 初步沟通", step3_t:"通话", step3_s:"通话之前先确立保密。", step4_t:"协议与托管",
-    ai_label:"以 AI 为核心的管理",
-    ai_text:"Presston 的管理以人工智能为核心。业务中的每一个动作——库存、物流、结算以及合伙人的决策——都通过 AI 进行分析与确定，以实现持续改进和基于数据的决策。",
+    ai_live:"AI · 实时",
+    ai_label:"由 AI 治理的管理",
+    ai_text:"AI 实时治理并验证业务中的每一个动作：",
+    ai_f1:"库存",
+    ai_f2:"物流",
+    ai_f3:"结算",
+    ai_f4:"合伙人决策",
+    ai_close:"人来引领，AI 将错误降到最低。",
     prog_kicker:"项目",
     prog_round:"第 01 轮",
     prog_steel_status:"筹备中 · 评估开放",
@@ -2358,7 +2407,7 @@ const I18N_NEW = {
     fund_plan_cta:"查看完整运营计划",
     ev_kicker:"实证",
     ev_title:"2025 年试点",
-    ev_lede:"一个完整的进口周期——进口、销售并完成收款——由 Presston 执行。",
+    ev_lede:"由 Presston 执行的一个完整进口周期：进口、销售并完成收款。",
     ev_note:"公开文件已做保护处理；销售与收款信息仅在保密条件下私下提供。",
     pp_tag:"私密文件",
     pp_title:"完整运营计划",
@@ -2436,7 +2485,7 @@ const I18N = {};
 /* ---- preserved from the original site: legal_text ---- */
 const LEGAL_TEXT = {
 en:`<p><strong>1. Private space.</strong> This site and all its content are private and confidential. Access is by invitation only, through a personal code, and is reserved for a closed circle of identified people. It is not open to the general public.</p>
-<p><strong>2. Confidentiality.</strong> The information available here — including the operating plan, documents, figures, and projections — is confidential. By accessing it, you agree not to copy, reproduce, distribute, or share it, nor to transfer your access code, without prior written authorization.</p>
+<p><strong>2. Confidentiality.</strong> The information available here, including the operating plan, documents, figures, and projections, is confidential. By accessing it, you agree not to copy, reproduce, distribute, or share it, nor to transfer your access code, without prior written authorization.</p>
 <p><strong>3. Not a securities offering.</strong> The information is provided solely for evaluation within a private circle and does not constitute a public offering, a solicitation, or a sale of securities, shares, or financial instruments. Participation, where it exists, is that of an active operating partner within an LLC, with real responsibilities and formalized through a written contract; it is not a passive investment product. Nothing herein is an offer or invitation to invest addressed to the public.</p>
 <p><strong>4. Projections, not guarantees.</strong> The figures, models, and returns shown are estimates and projections based on stated assumptions. They are not a guarantee of results and may vary. Past operations do not guarantee future results.</p>
 <p><strong>5. Not advice.</strong> This content is not legal, financial, accounting, or investment advice. You should evaluate it independently and consult your own qualified advisors before making any decision.</p>
@@ -2444,7 +2493,7 @@ en:`<p><strong>1. Private space.</strong> This site and all its content are priv
 <p><strong>7. Acceptance.</strong> By entering your code and checking the box, you confirm that you have read and accept these Terms and this Privacy Notice, and that you understand the private and confidential nature of this space.</p>
 <p>The definitive terms of ownership, participation, governance, and exit are set out in the corresponding legal documents. [Presston Strategic Partners LLC] · version [date].</p>`,
 zh:`<p><strong>1. 私密空间。</strong>本网站及其全部内容均为私密且保密。访问仅限受邀者，通过个人密钥进入，仅面向一个由已识别人员组成的封闭圈子。不向公众开放。</p>
-<p><strong>2. 保密。</strong>此处提供的信息 —— 包括运营计划、文件、数据与预测 —— 均为保密信息。访问即表示您同意：未经事先书面授权，不复制、不转载、不传播、不分享，也不转让您的访问密钥。</p>
+<p><strong>2. 保密。</strong>此处提供的信息（包括运营计划、文件、数据与预测）均为保密信息。访问即表示您同意：未经事先书面授权，不复制、不转载、不传播、不分享，也不转让您的访问密钥。</p>
 <p><strong>3. 并非证券要约。</strong>相关信息仅供在私密圈子内评估之用，不构成公开发行、招揽或对证券、股票或金融工具的出售。参与（如有）是作为 LLC 内承担真实责任的积极运营合伙人，并以书面合同予以正式确立；并非被动投资产品。此处任何内容均不构成向公众发出的投资要约或邀请。</p>
 <p><strong>4. 预测，而非保证。</strong>所示数据、模型与回报均为基于既定假设的估算与预测，不构成结果保证，且可能发生变动。既往业务不保证未来结果。</p>
 <p><strong>5. 并非建议。</strong>本内容不构成法律、财务、会计或投资建议。您应独立评估，并在做出任何决定前咨询您自己的合格顾问。</p>
@@ -2452,7 +2501,7 @@ zh:`<p><strong>1. 私密空间。</strong>本网站及其全部内容均为私�
 <p><strong>7. 接受。</strong>输入密钥并勾选复选框，即表示您已阅读并接受本《条款》与《隐私声明》，并理解本空间的私密与保密性质。</p>
 <p>关于所有权、参与、治理与退出的最终条款，以相应法律文件为准。[Presston Strategic Partners LLC] · 版本 [日期]。</p>`,
 es:`<p><strong>1. Espacio privado.</strong> Este sitio y todo su contenido son privados y confidenciales. El acceso es exclusivamente por invitación, mediante un código personal, y está reservado a un círculo cerrado de personas identificadas. No está abierto al público general.</p>
-<p><strong>2. Confidencialidad.</strong> La información aquí disponible — incluidos el plan operativo, los documentos, cifras y proyecciones — es confidencial. Al acceder, te comprometes a no copiarla, reproducirla, difundirla ni compartirla, ni a ceder tu código de acceso, sin autorización previa por escrito.</p>
+<p><strong>2. Confidencialidad.</strong> La información aquí disponible, incluidos el plan operativo, los documentos, las cifras y las proyecciones, es confidencial. Al acceder, te comprometes a no copiarla, reproducirla, difundirla ni compartirla, ni a ceder tu código de acceso, sin autorización previa por escrito.</p>
 <p><strong>3. No es una oferta de valores.</strong> La información se presenta únicamente para su evaluación dentro de un círculo privado y no constituye una oferta pública, una solicitud, ni una venta de valores, acciones o instrumentos financieros. La participación, cuando exista, es la de un socio operador activo dentro de una LLC, con responsabilidades reales y formalizada mediante un contrato escrito; no es un producto de inversión pasiva. Nada de lo aquí expuesto es una oferta o invitación a invertir dirigida al público.</p>
 <p><strong>4. Proyecciones, no garantías.</strong> Las cifras, modelos y retornos mostrados son estimaciones y proyecciones basadas en supuestos declarados. No constituyen una garantía de resultados y pueden variar. Las operaciones pasadas no garantizan resultados futuros.</p>
 <p><strong>5. No es asesoría.</strong> Este contenido no constituye asesoría legal, financiera, contable ni de inversión. Debes evaluarlo de forma independiente y consultar a tus propios asesores calificados antes de tomar cualquier decisión.</p>
