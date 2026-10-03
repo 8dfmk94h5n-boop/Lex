@@ -1,0 +1,624 @@
+<body>
+<a class="skip" href="#main" data-i18n="skip">Saltar al contenido</a>
+
+<!-- ============ PRIVATE PLAN VIEWER — empty until a valid code decrypts the document ============ -->
+<div class="pv" id="planViewer" role="dialog" aria-modal="true" aria-labelledby="pvConfid" hidden>
+  <div class="pv-top">
+    <div class="pv-confid" id="pvConfid"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4.5 7V5a3.5 3.5 0 0 1 7 0v2" fill="none" stroke="currentColor" stroke-width="1.3"/><rect x="2.75" y="7" width="10.5" height="7.25" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span data-i18n="pv_note">Private document — under confidentiality</span></div>
+    <div class="pv-tools">
+      <div class="seg pv-langs" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true" aria-label="English">EN</button>
+        <button type="button" data-set-lang="es" aria-pressed="false" aria-label="Español">ES</button>
+        <button type="button" data-set-lang="zh" aria-pressed="false" aria-label="中文">ZH</button>
+      </div>
+      <button type="button" class="pv-close" id="pvClose"><span data-i18n="pv_close">Close</span><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.4"/></svg></button>
+    </div>
+  </div>
+  <div class="pv-scroll" id="pvScroll" tabindex="-1" data-lenis-prevent>
+    <div class="pv-body" id="pvBody"></div>
+  </div>
+</div>
+
+<div class="overlay legal-overlay" id="legalOverlay" role="dialog" aria-modal="true" aria-labelledby="legalTitle">
+  <div class="modal legal-modal">
+    <div class="modal-inner">
+      <button class="m-close" id="legalClose" aria-label="Cerrar" data-i18n-aria="close">×</button>
+      <h2 id="legalTitle" data-i18n="legal_title">Términos de Acceso y Aviso de Privacidad</h2>
+      <div id="legalBody" class="legal-body"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ THE STAGE (fixed backdrop) ============ -->
+<div class="backdrop" id="backdrop" aria-hidden="true" data-grain="polvo">
+  <img class="bd-fallback" src="../assets-extra/poster-puerto-noche.jpg" alt="" />
+  <div class="bd-layer is-on" data-bd="port"><div class="bd-move" id="bdPortMove"><div class="bd-breathe">
+    <video id="vidPort" muted playsinline loop preload="none" disablepictureinpicture data-src="../assets-extra/video-puerto-noche.mp4" data-poster="../assets-extra/poster-puerto-noche.jpg"></video>
+  </div></div></div>
+  <div class="bd-layer" data-bd="welder"><div class="bd-move">
+    <video id="vidWelder" muted playsinline loop preload="none" disablepictureinpicture data-src="../assets-extra/video-soldador.mp4" data-poster="../assets-extra/poster-soldador.jpg"></video>
+  </div></div>
+  <div class="bd-layer" data-bd="origin"><div class="bd-move">
+    <video id="vidOrigin" muted playsinline loop preload="none" disablepictureinpicture data-src="../assets/origin-sequence.mp4" data-poster="../assets/origin-poster.jpg"></video>
+  </div></div>
+  <div class="bd-layer" data-bd="rockets"><div class="bd-move">
+    <video id="vidRockets" muted playsinline loop preload="none" disablepictureinpicture data-src="../assets/steps-bg.mp4" data-poster="../assets/steps-bg-poster.jpg"></video>
+  </div></div>
+  <div class="bd-layer" data-bd="trace"><div class="bd-move">
+    <video id="vidTrace" muted playsinline loop preload="none" disablepictureinpicture data-src="../assets/trace-bg.mp4" data-poster="../assets/trace-bg-poster.jpg"></video>
+  </div></div>
+  <div class="bd-scrim" id="bdScrim"></div>
+  <div class="bd-grid" id="bdGrid">
+    <i style="left:61%;top:30%">25.79N</i><i style="left:73%;top:40%">100.31W</i><i style="left:49%;top:50%">LDO</i><i style="left:85%;top:60%">ETA 06:40</i><i style="left:37%;top:70%">32.71N</i>
+  </div>
+  <div class="bd-shade"></div>
+  <div class="bd-tone"></div>
+  <div class="bd-veil"></div>
+  <div class="bd-grain"></div>
+</div>
+
+<!-- ============ ROUTE RAIL — container journey ============ -->
+<aside class="route" id="route" aria-hidden="true">
+  <div class="route-ai" data-i18n="route_ai">Ruta analizada con AI</div>
+  <div class="route-here" id="routeHere">Puerto</div>
+  <div class="route-track">
+    <i class="route-base"></i><i class="route-fill" id="routeFill"></i>
+    <ol class="route-stops">
+      <li class="route-stop" data-stop="hero"><span class="dot"></span><span class="lbl" data-i18n="stop_port">Puerto</span></li>
+      <li class="route-stop" data-stop="how"><span class="dot"></span><span class="lbl" data-i18n="stop_customs">Aduana</span></li>
+      <li class="route-stop" data-stop="programs"><span class="dot"></span><span class="lbl" data-i18n="stop_warehouse">Almacén</span></li>
+      <li class="route-stop" data-stop="trace"><span class="dot"></span><span class="lbl" data-i18n="stop_distribution">Distribución</span></li>
+      <li class="route-stop" data-stop="contact"><span class="dot"></span><span class="lbl" data-i18n="stop_settlement">Liquidación</span></li>
+    </ol>
+  </div>
+  <div class="route-tel"><span id="telCoord">22.15°N / 101.99°W</span><span class="demo-badge" data-i18n="demo">Demostración</span></div>
+</aside>
+
+<!-- ============ NAV ============ -->
+<header class="nav-wrap" id="navWrap">
+  <nav class="nav" aria-label="Secciones" data-i18n-aria="nav_aria">
+    <a class="logo" href="#hero" data-goto="hero" aria-label="Presston">
+      <svg width="22" height="19" viewBox="0 0 30 26" fill="none" aria-hidden="true"><rect x="1" y="17" width="12" height="8" rx="1" fill="#C9A96A"/><rect x="14.5" y="17" width="14.5" height="8" rx="1" fill="#9AA3AD"/><rect x="6" y="8" width="14.5" height="8" rx="1" fill="#E8EAED"/><rect x="21.5" y="8" width="7.5" height="8" rx="1" fill="#9AA3AD"/><rect x="13" y="0" width="10" height="7" rx="1" fill="#9AA3AD"/></svg>
+      <span>Presston</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#hero" data-goto="hero" class="active" data-i18n="nav_home">Inicio</a>
+      <a href="#how" data-goto="how" data-i18n="nav_model">Cómo funciona</a>
+      <a href="#programs" data-goto="programs" data-i18n="nav_programs">Programas</a>
+      <a href="#evidence" data-goto="evidence" data-i18n="nav_evidence">Evidencia</a>
+      <a href="#plan" data-goto="plan" data-i18n="nav_funding">Plan operativo</a>
+    </div>
+    <div class="seg" role="group" aria-label="Language">
+      <button type="button" data-set-lang="en" aria-pressed="true" aria-label="English">EN</button>
+      <button type="button" data-set-lang="es" aria-pressed="false" aria-label="Español">ES</button>
+      <button type="button" data-set-lang="zh" aria-pressed="false" aria-label="中文">ZH</button>
+    </div>
+    <button type="button" class="nav-menu-btn" id="navMenuBtn" aria-label="Menú" data-i18n-aria="menu" aria-expanded="false" aria-controls="navDrop">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+    </button>
+  </nav>
+</header>
+<nav class="nav-drop" id="navDrop" aria-label="Secciones" data-i18n-aria="nav_aria">
+  <a href="#hero" data-goto="hero" class="active" data-i18n="nav_home">Inicio</a>
+  <a href="#how" data-goto="how" data-i18n="nav_model">Cómo funciona</a>
+  <a href="#programs" data-goto="programs" data-i18n="nav_programs">Programas</a>
+  <a href="#evidence" data-goto="evidence" data-i18n="nav_evidence">Evidencia</a>
+  <a href="#plan" data-goto="plan" data-i18n="nav_funding">Plan operativo</a>
+  <div class="nav-drop-langs" role="group" aria-label="Language">
+    <button type="button" data-set-lang="en" aria-pressed="true" aria-label="English">EN</button>
+    <button type="button" data-set-lang="es" aria-pressed="false" aria-label="Español">ES</button>
+    <button type="button" data-set-lang="zh" aria-pressed="false" aria-label="中文">ZH</button>
+  </div>
+</nav>
+
+<main id="main" tabindex="-1">
+
+  <!-- 1 · HERO -->
+  <section class="scene scene--stage hero" id="hero" data-scene="hero" data-bd="port" data-scrim=".24" data-grid="0" data-cam="1.02 1.16 0 -2.5 0 1.5" style="--beats:2" aria-labelledby="heroTitle">
+    <div class="scene-frame">
+      <div class="scene-content">
+        <div class="grid12">
+          <div class="hero-copy">
+            <!-- Sello AI (propuesta 01 · Monograma, sello-ai/propuestas.html) -->
+            <div class="hero-seal" data-anim><span class="seal" aria-hidden="true"><svg viewBox="0 0 100 100" focusable="false"><text x="50" y="62" text-anchor="middle" font-family="Archivo" font-stretch="125%" font-weight="600" font-size="34" letter-spacing="-1" fill="#E8EAED">AI</text><rect x="30" y="72" width="40" height="1.6" fill="#C9A96A"/></svg></span><span class="hero-seal-lab" data-i18n="ai_seal">GOBERNADO POR AI</span></div>
+            <div class="kicker" data-anim><span class="k-line"></span><span data-i18n="hero_kicker">Norteamérica · Sectores estratégicos</span></div>
+            <h1 class="display h1" id="heroTitle" data-anim data-i18n="hero_title">Construimos el comercio que construye una nación.</h1>
+            <div class="hero-lower" data-show="1">
+              <p class="lead" data-anim data-i18n="hero_sub">Compañía privada que ejecuta operaciones reales de importación, exportación, distribución y venta en sectores estratégicos de Norteamérica.</p>
+              <p class="hero-statement" data-anim data-i18n="hero_trust">Contamos con experiencia real y alianzas dentro de la industria.</p>
+            </div>
+            <div class="hero-actions" data-anim>
+              <button type="button" class="btn btn-primary" data-open-apply data-program="steel"><span data-i18n="cta_eval">Solicitar evaluación privada</span><span class="arw" aria-hidden="true">→</span></button>
+              <p class="note" data-i18n="hero_private">Participación privada, por invitación y relación previa; no abierta al público.</p>
+            </div>
+          </div>
+        </div>
+        <div class="scroll-cue" aria-hidden="true"><span data-i18n="scroll">Desliza</span><i></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · ABOUT -->
+  <section class="scene scene--stage about" id="about" data-scene="about" data-bd="welder" data-scrim=".34" data-grid="0" data-cam="1.04 1.2 1.5 -1 0 -1" style="--beats:2" aria-labelledby="aboutTitle">
+    <div class="scene-frame">
+      <div class="scene-content">
+        <div class="grid12">
+          <div class="about-copy">
+            <div class="kicker" data-anim><span class="k-line"></span><span class="k-num">02</span><span data-i18n="about_kicker">Quiénes somos</span></div>
+            <h2 class="display h2" id="aboutTitle" data-anim data-i18n="about_title">Forjamos a los jóvenes operadores del mañana.</h2>
+            <p class="about-seed" data-anim data-show="1" data-i18n="about_seed">Sumamos jóvenes con inclinación mecánica y los profesionalizamos junto a un coach de altísima experticia y un equipo fenomenal que comparte lo que sabe.</p>
+            <p class="body" data-anim data-show="1" data-i18n="about_p1">Cada operación es una LLC independiente con un grupo definido y privado de socios que ingresan por acuerdo escrito, asumen responsabilidades reales de gestión y participan de forma directa, transparente y trazable.</p>
+            <p class="about-close" data-anim data-show="1" data-i18n="about_p2">Los socios aportan capital y tiempo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · HOW IT WORKS (4 steps + AI administration) -->
+  <section class="scene scene--stage how" id="how" data-scene="how" data-bd="origin" data-scrim=".42" data-grid=".6" data-cam="1.12 1.02 0 0 3 -3" style="--beats:3" aria-labelledby="howTitle">
+    <div class="scene-frame">
+      <div class="scene-content">
+        <div class="grid12">
+          <div class="how-head">
+            <div class="kicker" data-anim><span class="k-line"></span><span class="k-num">03</span><span data-i18n="how_kicker">Cómo funciona</span></div>
+            <h2 class="display h2" id="howTitle" data-anim data-i18n="how_title">Una forma directa de ser parte del comercio que mueve al mundo.</h2>
+          </div>
+          <div class="how-body">
+            <ol class="steps" data-anim data-show="1" data-show-m="1">
+              <li class="step"><span class="n">01</span><span class="t" data-i18n="step1_t">Evaluación privada</span></li>
+              <li class="step"><span class="n">02</span><span class="t" data-i18n="step2_t">Conversación inicial por WhatsApp</span></li>
+              <li class="step"><span class="n">03</span><span class="t" data-i18n="step3_t">Llamada</span><span class="s" data-i18n="step3_s">Con confidencialidad antes de la llamada.</span></li>
+              <li class="step"><span class="n">04</span><span class="t" data-i18n="step4_t">Acuerdo y custodia</span></li>
+            </ol>
+            <aside class="ai-block" data-show="2" aria-labelledby="aiTitle">
+              <div class="ai-live"><span class="ai-pulse" aria-hidden="true"></span><span data-i18n="ai_live">AI · en tiempo real</span></div>
+              <h3 class="ai-title" id="aiTitle" data-i18n="ai_label">Administración gobernada por AI</h3>
+              <p class="ai-text" data-i18n="ai_text">La AI gobierna y valida en tiempo real cada movimiento de la operación:</p>
+              <ul class="ai-flow">
+                <li data-i18n="ai_f1">Inventario</li>
+                <li data-i18n="ai_f2">Logística</li>
+                <li data-i18n="ai_f3">Liquidación</li>
+                <li data-i18n="ai_f4">Decisiones de socios</li>
+              </ul>
+              <p class="ai-close" data-i18n="ai_close">La gente lidera. La AI minimiza el error.</p>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · PROGRAMS -->
+  <section class="scene scene--stage programs" id="programs" data-scene="programs" data-bd="rockets" data-scrim=".22" data-grid="0" data-cam="1.06 1.14 0 0 -4 4" style="--beats:6" aria-labelledby="pgmTitle">
+    <div class="scene-frame">
+      <div class="scene-content">
+        <div class="grid12">
+          <div class="pgm-head">
+            <div class="kicker" data-anim><span class="k-line"></span><span class="k-num">04</span><span data-i18n="prog_kicker">Programas</span></div>
+            <h2 class="display h2" id="pgmTitle" data-anim data-i18n="prog_title">Los sectores donde operamos.</h2>
+          </div>
+          <ol class="pgm-list" id="pgmList" data-anim data-show="1,2,3,4,5" data-show-m="-1">
+            <li class="pgm-item is-live" data-step="1"><button type="button" data-pgm="0"><span class="code">01</span><span class="nm" data-i18n="pgm1_name">Acero</span><span class="st" data-i18n="prog_round">Ronda 01</span></button></li>
+            <li class="pgm-item" data-step="2"><button type="button" data-pgm="1"><span class="code">02</span><span class="nm" data-i18n="pgm2_name">Aluminio</span><span class="st" data-i18n="prog_hold_status">En estudio técnico</span></button></li>
+            <li class="pgm-item" data-step="3"><button type="button" data-pgm="2"><span class="code">03</span><span class="nm" data-i18n="pgm3_name">Agro</span><span class="st" data-i18n="prog_hold_status">En estudio técnico</span></button></li>
+            <li class="pgm-item" data-step="4"><button type="button" data-pgm="3"><span class="code">04</span><span class="nm" data-i18n="pgm4_name">Semiconductores</span><span class="st" data-i18n="prog_hold_status">En estudio técnico</span></button></li>
+            <li class="pgm-item" data-step="5"><button type="button" data-pgm="4"><span class="code">05</span><span class="nm" data-i18n="pgm5_name">Energía y químicos</span><span class="st" data-i18n="prog_hold_status">En estudio técnico</span></button></li>
+          </ol>
+          <div class="pgm-stack" id="pgmStack" data-anim>
+            <article class="pgm-card" data-show="1" aria-labelledby="pgm1t">
+              <div class="pc-top"><span class="pc-code">PGM 01 / 05</span><span class="pgm-status is-live"><span class="d"></span><span data-i18n="prog_steel_status">En preparación · Evaluación abierta</span></span></div>
+              <h3 class="display h3 pc-name" id="pgm1t"><span data-i18n="pgm1_name">Acero</span> · <span data-i18n="prog_round">Ronda 01</span></h3>
+              <p class="pc-hook" data-i18n="pgm1_hook">El músculo de la infraestructura norteamericana.</p>
+              <p class="pc-body" data-i18n="pgm1_body">Operaciones reales de importación y exportación de acero, un sector impulsado por el gobierno que nunca deja de moverse y la columna de lo que operamos.</p>
+              <div class="pc-actions">
+                <button type="button" class="btn btn-primary" data-open-apply data-program="steel"><span data-i18n="cta_eval">Solicitar evaluación privada</span><span class="arw" aria-hidden="true">→</span></button>
+              </div>
+            </article>
+            <article class="pgm-card" data-show="2" aria-labelledby="pgm2t">
+              <div class="pc-top"><span class="pc-code">PGM 02 / 05</span><span class="pgm-status"><span class="d"></span><span data-i18n="prog_hold_status">En estudio técnico</span></span></div>
+              <h3 class="display h3 pc-name" id="pgm2t" data-i18n="pgm2_name">Aluminio</h3>
+              <p class="pc-hook" data-i18n="pgm2_hook">Ligero, resistente e imparable.</p>
+              <p class="pc-body" data-i18n="pgm2_body">Operaciones de importación y exportación de aluminio, un metal esencial para la industria, el transporte y la energía del futuro.</p>
+              <p class="pc-noraise" data-i18n="prog_no_raise">Sin captación</p>
+            </article>
+            <article class="pgm-card" data-show="3" aria-labelledby="pgm3t">
+              <div class="pc-top"><span class="pc-code">PGM 03 / 05</span><span class="pgm-status"><span class="d"></span><span data-i18n="prog_hold_status">En estudio técnico</span></span></div>
+              <h3 class="display h3 pc-name" id="pgm3t" data-i18n="pgm3_name">Agro</h3>
+              <p class="pc-hook" data-i18n="pgm3_hook">Donde las Américas alimentan al mundo.</p>
+              <p class="pc-body" data-i18n="pgm3_body">Comercio de productos frescos en ambos sentidos: frutas y verduras premium de México hacia Estados Unidos y Canadá (aguacate, berries, cítricos, tomate y chiles), y productos base de EE. UU. como queso, soya y maíz hacia México y el mundo. Una categoría de altísima demanda y rotación constante.</p>
+              <p class="pc-noraise" data-i18n="prog_no_raise">Sin captación</p>
+            </article>
+            <article class="pgm-card" data-show="4" aria-labelledby="pgm4t">
+              <div class="pc-top"><span class="pc-code">PGM 04 / 05</span><span class="pgm-status"><span class="d"></span><span data-i18n="prog_hold_status">En estudio técnico</span></span></div>
+              <h3 class="display h3 pc-name" id="pgm4t" data-i18n="pgm4_name">Semiconductores</h3>
+              <p class="pc-hook" data-i18n="pgm4_hook">El motor de la economía digital.</p>
+              <p class="pc-body" data-i18n="pgm4_body">Operaciones en uno de los sectores más estratégicos de la actualidad, impulsado por programas gubernamentales de gran alcance para asegurar el suministro nacional. Los chips y semiconductores son el núcleo de la tecnología, la defensa y las industrias del futuro.</p>
+              <p class="pc-noraise" data-i18n="prog_no_raise">Sin captación</p>
+            </article>
+            <article class="pgm-card" data-show="5" aria-labelledby="pgm5t">
+              <div class="pc-top"><span class="pc-code">PGM 05 / 05</span><span class="pgm-status"><span class="d"></span><span data-i18n="prog_hold_status">En estudio técnico</span></span></div>
+              <h3 class="display h3 pc-name" id="pgm5t" data-i18n="pgm5_name">Energía y químicos</h3>
+              <p class="pc-hook" data-i18n="pgm5_hook">La energía de la industria y de lo que viene.</p>
+              <p class="pc-body" data-i18n="pgm5_body">Operaciones de insumos industriales esenciales y energía, incluyendo paneles solares, baterías y componentes relacionados en el corazón de la transición energética. Un pilar estratégico que el gobierno prioriza para impulsar la manufactura, la infraestructura y las cadenas de suministro de energía limpia a gran escala.</p>
+              <p class="pc-noraise" data-i18n="prog_no_raise">Sin captación</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · TRACEABILITY & GOVERNANCE -->
+  <section class="scene scene--stage trace" id="trace" data-scene="trace" data-bd="trace" data-scrim=".4" data-grid=".4" data-cam="1.04 1.12 3 -3 0 0" style="--beats:4" aria-labelledby="traceTitle">
+    <div class="scene-frame">
+      <div class="scene-content">
+        <div class="grid12">
+          <div class="trace-copy">
+            <div class="kicker" data-anim><span class="k-line"></span><span class="k-num">05</span><span data-i18n="trace_kicker">Trazabilidad y gobernanza</span></div>
+            <span class="demo-badge" data-anim data-i18n="demo">Demostración</span>
+            <h2 class="display h2" id="traceTitle" data-anim data-i18n="trace_title">Tu operación tiene ubicación.</h2>
+            <p class="body" data-anim data-show="1,2,3" data-show-m="0" data-i18n="trace_body">Cada socio accede a una plataforma de trazabilidad total, con geolocalización de la mercancía y monitoreo por cámara en tiempo real. Sabes siempre en qué punto está la operación y cómo se está liquidando, con total transparencia y acceso completo a su documentación, de la aduana a la liquidación.</p>
+          </div>
+          <div class="trace-stack" data-anim>
+            <div class="trace-panel" data-show="1">
+              <div class="tp-head"><span class="label" data-i18n="trace_an_lab">Análisis continuo</span><span class="tp-coord" id="mapCoord">LAT 22.15 · LON −101.99</span></div>
+              <div class="trace-row"><span class="k" data-i18n="trace_k1">Mercancía</span><span class="v"><span class="g"></span><span data-i18n="trace_v1">Geolocalizada</span></span></div>
+              <div class="trace-row"><span class="k" data-i18n="trace_k2">Monitoreo</span><span class="v"><span class="g"></span><span data-i18n="trace_v2">Cámaras en vivo</span></span></div>
+              <div class="trace-row"><span class="k" data-i18n="trace_k3">Inventario</span><span class="v"><span class="g"></span><span data-i18n="trace_v3">Documentado</span></span></div>
+              <div class="trace-row"><span class="k" data-i18n="trace_k4">Liquidación</span><span class="v"><span class="g"></span><span data-i18n="trace_v4">Auditable</span></span></div>
+            </div>
+            <div class="trace-panel" data-show="2">
+              <div class="tp-head"><span class="label" data-i18n="gov_lab">Gobernanza</span></div>
+              <h3 class="gov-title" data-i18n="gov_title">Los socios deciden en conjunto.</h3>
+              <ul class="gov-rules">
+                <li><span class="mono">01</span><span data-i18n="gov_r1">Asamblea mensual.</span></li>
+                <li><span class="mono">02</span><span data-i18n="gov_r2">Voto proporcional al capital.</span></li>
+                <li><span class="mono">03</span><span data-i18n="gov_r3">Decisiones ordinarias por mayoría ponderada.</span></li>
+                <li><span class="mono">04</span><span data-i18n="gov_r4">Cambios estructurales: 75% del capital + aprobación de la administración.</span></li>
+              </ul>
+            </div>
+            <div class="trace-panel" data-show="3">
+              <div class="tp-head"><span class="label" data-i18n="gov_prop_lab">Propuestas en votación</span></div>
+              <div class="fund-gov-list" id="fundGovList">
+                <div class="fund-gov-row"><div class="fund-gov-q" data-i18n="gov_p1">Ampliar la distribución a una segunda ciudad</div><div class="fund-gov-votes">3 <span data-i18n="fund_gov_votes">votos</span></div><div class="fund-gov-bar"><i style="width:60%"></i></div></div>
+                <div class="fund-gov-row top"><div class="fund-gov-q"><span data-i18n="gov_p2">Priorizar acero sobre aluminio en la próxima ronda</span><span class="fund-tag" data-i18n="fund_gov_most">Más votada</span></div><div class="fund-gov-votes">5 <span data-i18n="fund_gov_votes">votos</span></div><div class="fund-gov-bar"><i style="width:100%"></i></div></div>
+                <div class="fund-gov-row"><div class="fund-gov-q" data-i18n="gov_p3">Sumar un segundo proveedor como respaldo</div><div class="fund-gov-votes">2 <span data-i18n="fund_gov_votes">votos</span></div><div class="fund-gov-bar"><i style="width:40%"></i></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · EVIDENCE (flow — documents) -->
+  <section class="scene scene--flow evidence" id="evidence" data-scene="evidence" data-bd="port" data-scrim=".72" data-grid=".08" aria-labelledby="evTitle">
+    <div class="grid12">
+      <div class="ev-head">
+        <div class="kicker" data-anim><span class="k-line"></span><span class="k-num">06</span><span data-i18n="ev_kicker">Evidencia</span></div>
+        <h2 class="display h2" id="evTitle" data-anim data-i18n="ev_title">Prueba piloto 2025</h2>
+        <p class="lead" data-anim data-i18n="ev_lede">Un ciclo de importación completo ejecutado por Presston: importado, vendido y cobrado.</p>
+      </div>
+      <p class="ev-note" data-anim data-i18n="ev_note">Documentos públicos protegidos; venta y cobro solo en privado bajo confidencialidad.</p>
+      <div class="evidence-grid" data-anim>
+        <button type="button" class="evidence-card" data-open-category="docs">
+          <span class="evidence-ph" id="evidenceDocsPreview"><span class="evidence-plan-badge" data-i18n="evidence_docs_badge">Ver documentos</span></span>
+          <span class="evidence-cap" data-i18n="evidence_cat1">Importaciones pasadas</span>
+        </button>
+        <button type="button" class="evidence-card" data-open-category="logistics">
+          <span class="evidence-ph" id="evidenceLogisticsPreview"><span class="evidence-plan-badge" data-i18n="evidence_photos_badge">Ver fotos</span></span>
+          <span class="evidence-cap" data-i18n="evidence_cat2">Manejo logístico y de ventas</span>
+        </button>
+      </div>
+      <!-- Private plan: the document is NOT in this page. The code unlocks an
+           encrypted file fetched from privado/ only after it validates. -->
+      <div class="pp" id="privatePlan" data-anim>
+        <div class="pp-copy">
+          <div class="pp-tag"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4.5 7V5a3.5 3.5 0 0 1 7 0v2" fill="none" stroke="currentColor" stroke-width="1.3"/><rect x="2.75" y="7" width="10.5" height="7.25" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span data-i18n="pp_tag">Private document</span></div>
+          <h3 class="pp-title"><span data-i18n="pp_title">Full operating plan</span> <span class="pp-title-dim" data-i18n="pp_title_dim">— private document</span></h3>
+          <p class="pp-desc" data-i18n="pp_desc">The complete document, with all its operating detail: the economics, the cadence, the capital and the results. It opens with a personal code, shared under confidentiality.</p>
+        </div>
+        <form class="pp-form" id="ppForm" novalidate autocomplete="off">
+          <label class="pp-label" for="ppCode" data-i18n="pp_label">Access code</label>
+          <div class="pp-row">
+            <input class="pp-input" id="ppCode" name="pp-code" type="text" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" maxlength="64" aria-describedby="ppMsg ppTerms" data-i18n-placeholder="pp_placeholder" placeholder="Enter your code">
+            <button type="submit" class="btn pp-open" id="ppOpen"><span data-i18n="pp_open">Open</span><span class="arw" aria-hidden="true">→</span></button>
+          </div>
+          <p class="pp-msg" id="ppMsg" role="status" aria-live="polite"></p>
+          <p class="pp-terms" id="ppTerms"><span data-i18n="pp_terms_pre">Opening it means you agree to keep it confidential.</span> <button type="button" class="pp-legal" id="ppLegal" data-i18n="pp_terms_link">View terms</button></p>
+        </form>
+        <div class="pp-unlocked" id="ppUnlocked" hidden>
+          <p class="pp-ok mono" data-i18n="pp_unlocked_note">Access verified for this visit.</p>
+          <button type="button" class="btn pp-open" id="ppReopen"><span data-i18n="pp_reopen">Open the plan</span><span class="arw" aria-hidden="true">→</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · OPERATING PLAN — public hook (flow). The full plan is private. -->
+  <section class="scene scene--flow plan" id="plan" data-scene="plan" data-bd="port" data-scrim=".76" data-grid=".14" aria-labelledby="planTitle">
+    <div class="grid12">
+      <div class="plan-head">
+        <div class="kicker" data-anim><span class="k-line"></span><span class="k-num">07</span><span data-i18n="plan_kicker">Plan operativo</span></div>
+        <h2 class="display h2" id="planTitle" data-anim data-i18n="plan_title">El plan operativo, en tres bloques.</h2>
+      </div>
+      <div class="plan-blocks" data-anim>
+        <article class="pb pb-econ" aria-labelledby="pbAt">
+          <header class="pb-head"><span class="pb-letter">A</span><h3 class="pb-title" id="pbAt" data-i18n="pbA_t">La economía</h3></header>
+          <p class="pb-sub" data-i18n="pbA_per">Por contenedor</p>
+          <dl class="pb-rows">
+            <div><dt data-i18n="pbA_landed">Costo landed</dt><dd class="fig">$23,269</dd></div>
+            <div><dt data-i18n="pbA_sale">Valor de venta</dt><dd class="fig">$36,232</dd></div>
+            <div class="is-total"><dt data-i18n="pbA_gross">Bruto por contenedor</dt><dd class="fig">$12,963</dd></div>
+          </dl>
+          <p class="pb-sub" data-i18n="pbA_pace">Ritmo</p>
+          <dl class="pb-rows">
+            <div><dt data-i18n="pbA_y1">Año 1 · ciudad 1</dt><dd><span class="fig">29</span> <span class="pb-unit" data-i18n="pbA_containers">contenedores</span></dd></div>
+            <div><dt data-i18n="pbA_steady">En régimen, por ciudad</dt><dd><span class="fig">36</span> <span class="pb-unit" data-i18n="pbA_peryear">al año</span></dd></div>
+            <div><dt data-i18n="pbA_c2">Ciudad 2</dt><dd class="pb-unit" data-i18n="pbA_from2">entra en el año 2</dd></div>
+            <div><dt data-i18n="pbA_c3">Ciudad 3</dt><dd class="pb-unit" data-i18n="pbA_from3">entra en el año 3</dd></div>
+          </dl>
+        </article>
+        <article class="pb pb-proj" aria-labelledby="pbBt">
+          <header class="pb-head"><span class="pb-letter">B</span><h3 class="pb-title" id="pbBt" data-i18n="pbB_t">La proyección</h3></header>
+          <p class="scope-line" data-i18n="scope">Proyección del modelo a 3 años / 3 ciudades</p>
+          <dl class="pb-ledger">
+            <div><dt data-i18n="pbB_y1">Año 1</dt><dd class="fig">1.01x</dd></div>
+            <div><dt data-i18n="pbB_y2">Año 2</dt><dd class="fig">1.28x</dd></div>
+            <div><dt data-i18n="pbB_dist3">Distribuciones acumuladas a 3 años</dt><dd class="fig">1.77x</dd></div>
+            <div class="is-total"><dt data-i18n="pbB_total3">Total a 3 años, incluido el valor de la participación del 15%</dt><dd class="fig fig-xl">5.49x</dd></div>
+          </dl>
+          <p class="pb-recovery" data-i18n="pbB_recovery">El capital se recupera en 12 meses mediante las distribuciones de ganancias del plan.</p>
+        </article>
+        <article class="pb pb-ctrl" aria-labelledby="pbCt">
+          <header class="pb-head"><span class="pb-letter">C</span><h3 class="pb-title" id="pbCt" data-i18n="pbC_t">El control</h3></header>
+          <ul class="pb-list">
+            <li data-i18n="pbC_1">Asamblea mensual de socios</li>
+            <li data-i18n="pbC_2">Voto ponderado por capital aportado</li>
+            <li data-i18n="pbC_3">Capital en custodia de tercero independiente</li>
+            <li data-i18n="pbC_4">Reservas de aranceles e impuestos antes de cada distribución</li>
+            <li data-i18n="pbC_5">Plazo de 36 meses, con revisiones a los 12 y a los 24</li>
+          </ul>
+        </article>
+      </div>
+      <div class="plan-foot" data-anim>
+        <button type="button" class="btn btn-primary" data-open-apply data-program="steel"><span data-i18n="cta_eval">Solicitar evaluación privada</span><span class="arw" aria-hidden="true">→</span></button>
+        <p class="plan-private" data-i18n="plan_private">El plan operativo completo, con cifras, proveedores, logística y método, es un documento privado disponible bajo confidencialidad una vez admitido como socio.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · FUNDING (flow — figures) -->
+  <section class="scene scene--flow funding" id="funding" data-scene="funding" data-bd="port" data-scrim=".8" data-grid=".08" aria-labelledby="fundTitle">
+    <div class="grid12">
+      <div class="fund-head">
+        <div class="kicker" data-anim><span class="k-line"></span><span class="k-num">08</span><span data-i18n="fund_kicker">Financiamiento</span></div>
+        <h2 class="display h2" id="fundTitle" data-anim data-i18n="fund_title">La ronda, a la vista.</h2>
+        <p class="body" data-anim data-i18n="fund_lede">El avance de cada proyecto, la participación de cada socio y las decisiones que tomamos en conjunto.</p>
+      </div>
+      <div class="fund-head-side" data-anim>
+        <span class="demo-badge" data-i18n="demo">Demostración</span>
+      </div>
+
+      <div class="fund-board">
+        <div class="fund-panel" data-anim>
+          <div class="fund-gauge" aria-hidden="true">
+            <div class="fund-gauge-cap" data-i18n="fund_goal">Meta</div>
+            <div class="fund-tick" style="bottom:25%"></div><div class="fund-tick" style="bottom:50%"></div><div class="fund-tick" style="bottom:75%"></div>
+            <div class="fund-fill" id="fundFill"></div>
+          </div>
+          <div class="fund-info">
+            <div class="fund-lab" data-i18n="fund_proj">Proyecto en recaudación</div>
+            <div class="fund-name" id="fundName">Acero · Ronda 01</div>
+            <div class="fund-pct"><span id="fundPct">4.67</span><span class="fund-pct-u">%</span></div>
+            <div class="fund-stats">
+              <div><span class="fund-lab" data-i18n="fund_goal">Meta</span><span class="fund-stat-val" id="fundGoal">$120,000</span></div>
+              <div><span class="fund-lab" data-i18n="fund_committed">Comprometido</span><span class="fund-stat-val"><span id="fundCommitted">$5,600</span><small data-i18n="fund_anon">aporte anónimo</small></span></div>
+              <div><span class="fund-lab" data-i18n="fund_remaining">Restante</span><span class="fund-stat-val" id="fundRemaining">$114,400</span></div>
+              <div><span class="fund-lab" data-i18n="fund_min">Mínimo</span><span class="fund-stat-val"><span id="fundMin">$25,000</span><small id="fundMinShare">= 20.83% de la ronda</small></span></div>
+            </div>
+            <div class="fund-deploy"><span class="fund-dot"></span><span id="fundDeployTxt" data-i18n="fund_deploy">El proyecto despliega al alcanzar la meta.</span></div>
+          </div>
+        </div>
+
+        <div class="fund-terms" data-anim>
+          <div class="fund-term"><span class="fund-lab" data-i18n="fund_dist_lab">Distribuciones</span><p data-i18n="fund_dist_txt">Utilidades libres mensuales pro-rata tras reponer el ciclo, costos y reservas.</p></div>
+          <div class="fund-term"><span class="fund-lab" data-i18n="fund_cap_lab">Capital</span>
+            <ul class="cap-list">
+              <li><strong data-i18n="cap1_t">Recuperación en 12 meses:</strong> <span data-i18n="cap1_d">vía las distribuciones mensuales de ganancias recuperas lo aportado.</span></li>
+              <li><strong data-i18n="cap2_t">Tu capital sigue trabajando:</strong> <span data-i18n="cap2_d">la base permanece en la operación y tu participación se valoriza a medida que la empresa crece.</span></li>
+              <li><strong data-i18n="cap3_t">Devolución al liquidar:</strong> <span data-i18n="cap3_d">al cierre del programa se te devuelve el capital.</span></li>
+            </ul></div>
+          <div class="fund-term"><span class="fund-lab" data-i18n="fund_term_lab">Plazo</span><p data-i18n="fund_term_txt">36 meses, con revisiones a los 12 y a los 24, y liquidación ordenada en 90–120 días.</p></div>
+        </div>
+
+        <div class="fund-card fund-calc-card" data-anim>
+          <div class="fund-card-top">
+            <span class="fund-lab" data-i18n="fund_your_part">Tu participación</span>
+            <span class="fund-badge-group">
+              <span class="demo-badge" data-i18n="demo">Demostración</span>
+              <span class="fund-badge fund-badge-raising" id="fundBadgeRaising"><span class="fund-badge-dot"></span><span data-i18n="fund_raising">En recaudación</span></span>
+              <span class="fund-badge fund-badge-done" id="fundBadgeDeployed"><span class="fund-badge-dot"></span><span data-i18n="fund_deployed">Desplegado</span></span>
+            </span>
+          </div>
+          <div class="fund-calc-block fund-calc-block-1" style="margin-top:14px;padding-top:0;border-top:0;">
+            <p class="scope-line" data-i18n="scope">Proyección del modelo a 3 años / 3 ciudades</p>
+            <div class="fund-calc-block-title" data-i18n="calc_block1_title">Lo que aportas y lo que posees</div>
+            <div class="fund-amount-row">
+              <div class="fund-calc-input" role="group" aria-label="Monto del aporte">
+                <button type="button" class="fund-calc-step" id="fundCalcMinus" data-i18n-aria="calc_decrease" aria-label="Reducir aporte">−</button>
+                <span class="fund-calc-amt-wrap"><span class="fund-calc-cur mono">$</span><input type="text" inputmode="numeric" class="fund-big mono fund-calc-amt" id="fundAmount" value="25,000" data-i18n-aria="calc_amount_aria" aria-label="Tu aporte, en USD"></span>
+                <button type="button" class="fund-calc-step" id="fundCalcPlus" data-i18n-aria="calc_increase" aria-label="Aumentar aporte">+</button>
+              </div>
+              <button type="button" class="btn btn-ghost fund-participate-btn" data-open-apply data-program="steel"><span data-i18n="cta_eval">Solicitar evaluación privada</span></button>
+            </div>
+            <div class="fund-sub"><span data-i18n="fund_your_contrib">Tu aporte comprometido</span> <span class="fund-calc-range mono" id="fundCalcRange"></span></div>
+            <div class="fund-share"><span class="fund-lab" data-i18n="calc_stake_lab">Tu participación en la empresa</span><span class="fund-share-val mono" id="fundCalcEquityPct">—</span></div>
+          </div>
+          <div class="fund-calc-block fund-calc-block-2" aria-live="polite">
+            <div class="fund-calc-block-title" data-i18n="calc_block2_title">Lo que regresa en efectivo, y cuándo</div>
+            <div class="fund-calc-out">
+              <div class="fund-calc-out-line fund-calc-out-net">
+                <span class="fund-lab" data-i18n="calc_dist_lab">Tu distribución en efectivo</span>
+                <span class="fund-calc-values"><span class="fund-calc-years mono" id="fundCalcDistYears"></span><span class="mono fund-calc-total" id="fundCalcDistTotal">—</span></span>
+              </div>
+              <div class="fund-calc-out-line">
+                <span class="fund-lab" data-i18n="calc_annual_pct_lab">Rendimiento en efectivo anual sobre tu aporte</span>
+                <span class="fund-calc-values"><span class="fund-calc-years mono" id="fundCalcAnnualPct"></span></span>
+              </div>
+              <p class="fund-calc-frame mono" data-i18n="calc_frame_y1">Año 1 — Recuperación de capital: recuperas casi todo tu capital.</p>
+              <p class="fund-calc-frame mono" data-i18n="calc_frame_y23">Años 2–3 — Ganancia sobre capital que ya volvió a ti.</p>
+              <div class="fund-calc-out-line fund-calc-out-net">
+                <span class="fund-lab" data-i18n="calc_return_lab">Retorno acumulado</span>
+                <span class="fund-calc-values"><span class="fund-calc-years mono" id="fundCalcReturn"></span></span>
+              </div>
+            </div>
+          </div>
+          <div class="fund-calc-block fund-calc-block-3" aria-live="polite">
+            <div class="fund-calc-block-title" data-i18n="calc_block3_title">Lo que conservas al final, además del efectivo</div>
+            <div class="fund-calc-out-line">
+              <span class="fund-lab" data-i18n="calc_equity_value_lab">Valor de tu 15% — Año 3</span>
+              <span class="mono fund-calc-total" id="fundCalcEquityValue">—</span>
+            </div>
+            <p class="fund-calc-frame mono" data-i18n="calc_equity_caveat">Valor estimado, no efectivo en mano.</p>
+            <p class="fund-calc-frame mono" data-i18n="calc_equity_note">Sujeto a que el proyecto escale a tres ciudades.</p>
+          </div>
+          <div class="fund-calc-context" aria-live="polite">
+            <div class="fund-calc-context-lab mono" data-i18n="calc_context_lab">Cifras del proyecto (contexto)</div>
+            <div class="fund-calc-out-line"><span class="fund-lab" data-i18n="calc_gross_lab">Ventas brutas</span><span class="fund-calc-values"><span class="fund-calc-years mono" id="fundCalcGross"></span></span></div>
+            <div class="fund-calc-out-line"><span class="fund-lab" data-i18n="calc_net_lab">Utilidad neta</span><span class="fund-calc-values"><span class="fund-calc-years mono" id="fundCalcNetCtx"></span></span></div>
+          </div>
+          <div class="fund-calc-note mono">
+            <span data-i18n="calc_note_short">Participación activa · proyecciones estudiadas, no garantizadas — evalúa con tu propio equipo.</span>
+            <button type="button" class="fund-calc-note-btn" id="fundCalcNoteBtn" data-i18n="calc_note_more" aria-expanded="false">Ver detalle</button>
+          </div>
+          <p class="fund-calc-note-full mono" id="fundCalcNoteFull" data-i18n="calc_note_full" hidden></p>
+        </div>
+
+        <div class="fund-card fund-trust" data-anim>
+          <div class="fund-trust-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <span class="fund-lab" data-i18n="fund_trust_lab">Custodia</span>
+          <h3 data-i18n="fund_trust_title">Cuenta de propósito restringido</h3>
+          <p data-i18n="fund_trust_text">Cuenta de propósito restringido bajo escrow/custodia independiente.</p>
+          <ul class="fund-cands">
+            <li><span>EverBank</span><span class="mono" data-i18n="fund_cand">Candidato en evaluación</span></li>
+            <li><span>Fidelity National Title of East Florida</span><span class="mono" data-i18n="fund_cand">Candidato en evaluación</span></li>
+            <li><span>B&amp;M Law Group</span><span class="mono" data-i18n="fund_cand">Candidato en evaluación</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · FAQ (flow) -->
+  <section class="scene scene--flow faq" id="faq" data-scene="faq" data-bd="port" data-scrim=".8" data-grid=".05" aria-labelledby="faqTitle">
+    <div class="grid12">
+      <div class="faq-head">
+        <div class="kicker" data-anim><span class="k-line"></span><span class="k-num">09</span><span data-i18n="faq_kicker">Preguntas frecuentes</span></div>
+        <h2 class="display h2" id="faqTitle" data-anim data-i18n="faq_title">Cómo funciona, en claro.</h2>
+      </div>
+      <div class="faq-list" id="faqList" data-anim>
+        <details class="faq-item"><summary><span class="n">01</span><span data-i18n="fq1">¿Qué significa ser socio?</span><span class="faq-ic" aria-hidden="true"></span></summary><p data-i18n="fa1">Te conviertes en miembro de una LLC independiente creada para una operación de comercio específica. Tienes una participación real, asumes responsabilidades reales y participas directamente en su ejecución. La membresía es privada y por contrato. No es comprar acciones ni un producto financiero ofrecido al público.</p></details>
+        <details class="faq-item"><summary><span class="n">02</span><span data-i18n="fq2">¿Cómo hago seguimiento de la operación?</span><span class="faq-ic" aria-hidden="true"></span></summary><p data-i18n="fa2">A través de nuestra plataforma de trazabilidad. Tienes tracking de la naviera en tiempo real, cámaras y localización en nuestro centro de procesamiento y en los vehículos de distribución, y una plataforma contable con sistema POS que muestra cifras en tiempo real. Como socio, sabes siempre dónde está la mercancía y cómo se está liquidando.</p></details>
+        <details class="faq-item"><summary><span class="n">03</span><span data-i18n="fq3">¿Cómo se distribuyen los resultados?</span><span class="faq-ic" aria-hidden="true"></span></summary><p data-i18n="fa3">Las distribuciones son utilidades libres mensuales, pro-rata, tras reponer el ciclo, costos y reservas. Con ellas recuperas lo aportado en 12 meses; la base de capital permanece en la operación y se te devuelve al liquidar.</p></details>
+        <details class="faq-item"><summary><span class="n">04</span><span data-i18n="fq4">¿Cómo es la salida?</span><span class="faq-ic" aria-hidden="true"></span></summary><p data-i18n="fa4">Es una salida ordenada: la participación se ofrece primero a los socios, después a la compañía y luego a un comprador aprobado, con valoración objetiva y pago escalonado.</p></details>
+        <details class="faq-item"><summary><span class="n">05</span><span data-i18n="fq5">¿Cuál es la estructura legal?</span><span class="faq-ic" aria-hidden="true"></span></summary><p data-i18n="fa5">Cada operación es una LLC independiente con un grupo definido y privado de socios que ingresan por acuerdo escrito. El capital se mantiene en una cuenta de propósito restringido bajo escrow/custodia independiente; los candidatos a custodio están en evaluación. Recomendamos asesoría legal y financiera independiente.</p></details>
+        <details class="faq-item"><summary><span class="n">06</span><span data-i18n="fq6">¿Cuánto necesito para participar?</span><span class="faq-ic" aria-hidden="true"></span></summary><p data-i18n="fa6">El aporte mínimo es de $25,000.</p></details>
+        <details class="faq-item"><summary><span class="n">07</span><span data-i18n="fq7">¿Qué pasa tras la evaluación?</span><span class="faq-ic" aria-hidden="true"></span></summary><p data-i18n="fa7">Sigue una conversación inicial por WhatsApp, después una llamada con confidencialidad previa y, si avanzamos, el acuerdo escrito y la custodia.</p></details>
+        <details class="faq-item"><summary><span class="n">08</span><span data-i18n="fq8">¿Presston garantiza rendimientos?</span><span class="faq-ic" aria-hidden="true"></span></summary><p data-i18n="fa8">No. Los resultados provienen de operaciones reales de comercio y pueden variar; no garantizamos rendimientos. Lo que sí hacemos es estudiar a fondo cada operación y gestionar el riesgo de forma activa, para que nuestros socios participen con claridad y confianza.</p></details>
+        <details class="faq-item"><summary><span class="n">09</span><span data-i18n="fq9">¿Qué es la Referencia?</span><span class="faq-ic" aria-hidden="true"></span></summary><p data-i18n="fa9">Es la persona que te presentó. La participación es por invitación y relación previa, por eso te la pedimos en el formulario.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · CONTACT -->
+  <section class="scene scene--stage contact" id="contact" data-scene="contact" data-bd="port" data-scrim=".3" data-grid="0" data-cam="1.16 1.04 -2 0 1 0" style="--beats:1" aria-labelledby="contactTitle">
+    <div class="scene-frame">
+      <div class="scene-content">
+        <div class="grid12">
+          <div class="contact-copy">
+            <div class="kicker" data-anim><span class="k-line"></span><span class="k-num">10</span><span data-i18n="contact_kicker">Contacto</span></div>
+            <h2 class="sr-only" id="contactTitle" data-i18n="cta_eval">Solicitar evaluación privada</h2>
+            <button type="button" class="contact-cta" data-anim data-open-apply data-program="steel">
+              <span class="display" data-i18n="cta_eval">Solicitar evaluación privada</span><span class="arw" aria-hidden="true">→</span>
+            </button>
+            <div class="contact-lines" data-anim>
+              <p data-i18n="contact_l1">Contacto comercial: por completar</p>
+              <p data-i18n="contact_l2">WhatsApp comercial: por completar</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="grid12">
+    <div class="foot-brand">
+      <div class="foot-brand-row">
+        <svg width="26" height="22" viewBox="0 0 30 26" fill="none" aria-hidden="true"><rect x="1" y="17" width="12" height="8" rx="1" fill="#C9A96A"/><rect x="14.5" y="17" width="14.5" height="8" rx="1" fill="#9AA3AD"/><rect x="6" y="8" width="14.5" height="8" rx="1" fill="#E8EAED"/><rect x="21.5" y="8" width="7.5" height="8" rx="1" fill="#9AA3AD"/><rect x="13" y="0" width="10" height="7" rx="1" fill="#9AA3AD"/></svg>
+        <span>Presston</span> <span class="b2">Strategic Partners</span>
+      </div>
+      <div class="tag" data-i18n="brand_tag">Capital · Comercio · Estrategia</div>
+    </div>
+    <p class="foot-pie" data-i18n="foot_pie">Participación privada; no es una oferta pública. Se recomienda asesoría legal y financiera independiente.</p>
+    <p class="disclaimer"><strong data-i18n="disc_lead">Importante.</strong> <span data-i18n="disclaimer">Presston Strategic Partners no comercializa valores, no ofrece inversiones al público ni garantiza rendimientos financieros. La participación es privada y está limitada a socios identificados admitidos mediante acuerdo escrito; no está abierta al público general ni constituye oferta o solicitud de inversión. Cada operación es una LLC independiente; el capital de los socios se mantendrá en una cuenta de propósito restringido bajo escrow/custodia independiente, hoy con candidatos en evaluación. La información aquí contenida es de carácter general y está sujeta a revisión, elegibilidad y a la ley aplicable.</span></p>
+    <div class="foot-legal"><span>© 2026 Presston Strategic Partners LLC</span><span data-i18n="foot_note">La membresía es privada y por acuerdo escrito.</span></div>
+  </div>
+</footer>
+
+<!-- REEMPLAZAR WHATSAPP_NUMBER: número internacional sin + ni espacios -->
+<a class="wa-float wa-link" id="waFloat" data-wa-base="https://wa.me/WHATSAPP_NUMBER" href="https://wa.me/WHATSAPP_NUMBER" target="_blank" rel="noopener" aria-label="Habla con nosotros">
+  <span class="wa-ic" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16.03 3C9.4 3 4 8.36 4 15c0 2.23.62 4.31 1.7 6.1L4 29l8.1-1.66A11.9 11.9 0 0 0 16.03 27C22.66 27 28 21.64 28 15S22.66 3 16.03 3Zm6.9 17.06c-.3.83-1.5 1.53-2.42 1.72-.63.13-1.45.24-4.22-.9-3.54-1.47-5.83-5.06-6-5.3-.18-.24-1.44-1.92-1.44-3.66 0-1.74.9-2.6 1.24-2.95.3-.32.66-.4.9-.4.23 0 .46 0 .66.01.22.01.5-.08.78.6.3.7.99 2.44 1.08 2.62.09.18.15.4.03.63-.12.24-.18.39-.35.6-.18.2-.37.46-.53.62-.18.18-.36.37-.16.72.2.36.9 1.5 1.94 2.44 1.33 1.2 2.44 1.58 2.8 1.76.36.18.57.15.78-.08.21-.24.9-1.06 1.14-1.42.24-.36.48-.3.8-.18.32.12 2.06.98 2.41 1.16.35.18.58.27.66.42.09.16.09.9-.2 1.73Z"/></svg></span>
+  <span class="wa-lbl" data-i18n="wa_label">Habla con nosotros</span>
+</a>
+
+<!-- ============ APPLICATION MODAL — prototype, submission disabled ============ -->
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <div class="modal-inner">
+      <button class="m-close" id="modalClose" aria-label="Cerrar" data-i18n-aria="close">×</button>
+      <h2 id="modalTitle" data-i18n="cta_eval">Solicitar evaluación privada</h2>
+      <p class="m-sub"><span data-i18n="modal_sub">Solicitud sobre</span> <strong id="modalProgram">…</strong>. <span data-i18n="modal_sub2">Nuestro equipo revisa cada solicitud de forma individual.</span></p>
+      <p class="proto-note" role="note" data-i18n="f_proto_note">Formulario de prototipo: el envío está deshabilitado y no se transmite ningún dato.</p>
+      <!-- REEMPLAZAR FORMSPREE_ID por el endpoint real cuando el formulario se habilite -->
+      <form id="applyForm" action="https://formspree.io/f/FORMSPREE_ID" method="POST" novalidate>
+        <fieldset disabled style="border:0;">
+          <input type="hidden" name="program" id="fProgram" value="" />
+          <div class="field"><label for="fName" data-i18n="f_name">Nombre completo</label><input type="text" id="fName" name="name" autocomplete="name" /></div>
+          <div class="field"><label for="fEmail" data-i18n="f_email">Correo electrónico</label><input type="email" id="fEmail" name="email" autocomplete="email" /></div>
+          <div class="field"><label for="fPhone" data-i18n="f_phone">Teléfono / WhatsApp</label><input type="tel" id="fPhone" name="phone" autocomplete="tel" /></div>
+          <div class="field"><label for="fLocation" data-i18n="f_location">País / Estado o ciudad</label><input type="text" id="fLocation" name="location" autocomplete="address-level2" /></div>
+          <div class="field"><label for="fRef" data-i18n="f_ref">Referencia: ¿quién te presentó?</label><input type="text" id="fRef" name="referencia" /></div>
+          <div class="field"><label for="fAmount" data-i18n="f_amount">Monto de participación (desde $25,000)</label><input type="number" id="fAmount" name="participation_amount" min="25000" step="1000" value="25000" /></div>
+          <div class="field"><label for="fMsg" data-i18n="f_msg">Mensaje (opcional)</label><textarea id="fMsg" name="message"></textarea></div>
+        </fieldset>
+        <div class="m-actions">
+          <button type="submit" class="btn btn-primary" disabled data-i18n="f_submit">Enviar (deshabilitado)</button>
+          <button type="button" class="btn btn-ghost" id="cancelBtn" data-i18n="f_cancel">Cerrar</button>
+        </div>
+        <p class="form-note" data-i18n="f_note">Esto es una solicitud de información, no una solicitud de compra, y no genera obligación alguna. La participación es privada y está sujeta a acuerdo escrito y a la ley aplicable.</p>
+        <!-- REEMPLAZAR WHATSAPP_NUMBER: número internacional sin + ni espacios -->
+        <a class="modal-wa-link wa-link" id="modalWaLink" data-wa-base="https://wa.me/WHATSAPP_NUMBER" href="https://wa.me/WHATSAPP_NUMBER" target="_blank" rel="noopener" data-i18n="modal_wa">¿Prefieres hablar? Escríbenos por WhatsApp</a>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============ EVIDENCE LIGHTBOX (preserved) ============ -->
+<div class="ev-lightbox" id="evLightbox" role="dialog" aria-modal="true" aria-labelledby="evLbCaption">
+  <div class="ev-lb-stage">
+    <div class="ev-lb-media" id="evLbMedia"></div>
+    <div class="ev-lb-cap mono" id="evLbCaption"></div>
+    <button type="button" class="ev-lb-close" id="evLbClose" aria-label="Cerrar" data-i18n-aria="close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+    <button type="button" class="ev-lb-arrow ev-lb-prev" id="evLbPrev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <button type="button" class="ev-lb-arrow ev-lb-next" id="evLbNext" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>

@@ -1,0 +1,193 @@
+/* Copia de referencia del bloque de arte de la V5 (vive al final de head.html). */
+/* ============================================================
+   VARIANTE 5 — "TURNO DE NOCHE"
+   Una sola visión a partir de tres referencias:
+   · SpaceX — disciplina: cada capítulo es una banda de video a pantalla
+     completa; en su primer tiempo solo hay kicker, titular y (si existe)
+     su CTA, abajo a la izquierda. Nada más.
+   · Terminal Industries — alma industrial: capítulos numerados que
+     avanzan con el scroll; un riel de capítulo; el expediente como hoja
+     técnica con numerales grandes.
+   · Illoca / Unseen — la cámara: cada capítulo tiene un movimiento
+     (dolly, grúa, paneo) que el scroll conduce y que se asienta con
+     inercia; el corte entre capítulos es un empuje a través de la imagen.
+   Paleta: noche de acero; el ámbar vive en las luces prácticas del
+   metraje y en las señales; el hueso es la voz.
+   Solo transform/opacity. Sin JS o con movimiento reducido no hay cámara:
+   todo se lee en flujo sobre acero.
+   ============================================================ */
+:root{ --rail-w:0px;--nav-h:76px; }
+@media (min-width:1025px){ :root{ --rail-w:0px; } }
+@media (max-width:1024px){ :root{ --nav-h:calc(60px + env(safe-area-inset-top,0px)); } }
+.grid12{ max-width:none; }
+
+/* ---------- the plates: night grade, a SpaceX floor of shadow for the type ---------- */
+.bd-layer video,.bd-layer img{ filter:saturate(.62) contrast(1.14) brightness(.9); }
+.motion .bd-layer[data-bd="port"] .bd-breathe{ animation:none; }   /* the camera owns the plate now */
+.bd-layer > .bd-move{ will-change:transform; }
+.backdrop .bd-tone{ display:none; }
+.backdrop .bd-shade{ background:
+  linear-gradient(180deg, rgba(11,14,17,.5) 0%, rgba(11,14,17,0) 20%, rgba(11,14,17,0) 46%, rgba(11,14,17,.9) 100%),
+  linear-gradient(90deg, rgba(11,14,17,.7) 0%, rgba(11,14,17,.12) 55%, rgba(11,14,17,0) 100%); }
+.backdrop .bd-scrim,.backdrop .bd-grid,.backdrop .bd-shade,.backdrop .bd-veil,.backdrop .bd-grain{ z-index:5; }
+@media (max-width:1024px){
+  .backdrop .bd-shade{ background:linear-gradient(180deg, rgba(11,14,17,.55) 0%, rgba(11,14,17,.2) 26%, rgba(11,14,17,.55) 52%, rgba(11,14,17,.94) 100%); }
+  .bd-layer[data-bd="welder"] video,.bd-layer[data-bd="welder"] img{ filter:saturate(.55) contrast(1.06) brightness(.55); }
+  .bd-layer[data-bd="origin"] video,.bd-layer[data-bd="origin"] img{ filter:saturate(.58) contrast(1.08) brightness(.72); }
+  .bd-layer[data-bd="trace"] video,.bd-layer[data-bd="trace"] img{ filter:saturate(.55) contrast(1.06) brightness(.66); }
+}
+
+/* ---------- nav: SpaceX — transparent, uppercase, tucks away on the way down ---------- */
+.nav-wrap,.nav-wrap.scrolled,.js .nav-wrap,.js .nav-wrap.scrolled{ top:0;height:var(--nav-h);padding:env(safe-area-inset-top,0px) var(--pad) 0;align-items:center;justify-content:stretch;
+  background:linear-gradient(180deg, rgba(11,14,17,.6), rgba(11,14,17,0));transition:transform .6s var(--ease),background-color .4s var(--ease); }
+.nav-wrap.is-tucked{ transform:translateY(-100%); }
+html:not(.motion) .nav-wrap{ background:rgba(11,14,17,.95);border-bottom:1px solid var(--hair-2); }
+.nav,.nav-wrap.scrolled .nav{ width:100%;max-width:none;padding:0;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;gap:32px; }
+.nav-wrap.scrolled .logo,.nav-wrap.scrolled .seg{ display:flex; }
+@media (min-width:1025px){
+  .nav-wrap.scrolled .nav-links{ display:flex; }
+  .nav-wrap.scrolled .nav-menu-btn{ display:none; }
+  .nav-links{ justify-content:flex-start;gap:4px;margin-left:24px; }
+  .nav-links a{ font-family:var(--f-body);font-weight:600;font-stretch:100%;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--bone);opacity:.72;transition:opacity .25s ease; }
+  html[data-lang="zh"] .nav-links a{ letter-spacing:.06em;font-size:13px; }
+  .nav-links a:hover,.nav-links a.active{ opacity:1; }
+  .nav-links a.active::after{ left:12px;right:12px;bottom:6px;height:1px; }
+}
+.nav-drop{ top:calc(var(--nav-h) + 4px); }
+
+/* ---------- chapter rail (Terminal): the route on the right edge ---------- */
+html.motion .route{ left:auto;right:calc(var(--pad) * .5);top:50%;bottom:auto;width:auto;height:min(46vh,360px);transform:translateY(-50%);
+  display:block;padding:0;background:none;transition:opacity .5s var(--ease); }
+html.motion .route-ai,html.motion .route-tel,html.motion .route-here{ display:none; }
+html.motion .route-track{ position:absolute;right:0;top:0;bottom:0;width:1px;height:auto; }
+html.motion .route-base,html.motion .route-fill{ left:0;top:0;width:1px;height:100%; }
+html.motion .route-base{ background:rgba(232,234,237,.22); }
+html.motion .route-fill{ transform-origin:50% 0;transform:scaleY(0); }
+html.motion .route-stops{ inset:0; }
+html.motion .route-stop{ left:auto;right:0;transform:translateY(-50%);gap:12px;flex-direction:row-reverse; }
+html.motion .route-stop .dot{ width:9px;height:1px;border:0;background:rgba(232,234,237,.4);transition:width .5s var(--ease),background .4s var(--ease); }
+html.motion .route-stop.is-lit .dot{ background:var(--amber); }
+html.motion .route-stop.is-here .dot{ width:22px; }
+html.motion .route-stop .lbl{ font-size:9.5px;opacity:0;transform:translateX(6px);transition:opacity .4s var(--ease),transform .5s var(--ease); }
+html.motion .route-stop.is-here .lbl{ opacity:1;transform:none;color:var(--bone); }
+html.motion .route-stop:nth-child(1){ top:0; } html.motion .route-stop:nth-child(2){ top:25%; } html.motion .route-stop:nth-child(3){ top:50%; }
+html.motion .route-stop:nth-child(4){ top:75%; } html.motion .route-stop:nth-child(5){ top:100%; }
+html.motion.in-sheet .route{ opacity:0; }
+@media (max-width:1024px){
+  html.motion .route{ right:0;left:0;top:0;height:2px;transform:none; }
+  html.motion .route-track{ left:0;right:0;width:auto;height:2px;top:0;bottom:auto; }
+  html.motion .route-base,html.motion .route-fill{ width:100%;height:2px; }
+  html.motion .route-base{ background:transparent; }
+  html.motion .route-fill{ transform-origin:0 50%;transform:scaleX(0); }
+  html.motion .route-stop{ display:none; }
+}
+html:not(.motion) .route{ display:none; }
+
+/* ============================================================
+   THE BANDS — one headline, one CTA, bottom left
+   ============================================================ */
+html.motion .is-staged .scene-content > .grid12{ padding-top:calc(var(--nav-h) + 16px);padding-bottom:clamp(40px,8vh,88px);align-content:end; }
+@media (max-width:1024px){ html.motion .is-staged .scene-content > .grid12{ padding-bottom:calc(28px + var(--safe-bottom)); } }
+.scene--stage .h2{ font-size:clamp(30px,min(3.4vw,6vh),60px);line-height:1.04;letter-spacing:-.025em; }
+.hero-copy .h1{ font-size:clamp(40px,min(5vw,8.6vh),96px);line-height:.98;letter-spacing:-.03em; }
+html[data-lang="en"] .hero-copy .h1{ max-width:12ch; }
+html[data-lang="zh"] .hero-copy .h1{ font-size:clamp(34px,min(4.2vw,7.4vh),80px);line-height:1.16; }
+.scroll-cue{ display:none!important; }
+/* the kicker as a chapter mark */
+.scene--stage .kicker .k-num{ font-family:var(--f-display);font-stretch:var(--stretch-display);font-weight:600;font-size:13px;letter-spacing:0; }
+@media (min-width:1025px){
+  /* hero: headline, then the call; the lead arrives in the second beat beneath it */
+  .hero .scene-content > .grid12{ align-content:end; }
+  /* hero: headline across, then one row — the call on the left, the lead (second beat) on the right */
+  .hero-copy{ grid-column:1 / -1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);align-items:end; }
+  .hero-copy > .hero-seal,.hero-copy > .kicker{ grid-column:1 / span 8; }
+  .hero-copy > .h1{ grid-column:1 / span 9; }
+  .hero-copy .hero-actions{ grid-column:1 / span 5;grid-row:4;margin-top:clamp(14px,2.4vh,26px);flex-direction:column;align-items:flex-start;gap:2px; }
+  .hero-copy .hero-lower{ grid-column:7 / -1;grid-row:4;margin-top:0;grid-template-columns:1fr;row-gap:14px; }
+  .hero-lower .lead,.hero-statement{ grid-column:1 / -1; }
+  .about .scene-content > .grid12{ align-content:end; }
+  .about-copy{ grid-column:1 / span 6; }
+  .about-copy .h2{ font-size:clamp(34px,min(4vw,7vh),72px);max-width:14ch; }
+  /* how: head left, the steps and the AI to the right, as the camera rises */
+  .how .scene-content > .grid12{ grid-template-rows:auto;align-content:end; }
+  .how-body{ display:contents; }
+  .how-head{ grid-column:1 / span 5;grid-row:1;align-self:end; }
+  .how .steps{ grid-column:7 / span 6;grid-row:1;align-self:end;grid-template-columns:1fr 1fr;row-gap:22px; }
+  .how .ai-block{ grid-column:7 / span 6;grid-row:2;align-self:end;margin:28px 0 0; }
+  .how.is-staged .ai-block{ grid-row:1;margin:0; }
+  .how.is-staged .steps[data-show]{ transition:none; }
+  .programs .scene-content > .grid12{ align-content:end; }
+  .pgm-head{ grid-column:1 / span 5;grid-row:1;align-self:end; }
+  .pgm-list{ grid-column:1 / span 5;grid-row:2;margin-top:18px; }
+  .pgm-stack{ grid-column:7 / span 6;grid-row:1 / span 2;align-self:end; }
+  .trace .scene-content > .grid12{ align-content:end; }
+  .trace-copy{ grid-column:1 / span 5;align-self:end; }
+  .trace-stack{ grid-column:7 / span 6;align-self:end; }
+  .contact .scene-content > .grid12{ align-content:end; }
+  .contact-cta .display{ font-size:clamp(42px,min(5.6vw,9.6vh),108px); }
+}
+/* in the how band the AI replaces the steps (same place, next beat) */
+.how.is-staged .steps,.how.is-staged .ai-block{ grid-area:1 / 7 / 2 / -1; }
+@media (max-width:1024px){ .how.is-staged .how-body{ display:grid;grid-template-columns:minmax(0,1fr); } .how.is-staged .steps,.how.is-staged .ai-block{ grid-area:1 / 1 / 2 / 2;align-self:end; } }
+.how .step .t{ color:var(--bone); }
+.how .step .n{ color:var(--amber); }
+.how .step::before{ transform:scaleX(1); }
+/* panels: night glass, hairline, an amber top edge */
+.pgm-card,.trace-panel,.ai-block{ background:rgba(11,14,17,.78);border:1px solid var(--hair);border-top-color:var(--amber-a40); }
+.ai-block{ border-left:1px solid var(--hair); }
+
+/* ---------- phones: the band keeps its discipline ---------- */
+@media (max-width:1024px){
+  .programs.is-staged .pgm-list{ display:none; }
+  /* trace: the body and its three panels take turns in one place */
+  .trace.is-staged .trace-copy,.trace.is-staged .trace-stack{ display:contents; }
+  .trace.is-staged .scene-content > .grid12 > *,.trace.is-staged .trace-copy > *,.trace.is-staged .trace-stack > *{ grid-column:1 / -1; }
+  .trace.is-staged .trace-copy .body,.trace.is-staged .trace-panel{ grid-row:4;align-self:end; }
+  .trace.is-staged .trace-copy .body{ margin-bottom:0; }
+  .trace.is-staged .trace-copy .demo-badge{ justify-self:start; }
+  .hero-copy .hero-actions{ order:3; }
+  .hero-copy .hero-lower{ order:4;margin-top:18px; }
+  .hero-copy{ display:flex;flex-direction:column; }
+}
+
+/* short phones: the same band, tighter type */
+@media (max-width:1024px) and (max-height:760px){
+  html.motion .is-staged .scene-content > .grid12{ padding-top:calc(var(--nav-h) + 6px);padding-bottom:calc(16px + var(--safe-bottom)); }
+  .hero-copy .h1{ font-size:clamp(30px,8.4vw,38px); }
+  .hero-lower .lead{ font-size:14px;line-height:1.5; }
+  .hero-actions .note{ font-size:12.5px; }
+  .trace-row .v{ font-size:16px; }
+  .trace-copy .h2{ margin-bottom:12px; }
+  .trace.is-staged .scene-content > .grid12{ row-gap:0; }
+  .trace.is-staged .trace-copy .demo-badge{ margin-bottom:12px;justify-self:start; }
+  .scene--stage .h2,.about-copy .h2{ font-size:clamp(26px,7.4vw,32px); }
+  .scene--stage .kicker{ margin-bottom:12px; }
+  .hero-seal{ margin-bottom:10px; }
+  .about-seed,.scene--stage .body,.pgm-card .pc-body{ font-size:14px;line-height:1.5; }
+  .pgm-card{ padding:16px 16px 18px; }
+  .trace-panel{ padding:14px 16px 16px; }
+  .trace-row{ padding:8px 0; }
+  .gov-rules li{ padding:8px 0;font-size:14px; }
+  .fund-gov-row{ padding:9px 0; }
+  .hero-statement{ font-size:16px; }
+}
+/* ============================================================
+   THE SHEET (Terminal) — evidence, plan, funding, FAQ
+   ============================================================ */
+.scene--flow{ background:var(--ink);padding:clamp(80px,11vh,140px) 0 clamp(72px,10vh,120px);border-top:1px solid var(--hair-2); }
+.scene--flow::before{ display:none; }
+.evidence.scene--flow{ border-top:0; }
+.evidence.scene--flow::after{ content:"";position:absolute;left:0;right:0;bottom:100%;height:40vh;pointer-events:none;background:linear-gradient(180deg, rgba(11,14,17,0), var(--ink)); }
+.scene--flow > .grid12{ position:relative; }
+/* the chapter numeral, set large like a sheet number */
+.scene--flow .kicker{ display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:16px;row-gap:14px;align-items:center; }
+.scene--flow .kicker .k-num{ grid-column:1 / -1;grid-row:1;font-family:var(--f-display);font-stretch:var(--stretch-display);font-weight:600;letter-spacing:-.04em;
+  font-size:clamp(72px,8vw,150px);line-height:.8;color:var(--mist-dim);text-shadow:none; }
+.scene--flow .kicker .k-line{ grid-row:2; }
+.scene--flow .kicker > span:last-child{ grid-row:2; }
+.scene--flow .h2{ font-size:clamp(34px,4vw,72px);line-height:1.02;letter-spacing:-.035em; }
+html[data-lang="zh"] .scene--flow .h2{ font-size:clamp(30px,3.2vw,56px);line-height:1.22;letter-spacing:.01em; }
+.scene--flow .fund-card,.scene--flow .fund-panel{ background:var(--steel); }
+.scene--flow .evidence-card{ background:var(--steel); }
+/* a caption scrim under the label, so "View documents" reads even over the white invoice */
+.evidence-ph::after{ content:"";position:absolute;left:0;right:0;bottom:0;height:42%;z-index:1;pointer-events:none;background:linear-gradient(180deg, rgba(11,14,17,0), rgba(11,14,17,.78)); }
