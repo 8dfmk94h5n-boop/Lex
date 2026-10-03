@@ -31,7 +31,7 @@ test/                    Pruebas unitarias (`npm test`, sin red)
 
 **Voz (vía principal).** Al abrir el nodo flotante, el navegador pide micrófono y llama a `POST /session`. El Worker pide a OpenAI un token efímero (`/v1/realtime/client_secrets`) con el system prompt y las herramientas, y devuelve solo ese token; la `OPENAI_API_KEY` nunca sale del Worker. El navegador conecta por WebRTC directo a OpenAI Realtime. La apertura es siempre en inglés e invita a cambiar: «Si prefieres español, dime «español»».
 
-En modo voz el panel no muestra texto (ni transcripción ni input): solo un escenario con una esfera blanca difuminada y olas que orbitan a su alrededor. Las olas son azules y pulsan con la amplitud real de la voz de la AI; se vuelven rojas mientras el visitante habla (VAD del servidor + nivel del micrófono). Tipografías: Archivo (la carga el sitio) y Fragment Mono para estados (el widget añade su `<link>` de Google Fonts si el sitio no la carga).
+En modo voz el panel no muestra texto (ni transcripción ni input): solo una esfera de metal líquido tras una lámina de vidrio esmerilado (blur de 18 px). Dentro de la esfera, una marea de color sube y se agita con la amplitud real de la voz: azul cuando habla la AI, roja mientras habla el visitante (VAD del servidor + nivel del micrófono). Tipografías: Archivo (la carga el sitio) y Fragment Mono para estados (el widget añade su `<link>` de Google Fonts si el sitio no la carga).
 
 Cuando el modelo llama una herramienta, el widget la reenvía al Worker:
 - `buscar_corpus` → `POST /search`. Temas privados (producto, proveedor, precios, márgenes, plan privado) no devuelven contenido: el bot recibe la orden de desviar a la evaluación privada. Sin resultados → no inventa.
