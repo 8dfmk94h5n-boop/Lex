@@ -479,17 +479,20 @@ html[data-lang="zh"] .pgm-card .pc-hook{ font-style:normal;font-weight:500; }
   background:linear-gradient(160deg,#1C232B 0%,#12171C 55%,#0D1014 100%);
   box-shadow:inset 0 0 0 1px rgba(232,234,237,.13), inset 0 1px 0 rgba(232,234,237,.08), 0 6px 18px rgba(0,0,0,.45); }
 .hero-seal .seal svg{ position:absolute;inset:0;width:100%;height:100%;z-index:1; }
+.hero-seal .seal::after{ content:"";position:absolute;z-index:2;left:-60%;top:-60%;width:220%;height:220%;pointer-events:none;
+  background:linear-gradient(135deg, transparent 42%, rgba(170,182,196,.10) 47%, rgba(214,222,230,.34) 50%, rgba(150,162,176,.10) 53%, transparent 58%);
+  mix-blend-mode:screen;opacity:0;transform:translate(-32%,32%);
+  animation:sealSheen 7s cubic-bezier(.45,.05,.35,1) infinite; }
+@keyframes sealSheen{
+  0%{ transform:translate(-32%,32%);opacity:0; }
+  6%{ opacity:.5; }
+  38%{ opacity:.5; }
+  46%{ transform:translate(32%,-32%);opacity:0; }
+  100%{ transform:translate(32%,-32%);opacity:0; }
+}
+@media (prefers-reduced-motion:reduce){ .hero-seal .seal::after{ animation:none;opacity:0; } }
 .hero-seal-lab{ font-family:var(--f-mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--mist);text-shadow:0 1px 10px rgba(5,7,9,.6); }
 html[data-lang="zh"] .hero-seal-lab{ letter-spacing:.12em; }
-/* Sello AI · "Neón · solo bordes" (opción 5 de /sellos/): anillo cónico que gira y halo que respira */
-.hero-seal .seal-ring{position:relative;display:inline-flex;padding:3px;border-radius:24%;overflow:hidden;isolation:isolate;animation:ringHalo 3.5s ease-in-out infinite}
-.hero-seal .seal-ring::before{content:"";position:absolute;inset:-60%;z-index:0;background:conic-gradient(#00e1ff,#7a5cff,#ff2dc8,#00e1ff);animation:ringSpin 3.5s linear infinite}
-@keyframes ringSpin{to{transform:rotate(1turn)}}
-@keyframes ringHalo{0%,100%{box-shadow:0 0 14px rgba(0,225,255,.55),0 0 44px rgba(0,225,255,.28),0 8px 22px rgba(0,0,0,.5)}50%{box-shadow:0 0 16px rgba(255,45,200,.6),0 0 48px rgba(255,45,200,.32),0 8px 22px rgba(0,0,0,.5)}}
-.hero-seal .seal{position:relative;z-index:1;width:40px;height:40px;border-radius:21%;background:linear-gradient(160deg,#202932 0%,#141a20 55%,#0D1014 100%);box-shadow:inset 0 2px 5px rgba(0,0,0,.55), inset 0 -8px 16px rgba(0,225,255,.16), inset 0 1px 0 rgba(255,255,255,.07)}
-.hero-seal .seal svg text{filter:drop-shadow(0 0 6px rgba(0,229,255,.9))}
-.hero-seal-lab{font-size:10.5px;color:#E8EAED;text-shadow:0 0 14px rgba(0,229,255,.6)}
-@media (prefers-reduced-motion:reduce){.hero-seal .seal-ring,.hero-seal .seal-ring::before{animation:none}}
 
 /* ---------- PLAN HOOK (flow) — aggregated, approved figures only ---------- */
 .plan-head{ grid-column:1 / span 8; }
@@ -1419,7 +1422,7 @@ html[data-lang="zh"] .scene--flow .h2{ font-size:clamp(30px,3.2vw,56px);line-hei
         <div class="grid12">
           <div class="hero-copy">
             <!-- Sello AI (propuesta 01 · Monograma, sello-ai/propuestas.html) -->
-            <div class="hero-seal" data-anim><span class="seal-ring"><span class="seal" aria-hidden="true"><svg viewBox="0 0 100 100" focusable="false"><text x="50" y="62" text-anchor="middle" font-family="Archivo" font-stretch="125%" font-weight="600" font-size="34" letter-spacing="-1" fill="#E8EAED">AI</text><rect x="30" y="72" width="40" height="1.6" fill="#C9A96A"/></svg></span></span><span class="hero-seal-lab" data-i18n="ai_seal">GOBERNADO POR AI</span></div>
+            <div class="hero-seal" data-anim><span class="seal" aria-hidden="true"><svg viewBox="0 0 100 100" focusable="false"><text x="50" y="62" text-anchor="middle" font-family="Archivo" font-stretch="125%" font-weight="600" font-size="34" letter-spacing="-1" fill="#E8EAED">AI</text><rect x="30" y="72" width="40" height="1.6" fill="#C9A96A"/></svg></span><span class="hero-seal-lab" data-i18n="ai_seal">GOBERNADO POR AI</span></div>
             <div class="kicker" data-anim><span class="k-line"></span><span data-i18n="hero_kicker">Norteamérica · Sectores estratégicos</span></div>
             <h1 class="display h1" id="heroTitle" data-anim data-i18n="hero_title">Construimos el comercio que construye una nación.</h1>
             <div class="hero-lower" data-show="1">
