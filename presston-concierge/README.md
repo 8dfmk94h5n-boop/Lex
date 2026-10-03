@@ -21,7 +21,7 @@ worker/
   src/hubspot.js         Contacto + negocio en pipeline "Concierge" (`default`) + nota con transcripción
   src/transcript.js      Formato de la transcripción; email (Resend) y WhatsApp (preparado)
   src/corpus.generated.js  Generado por `npm run corpus` — no editar
-widget/concierge.js      Nodo flotante + panel, diseño V5 "Turno de noche" (Shadow DOM: no toca estilos ni copy del sitio)
+widget/concierge.js      Lanzador «Esfera firmada» + panel, diseño V5 "Turno de noche" (Shadow DOM: no toca estilos ni copy del sitio)
 widget/demo.html         Página de prueba local
 scripts/acceptance.mjs   Pruebas de aceptación en vivo (requiere secretos)
 test/                    Pruebas unitarias (`npm test`, sin red)
@@ -29,7 +29,7 @@ test/                    Pruebas unitarias (`npm test`, sin red)
 
 ## Cómo funciona
 
-**Voz (vía principal).** Al abrir el nodo flotante, el navegador pide micrófono y llama a `POST /session`. El Worker pide a OpenAI un token efímero (`/v1/realtime/client_secrets`) con el system prompt y las herramientas, y devuelve solo ese token; la `OPENAI_API_KEY` nunca sale del Worker. El navegador conecta por WebRTC directo a OpenAI Realtime. La apertura es siempre en inglés e invita a cambiar: «Si prefieres español, dime «español»».
+**Voz (vía principal).** Al tocar el lanzador («Habla con Presston»), el navegador pide micrófono y llama a `POST /session`. El Worker pide a OpenAI un token efímero (`/v1/realtime/client_secrets`) con el system prompt y las herramientas, y devuelve solo ese token; la `OPENAI_API_KEY` nunca sale del Worker. El navegador conecta por WebRTC directo a OpenAI Realtime. La apertura es siempre en inglés e invita a cambiar: «Si prefieres español, dime «español»».
 
 En modo voz el panel no muestra texto (ni transcripción ni input): solo una esfera de metal líquido tras una lámina de vidrio esmerilado (blur de 18 px). Dentro de la esfera, una marea de color sube y se agita con la amplitud real de la voz: azul cuando habla la AI, roja mientras habla el visitante (VAD del servidor + nivel del micrófono). Tipografías: Archivo (la carga el sitio) y Fragment Mono para estados (el widget añade su `<link>` de Google Fonts si el sitio no la carga).
 

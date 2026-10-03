@@ -23,6 +23,7 @@
       close: 'Cerrar',
       title: 'Presston — Concierge AI',
       seal: 'AI Governed',
+      launch: 'Habla con Presston',
       connecting: 'Conectando',
       listening: 'Escuchando',
       speaking: 'Hablando',
@@ -47,6 +48,7 @@
       close: 'Close',
       title: 'Presston — Concierge AI',
       seal: 'AI Governed',
+      launch: 'Talk to Presston',
       connecting: 'Connecting',
       listening: 'Listening',
       speaking: 'Speaking',
@@ -121,7 +123,10 @@
     '  <footer><div class="ctl"><button class="mode" type="button"></button><button class="mute" type="button"></button>' +
     '    <button class="lang" type="button" aria-label="Idioma / Language"></button></div><span class="disc"></span></footer>' +
     '</section>' +
-    '<button class="orb" type="button" aria-expanded="false"><span class="halo"></span><span class="core"></span></button>';
+    '<button class="orb" type="button" aria-expanded="false">' +
+    '<span class="cap" aria-hidden="true"><span class="c1"></span><span class="c2"></span></span>' +
+    '<span class="seal-orb" aria-hidden="true"><span class="ring"></span><span class="mini"></span><span class="live"></span><span class="ox"></span></span>' +
+    '</button>';
   var $ = function (s) { return root.querySelector(s); };
   var orb = $('.orb'), panel = $('.panel'), log = $('.log'), statusEl = $('.status');
   var form = $('.ask'), input = $('.ask input');
@@ -137,6 +142,8 @@
   function applyLang() {
     panel.setAttribute('data-mode', state.mode || '');
     orb.setAttribute('aria-label', state.open ? t('close') : t('open'));
+    $('.orb .c1').textContent = t('seal');
+    $('.orb .c2').textContent = t('launch');
     $('#pc-title').textContent = t('title');
     $('.seal').textContent = t('seal');
     $('.x').setAttribute('aria-label', t('close'));
@@ -578,22 +585,42 @@
       'button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;padding:0}',
       'button:focus-visible,input:focus-visible{outline:1px solid var(--brass);outline-offset:3px}',
 
-      // Nodo flotante: anillo fino de latón + núcleo pequeño
-      '.orb{position:relative;display:block;margin-left:auto;width:52px;height:52px;border-radius:50%;',
-      '  border:1px solid var(--brass);background:rgba(11,14,17,.82);transition:border-color .3s,background .3s}',
-      '.orb:hover{background:rgba(13,16,20,.95)}',
-      '.core{position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:var(--brass);',
-      '  transform:scale(calc(1 + 1.6*var(--lvl)));transition:transform .06s linear}',
-      '.halo{position:absolute;inset:-1px;border-radius:50%;border:1px solid var(--brass);opacity:0;',
-      '  transform:scale(calc(1 + .4*var(--lvl)));transition:transform .06s linear,opacity .2s}',
-      ':host(.is-speaking) .halo,:host(.is-hearing) .halo{opacity:calc(.15 + .6*var(--lvl))}',
-      ':host(:not(.is-open)) .halo{animation:ping 3.2s cubic-bezier(.2,.6,.3,1) infinite}',
-      ':host(.is-thinking) .core{animation:blink 1.2s ease-in-out infinite}',
-      '@keyframes ping{0%{opacity:.5;transform:scale(1)}70%,100%{opacity:0;transform:scale(1.45)}}',
+      // Lanzador "Esfera firmada": firma AI GOVERNED + Habla con Presston junto a la esfera de metal líquido en miniatura
+      '.orb{display:flex;align-items:center;gap:14px;margin-left:auto;text-align:right;-webkit-tap-highlight-color:transparent}',
+      '.orb:focus-visible{outline:none}',
+      '.orb:focus-visible .ring{outline:1px solid var(--brass);outline-offset:4px}',
+      '.cap{display:grid;justify-items:end;gap:5px;transition:opacity .25s,transform .25s}',
+      '.c1{font:400 9px/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--brass);display:inline-flex;align-items:center;gap:8px}',
+      '.c1::after{content:"";width:14px;height:1px;background:var(--brass)}',
+      '.c2{font:600 11px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--dim);white-space:nowrap;transition:color .25s}',
+      '.seal-orb{position:relative;flex:none;width:64px;height:64px}',
+      '.ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(201,169,106,.5);background:rgba(11,14,17,.6);transition:border-color .25s,transform .35s,background .25s}',
+      '.mini{position:absolute;inset:5px;border-radius:50%;overflow:hidden;isolation:isolate;transition:transform .35s;',
+      '  background:radial-gradient(circle at 37% 30%,#2a3139 0%,#07090b 72%)}',
+      '.mini::before{content:"";position:absolute;left:-10%;right:-10%;bottom:-10%;height:52%;border-radius:46% 54% 0 0/18% 22% 0 0;',
+      '  background:linear-gradient(to top,rgba(90,146,255,.25),rgba(90,146,255,.85));filter:blur(4px);animation:tide 4.8s ease-in-out infinite}',
+      '.mini::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(232,234,237,.16);',
+      '  background:radial-gradient(circle at 40% 35%,rgba(0,0,0,0) 40%,rgba(0,0,0,.75) 100%),linear-gradient(180deg,rgba(232,234,237,.10),rgba(232,234,237,0) 40%)}',
+      '@keyframes tide{0%,100%{height:48%;transform:rotate(-3deg)}50%{height:56%;transform:rotate(3deg)}}',
+      '.live{position:absolute;top:4px;right:4px;width:7px;height:7px;border-radius:50%;background:var(--brass);box-shadow:0 0 0 3px var(--bg);transition:opacity .25s}',
+      '.ox{position:absolute;inset:0;display:none;color:var(--dim)}',
+      '.ox::before,.ox::after{content:"";position:absolute;left:25px;top:31.5px;width:14px;height:1px;background:currentColor;transform:rotate(45deg)}',
+      '.ox::after{transform:rotate(-45deg)}',
+      // hover
+      '.orb:hover .c2,.orb:focus-visible .c2{color:var(--ink)}',
+      '.orb:hover .ring,.orb:focus-visible .ring{border-color:var(--brass);transform:scale(1.06)}',
+      '.orb:hover .mini,.orb:focus-visible .mini{transform:scale(1.04)}',
+      // abierto: la firma se retira y la esfera se vuelve cerrar
+      ':host(.is-open) .cap,:host(.is-open) .live{opacity:0;transform:translateX(8px);pointer-events:none}',
+      ':host(.is-open) .mini{transform:scale(0)}',
+      ':host(.is-open) .ox{display:block}',
+      ':host(.is-open) .ring{border-color:#333D48;background:rgba(11,14,17,.94)}',
+      ':host(.is-open) .orb:hover .ring,:host(.is-open) .orb:focus-visible .ring{border-color:var(--brass);transform:none}',
+      ':host(.is-open) .orb:hover .ox,:host(.is-open) .orb:focus-visible .ox{color:var(--ink)}',
       '@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}',
 
       // Panel
-      '.panel{position:absolute;right:0;bottom:68px;width:min(368px,calc(100vw - 32px));max-height:min(580px,calc(100vh - 110px));display:flex;flex-direction:column;',
+      '.panel{position:absolute;right:0;bottom:80px;width:min(368px,calc(100vw - 32px));max-height:min(580px,calc(100vh - 122px));display:flex;flex-direction:column;',
       '  background:rgba(11,14,17,.97);border:1px solid var(--line);border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.6);overflow:hidden}',
       '.panel[hidden]{display:none}',
       'header{padding:16px 18px 12px;border-bottom:1px solid var(--line)}',
@@ -642,8 +669,8 @@
       '.disc{font:400 9px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#5E6670}',
 
       '@media (max-width:480px){:host{right:16px;bottom:max(16px,env(safe-area-inset-bottom))}',
-      '  .panel{position:fixed;left:12px;right:12px;bottom:84px;width:auto;max-height:calc(100dvh - 104px)}.stage{height:300px}}',
-      '@media (prefers-reduced-motion:reduce){.halo,.core,.status::before{animation:none!important}}',
+      '  .panel{position:fixed;left:12px;right:12px;bottom:92px;width:auto;max-height:calc(100dvh - 112px)}.stage{height:300px}}',
+      '@media (prefers-reduced-motion:reduce){.mini::before,.status::before{animation:none!important}}',
     ].join('\n');
   }
 })();
