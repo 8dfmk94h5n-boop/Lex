@@ -1,0 +1,31 @@
+name = "concierge"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+# Worker nuevo e independiente: no toca el Worker del sitio.
+# Secretos (NUNCA aquí ni en el frontend):
+#   npx wrangler secret put OPENAI_API_KEY
+#   npx wrangler secret put HUBSPOT_TOKEN
+#   (cuando se activen) RESEND_API_KEY, WHATSAPP_TOKEN
+
+[vars]
+# Monto comprometido a la fecha de la Ronda Acero (USD). Actualizar y volver a desplegar,
+# o sobrescribir en el dashboard de Cloudflare. Vacío → el bot lo remite a la evaluación privada.
+ROUND_COMMITTED = ""
+ROUND_TARGET = "120000"
+# Orígenes que pueden usar el widget (separados por coma). Completar con el dominio del sitio.
+ALLOWED_ORIGINS = "http://localhost:8787,http://localhost:8080"
+REALTIME_MODEL = "gpt-realtime"
+REALTIME_VOICE = "cedar"
+TRANSCRIBE_MODEL = "gpt-4o-mini-transcribe"
+TEXT_MODEL = "gpt-5-mini"
+# Email (inactivo hasta acordar la credencial): EMAIL_FROM = "Presston <concierge@dominio>"
+# WhatsApp (preparado, inactivo): WHATSAPP_PHONE_NUMBER_ID = "", WHATSAPP_TEMPLATE = ""
+
+# Límite por IP (recomendado en producción). Descomentar:
+# [[ratelimits]]
+# name = "RATE_LIMITER"
+# namespace_id = "1001"
+#   [ratelimits.simple]
+#   limit = 30
+#   period = 60

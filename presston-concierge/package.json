@@ -1,0 +1,14 @@
+{
+  "name": "presston-concierge",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Presston — Concierge AI (Fase 1): widget de voz + Cloudflare Worker. Sin dependencias.",
+  "type": "module",
+  "scripts": {
+    "corpus": "node scripts/build-corpus.mjs",
+    "test": "node --test test/*.test.mjs",
+    "dev": "cd worker && npx wrangler dev",
+    "deploy": "npm run corpus && cd worker && npx wrangler deploy",
+    "acceptance": "node scripts/acceptance.mjs"
+  }
+}
