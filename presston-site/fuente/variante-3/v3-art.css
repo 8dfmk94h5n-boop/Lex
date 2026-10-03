@@ -1,0 +1,217 @@
+/* Copia de referencia del bloque de arte de la V3 (vive al final de head.html). */
+/* ============================================================
+   VARIANTE 3 — "EXPEDIENTE"
+   Two materials, one palette:
+   · ACERO — the cinema. A letterbox frame holds the film; the frame is
+     the interface (nav in the upper bar, the container's route and the
+     chapter slate in the lower one). Image graded steel with amber in
+     the highlights. Environments change with a film advance (the next
+     plate rises into the gate), never a fade.
+   · HUESO — the dossier. Evidence, plan, funding and FAQ are printed on
+     bone: steel ink, amber deepened to brass so it reads as text. The
+     paper rises over the cinema, the cinema recedes beneath it; at the
+     end the paper lifts and the port is there again for the close.
+   Only transform/opacity move (the headline mask uses clip-path on one
+   element at a time). Without JS or with reduced motion there is no
+   frame: the film sits behind the steel chapters and the dossier is
+   still paper, everything reads in plain flow.
+   ============================================================ */
+:root{
+  --rail-w:0px;
+  --lb-t:76px;            /* upper bar: the nav lives in it */
+  --lb-b:62px;            /* lower bar: route + slate */
+  --paper:#E8EAED;        /* hueso */
+  --paper-2:#DEE1E5;
+  --ink-on-paper:#0B0E11; /* acero oscuro como tinta */
+  --brass:#7E5F26;        /* el mismo ámbar, graduado para leerse sobre hueso (AA) */
+}
+@media (min-width:1025px){ :root{ --rail-w:0px; } }
+@media (max-width:1024px){ :root{ --lb-t:calc(62px + env(safe-area-inset-top,0px));--lb-b:0px; } }
+
+/* ---------- grading: steel, amber in the highlights ---------- */
+.bd-layer video,.bd-layer img{ filter:saturate(.52) contrast(1.1) brightness(.92); }
+.backdrop .bd-tone{ background:linear-gradient(180deg, rgba(201,169,106,.5), rgba(201,169,106,.22) 60%, rgba(201,169,106,.1));mix-blend-mode:soft-light;opacity:.55; }
+.backdrop .bd-shade{ background:
+    linear-gradient(90deg, rgba(11,14,17,.8) 0%, rgba(11,14,17,.34) 46%, rgba(11,14,17,.12) 100%),
+    linear-gradient(180deg, rgba(11,14,17,.35) 0%, rgba(11,14,17,0) 30%, rgba(11,14,17,0) 62%, rgba(11,14,17,.7) 100%); }
+.backdrop::after{ content:"";position:absolute;inset:0;z-index:9;background:var(--ink);opacity:var(--pk,0);pointer-events:none; }
+html.motion .backdrop{ transform-origin:50% 40%; }
+
+/* ---------- the letterbox (motion only) ---------- */
+.lb{ display:none; }
+html.motion .lb{ display:block;position:fixed;inset:0;z-index:60;pointer-events:none; }
+.lb-t,.lb-b{ position:absolute;left:0;right:0;height:51vh;background:var(--ink);will-change:transform;
+  transition:transform 1.6s cubic-bezier(.76,0,.24,1),background-color .6s var(--ease); }
+.lb-t{ top:0;transform:translateY(calc(var(--lb-t) - 51vh)); }
+.lb-b{ bottom:0;transform:translateY(calc(51vh - var(--lb-b))); }
+.lb-t::after{ content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--hair-2);transition:background-color .6s var(--ease); }
+.lb-b::before{ content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--hair-2); }
+.lb.is-closed .lb-t,.lb.is-closed .lb-b{ transform:none; }
+html.paper-top .lb-t{ background:var(--paper); }
+html.paper-top .lb-t::after{ background:rgba(11,14,17,.14); }
+html.paper-low .lb-b{ transform:translateY(51vh);transition-duration:.7s; }
+
+/* ---------- nav: inside the upper bar ---------- */
+.nav-wrap,.nav-wrap.scrolled,.js .nav-wrap,.js .nav-wrap.scrolled{ top:0;height:var(--lb-t);padding:env(safe-area-inset-top,0px) var(--pad) 0;align-items:center;justify-content:stretch; }
+html:not(.motion) .nav-wrap{ background:rgba(11,14,17,.94);border-bottom:1px solid var(--hair-2); }
+.nav-wrap{ color:var(--bone); }
+.nav,.nav-wrap.scrolled .nav{ width:100%;max-width:none;padding:0;border:0;border-radius:0;background:none;box-shadow:none;color:var(--bone);backdrop-filter:none;-webkit-backdrop-filter:none;gap:28px;transition:color .6s var(--ease); }
+.nav-wrap.scrolled .logo,.nav-wrap.scrolled .seg{ display:flex; }
+@media (min-width:1025px){
+  .nav-wrap.scrolled .nav-links{ display:flex; }
+  .nav-wrap.scrolled .nav-menu-btn{ display:none; }
+  .nav-links{ justify-content:center;gap:6px; }
+  .nav-links a{ font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase; }
+  html[data-lang="zh"] .nav-links a{ letter-spacing:.04em;font-size:12.5px; }
+}
+.nav-drop{ top:calc(var(--lb-t) + 8px); }
+/* the frame takes the paper's tone when the dossier reaches it */
+html.paper-top .nav-wrap{ --bone:#0B0E11;--mist:#3E4751;--mist-dim:#5A646E;--hair:rgba(11,14,17,.16); }
+html.paper-top .nav-wrap .logo svg rect[fill="#E8EAED"]{ fill:#0B0E11; }
+html.paper-top .nav-menu-btn{ filter:none; }
+html.paper-top .nav-wrap .seg button,html.paper-top .nav-wrap a{ text-shadow:none; }
+.logo span{ color:var(--bone); }
+html.paper-top .seg button + button::before{ background:rgba(11,14,17,.3); }
+html.paper-top .seg button[aria-pressed="true"]{ color:var(--brass); }
+
+/* ---------- route + slate: inside the lower bar ---------- */
+.slate{ display:none; }
+html.motion .route{ left:0;right:0;top:auto;bottom:0;width:auto;height:var(--lb-b);transform:none;display:grid;
+  grid-template-columns:minmax(0,auto) auto minmax(220px,1fr) auto;align-items:center;column-gap:clamp(20px,2.4vw,40px);
+  padding:0 var(--pad);background:none;transition:transform .7s var(--ease),opacity .5s var(--ease); }
+html.motion.paper-low .route{ transform:translateY(110%); }
+html.motion .slate{ display:flex;align-items:baseline;gap:8px;min-width:0;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mist); }
+html[data-lang="zh"] .slate{ letter-spacing:.05em; }
+.slate-n{ font-family:var(--f-display);font-stretch:var(--stretch-display);font-weight:600;font-size:22px;letter-spacing:-.02em;color:var(--bone);line-height:1; }
+.slate-of{ color:var(--mist-dim); }
+.slate-t{ margin-left:10px;padding-left:12px;border-left:1px solid var(--hair);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:26ch;color:var(--bone); }
+html.motion .route-ai{ position:static;font-size:10px; }
+html.motion .route-here{ display:none; }
+html.motion .route-track{ position:relative;height:30px;flex:none;align-self:center; }
+html.motion .route-base,html.motion .route-fill{ left:0;top:9px;width:100%;height:1px; }
+html.motion .route-base{ background:rgba(232,234,237,.2); }
+html.motion .route-fill{ transform-origin:0 50%;transform:scaleX(0); }
+html.motion .route-stops{ inset:0; }
+html.motion .route-stop{ top:9px;transform:translate(-50%,-50%);gap:0;flex-direction:column; }
+html.motion .route-stop .lbl{ display:block;position:absolute;top:10px;left:50%;transform:translateX(-50%);font-size:9.5px;white-space:nowrap; }
+html.motion .route-stop:nth-child(1){ left:0;transform:translate(0,-50%); }
+html.motion .route-stop:nth-child(1) .lbl{ left:0;transform:none; }
+html.motion .route-stop:nth-child(2){ left:25%; } html.motion .route-stop:nth-child(3){ left:50%; } html.motion .route-stop:nth-child(4){ left:75%; }
+html.motion .route-stop:nth-child(5){ left:100%;transform:translate(-100%,-50%); }
+html.motion .route-stop:nth-child(5) .lbl{ left:auto;right:0;transform:none; }
+html.motion .route-stop .dot{ width:7px;height:7px;transform:rotate(45deg); }
+html.motion .route-tel{ flex-direction:row;align-items:center;gap:12px; }
+@media (min-width:1025px) and (max-width:1365px){
+  html.motion .route-ai{ display:none; }
+  html.motion .route{ grid-template-columns:minmax(0,auto) minmax(200px,1fr) auto; }
+  .slate-t{ max-width:18ch; }
+}
+@media (min-width:1025px) and (max-width:1199px){
+  html.motion .route-stop:not(.is-here) .lbl{ opacity:0; }
+  html.motion .route-tel{ display:none; }
+  html.motion .route{ grid-template-columns:minmax(0,auto) minmax(200px,1fr); }
+}
+/* phones & tablets: the route is a hairline along the upper bar */
+@media (max-width:1024px){
+  html.motion .route{ top:0;bottom:auto;height:var(--lb-t);display:block;padding:0;background:none; }
+  html.motion.paper-low .route{ transform:none; }
+  html.motion .route > :not(.route-track){ display:none; }
+  html.motion .route-track{ position:absolute;left:0;right:0;top:auto;bottom:0;height:1px; }
+  html.motion .route-base,html.motion .route-fill{ top:0; }
+  html.motion .route-base{ background:transparent; }
+  html.motion .route-stop{ top:0; }
+  html.motion .route-stop .lbl{ display:none; }
+  html.motion .route-stop .dot{ width:5px;height:5px; }
+  html.paper-top .route-stop .dot{ border-color:rgba(11,14,17,.4);background:var(--paper); }
+  html.paper-top .route-stop.is-lit .dot{ background:var(--brass);border-color:var(--brass); }
+  html.paper-top .route-fill{ background:var(--brass); }
+}
+
+/* ---------- the cinema chapters ---------- */
+/* one left edge for the whole page: the logo, the slate and every chapter align on --pad */
+.grid12{ max-width:none; }
+html.motion .is-staged .scene-content > .grid12{ padding-top:calc(var(--lb-t) + clamp(20px,3.4vh,40px));padding-bottom:calc(var(--lb-b) + clamp(20px,3.6vh,44px)); }
+@media (max-width:1024px){
+  html.motion .is-staged .scene-content > .grid12{ padding-top:calc(var(--lb-t) + 22px);padding-bottom:calc(18px + var(--safe-bottom)); }
+}
+.scene--stage .h2{ font-size:clamp(30px,min(3.7vw,6.6vh),66px); }
+.hero-copy .h1{ font-size:clamp(42px,min(6.2vw,10.6vh),124px);line-height:.95; }
+html[data-lang="zh"] .hero-copy .h1{ font-size:clamp(34px,min(4.8vw,8.6vh),92px);line-height:1.18; }
+html[data-lang="en"] .hero-copy .h1{ max-width:12ch; }
+@media (min-width:1025px){
+  .hero-copy{ grid-column:1 / span 11; }
+  .hero-lower{ grid-template-columns:repeat(11,minmax(0,1fr)); }
+  .hero-lower .lead{ grid-column:1 / span 5; }
+  .hero-statement{ grid-column:7 / span 4; }
+}
+/* phones: the text covers the whole plate, so the grade darkens evenly */
+@media (max-width:1024px){
+  .backdrop .bd-shade{ background:linear-gradient(180deg, rgba(11,14,17,.55) 0%, rgba(11,14,17,.58) 45%, rgba(11,14,17,.84) 100%); }
+  html.motion .scene--stage .body,html.motion .scene--stage .lead{ text-shadow:0 1px 14px rgba(5,7,9,.9),0 0 2px rgba(5,7,9,.6); }
+  /* the welder's sparks and the origin flare sit right behind the copy: the plate dims, the text stays */
+  .bd-layer[data-bd="welder"] video,.bd-layer[data-bd="welder"] img{ filter:saturate(.45) contrast(1) brightness(.48); }
+  .bd-layer[data-bd="origin"] video,.bd-layer[data-bd="origin"] img{ filter:saturate(.52) contrast(1.06) brightness(.78); }
+  .bd-layer[data-bd="trace"] video,.bd-layer[data-bd="trace"] img{ filter:saturate(.45) contrast(1.04) brightness(.62); }
+}
+.scroll-cue{ display:none!important; }
+.about-copy{ grid-column:1 / span 6; }
+.about-copy .h2{ font-size:clamp(34px,min(4.4vw,7.6vh),80px);max-width:13ch; }
+.contact-cta .display{ font-size:clamp(42px,min(6vw,10.4vh),116px); }
+/* cinema kicker: the chapter mark */
+.scene--stage .kicker .k-num{ font-family:var(--f-display);font-stretch:var(--stretch-display);font-weight:600;font-size:15px;letter-spacing:0; }
+
+/* ============================================================
+   THE DOSSIER — bone paper, steel ink
+   ============================================================ */
+.scene--flow{ --bone:#0B0E11;--mist:#3E4751;--mist-dim:#5A646E;--amber:var(--brass);--amber-soft:#6E5220;
+  --amber-a08:rgba(126,95,38,.07);--amber-a16:rgba(126,95,38,.14);--amber-a40:rgba(126,95,38,.45);
+  --hair:rgba(11,14,17,.16);--hair-2:rgba(11,14,17,.08);--panel:rgba(11,14,17,.03);--panel-2:rgba(11,14,17,.035);--steel:var(--paper-2);--steel-2:#D4D8DD;
+  background:var(--paper);color:var(--bone);z-index:2; }
+.scene--flow::before{ display:none; }
+.scene--flow .btn,.scene--flow .contact-cta .display{ text-shadow:none; }
+.scene--flow .btn:hover{ color:var(--brass); }
+.scene--flow ::selection{ background:var(--ink-on-paper);color:var(--paper); }
+/* a printed folio: a rule across the sheet, the chapter number large in ink */
+.scene--flow > .grid12{ position:relative; }
+.scene--flow > .grid12::before{ content:"";grid-column:1 / -1;height:2px;background:var(--ink-on-paper);margin-bottom:clamp(18px,2.6vh,28px); }
+.scene--flow .kicker{ color:var(--bone); }
+.scene--flow .kicker .k-num{ font-family:var(--f-display);font-stretch:var(--stretch-display);font-weight:600;font-size:15px;color:var(--bone); }
+.scene--flow .kicker .k-line{ background:var(--brass); }
+.scene--flow .display{ color:var(--bone); }
+.scene--flow .h2{ font-size:clamp(36px,4.6vw,84px);line-height:1;letter-spacing:-.035em; }
+html[data-lang="zh"] .scene--flow .h2{ font-size:clamp(30px,3.6vw,60px);line-height:1.22;letter-spacing:.01em; }
+.scene--flow{ padding:clamp(72px,10vh,120px) 0 clamp(64px,9vh,108px); }
+.evidence.scene--flow{ padding-top:clamp(96px,13vh,150px); }
+/* the paper's leading edge: a brass hairline and the sheet's shadow on the steel */
+.evidence.scene--flow{ box-shadow:0 -1px 0 var(--brass),0 -40px 80px -20px rgba(5,7,9,.7); }
+.faq.scene--flow{ box-shadow:0 40px 80px -20px rgba(5,7,9,.7); }
+/* components that keep their own light (photos, the plan viewer) */
+.scene--flow .evidence-ph{ --bone:#E8EAED;background:#0B0E11; }
+.scene--flow .evidence-card{ background:var(--paper-2); }
+/* a caption scrim under the label, so "View documents" reads even over the white invoice */
+.evidence-ph::after{ content:"";position:absolute;left:0;right:0;bottom:0;height:42%;z-index:1;pointer-events:none;background:linear-gradient(180deg, rgba(11,14,17,0), rgba(11,14,17,.78)); }
+.scene--flow .evidence-card:hover{ border-color:var(--ink-on-paper); }
+.scene--flow .pp-msg[data-kind="error"]{ color:var(--ink-on-paper);padding-left:10px;border-left:2px solid var(--brass); }
+.scene--flow .fund-gauge{ background:var(--paper-2); }
+.scene--flow .fund-fill{ background:linear-gradient(180deg,#C9A96A,rgba(201,169,106,.45)); }
+.scene--flow .fund-calc-input{ background:rgba(11,14,17,.04); }
+.scene--flow .fund-card,.scene--flow .fund-panel{ box-shadow:none; }
+.scene--flow input{ color:var(--bone); }
+.scene--flow .fig-xl{ color:var(--bone); }
+.scene--flow .pb.pb-proj .is-total dd{ color:var(--bone); }
+.scene--flow .faq-item summary{ color:var(--bone); }
+/* the floating WhatsApp line takes the paper's ink */
+html.paper-low .wa-float{ color:#0B0E11;text-shadow:none; }
+html.paper-low .wa-float .wa-ic svg{ filter:none;fill:#0B0E11; }
+.wa-float{ transition:color .5s var(--ease); }
+@media (min-width:1025px){ html.motion .wa-float{ bottom:calc(var(--lb-b) + 14px); } }
+
+/* ---------- headline mask (motion) ---------- */
+html.motion .is-staged .display{ will-change:transform; }
+
+/* reduced motion / no JS: the steel chapters keep their film behind them,
+   the dossier stays paper; nothing is framed. */
+html:not(.motion) .scene--stage .scene-content{ padding-top:calc(var(--lb-t) + 48px); }
+html:not(.motion) .route{ display:none; }   /* the route lives in the frame; no frame, no route */
+.no-js .bd-layer video{ display:none; }
+.bd-fallback{ position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover; }   /* no JS: the poster is the scene, never an empty player */
